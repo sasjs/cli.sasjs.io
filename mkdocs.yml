@@ -10,6 +10,7 @@ nav:
       - sasjs context: context.md
       - sasjs create: create.md
       - sasjs deploy: deploy.md
+      - sasjs folder: folder.md
       - sasjs run: run.md
       - sasjs servicepack: servicepack.md
 
