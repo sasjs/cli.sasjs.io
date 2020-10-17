@@ -1,0 +1,28 @@
+{
+  "name": "devdocs",
+  "version": "1.1.1",
+  "description": "Using the SASjs CLI for Dev Ops with SAS",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sasjs/cli.sasjs.io.git"
+  },
+  "keywords": [
+    "SAS","Viya","SASjs"
+  ],
+  "author": "Allan Bowe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sasjs/cli.sasjs.io/issues"
+  },
+  "homepage": "https://cli.sasjs.io",
+  "devDependencies": {
+
+  }
+}

@@ -1,0 +1,58 @@
+site_name: SAS Dev Ops with SASjs CLI
+site_url: https://cli.sasjs.io
+nav:
+  - Home: index.md
+  - Installation: installation.md
+  - Actions:
+      - sasjs add: add.md
+      - sasjs build: build.md
+      - sasjs compile: compile.md
+      - sasjs context: context.md
+      - sasjs create: create.md
+      - sasjs deploy: deploy.md
+      - sasjs run: run.md
+      - sasjs servicepack: servicepack.md
+
+
+markdown_extensions:
+  - admonition
+  - pymdownx.superfences
+  - codehilite
+  - meta
+  - toc:
+      permalink: true
+
+extra_css: ["font-awesome.css"]
+
+plugins:
+  - search:
+      prebuild_index: true
+
+# Repository
+repo_name: "cli.sasjs.io"
+repo_url: "https://github.com/sasjs/cli.sasjs.io"
+
+theme:
+  name: material
+  logo: "img/logo/favicon/32.svg"
+  palette:
+    primary: "White"
+    accent: "Amber"
+  font:
+    text: "Open Sans"
+    code: "Ubuntu Mono"
+  favicon: img/logo/favicon/32.ico
+  custom_dir: "theme"
+  highlightjs: true
+  hljs_languages:
+      - SAS
+      - JavaScript
+      - Bash
+  extra:
+    social:
+      - icon: fontawesome/brands/linkedin
+        link: https://linkedin.com/company/sasjs
+        name: SASjs on LinkedIn
+copyright: All rights reserved &copy;2020 Macro People Ltd.
+
+google_analytics: ['UA-109713029-8', 'sasjs.io']

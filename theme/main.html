@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block extrahead %}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="author" content="Allan Bowe">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:locale" content="en_UK" />
+<meta property="og:type" content="website">
+{% if page and page.meta and page.meta.og_image %}
+  {% set og_image = page.meta.og_image %}
+{% elif page %}
+  {% set og_image = '/img/appin1min.jpg' %}
+{% endif %}
+<meta name="image" property="og:image" content="{{og_image}}">
+<meta property='og:image:alt' content='SASjs Logo'/>
+<meta property='og:image:title' content='SASjs Logo'/>
+{% if page and page.meta and page.meta.description %}
+  {% set og_desc = page.meta.description %}
+{% elif page %}
+  {% set og_desc = "Accelerate SAS Dev Ops with the SASjs CLI" %}
+{% endif %}
+<meta name="description" property="og:description" content="{{og_desc}}">
+
+<meta property="og:title" content="The SASjs Framework">
+<meta property="og:author" content="https://www.linkedin.com/company/19117949">
+
+{% if page and page.meta and page.meta.description %}
+  <meta property="og:url" content="{{page.canonical_url}}">
+  <meta property="twitter:url" content="{{page.canonical_url}}">
+{% elif page %}
+  <meta property="og:url" content="https://sasjs.io">
+  <meta property="twitter:url" content="https://sasjs.io">
+{% endif %}
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:title" content="The SASjs Framework">
+<meta property="twitter:description" content="Build Your Own SAS 9 and SAS Viya Web Apps">
+<meta property="twitter:image" content='/img/logo/favicon/32.svg'>
+<meta property="twitter:image:alt" content="SASjs logo">
+<meta property='twitter:image:title' content='SASjs Logo'/>
+<meta property="twitter:site" content='https://sasjs.io'>
+<!-- meta name="twitter:creator" content="@_sasensei_" -->
+
+<meta property='name:description' content='Build Your Own HTML5 Web Apps on SAS 9 and SAS Viya with the SASjs framework - comprised of a Javascript Adapter, SAS Macro Library, and CLI tool for automated build and deployment.'/>
+<meta property="article:author" content="https://www.linkedin.com/company/19117949" />
+<meta property="article:publisher" content="https://www.linkedin.com/company/19117949" />
+{% endblock %}
+
+{% block scripts %}
+<!-- Hotjar Tracking Code for https://sasjs.io -->
+<script>
+  (function(h,o,t,j,a,r){
+      h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+      h._hjSettings={hjid:1913972,hjsv:6};
+      a=o.getElementsByTagName('head')[0];
+      r=o.createElement('script');r.async=1;
+      r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+      a.appendChild(r);
+  })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+
+{% endblock %}
