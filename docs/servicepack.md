@@ -14,7 +14,7 @@ The `sasjs servicepack` command allows administrators to deploy the backend serv
 <!--script id="asciicast-FsXbbv87BFPpzVWkVpysftBnI" src="https://asciinema.org/a/FsXbbv87BFPpzVWkVpysftBnI.js" async></script-->
 
 ## Prerequisites
-Before using this command, you will need to install the SASJS CLI and [add a deployment target](/sasjs-cli-add).
+Before using this command, you will need to install the SASJS CLI and [add a deployment target](/add).
 
 ## Syntax
 

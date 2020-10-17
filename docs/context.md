@@ -20,7 +20,7 @@ A compute context is used when firing up a new SAS session (it itself inherits f
 <script id="asciicast-FsXbbv87BFPpzVWkVpysftBnI" src="https://asciinema.org/a/FsXbbv87BFPpzVWkVpysftBnI.js" async></script>
 
 ## Prerequisites
-Before using this command, you will need to install the SASJS CLI and [add a deployment target](/sasjs-cli-add).
+Before using this command, you will need to install the SASJS CLI and [add a deployment target](/add).
 
 ## Syntax
 
@@ -36,7 +36,7 @@ Additional arguments include:
 
 ## Compute Context Structure
 
-The create and edit actions use the same JSON structure for adding / modifying contexts.  This also matches the context made by the [export](/sasjs-cli-context#sasjs-context-export) action, which can be used to provide a template for adding / modifying new contexts.  The JSON is defined as follows:
+The create and edit actions use the same JSON structure for adding / modifying contexts.  This also matches the context made by the [export](/context#sasjs-context-export) action, which can be used to provide a template for adding / modifying new contexts.  The JSON is defined as follows:
 
 ```
 {

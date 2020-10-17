@@ -13,7 +13,7 @@ The `sasjs run` command enables developers to submit SAS code for execution from
 <script id="asciicast-FK3Xr2RhqAjhIcqLLLKD7xCvM" src="https://asciinema.org/a/FK3Xr2RhqAjhIcqLLLKD7xCvM.js" async></script>
 
 ## Prerequisites
-Before using this command, you will need to [install](/sasjs-cli/#installation) the SASJS CLI and add a deployment [target](/sasjs-cli-add).
+Before using this command, you will need to [install](/installation) the SASJS CLI and add a deployment [target](/add).
 
 ## Syntax
 

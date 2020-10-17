@@ -1,7 +1,7 @@
 sasjs add
 ====================
 
-The `sasjs add` command provides a series of prompts used to define a SAS [target](/glossary#target) along with the relevant connection details (if SAS Viya).
+The `sasjs add` command provides a series of prompts used to define a SAS [target](https://sasjs.io/glossary#target) along with the relevant connection details (if SAS Viya).
 
 ## Syntax
 
@@ -17,7 +17,7 @@ The first prompt requests scope.  If Local is chosen, the target configuration w
 If Global is chosen, the target configuration will be added to a `.sasjsrc` file in the users home directory.  The `sasjs` command will look for a target here if executed outside of a SASjs project.
 
 ### Server Type
-The second prompt requests a server type.  Choose 1 for SAS Viya, or 2 for SAS 9.  
+The second prompt requests a server type.  Choose 1 for SAS Viya, or 2 for SAS 9.
 
 ### Target Name
 Choose a name for your target.  Nearly every SASjs command will take this as input, so you might want to keep it short.
