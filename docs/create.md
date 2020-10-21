@@ -11,7 +11,7 @@ To create a new project, run:  `sasjs create mynewproject`
 
 To install in an existing project, change into that directory and run: `sasjs create` (without arguments).  This will create a `sas` folder inside the directory.
 
-<a href="https://asciinema.org/a/2HEe1ym63B8BNAvISepe1vmT5" target="_blank"><img src="https://asciinema.org/a/2HEe1ym63B8BNAvISepe1vmT5.svg" /></a>
+<script id="asciicast-2HEe1ym63B8BNAvISepe1vmT5" src="https://asciinema.org/a/2HEe1ym63B8BNAvISepe1vmT5.js" async></script>
 
 Compilation
 ---------------------
