@@ -20,28 +20,33 @@ The Viya build script requires a number of variables to be prepared by an admini
 ```sas
 filename mc url "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
 %inc mc;
-%let client=MyClient;
-%let secret=MySecret;
-%mv_getapptoken(client_id=&client,client_secret=&secret)
-```
-This will generate a URL in the log, which must be followed to generate a refresh code (one time step):
 
-```
-%mv_getrefreshtoken(client_id=&client,client_secret=&secret,code=wKDZYTEPK6)
+/* create random client and secret */
+%mv_registerclient(outds=clientinfo)
 ```
 
-The ACCESS_TOKEN and REFRESH_TOKEN are now in the log.  In future, when running `sasjs build` for a Viya target, the following values must be provided:
+This will generate a URL in the log, which must be followed to generate a refresh code (one time step).  Paste that code into the macro below:
 
-```sas
-%let client=MyClient;
-%let secret=MySecret;
-/* these values are long - split over multiple lines with %trim()*/
-%let ACCESS_TOKEN=MyGeneratedAccessToken;
-%let REFRESH_TOKEN=MyGeneratedRefreshToken;
+```
+/* paste the code below */
+%mv_tokenauth(inds=clientinfo,code=xET8ETs74z)
+
+/* extract client, secret & token to the log */
+data _null_;
+  merge mv_tokenauth clientinfo(drop=error);
+  put access_token=;
+  put refresh_token=;
+  put client_id=;
+  put client_secret=;
+run;
+
 ```
 
-The above can then be securely placed in a read-protected directory (such as a home directory on the SAS server) and `%inc`'d.
+## Calling SAS Viya from SAS 9
+
+When calling SAS Viya from SAS 9, the `oauth_bearer=sas_services` option is not available.  However it is still possible to call the APIs using `proc http` in the [core](https://core.sasjs.io) by putting the ACCESS_TOKEN in a macro variable and referring to that variable in the `access_token_var=` keyword parameter of each viya macro (starting `mv_`).
+
 
 !!! Warning
-    Saving security tokens in project repositories, especially if they are committed to source control, is a security risk - as anyone with access can use them to make modifications on the Viya platform.  Be sure to use a secure mechanism such as the `%inc` approach described above, or another approved mechanism for securing these kinds of variables.
+    Saving security tokens in project repositories, especially if they are committed to source control, is a security risk - as anyone with access can use them to make modifications on the Viya platform.  Be sure to use a secure mechanism such as the `%inc` from a secure directory, or another approved mechanism for securing these kinds of variables.  Avoid writing Access Tokens to log files.
 
