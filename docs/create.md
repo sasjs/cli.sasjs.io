@@ -11,6 +11,8 @@ To create a new project, run:  `sasjs create mynewproject`
 
 To install in an existing project, change into that directory and run: `sasjs create` (without arguments).  This will create a `sas` folder inside the directory.
 
+<a href="https://asciinema.org/a/2HEe1ym63B8BNAvISepe1vmT5" target="_blank"><img src="https://asciinema.org/a/2HEe1ym63B8BNAvISepe1vmT5.svg" /></a>
+
 Compilation
 ---------------------
 From the root of the project, run:  `sasjs compile`.  This will take all of the macros in the `services` folder and create equivalents in the `sasbuild` folder.  Each service will contain all of the dependent macros as listed under `dependencies` in the header, as well as the `serviceinit.sas` and `serviceterm.sas` files.
