@@ -3,6 +3,8 @@ sasjs add
 
 The `sasjs add` command provides a series of prompts used to define a SAS [target](https://sasjs.io/glossary#target) along with the relevant connection details (if SAS Viya).
 
+<script id="asciicast-8CZROaVsvobDCumlqgxrhHkE3" src="https://asciinema.org/a/8CZROaVsvobDCumlqgxrhHkE3.js" async></script>
+
 ## Syntax
 
 ```
