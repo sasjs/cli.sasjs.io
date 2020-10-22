@@ -31,6 +31,8 @@ Additional arguments include:
 
 Used to create a new SAS folder. Will fail if the folder already exists. If the `-f` flag is used, a new folder will be forcibly created (ie, if there is an existing one, it will be deleted).
 
+<script id="asciicast-WbTaf3ns77RUL6iCSoHzAULN0" src="https://asciinema.org/a/WbTaf3ns77RUL6iCSoHzAULN0.js" async></script>
+
 ### Syntax
 
 > `sasjs folder create <folderpath> -t target -f`
@@ -44,6 +46,8 @@ sasjs folder create /Public/new/folder -t myTarget
 ## sasjs folder delete
 
 Used to delete an existing SAS Folder.  To avoid the overhead with recursively deleting folders and content, the `delete` command actually moves the requisite folder into the Recycle Bin. This makes it very fast, as well as reversable.
+
+<script id="asciicast-6ex7kftlSRbmjeXxpjV47qEbf" src="https://asciinema.org/a/6ex7kftlSRbmjeXxpjV47qEbf.js" async></script>
 
 ### Syntax
 
@@ -59,6 +63,8 @@ sasjs folder delete /Public/new/folder -t myTarget
 ## sasjs folder move
 
 Moves an existing folder to a new parent location.
+
+<script id="asciicast-oZB91eGpw7WvdFp3VYxetYj4k" src="https://asciinema.org/a/oZB91eGpw7WvdFp3VYxetYj4k.js" async></script>
 
 ### Syntax
 
