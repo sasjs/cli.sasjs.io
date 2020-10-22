@@ -58,6 +58,8 @@ The service pack structure is designed to provide the bare minimum for defining 
 
 Used to deploy a servicepack to a Target.  Note that the servicepack will be deployed to the `appLoc` defined in that target.
 
+<script id="asciicast-drF1SqlUStgdc74CjJokqzNef" src="https://asciinema.org/a/drF1SqlUStgdc74CjJokqzNef.js" async></script>
+
 ### Syntax
 
 > `sasjs servicepack deploy -s source.json -t target`
