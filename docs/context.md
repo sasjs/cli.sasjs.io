@@ -137,18 +137,17 @@ sasjs context edit myComputeContext -s ./myContext.json -t myTarget
 
 ## sasjs context export
 
-Exports specified compute context to contextName.json in the current folder  No soure JSON needed, contextName is used instead.
+Exports specified compute context to `contextName.json` in the current folder.  No source JSON is needed, just provide the _contextName_.
 
 ### Syntax
 
-> `sasjs context delete <contextName> -t target`
+> `sasjs context export <contextName> -t target`
 
 ### Usage
 
 ```
-sasjs context delete myRenamedComputeContext -t myTarget
+sasjs context export someContext -t myTarget
 ```
-
 
 ## sasjs context list
 
