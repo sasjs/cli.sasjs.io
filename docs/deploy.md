@@ -8,10 +8,12 @@ sasjs deploy
 ====================
 
 ## Prerequisites
-Before using this command, you will need to install the SASJS CLI and:  
-[add a deployment target](/add).  
-[compile services](/compile).  
-[build services](/build).
+
+Before using this command, you will need to install the SASJS CLI and:
+
+* [add a deployment target](/add).
+* [compile services](/compile).
+* [build services](/build).
 
 ## Syntax
 
@@ -23,19 +25,19 @@ The build program generated in the previous step can be deployed in 3 ways:
 
 3 - API: use the SAS APIs
 
-2nd and 3rd options can be configured and executed with a single:
+2nd and 3rd options can be configured and executed with a single command:
 
 ```
-sasjs deploy
+sasjs deploy [targetName]
 ```
 or:
 ```
-sasjs d
+sasjs d [targetName]
 ```
 
 You can compile, build and deploy using:
 ```
-sasjs cbd [targetNamme]
+sasjs cbd [targetName]
 ```
 If you don't specify a target (eg `sas9` or `viya`) then the first target in the `sasjsconfig.json` file is used.
 
