@@ -28,6 +28,7 @@ Additional arguments may include:
 * `--target` (alias `-t`) - the target environment in which to deploy the services.  If not specified, the first target will be used instead.
 * `--output` (alias `-o`) - path where output of the finished job execution will be saved
 * `--log` (alias `-l`) - path where log of the finished job execution will be saved
+* `--wait` (alias `-w`) - if present, CLI will wait for job completion.
 
 
 ## sasjs job execute
