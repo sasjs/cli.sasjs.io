@@ -7,17 +7,43 @@ description: The `sasjs deploy` command performs the actual deployment of a SASj
 sasjs deploy
 ====================
 
+## Prerequisites
+
+Before using this command, you will need to install the SASJS CLI and:
+
+* [add a deployment target](/add).
+* [compile services](/compile).
+* [build services](/build).
+
+## Syntax
+
 The build program generated in the previous step can be deployed in 3 ways:
 
 1 - MANUAL: copy paste the code into SAS Studio or Enterprise Guide and run it
 
 2 - SSH: build a shell script or bat file to load, and execute with a web service
 
-3 - API: Use the SAS APIs
+3 - API: use the SAS APIs
 
-Points 2 and 3 can be configured / executed with a single `sasjs deploy` or `sasjs d` command.  You can compile, build AND deploy using `sasjs cbd [target]`.  If you don't specify a target (eg sas9 or viya) then the first target in the `sasjsconfig.json` file is used.
+2nd and 3rd options can be configured and executed with a single command:
 
-### CopyPaste approach
+```
+sasjs deploy [targetName]
+```
+or:
+```
+sasjs d [targetName]
+```
+
+You can compile, build and deploy using:
+```
+sasjs cbd [targetName]
+```
+If you don't specify a target (eg `sas9` or `viya`) then the first target in the `sasjsconfig.json` file is used.
+
+NOTE: By default deploy will overwrite an existing deploy (force deploy).
+
+### Copy/Paste approach
 The build script (named as per `buildOutputFileName`) can be copy pasted into SAS Studio and executed to create the backend services.  Please note:
 
 * You will be running under your own identity.  If you need files created under the Web Server identity, deploy your build script using a web service.
