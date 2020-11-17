@@ -1,14 +1,14 @@
 ---
 layout: article
-title: Managing SAS Jobs with SASjs
-description: Documentation on how to use the SASjs CLI to manage SAS Jobs
+title: Managing SAS Viya Jobs with SASjs
+description: Documentation on how to use the SASjs CLI to manage SAS Jobs in Viya
 
 ---
 
 sasjs job
 ====================
 
-The `sasjs job` command enables developers to perform operations on jobs which are on server.
+The `sasjs job` command enables developers to perform operations on SAS Viya Jobs.
 
 ## Prerequisites
 
@@ -27,17 +27,17 @@ Additional arguments may include:
 
 * `--target` (alias `-t`) - the target environment in which to deploy the services.  If not specified, the first target will be used instead.
 * `--output` (alias `-o`) - path where output of the finished job execution will be saved
-* `--log` (alias `-l`) - path where log of the finished job execution will be saved
+* `--log` (alias `-l`) - path where the log of the finished job will be saved (if used, `-w` is implied)
 * `--wait` (alias `-w`) - if present, CLI will wait for job completion.
 
 
 ## sasjs job execute
 
-Used to execute a job on server.
+Used to execute a job on the SAS server.
 
 ### Syntax
 
-> `sasjs job execute /Public/job -l ./jobLog.log -o ./jobOutput.json -t targetName`
+> `sasjs job execute /Public/folder/someJob -l ./jobLog.log -o ./jobOutput.json -t targetName`
 
 ### Usage
 
@@ -46,4 +46,4 @@ Used to execute a job on server.
 sasjs job execute /Public/job -l ./jobLog.log -o ./jobOutput.json -t myTarget
 ```
 
-This will create a session and run a SAS job. The log and output will be returned as a files in the current directory.
+This will create a session and run a SAS job. The log and output will be returned as files in the current directory.
