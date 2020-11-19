@@ -7,7 +7,9 @@ description: The `sasjs compile` command extracts all the dependencies and input
 sasjs compile
 ====================
 
-From the root of the project, run:  `sasjs compile`.  This will take all of the macros in the `services` folder and create equivalents in the `sasbuild` folder.  Each service will contain all of the dependent macros as listed under `dependencies` in the header, as well as the `serviceinit.sas` and `serviceterm.sas` files.
+From the root of the project, run:  `sasjs compile`.  This will take all of the macros in the `services` folder and create equivalents in the `sasbuild` folder.  
+
+Each service will contain all of the dependent macros as listed under `SAS Macros` or `Dependencies` in the header, as well as the `serviceinit.sas` and `serviceterm.sas` files. If both of `SAS Macros` and `Dependencies` are provided, `SAS Macros` will be used.
 ![sasjscliflow.png](/img/sasjscompile.png)
 
 If `streamWeb` is `true`, then the `index.html` file in your `webSourcePath` is scanned and any linked JS / CSS files are also compiled into the `streamWebFolder` folder.  The `index.html` becomes a `clickme` service in your `appLoc` SAS folder root.
