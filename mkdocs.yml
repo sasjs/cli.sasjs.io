@@ -3,7 +3,7 @@ site_url: https://cli.sasjs.io
 nav:
   - Home: index.md
   - Installation: installation.md
-  - Actions:
+  - Commands:
       - sasjs add: add.md
       - sasjs build: build.md
       - sasjs compile: compile.md
@@ -14,7 +14,7 @@ nav:
       - sasjs job: job.md
       - sasjs run: run.md
       - sasjs servicepack: servicepack.md
-
+  - FAQ: faq.md
 
 markdown_extensions:
   - admonition

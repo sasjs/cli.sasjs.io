@@ -14,7 +14,7 @@ sasjs add
 ## Description
 
 ### Local or Global Config
-The first prompt requests scope.  If Local is chosen, the target configuration will be added in the `/sasjs/sasjsconfig.json` file, and any credentials (eg tokens) will be saved in the `.sasjsrc` file in the current SASjs project directory.  The `sasjs` command will use this config whenever running inside the SASjs project.
+The first prompt requests scope.  If Local is chosen, the target configuration will be added in the `/sasjs/sasjsconfig.json` file, and any credentials (eg tokens) will be saved in a `.env.[targetName]` file in the current SASjs project directory.
 
 If Global is chosen, the target configuration will be added to a `.sasjsrc` file in the users home directory.  The `sasjs` command will look for a target here if executed outside of a SASjs project.
 
