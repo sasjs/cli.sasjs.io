@@ -28,3 +28,4 @@ There is also a feature to let you deploy your frontend as a service, bypassing 
 |[job](/job)|Manage & Execute SAS Jobs|
 |[run](/run)|Run arbitrary SAS code in a Viya Compute Session, directly from the terminal (or commandline session)|
 |[servicepack](/servicepack)|The SASjs Service Pack is a collection of services and folder objects.  The servicepack command lets you deploy them easily|
+|[flow](/flow)|SAS job scheduler that takes a JSON file as input, and submit all the jobs sequentially, logging the results to an output CSV file|
