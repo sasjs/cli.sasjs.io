@@ -28,18 +28,18 @@ The build program generated in the previous step can be deployed in 3 ways:
 2nd and 3rd options can be configured and executed with a single command:
 
 ```
-sasjs deploy [targetName]
+sasjs deploy --target(-t) <target name>
 ```
 or:
 ```
-sasjs d [targetName]
+sasjs d --target(-t) <target name>
 ```
 
 You can compile, build and deploy using:
 ```
-sasjs cbd [targetName]
+sasjs cbd --target(-t) <target name>
 ```
-If you don't specify a target (eg `sas9` or `viya`) then the first target in the `sasjsconfig.json` file is used.
+If you don't specify a target (eg `sas9` or `viya`) then the first target in the `sasjsconfig.json` file is used. If local configuration file is not found, global `.sasjsrc` file will be used.
 
 NOTE: By default deploy will overwrite an existing deploy (force deploy).
 

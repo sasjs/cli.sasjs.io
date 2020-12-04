@@ -31,7 +31,7 @@ Additional arguments may include:
 * `--source` (alias `-s`) - path to the flow definition source file (\*.json).
 * `--logFolder` (alias `-l`) - path to the folder where job logs will be saved.
 * `--csvFile` (alias `-c`) - path to the CSV file containing job statuses will be saved.  This file is replaced if the command is re-executed.
-* `--target` (alias `-t`) - the target environment in which to deploy the services. If not specified, the first target will be used instead.
+* `--target` (alias `-t`) - the target environment in which to deploy the services. If not specified, the first target will be used instead. The target can exist either in the local project configuration or in the global .sasjsrc file.
 
 ## Source JSON file
 

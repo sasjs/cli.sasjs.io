@@ -24,6 +24,7 @@ sasjs run <sourcecode> [additional arguments]
 Additional arguments may include:
 
 * `--target` (alias `-t`) - the target environment in which to deploy the services.  If not specified, the first target will be used instead.
+The target can exist either in the local project configuration or in the global .sasjsrc file.
 
 
 ## sasjs run

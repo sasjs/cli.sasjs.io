@@ -11,6 +11,15 @@ To create a new project, run:  `sasjs create mynewproject`
 
 To install in an existing project, change into that directory and run: `sasjs create` (without arguments).  This will create a `sas` folder inside the directory.
 
+* if no foldername is specified, it creates the folder structure in the current working
+directory.
+* If this is an existing NPM project, it will update package.json with the @sasjs/core
+dependency.
+* An additional option can be specified to create a web app from a template. This
+supports creation of Angular, React and minimal web apps. There is also a sasonly
+option. e.g. sasjs create my-sas-project --template react and sasjs
+create my-sas-project -t angular
+
 <script id="asciicast-2HEe1ym63B8BNAvISepe1vmT5" src="https://asciinema.org/a/2HEe1ym63B8BNAvISepe1vmT5.js" async></script>
 
 Compilation

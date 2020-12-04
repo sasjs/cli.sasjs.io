@@ -31,7 +31,7 @@ sasjs context <action> [additional arguments]
 Additional arguments include:
 
 * `--source` (alias `-s`) - the source JSON file to create or edit a compute context.  Used in the create and edit actions.
-* `--target` (alias `-t`) - the target environment in which to create the compute context.  If not specified, the first target will be used instead.
+* `--target` (alias `-t`) - the target environment in which to create the compute context.  If not specified, the first target will be used instead. The target can exist either in the local project configuration or in the global .sasjsrc file.
 
 
 ## Compute Context Structure
