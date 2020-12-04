@@ -26,8 +26,8 @@ sasjs job <action> <job path> [additional arguments]
 Additional arguments may include:
 
 * `--target` (alias `-t`) - the target environment in which to deploy the services.  If not specified, the first target will be used instead.
-* `--output` (alias `-o`) - path where output of the finished job execution will be saved
-* `--log` (alias `-l`) - path where the log of the finished job will be saved (if used, `-w` is implied)
+* `--output` (alias `-o`) - path where output of the finished job execution will be saved.
+* `--log` (alias `-l`) - path where the log of the finished job will be saved (if used, `-w` is implied).
 * `--wait` (alias `-w`) - if present, CLI will wait for job completion.
 
 
