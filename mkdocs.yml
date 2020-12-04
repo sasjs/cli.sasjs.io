@@ -14,6 +14,7 @@ nav:
       - sasjs job: job.md
       - sasjs run: run.md
       - sasjs servicepack: servicepack.md
+      - sasjs flow: flow.md
   - FAQ: faq.md
 
 markdown_extensions:
