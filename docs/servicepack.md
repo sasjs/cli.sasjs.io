@@ -25,7 +25,7 @@ sasjs servicepack <action> [additional arguments]
 Additional arguments may include:
 
 * `--source` (alias `-s`) - the source JSON file containin the services and folders.  Used in the deploy action.
-* `--target` (alias `-t`) - the target environment in which to deploy the services.  If not specified, the first target will be used instead.
+* `--target` (alias `-t`) - the target environment in which to deploy the services.  If not specified, the first target will be used instead. The target can exist either in the local project configuration or in the global .sasjsrc file.
 * `-f` - used to **f**orce a deploy, eg even if the folders / services already exist (they will then be overwritten)
 
 ## Service Pack Structure

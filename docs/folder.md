@@ -24,7 +24,7 @@ sasjs folder <action> [additional arguments]
 
 Additional arguments include:
 
-* `--target` (alias `-t`) - the target environment in which to create the SAS Folder.  If not specified, the first target will be used instead.
+* `--target` (alias `-t`) - the target environment in which to create the SAS Folder.  If not specified, the first target will be used instead. The target can exist either in the local project configuration or in the global .sasjsrc file.
 
 
 ## sasjs folder create
