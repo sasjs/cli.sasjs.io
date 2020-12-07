@@ -1,6 +1,6 @@
 ---
 layout: article
-title: Executing SASjs web service from the commandline
+title: Execute SASjs web services from the commandline
 description: The SASjs CLI allows you execute SASjs web services directly from the command line
 og_image: https://sasjs.io/img/sasjs-cli-run.png?_=1
 ---
@@ -23,7 +23,7 @@ This will create a session and execute the relevant SAS service. The output will
 sasjs request <sasProgramPath> [additional arguments]
 ```
 
-`sasProgramPath` - if this has a leading slash (eg /Public/app/folder/servicename) then it must be the full path. If it is a relative path (eg path/servicename) then it will be pre-pended with the appLoc - defined in the `sasjs/sasjsconfig.json` file.
+`sasProgramPath` - if this has a leading slash (eg /Public/app/folder/servicename) then it must be the full path. If it is a relative path (eg path/servicename) then it will be pre-pended with the appLoc - defined in the config JSON file.
 
 Additional arguments may include:
 
