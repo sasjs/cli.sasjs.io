@@ -2,7 +2,7 @@
 layout: article
 title: Executing SAS job on the server from the commandline
 description: SASjs CLI lets you execute SAS job in a Viya Compute Session, that is on server directly from the terminal (or commandline session).
-og_image: https://sasjs.io/img/sasjs-cli-run.png?_=1
+og_image: https://sasjs.io/img/sasjs-cli-request.png?_=1
 ---
 
 sasjs request
