@@ -1,49 +1,64 @@
 ---
 layout: article
-title: Executing SAS job on the server from the commandline
-description: SASjs CLI lets you execute SAS job in a Viya Compute Session, that is on server directly from the terminal (or commandline session).
+title: Execute SASjs web services from the commandline
+description: The SASjs CLI allows you execute SASjs web services directly from the command line
 og_image: https://sasjs.io/img/sasjs-cli-request.png?_=1
 ---
 
 sasjs request
 ====================
 
-The `sasjs request` command enables developers to submit SAS job for execution from the commandline.
+The `sasjs request` command enables developers to call SASjs web services from the commandline.
 
 ## Prerequisites
 Before using this command, you will need to [install](/installation) the SASJS CLI and add a deployment [target](/add).
 
-## Syntax
+## sasjs request
+
+This will create a session and execute the relevant SAS service. The output will be returned as a file in the current directory.
+
+### Syntax
 
 ```
 sasjs request <sasProgramPath> [additional arguments]
 ```
 
-`sasProgramPath` - if this has a leading slash (eg /Public/app/folder/servicename)
-then it must be the full path. If it is a relative path (eg path/servicename) then
-it will be pre-pended with the appLoc - which must then be defined in the sasjs config.
+`sasProgramPath` - if this has a leading slash (eg /Public/app/folder/servicename) then it must be the full path. If it is a relative path (eg path/servicename) then it will be pre-pended with the appLoc - defined in the config JSON file.
 
 Additional arguments may include:
 
 * `--target` (alias `-t`) - the target environment in which to deploy the services.  If not specified, the first target will be used instead.
 The target can exist either in the local project configuration or in the global .sasjsrc file.
 
-* `--data` (alias `-d`) - (optional) it is accepting `json` file which should include data that you want to pass as a parameter in executing a request.
+* `--data` (alias `-d`) - (optional) The path to a `json` file containing the input data passed into the request.
 
-* `--config` (alias `-c`) - (optional) it is accepting `json` file which should include config that you want to pass as a parameter in executing a request.
+* `--config` (alias `-c`) - (optional) The path to a `json` file containting the config to be used when executing a request.
 
+### data structure
 
-## sasjs request
-
-This will create a session and execute given SAS job. The output will be returned as a file in the current directory.
-
-### Syntax
-
-> `sasjs request some/job -d ./dataFile.json -c ./configFile.json -t myTarget`
-
-### Usage
+The input data is structured as follows:
 
 ```
-# run the SAS job on the target
-sasjs request some/job -t myTarget
+{
+    "tablewith2cols1row": [{
+        "col1": "val1",
+        "col2": 42
+    }],
+    "tablewith1col2rows": [{
+        "col": "row1"
+    }, {
+        "col": "row2"
+    }]
+}
+```
+
+
+### Examples
+
+```
+# run a SAS Service without inputs, using the default target
+sasjs request /Public/app/myApp/common/appinit
+
+# run a SASjs web service with inputs and a config file
+sasjs request common/getdata -d ./dataFile.json -c ./configFile.json -t myTarget
 ```
