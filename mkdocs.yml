@@ -13,6 +13,7 @@ nav:
       - sasjs folder: folder.md
       - sasjs job: job.md
       - sasjs run: run.md
+      - sasjs request: request.md
       - sasjs servicepack: servicepack.md
       - sasjs flow: flow.md
   - FAQ: faq.md
