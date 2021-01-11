@@ -26,6 +26,22 @@ Additional arguments include:
 
 * `--target` (alias `-t`) - the target environment in which to create the SAS Folder.  If not specified, the first target will be used instead. The target can exist either in the local project configuration or in the global .sasjsrc file.
 
+## sasjs folder list
+
+Used to list first level children folders of given folder.
+
+<!-- Needs recorded video -->
+<script id="asciicast-WbTaf3ns77RUL6iCSoHzAULN0" src="https://asciinema.org/a/WbTaf3ns77RUL6iCSoHzAULN0.js" async></script>
+
+### Syntax
+
+> `sasjs folder list <folderpath> -t target`
+
+### Usage
+
+```
+sasjs folder list /Public -t myTarget
+```
 
 ## sasjs folder create
 
@@ -62,13 +78,15 @@ sasjs folder delete /Public/new/folder -t myTarget
 
 ## sasjs folder move
 
-Moves an existing folder to a new parent location.
+Moves an existing folder to a new location. It behaves similar as unix `mv` command.
+If same locations is provided, but name is different on the `targetpath` then it will rename the folder.
+If different locations are provided, first it will check if last path section string in the `targetpath` exists as a folder, it will move it inside, and if it does not exist, it will move it inside of first up level folder and the last section of `targetpath` will be used for the renaming of moving folder.
 
 <script id="asciicast-oZB91eGpw7WvdFp3VYxetYj4k" src="https://asciinema.org/a/oZB91eGpw7WvdFp3VYxetYj4k.js" async></script>
 
 ### Syntax
 
-> `sasjs folder move <folderpath> <newparentpath>`
+> `sasjs folder move <folderpath> <targetpath>`
 
 ### Usage
 
