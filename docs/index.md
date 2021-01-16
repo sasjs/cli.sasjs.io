@@ -24,6 +24,7 @@ There is also a feature to let you deploy your frontend as a service, bypassing 
 |[context](/context)|List, export, create, edit, and delete SAS Compute contexts|
 |[create](/create)| Initialise a SASjs repository, either in plain form or using a range of templates|
 |[deploy](/deploy)|Perform the actual deployment of a SASjs project into SAS 9 or Viya|
+|[doc](/doc)|Generate HTML documentation based on the Doxygen headers used in the SAS Macros, Programs, Jobs & Services.|
 |[folder](/folder)|Management of logical Viya folders|
 |[job](/job)|Manage & Execute SAS Jobs|
 |[request](/request)|Execute SASjs web services from the commandline|
