@@ -10,6 +10,7 @@ nav:
       - sasjs context: context.md
       - sasjs create: create.md
       - sasjs deploy: deploy.md
+      - sasjs doc: doc.md
       - sasjs folder: folder.md
       - sasjs job: job.md
       - sasjs run: run.md
@@ -49,9 +50,9 @@ theme:
   custom_dir: "theme"
   highlightjs: true
   hljs_languages:
-      - SAS
-      - JavaScript
-      - Bash
+    - SAS
+    - JavaScript
+    - Bash
   extra:
     social:
       - icon: fontawesome/brands/linkedin
@@ -59,4 +60,4 @@ theme:
         name: SASjs on LinkedIn
 copyright: All rights reserved &copy;2020 Macro People Ltd.
 
-google_analytics: ['UA-109713029-8', 'sasjs.io']
+google_analytics: ["UA-109713029-8", "sasjs.io"]
