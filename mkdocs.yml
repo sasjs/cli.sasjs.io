@@ -38,7 +38,7 @@ repo_url: "https://github.com/sasjs/cli.sasjs.io"
 
 theme:
   name: material
-  logo: "img/logo/favicon/32.svg"
+  logo: "img/logo/favicon/32.png"
   palette:
     primary: "White"
     accent: "Amber"
