@@ -18,6 +18,8 @@ Generates docs for all .sas files contained in the programFolders / macroFolders
 
 `sasjs docs` is an alias for `sasjs doc`.
 
+[![sasjs doc command](https://img.youtube.com/vi/ESNdCtXKRrw/0.jpg)](https://www.youtube.com/watch?v=ESNdCtXKRrw)
+
 ### Syntax
 
 ```
