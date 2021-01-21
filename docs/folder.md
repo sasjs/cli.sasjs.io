@@ -31,7 +31,7 @@ Additional arguments include:
 Used to list first level children folders of given folder.
 
 <!-- Needs recorded video -->
-<script id="asciicast-WbTaf3ns77RUL6iCSoHzAULN0" src="https://asciinema.org/a/WbTaf3ns77RUL6iCSoHzAULN0.js" async></script>
+<script id="asciicast-385938" src="https://asciinema.org/a/385938.js" async></script>
 
 ### Syntax
 
