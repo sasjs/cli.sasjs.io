@@ -26,6 +26,22 @@ Additional arguments include:
 
 * `--target` (alias `-t`) - the target environment in which to create the SAS Folder.  If not specified, the first target will be used instead. The target can exist either in the local project configuration or in the global .sasjsrc file.
 
+## sasjs folder list
+
+Used to list first level children folders of given folder.
+
+<!-- Needs recorded video -->
+<script id="asciicast-385938" src="https://asciinema.org/a/385938.js" async></script>
+
+### Syntax
+
+> `sasjs folder list <folderpath> -t target`
+
+### Usage
+
+```
+sasjs folder list /Public -t myTarget
+```
 
 ## sasjs folder create
 
@@ -62,16 +78,30 @@ sasjs folder delete /Public/new/folder -t myTarget
 
 ## sasjs folder move
 
-Moves an existing folder to a new parent location.
+Moves an existing folder to a new location. It behaves similarly to the Unix `mv` command.
+If `targetpath` is an existing folder, the folder will be moved underneath `targetpath`.
+If `targetpath` does not exist, the folder is moved and renamed, inside the parent folder.  See examples below.
 
 <script id="asciicast-oZB91eGpw7WvdFp3VYxetYj4k" src="https://asciinema.org/a/oZB91eGpw7WvdFp3VYxetYj4k.js" async></script>
 
 ### Syntax
 
-> `sasjs folder move <folderpath> <newparentpath>`
+> `sasjs folder move <folderpath> <targetpath>`
 
 ### Usage
 
+Moving `folder` to `/Public`
 ```
-sasjs folder move /Public/old/folder /Public
+sasjs folder move /Public/old/folder /Public -t myTarget
+```
+
+Moving `folder` to `folder2` leaving it in same directory
+```
+sasjs folder move /Public/old/folder /Public/old/folder2 -t myTarget
+```
+
+Moving `folder` to `/Public` and renaming to `folder2`  
+Reason for rename - `/Public/folder2` does not exist.
+```
+sasjs folder move /Public/old/folder /Public/folder2 -t myTarget
 ```
