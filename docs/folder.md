@@ -78,9 +78,9 @@ sasjs folder delete /Public/new/folder -t myTarget
 
 ## sasjs folder move
 
-Moves an existing folder to a new location. It behaves similar as unix `mv` command.
-If same locations is provided, but name is different on the `targetpath` then it will rename the folder.
-If different locations are provided, first it will check if last path section string in the `targetpath` exists as a folder, it will move it inside, and if it does not exist, it will move it inside of first up level folder and the last section of `targetpath` will be used for the renaming of moving folder.
+Moves an existing folder to a new location. It behaves similarly as Unix `mv` command.
+If the same locations are provided, but the name is different on the `targetpath` then it will rename the folder.
+If different locations are provided, first it will check if last path section string in the `targetpath` exists as a folder, it will move it inside, and if it does not exist, it will move it inside of the first up level folder and the last section of `targetpath` will be used for the renaming of moving folder.
 
 <script id="asciicast-oZB91eGpw7WvdFp3VYxetYj4k" src="https://asciinema.org/a/oZB91eGpw7WvdFp3VYxetYj4k.js" async></script>
 
@@ -90,6 +90,18 @@ If different locations are provided, first it will check if last path section st
 
 ### Usage
 
+It will move `folder` to `/Public`
 ```
-sasjs folder move /Public/old/folder /Public
+sasjs folder move /Public/old/folder /Public -t myTarget
+```
+
+It will only rename `folder` to `folder2` leaving it in same directory
+```
+sasjs folder move /Public/old/folder /Public/old/folder2 -t myTarget
+```
+
+It will move `folder` to `/Public` and will rename it to `folder2`  
+The reason behind it is that `/Public/folder2` does not exists, in that case it moves and renames the folder.
+```
+sasjs folder move /Public/old/folder /Public/folder2 -t myTarget
 ```
