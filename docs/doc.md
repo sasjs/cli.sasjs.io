@@ -14,7 +14,7 @@ Before using this command, you will need to [install](/installation) the SASjs C
 
 ## sasjs doc
 
-Generates docs for all .sas files contained in the programFolders / macroFolders / jobFolders / serviceFolders listed in the sasjsconfig.json file, for all targets. If a specific target is provided, the generated docs will ignore content from the other targets.
+Generates HTML docs for all .sas files contained in the programFolders / macroFolders / jobFolders / serviceFolders listed in the sasjsconfig.json file, for all targets. If a specific target is provided, the generated docs will ignore content from the other targets.
 
 `sasjs docs` is an alias for `sasjs doc`.
 
@@ -39,20 +39,20 @@ Additional arguments may include:
 # generates docs in default folder i.e. ./sasjsbuild/docs, using all targets as a source
 sasjs doc
 
-# generates docs in default folder i.e. ./sasjsbuild/docs, using the specific targets
+# generates docs in default folder i.e. ./sasjsbuild/docs, using a specific target
 sasjs doc -t viya
 
-# generates docs in provided folder i.e. ./my-docs, using the specific targets
+# generates docs in specific folder i.e. ./my-docs, using a particular target
 sasjs doc -t viya --outDirectory my-docs
 ```
 
 ## sasjs doc init
 
-For existing sasjs projects (eg those created prior to the implementation of the `sasjs doc` command, or where the doxy folder is otherwise uninitialised) OR to reset doxygen configuration/content(html files), it is possible to initialise the config files using the `sasjs doc init` command.
+For existing SASjs projects (eg those created prior to the implementation of the `sasjs doc` command, or where the doxy folder is otherwise uninitialised) OR to reset doxygen configuration/content, it is possible to initialise the config files using the `sasjs doc init` command.
 
-This will create 'doxy' folder under 'sasjs', and make it ready to use `sasjs doc`
+This will create the 'doxy' folder under 'sasjs', and make it ready to use `sasjs doc`
 
-For new projects using `sasjs create`, `sasjs doc init` is not required (the doxy folder and requisite files are created automatically)
+For new projects using `sasjs create`, `sasjs doc init` is not required - the doxy folder and requisite files are created automatically.
 
 ### Syntax
 
