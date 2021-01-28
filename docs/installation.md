@@ -17,7 +17,7 @@ npm i -g @sasjs/cli
 
 ### Upgrades
 
-Due to a bug in NPM, the following approaches for upgrades are not reliable:
+Due to a [bug in NPM](https://github.com/npm/cli/issues/1884), the following approaches for upgrades are not reliable:
 
 * `npm i -g @sasjs/cli@latest` (`sasjs v` will show latest version, but code isn't actually updated)
 * `npm update @sasjs/cli` (works but the first time you use the `sasjs` command there will be an error)
