@@ -327,35 +327,19 @@
       "macroFolders": {
           "$id": "#/properties/macroFolders",
           "type": "array",
-          "title": "The macroFolders schema",
-          "description": "An explanation about the purpose of this instance.",
+          "title": "The macroFolders array",
+          "description": "The folders in this array are searched when running `sasjs compile` for any dependent SAS Macros.  Dependent SAS macros are inserted at the beginning of all relevant compiled Jobs and Services. SAS Macros are found in Jobs, Services, Init / Term programs, and other Macros, by the existence of a `  <h4> SAS Macros </h4>` entry in the doxygen header (note the leading 2 spaces).\n \n In addition, by default, the [sasjs/core](https://core.sasjs.io/) macro folders are also searched (these are created under `/node_modules/@sasjs/core` after running `npm install`).",
           "default": [],
           "examples": [
               [
                   "macros"
               ]
-          ],
-          "additionalItems": true,
-          "items": {
-              "$id": "#/properties/macroFolders/items",
-              "anyOf": [
-                  {
-                      "$id": "#/properties/macroFolders/items/anyOf/0",
-                      "type": "string",
-                      "title": "The first anyOf schema",
-                      "description": "An explanation about the purpose of this instance.",
-                      "default": "",
-                      "examples": [
-                          "macros"
-                      ]
-                  }
-              ]
-          }
+          ]
       },
       "programFolders": {
           "$id": "#/properties/programFolders",
           "type": "array",
-          "title": "The programFolders schema",
+          "title": "The programFolders array",
           "description": "An explanation about the purpose of this instance.",
           "default": [],
           "examples": [
