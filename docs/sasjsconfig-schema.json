@@ -553,6 +553,9 @@
               "jobConfig": {
                 "$ref": "#/properties/jobConfig"
               },
+              "jobConfig": {
+                "$ref": "#/properties/docConfig"
+              },
               "streamConfig": {
                 "$id": "#/properties/targets/items/anyOf/0/properties/streamConfig",
                 "type": "object",
