@@ -118,7 +118,11 @@
       "examples": [
         {
           "displayMacroCore": true,
-          "outDirectory": ""
+          "outDirectory": "/some/output/directory",
+          "dataControllerUrl": "https://mysasserver/datacontroller"
+        },
+        {
+          "displayMacroCore": false
         }
       ],
       "properties": {
@@ -144,7 +148,9 @@
           "title": "The dataControllerUrl docConfig option",
           "description": "Provide the full URL to Data Controller so that `sasjs doc` can link the lineage diagram directly to the table viewer in Data Controller (https://datacontroller.io).\nIf left blank, or undefined, no links will be generated.",
           "default": "",
-          "examples": ["https://sas.analytium.co.uk/dcviya/development/#/view/viewer/"]
+          "examples": [
+            "https://sas.analytium.co.uk/dcviya/development/#/view/viewer/"
+          ]
         }
       }
     },
@@ -570,9 +576,7 @@
                     "webSourcePath": "dist"
                   }
                 ],
-                "required": [
-                  "streamWeb"
-                ],
+                "required": ["streamWeb"],
                 "properties": {
                   "assetPaths": {
                     "$id": "#/properties/targets/items/anyOf/0/properties/streamConfig/properties/assetPaths",
