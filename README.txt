@@ -4,6 +4,7 @@ Installation
 2. pip install mkdocs-material
 3. pip install fontawesome_markdown
 4. pip install mkdocs-redirects
+5. pip install json-schema-for-humans
 
 To build, navigate to the root of this repo and run:
     mkdocs build --clean
