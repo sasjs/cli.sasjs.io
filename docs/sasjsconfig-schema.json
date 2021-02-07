@@ -141,7 +141,7 @@
           "$id": "#/properties/docConfig",
           "type": "object",
           "title": "The docConfig schema",
-          "description": "SASjs uses doxygen to auto-generate HTML documentation using the headers in your SAS programs, macros, services & jobs. For more info, see https://cli.sasjs.io/doc/",
+          "description": "SASjs uses doxygen to auto-generate HTML documentation using the headers in your SAS programs, macros, services & jobs. For more info, see [https://cli.sasjs.io/doc](https://cli.sasjs.io/doc).",
           "default": {},
           "examples": [
               {
@@ -228,7 +228,7 @@
           "$id": "#/properties/deployConfig",
           "type": "object",
           "title": "The deployConfig schema",
-          "description": "An explanation about the purpose of this instance.",
+          "description": "The deployConfig object enables settings that relate to the deployment of a SAS app - be that Viya, or SAS 9, or a pure Base environment.",
           "default": {},
           "examples": [
               {
@@ -237,40 +237,21 @@
                   ]
               }
           ],
-          "required": [
-              "deployScripts"
-          ],
           "properties": {
               "deployScripts": {
                   "$id": "#/properties/deployConfig/properties/deployScripts",
                   "type": "array",
-                  "title": "The deployScripts schema",
-                  "description": "An explanation about the purpose of this instance.",
+                  "title": "The deployConfig deployScripts array",
+                  "description": "These scripts are executed when running `sasjs deploy`.  If the file is a .sas file, it is executed on the SAS server (Viya only).  Otherwise it is executed locally.  These scripts are run AFTER the deployment of the servicepack, if `deployServicePack:true` (Viya only).",
                   "default": [],
                   "examples": [
                       [
-                          "build/deployscript.sh"
+                          "build/deployscript.sh","build/myprogram.sas"
                       ]
-                  ],
-                  "additionalItems": true,
-                  "items": {
-                      "$id": "#/properties/deployConfig/properties/deployScripts/items",
-                      "anyOf": [
-                          {
-                              "$id": "#/properties/deployConfig/properties/deployScripts/items/anyOf/0",
-                              "type": "string",
-                              "title": "The first anyOf schema",
-                              "description": "An explanation about the purpose of this instance.",
-                              "default": "",
-                              "examples": [
-                                  "build/deployscript.sh"
-                              ]
-                          }
-                      ]
-                  }
-              }
-          },
-          "additionalProperties": true
+                  ]
+                }
+
+          }
       },
       "serviceConfig": {
           "$id": "#/properties/serviceConfig",

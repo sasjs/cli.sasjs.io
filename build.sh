@@ -3,7 +3,7 @@
 # PROJECT: SASjs Developer Guide                                   #
 ####################################################################
 
-generate-schema-doc --config-file sasjsconfig-docs.yaml sasjsconfig-schema.json theme/sasjsconfig.html
+generate-schema-doc --config-file sasjsconfig-docs.yaml docs/sasjsconfig-schema.json docs/sasjsconfig.html
 
 # deprecated - now runs with a github action
 #BUILD_FOLDER="/tmp/sasjscli_build"
