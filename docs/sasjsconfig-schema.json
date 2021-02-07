@@ -146,7 +146,7 @@
           "$id": "#/properties/docConfig/properties/dataControllerUrl",
           "type": "string",
           "title": "The dataControllerUrl docConfig option",
-          "description": "Provide the full URL to Data Controller so that `sasjs doc` can link the lineage diagram directly to the table viewer in Data Controller (https://datacontroller.io).\nIf left blank, or undefined, no links will be generated.",
+          "description": "Provide the full URL to Data Controller so that `sasjs doc` can link the lineage diagram directly to the table viewer in [Data Controller](https://datacontroller.io).\nIf left blank, or undefined, no links will be generated.",
           "default": "",
           "examples": [
             "https://sas.analytium.co.uk/dcviya/development/#/view/viewer/"
@@ -175,7 +175,7 @@
           "$id": "#/properties/buildConfig/properties/initProgram",
           "type": "string",
           "title": "The buildConfig initProgram",
-          "description": "The path to a .sas program that will be inserted at the start of the build .sas program (created when running sasjs build).",
+          "description": "The path to a .sas program that will be inserted at the start of the build .sas program (created when running `sasjs build`).",
           "default": "",
           "examples": ["build/buildinit.sas"]
         },
@@ -183,7 +183,7 @@
           "$id": "#/properties/buildConfig/properties/termProgram",
           "type": "string",
           "title": "The buildConfig termProgram",
-          "description": "The path to a .sas program that will be inserted at the end of the build .sas program (created when running sasjs build).",
+          "description": "The path to a .sas program that will be inserted at the end of the build .sas program (created when running `sasjs build`).",
           "default": "",
           "examples": ["build/buildterm.sas"]
         },
@@ -191,7 +191,7 @@
           "$id": "#/properties/buildConfig/properties/macroVars",
           "type": "object",
           "title": "The buildConfig macro variables",
-          "description": "A series of name value pairs that will be turned into SAS macro variables in the build .sas program (generated when running sasjs build).  The example provided will generate sas code as follows:\n```\n%let name=value;\n%let numvar=42;\n```",
+          "description": "A series of name value pairs that will be turned into SAS macro variables in the build .sas program (generated when running `sasjs build`).  The example provided will generate sas code as follows:\n```\n%let name=value;\n%let numvar=42;\n```",
           "default": {},
           "examples": [
             {
