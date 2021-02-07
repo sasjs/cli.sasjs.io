@@ -295,7 +295,7 @@
           "$id": "#/properties/jobConfig/properties/jobFolders",
           "type": "array",
           "title": "The jobConfig jobFolders array",
-          "description": "When running `sasjs compile`, all programs in the folders defined in this array are compiled and placed into same-named folders under `sasjsbuild/jobs`. Folders can be absolute, or relative to the `sasjs` folder.",
+          "description": "When running `sasjs compile`, all programs in the local folders defined in this array are compiled and placed into same-named folders under `sasjsbuild/jobs`. Folders can be absolute, or relative to the local project `/sasjs` folder.",
           "default": [],
           "examples": [["jobs/extract", "jobs/transform", "jobs/load"]]
         },
@@ -303,7 +303,7 @@
           "$id": "#/properties/jobConfig/properties/initProgram",
           "type": "string",
           "title": "The jobConfig initProgram",
-          "description": "The jobConfig `initProgram` is a .sas file that is inserted at the start of every SAS Job (after compiled macros and any `macroVars`, and before the Job itself). ",
+          "description": "The jobConfig `initProgram` is a local .sas file that is inserted at the start of every SAS Job (after compiled macros and any `macroVars`, and before the Job itself). ",
           "default": "",
           "examples": ["jobs/jobinit.sas"]
         },
@@ -334,7 +334,7 @@
       "$id": "#/properties/macroFolders",
       "type": "array",
       "title": "The macroFolders array",
-      "description": "The folders in this array are searched when running `sasjs compile` for any dependent SAS Macros.  Dependent Macros are inserted at the beginning of all relevant compiled Jobs and Services. SAS Macros are found in Jobs, Services, Init / Term programs, and other Macros, by the existence of a &nbsp;`  <h4> SAS Macros </h4>` entry in the doxygen header.\n \n In addition, by default, the sasjs/core (https://core.sasjs.io) macro folders are also searched (these are created under `/node_modules/@sasjs/core` after running `npm install`).",
+      "description": "The local folders in this array are searched when running `sasjs compile` for any dependent SAS Macros.  Dependent Macros are inserted at the beginning of all relevant compiled Jobs and Services. SAS Macros are found in Jobs, Services, Init / Term programs, and other Macros, by the existence of a &nbsp;`  <h4> SAS Macros </h4>` entry in the doxygen header.\n \n In addition, by default, the sasjs/core (https://core.sasjs.io) macro folders are also searched (these are created under `/node_modules/@sasjs/core` after running `npm install`).",
       "default": [],
       "examples": [["macros", "../../more_macros"]]
     },
@@ -342,7 +342,7 @@
       "$id": "#/properties/programFolders",
       "type": "array",
       "title": "The programFolders array",
-      "description": "These folders are searched for any dependent SAS Programs as defined in the doxygen headers of relevant Services and Jobs.  Unlike SAS Macros, which can be easily inserted into the precode of a Service or Job, a SAS program requires some preparation so that it can be invoked on demand. `sasjs compile` will take any dependent SAS programs, and wrap them in a `data _null_` step with put statements, to a user-defined fileref, so that the program can be subsequently `%include`'d according to the developer's preference.\n\nThe doxygen syntax is as follows:\n\n```  <h4> SAS Programs </h4>\n  @li mysasprogram.sas myfref\n```",
+      "description": "These local folders are searched for any dependent SAS Programs as defined in the doxygen headers of relevant Services and Jobs.  Unlike SAS Macros, which can be easily inserted into the precode of a Service or Job, a SAS program requires some preparation so that it can be invoked on demand. `sasjs compile` will take any dependent SAS programs, and wrap them in a `data _null_` step with put statements, to a user-defined fileref, so that the program can be subsequently `%include`'d according to the developer's preference.\n\nThe doxygen syntax is as follows:\n\n```  <h4> SAS Programs </h4>\n  @li mysasprogram.sas myfref\n```",
       "default": [],
       "examples": [["programs", "../../more_programs"]]
     },
@@ -445,8 +445,8 @@
           {
             "$id": "#/properties/targets/items/anyOf/0",
             "type": "object",
-            "title": "Viya Target Definition",
-            "description": "A Viya-based target definition",
+            "title": "SASjs Targets",
+            "description": "A target provides the configuration specific to a particular deployment, eg DEV / TEST, or SAS9 / SASVIYA.",
             "default": {},
             "examples": [
               {
@@ -542,217 +542,19 @@
                 "$ref": "#/properties/buildConfig"
               },
               "deployConfig": {
-                "$id": "#/properties/targets/items/anyOf/0/properties/deployConfig",
-                "type": "object",
-                "title": "The deployConfig schema",
-                "description": "An explanation about the purpose of this instance.",
-                "default": {},
-                "examples": [
-                  {
-                    "deployServicePack": true,
-                    "deployScripts": ["sasjsbuild/myviyadeploy.sas"]
-                  }
-                ],
-                "required": ["deployServicePack", "deployScripts"],
-                "properties": {
-                  "deployServicePack": {
-                    "$id": "#/properties/targets/items/anyOf/0/properties/deployConfig/properties/deployServicePack",
-                    "type": "boolean",
-                    "title": "The deployServicePack schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": false,
-                    "examples": [true]
-                  },
-                  "deployScripts": {
-                    "$id": "#/properties/targets/items/anyOf/0/properties/deployConfig/properties/deployScripts",
-                    "type": "array",
-                    "title": "The deployScripts schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": [],
-                    "examples": [["sasjsbuild/myviyadeploy.sas"]],
-                    "additionalItems": true,
-                    "items": {
-                      "$id": "#/properties/targets/items/anyOf/0/properties/deployConfig/properties/deployScripts/items",
-                      "anyOf": [
-                        {
-                          "$id": "#/properties/targets/items/anyOf/0/properties/deployConfig/properties/deployScripts/items/anyOf/0",
-                          "type": "string",
-                          "title": "The first anyOf schema",
-                          "description": "An explanation about the purpose of this instance.",
-                          "default": "",
-                          "examples": ["sasjsbuild/myviyadeploy.sas"]
-                        }
-                      ]
-                    }
-                  }
-                },
-                "additionalProperties": true
+                "$ref": "#/properties/deployConfig"
               },
               "serviceConfig": {
-                "$id": "#/properties/targets/items/anyOf/0/properties/serviceConfig",
-                "type": "object",
-                "title": "The serviceConfig schema",
-                "description": "An explanation about the purpose of this instance.",
-                "default": {},
-                "examples": [
-                  {
-                    "serviceFolders": ["targets/viya/services/admin"],
-                    "initProgram": "build/serviceinit.sas",
-                    "termProgram": "build/serviceinit.sas",
-                    "macroVars": {
-                      "name": "viyavalue",
-                      "extravar": "this too"
-                    }
-                  }
-                ],
-                "required": [
-                  "serviceFolders",
-                  "initProgram",
-                  "termProgram",
-                  "macroVars"
-                ],
-                "properties": {
-                  "serviceFolders": {
-                    "$id": "#/properties/targets/items/anyOf/0/properties/serviceConfig/properties/serviceFolders",
-                    "type": "array",
-                    "title": "The serviceFolders schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": [],
-                    "examples": [["targets/viya/services/admin"]],
-                    "additionalItems": true,
-                    "items": {
-                      "$id": "#/properties/targets/items/anyOf/0/properties/serviceConfig/properties/serviceFolders/items",
-                      "anyOf": [
-                        {
-                          "$id": "#/properties/targets/items/anyOf/0/properties/serviceConfig/properties/serviceFolders/items/anyOf/0",
-                          "type": "string",
-                          "title": "The first anyOf schema",
-                          "description": "An explanation about the purpose of this instance.",
-                          "default": "",
-                          "examples": ["targets/viya/services/admin"]
-                        }
-                      ]
-                    }
-                  },
-                  "initProgram": {
-                    "$id": "#/properties/targets/items/anyOf/0/properties/serviceConfig/properties/initProgram",
-                    "type": "string",
-                    "title": "The initProgram schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": "",
-                    "examples": ["build/serviceinit.sas"]
-                  },
-                  "termProgram": {
-                    "$id": "#/properties/targets/items/anyOf/0/properties/serviceConfig/properties/termProgram",
-                    "type": "string",
-                    "title": "The termProgram schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": "",
-                    "examples": ["build/serviceinit.sas"]
-                  },
-                  "macroVars": {
-                    "$id": "#/properties/targets/items/anyOf/0/properties/serviceConfig/properties/macroVars",
-                    "type": "object",
-                    "title": "The macroVars schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [
-                      {
-                        "name": "viyavalue",
-                        "extravar": "this too"
-                      }
-                    ],
-                    "required": ["name", "extravar"],
-                    "properties": {
-                      "name": {
-                        "$id": "#/properties/targets/items/anyOf/0/properties/serviceConfig/properties/macroVars/properties/name",
-                        "type": "string",
-                        "title": "The name schema",
-                        "description": "An explanation about the purpose of this instance.",
-                        "default": "",
-                        "examples": ["viyavalue"]
-                      },
-                      "extravar": {
-                        "$id": "#/properties/targets/items/anyOf/0/properties/serviceConfig/properties/macroVars/properties/extravar",
-                        "type": "string",
-                        "title": "The extravar schema",
-                        "description": "An explanation about the purpose of this instance.",
-                        "default": "",
-                        "examples": ["this too"]
-                      }
-                    },
-                    "additionalProperties": true
-                  }
-                },
-                "additionalProperties": true
+                "$ref": "#/properties/serviceConfig"
               },
               "jobConfig": {
-                "$id": "#/properties/targets/items/anyOf/0/properties/jobConfig",
-                "type": "object",
-                "title": "The jobConfig schema",
-                "description": "An explanation about the purpose of this instance.",
-                "default": {},
-                "examples": [
-                  {
-                    "jobFolders": [],
-                    "initProgram": "",
-                    "termProgram": "",
-                    "macroVars": {}
-                  }
-                ],
-                "required": [
-                  "jobFolders",
-                  "initProgram",
-                  "termProgram",
-                  "macroVars"
-                ],
-                "properties": {
-                  "jobFolders": {
-                    "$id": "#/properties/targets/items/anyOf/0/properties/jobConfig/properties/jobFolders",
-                    "type": "array",
-                    "title": "The jobFolders schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": [],
-                    "examples": [[]],
-                    "additionalItems": true,
-                    "items": {
-                      "$id": "#/properties/targets/items/anyOf/0/properties/jobConfig/properties/jobFolders/items"
-                    }
-                  },
-                  "initProgram": {
-                    "$id": "#/properties/targets/items/anyOf/0/properties/jobConfig/properties/initProgram",
-                    "type": "string",
-                    "title": "The initProgram schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": "",
-                    "examples": [""]
-                  },
-                  "termProgram": {
-                    "$id": "#/properties/targets/items/anyOf/0/properties/jobConfig/properties/termProgram",
-                    "type": "string",
-                    "title": "The termProgram schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": "",
-                    "examples": [""]
-                  },
-                  "macroVars": {
-                    "$id": "#/properties/targets/items/anyOf/0/properties/jobConfig/properties/macroVars",
-                    "type": "object",
-                    "title": "The macroVars schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [{}],
-                    "required": [],
-                    "additionalProperties": true
-                  }
-                },
-                "additionalProperties": true
+                "$ref": "#/properties/jobConfig"
               },
               "streamConfig": {
                 "$id": "#/properties/targets/items/anyOf/0/properties/streamConfig",
                 "type": "object",
-                "title": "The streamConfig schema",
-                "description": "An explanation about the purpose of this instance.",
+                "title": "The target streamConfig",
+                "description": "SASjs allows the frontend of a local web app to be compiled such that all html, css, javascript, and other assets such as png or mp4 are converted into web services and streamed directly from SAS.\n\nThis approach is convenient as it bypasses the need to deploy to a web server. ",
                 "default": {},
                 "examples": [
                   {
@@ -763,463 +565,51 @@
                   }
                 ],
                 "required": [
-                  "assetPaths",
-                  "streamWeb",
-                  "streamWebFolder",
-                  "webSourcePath"
+                  "streamWeb"
                 ],
                 "properties": {
                   "assetPaths": {
                     "$id": "#/properties/targets/items/anyOf/0/properties/streamConfig/properties/assetPaths",
                     "type": "array",
-                    "title": "The assetPaths schema",
-                    "description": "An explanation about the purpose of this instance.",
+                    "title": "The streamConfig assetPaths array",
+                    "description": "An array of local folders.  All assets placed in these folders are converted into web services - example file types could be png, svg, mp3, mp4, excel - anything really.",
                     "default": [],
-                    "examples": [[]],
-                    "additionalItems": true,
-                    "items": {
-                      "$id": "#/properties/targets/items/anyOf/0/properties/streamConfig/properties/assetPaths/items"
-                    }
+                    "examples": [["/myassets"]]
                   },
                   "streamWeb": {
                     "$id": "#/properties/targets/items/anyOf/0/properties/streamConfig/properties/streamWeb",
                     "type": "boolean",
-                    "title": "The streamWeb schema",
-                    "description": "An explanation about the purpose of this instance.",
+                    "title": "The streamConfig streamWeb flag",
+                    "description": "When set to `true`, frontend files saved in the `webSourcePath` will be converted to streaming services in the `streamWebFolder` in SAS.",
                     "default": false,
-                    "examples": [false]
+                    "examples": [true]
                   },
                   "streamWebFolder": {
                     "$id": "#/properties/targets/items/anyOf/0/properties/streamConfig/properties/streamWebFolder",
                     "type": "string",
-                    "title": "The streamWebFolder schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": "",
+                    "title": "The streamConfig streamWebFolder",
+                    "description": "This is the target SAS folder (relative to the appLoc) where the compiled web assets will be created.",
+                    "default": "webv",
                     "examples": ["webv"]
                   },
                   "webSourcePath": {
                     "$id": "#/properties/targets/items/anyOf/0/properties/streamConfig/properties/webSourcePath",
                     "type": "string",
                     "title": "The webSourcePath schema",
-                    "description": "An explanation about the purpose of this instance.",
+                    "description": "When `streamConfig` is set to `true`, all files in this folder will be converted to streaming web services.  The `index.html` will be taken as a baseline, and all relative URLS will be prefixed such that the links still work and the assets still load.",
                     "default": "",
                     "examples": ["dist"]
                   }
-                },
-                "additionalProperties": true
+                }
               },
               "macroFolders": {
-                "$id": "#/properties/targets/items/anyOf/0/properties/macroFolders",
-                "type": "array",
-                "title": "The macroFolders schema",
-                "description": "An explanation about the purpose of this instance.",
-                "default": [],
-                "examples": [["targets/viya/macros"]],
-                "additionalItems": true,
-                "items": {
-                  "$id": "#/properties/targets/items/anyOf/0/properties/macroFolders/items",
-                  "anyOf": [
-                    {
-                      "$id": "#/properties/targets/items/anyOf/0/properties/macroFolders/items/anyOf/0",
-                      "type": "string",
-                      "title": "The first anyOf schema",
-                      "description": "An explanation about the purpose of this instance.",
-                      "default": "",
-                      "examples": ["targets/viya/macros"]
-                    }
-                  ]
-                }
+                "$ref": "#/properties/macroFolders"
               },
               "programFolders": {
-                "$id": "#/properties/targets/items/anyOf/0/properties/programFolders",
-                "type": "array",
-                "title": "The programFolders schema",
-                "description": "An explanation about the purpose of this instance.",
-                "default": [],
-                "examples": [[]],
-                "additionalItems": true,
-                "items": {
-                  "$id": "#/properties/targets/items/anyOf/0/properties/programFolders/items"
-                }
+                "$ref": "#/properties/programFolders"
               }
             },
             "additionalProperties": true
-          },
-          {
-            "$id": "#/properties/targets/items/anyOf/1",
-            "type": "object",
-            "title": "The second anyOf schema",
-            "description": "An explanation about the purpose of this instance.",
-            "default": {},
-            "examples": [
-              {
-                "name": "sas9",
-                "serverType": "SAS9",
-                "serverUrl": "http://sas.analytium.co.uk:7980",
-                "appLoc": "/User Folders/&sysuserid/My Folder",
-                "serverName": "Foundation",
-                "repositoryName": "SASApp",
-                "buildConfig": {
-                  "buildOutputFileName": "mysas9deploy.sas",
-                  "initProgram": "",
-                  "termProgram": "",
-                  "macroVars": {}
-                },
-                "deployConfig": {
-                  "deployScripts": ["build/deploysas9.sh"],
-                  "deployServicePack": false
-                },
-                "serviceConfig": {
-                  "serviceFolders": ["targets/sas9/services/admin"],
-                  "initProgram": "",
-                  "termProgram": "build/servicetermother.sas",
-                  "macroVars": {}
-                },
-                "streamConfig": {
-                  "assetPaths": [],
-                  "streamWeb": false,
-                  "streamWebFolder": "web9",
-                  "webSourcePath": "dist"
-                },
-                "macroFolders": ["targets/sas9/macros"],
-                "programFolders": []
-              }
-            ],
-            "required": [
-              "name",
-              "serverType",
-              "serverUrl",
-              "appLoc",
-              "serverName",
-              "repositoryName",
-              "buildConfig",
-              "deployConfig",
-              "serviceConfig",
-              "streamConfig",
-              "macroFolders",
-              "programFolders"
-            ],
-            "properties": {
-              "name": {
-                "$id": "#/properties/targets/items/anyOf/1/properties/name",
-                "type": "string",
-                "title": "The name schema",
-                "description": "An explanation about the purpose of this instance.",
-                "default": "",
-                "examples": ["sas9"]
-              },
-              "serverType": {
-                "$id": "#/properties/targets/items/anyOf/1/properties/serverType",
-                "type": "string",
-                "title": "The serverType schema",
-                "description": "An explanation about the purpose of this instance.",
-                "default": "",
-                "examples": ["SAS9"]
-              },
-              "serverUrl": {
-                "$id": "#/properties/targets/items/anyOf/1/properties/serverUrl",
-                "type": "string",
-                "title": "The serverUrl schema",
-                "description": "An explanation about the purpose of this instance.",
-                "default": "",
-                "examples": ["http://sas.analytium.co.uk:7980"]
-              },
-              "appLoc": {
-                "$id": "#/properties/targets/items/anyOf/1/properties/appLoc",
-                "type": "string",
-                "title": "The appLoc schema",
-                "description": "An explanation about the purpose of this instance.",
-                "default": "",
-                "examples": ["/User Folders/&sysuserid/My Folder"]
-              },
-              "serverName": {
-                "$id": "#/properties/targets/items/anyOf/1/properties/serverName",
-                "type": "string",
-                "title": "The serverName schema",
-                "description": "An explanation about the purpose of this instance.",
-                "default": "",
-                "examples": ["Foundation"]
-              },
-              "repositoryName": {
-                "$id": "#/properties/targets/items/anyOf/1/properties/repositoryName",
-                "type": "string",
-                "title": "The repositoryName schema",
-                "description": "An explanation about the purpose of this instance.",
-                "default": "",
-                "examples": ["SASApp"]
-              },
-              "buildConfig": {
-                "$id": "#/properties/targets/items/anyOf/1/properties/buildConfig",
-                "type": "object",
-                "title": "The buildConfig schema",
-                "description": "An explanation about the purpose of this instance.",
-                "default": {},
-                "examples": [
-                  {
-                    "buildOutputFileName": "mysas9deploy.sas",
-                    "initProgram": "",
-                    "termProgram": "",
-                    "macroVars": {}
-                  }
-                ],
-                "required": [
-                  "buildOutputFileName",
-                  "initProgram",
-                  "termProgram",
-                  "macroVars"
-                ],
-                "properties": {
-                  "buildOutputFileName": {
-                    "$id": "#/properties/targets/items/anyOf/1/properties/buildConfig/properties/buildOutputFileName",
-                    "type": "string",
-                    "title": "The buildOutputFileName schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": "",
-                    "examples": ["mysas9deploy.sas"]
-                  },
-                  "initProgram": {
-                    "$id": "#/properties/targets/items/anyOf/1/properties/buildConfig/properties/initProgram",
-                    "type": "string",
-                    "title": "The initProgram schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": "",
-                    "examples": [""]
-                  },
-                  "termProgram": {
-                    "$id": "#/properties/targets/items/anyOf/1/properties/buildConfig/properties/termProgram",
-                    "type": "string",
-                    "title": "The termProgram schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": "",
-                    "examples": [""]
-                  },
-                  "macroVars": {
-                    "$id": "#/properties/targets/items/anyOf/1/properties/buildConfig/properties/macroVars",
-                    "type": "object",
-                    "title": "The macroVars schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [{}],
-                    "required": [],
-                    "additionalProperties": true
-                  }
-                },
-                "additionalProperties": true
-              },
-              "deployConfig": {
-                "$id": "#/properties/targets/items/anyOf/1/properties/deployConfig",
-                "type": "object",
-                "title": "The deployConfig schema",
-                "description": "An explanation about the purpose of this instance.",
-                "default": {},
-                "examples": [
-                  {
-                    "deployScripts": ["build/deploysas9.sh"],
-                    "deployServicePack": false
-                  }
-                ],
-                "required": ["deployScripts", "deployServicePack"],
-                "properties": {
-                  "deployScripts": {
-                    "$id": "#/properties/targets/items/anyOf/1/properties/deployConfig/properties/deployScripts",
-                    "type": "array",
-                    "title": "The deployScripts schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": [],
-                    "examples": [["build/deploysas9.sh"]],
-                    "additionalItems": true,
-                    "items": {
-                      "$id": "#/properties/targets/items/anyOf/1/properties/deployConfig/properties/deployScripts/items",
-                      "anyOf": [
-                        {
-                          "$id": "#/properties/targets/items/anyOf/1/properties/deployConfig/properties/deployScripts/items/anyOf/0",
-                          "type": "string",
-                          "title": "The first anyOf schema",
-                          "description": "An explanation about the purpose of this instance.",
-                          "default": "",
-                          "examples": ["build/deploysas9.sh"]
-                        }
-                      ]
-                    }
-                  },
-                  "deployServicePack": {
-                    "$id": "#/properties/targets/items/anyOf/1/properties/deployConfig/properties/deployServicePack",
-                    "type": "boolean",
-                    "title": "The deployServicePack schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": false,
-                    "examples": [false]
-                  }
-                },
-                "additionalProperties": true
-              },
-              "serviceConfig": {
-                "$id": "#/properties/targets/items/anyOf/1/properties/serviceConfig",
-                "type": "object",
-                "title": "The serviceConfig schema",
-                "description": "An explanation about the purpose of this instance.",
-                "default": {},
-                "examples": [
-                  {
-                    "serviceFolders": ["targets/sas9/services/admin"],
-                    "initProgram": "",
-                    "termProgram": "build/servicetermother.sas",
-                    "macroVars": {}
-                  }
-                ],
-                "required": [
-                  "serviceFolders",
-                  "initProgram",
-                  "termProgram",
-                  "macroVars"
-                ],
-                "properties": {
-                  "serviceFolders": {
-                    "$id": "#/properties/targets/items/anyOf/1/properties/serviceConfig/properties/serviceFolders",
-                    "type": "array",
-                    "title": "The serviceFolders schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": [],
-                    "examples": [["targets/sas9/services/admin"]],
-                    "additionalItems": true,
-                    "items": {
-                      "$id": "#/properties/targets/items/anyOf/1/properties/serviceConfig/properties/serviceFolders/items",
-                      "anyOf": [
-                        {
-                          "$id": "#/properties/targets/items/anyOf/1/properties/serviceConfig/properties/serviceFolders/items/anyOf/0",
-                          "type": "string",
-                          "title": "The first anyOf schema",
-                          "description": "An explanation about the purpose of this instance.",
-                          "default": "",
-                          "examples": ["targets/sas9/services/admin"]
-                        }
-                      ]
-                    }
-                  },
-                  "initProgram": {
-                    "$id": "#/properties/targets/items/anyOf/1/properties/serviceConfig/properties/initProgram",
-                    "type": "string",
-                    "title": "The initProgram schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": "",
-                    "examples": [""]
-                  },
-                  "termProgram": {
-                    "$id": "#/properties/targets/items/anyOf/1/properties/serviceConfig/properties/termProgram",
-                    "type": "string",
-                    "title": "The termProgram schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": "",
-                    "examples": ["build/servicetermother.sas"]
-                  },
-                  "macroVars": {
-                    "$id": "#/properties/targets/items/anyOf/1/properties/serviceConfig/properties/macroVars",
-                    "type": "object",
-                    "title": "The macroVars schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": {},
-                    "examples": [{}],
-                    "required": [],
-                    "additionalProperties": true
-                  }
-                },
-                "additionalProperties": true
-              },
-              "streamConfig": {
-                "$id": "#/properties/targets/items/anyOf/1/properties/streamConfig",
-                "type": "object",
-                "title": "The streamConfig schema",
-                "description": "An explanation about the purpose of this instance.",
-                "default": {},
-                "examples": [
-                  {
-                    "assetPaths": [],
-                    "streamWeb": false,
-                    "streamWebFolder": "web9",
-                    "webSourcePath": "dist"
-                  }
-                ],
-                "required": [
-                  "assetPaths",
-                  "streamWeb",
-                  "streamWebFolder",
-                  "webSourcePath"
-                ],
-                "properties": {
-                  "assetPaths": {
-                    "$id": "#/properties/targets/items/anyOf/1/properties/streamConfig/properties/assetPaths",
-                    "type": "array",
-                    "title": "The assetPaths schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": [],
-                    "examples": [[]],
-                    "additionalItems": true,
-                    "items": {
-                      "$id": "#/properties/targets/items/anyOf/1/properties/streamConfig/properties/assetPaths/items"
-                    }
-                  },
-                  "streamWeb": {
-                    "$id": "#/properties/targets/items/anyOf/1/properties/streamConfig/properties/streamWeb",
-                    "type": "boolean",
-                    "title": "The streamWeb schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": false,
-                    "examples": [false]
-                  },
-                  "streamWebFolder": {
-                    "$id": "#/properties/targets/items/anyOf/1/properties/streamConfig/properties/streamWebFolder",
-                    "type": "string",
-                    "title": "The streamWebFolder schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": "",
-                    "examples": ["web9"]
-                  },
-                  "webSourcePath": {
-                    "$id": "#/properties/targets/items/anyOf/1/properties/streamConfig/properties/webSourcePath",
-                    "type": "string",
-                    "title": "The webSourcePath schema",
-                    "description": "An explanation about the purpose of this instance.",
-                    "default": "",
-                    "examples": ["dist"]
-                  }
-                },
-                "additionalProperties": true
-              },
-              "macroFolders": {
-                "$id": "#/properties/targets/items/anyOf/1/properties/macroFolders",
-                "type": "array",
-                "title": "The macroFolders schema",
-                "description": "An explanation about the purpose of this instance.",
-                "default": [],
-                "examples": [["targets/sas9/macros"]],
-                "additionalItems": true,
-                "items": {
-                  "$id": "#/properties/targets/items/anyOf/1/properties/macroFolders/items",
-                  "anyOf": [
-                    {
-                      "$id": "#/properties/targets/items/anyOf/1/properties/macroFolders/items/anyOf/0",
-                      "type": "string",
-                      "title": "The first anyOf schema",
-                      "description": "An explanation about the purpose of this instance.",
-                      "default": "",
-                      "examples": ["targets/sas9/macros"]
-                    }
-                  ]
-                }
-              },
-              "programFolders": {
-                "$id": "#/properties/targets/items/anyOf/1/properties/programFolders",
-                "type": "array",
-                "title": "The programFolders schema",
-                "description": "An explanation about the purpose of this instance.",
-                "default": [],
-                "examples": [[]],
-                "additionalItems": true,
-                "items": {
-                  "$id": "#/properties/targets/items/anyOf/1/properties/programFolders/items"
-                }
-              }
-            }
           }
         ]
       }
