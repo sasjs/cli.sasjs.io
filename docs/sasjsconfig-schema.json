@@ -257,7 +257,7 @@
           "$id": "#/properties/serviceConfig",
           "type": "object",
           "title": "The serviceConfig schema",
-          "description": "An explanation about the purpose of this instance.",
+          "description": "The serviceConfig object defines how SASjs web services are compiled.  Web services differ from jobs in that they include some fixed pre-code (eg the macros to stream out the result json).",
           "default": {},
           "examples": [
               {
@@ -268,53 +268,32 @@
                   "initProgram": "build/serviceinit.sas",
                   "termProgram": "build/serviceterm.sas",
                   "macroVars": {
-                      "name": "value",
-                      "numvar": "42"
+                      "mac1": "value",
+                      "mac2": "42"
                   }
               }
           ],
           "required": [
-              "serviceFolders",
-              "initProgram",
-              "termProgram",
-              "macroVars"
           ],
           "properties": {
               "serviceFolders": {
                   "$id": "#/properties/serviceConfig/properties/serviceFolders",
                   "type": "array",
-                  "title": "The serviceFolders schema",
-                  "description": "An explanation about the purpose of this instance.",
+                  "title": "The serviceConfig serviceFolders array",
+                  "description": "When running `sasjs compile`, all programs in the folders defined in this array are compiled and placed into same-named folders under `sasjsbuild/services`.  They will be compiled as services (so, with the service pre-code).  Folders can be absolute, or relative to the `sasjs` folder.",
                   "default": [],
                   "examples": [
                       [
                           "services/common",
                           "services/admin"
                       ]
-                  ],
-                  "additionalItems": true,
-                  "items": {
-                      "$id": "#/properties/serviceConfig/properties/serviceFolders/items",
-                      "anyOf": [
-                          {
-                              "$id": "#/properties/serviceConfig/properties/serviceFolders/items/anyOf/0",
-                              "type": "string",
-                              "title": "The first anyOf schema",
-                              "description": "An explanation about the purpose of this instance.",
-                              "default": "",
-                              "examples": [
-                                  "services/common",
-                                  "services/admin"
-                              ]
-                          }
-                      ]
-                  }
+                  ]
               },
               "initProgram": {
                   "$id": "#/properties/serviceConfig/properties/initProgram",
                   "type": "string",
-                  "title": "The initProgram schema",
-                  "description": "An explanation about the purpose of this instance.",
+                  "title": "The serviceConfig initProgram",
+                  "description": "The serviceConfig `initProgram` is a .sas file that is inserted at the start of every SAS service (after compiled macros and any `macroVars`, and before the service itself). ",
                   "default": "",
                   "examples": [
                       "build/serviceinit.sas"
@@ -323,8 +302,8 @@
               "termProgram": {
                   "$id": "#/properties/serviceConfig/properties/termProgram",
                   "type": "string",
-                  "title": "The termProgram schema",
-                  "description": "An explanation about the purpose of this instance.",
+                  "title": "The serviceConfig termProgram",
+                  "description": "The serviceConfig termProgram is inserted at the end of every service as part of `sasjs compile`.",
                   "default": "",
                   "examples": [
                       "build/serviceterm.sas"
@@ -333,45 +312,17 @@
               "macroVars": {
                   "$id": "#/properties/serviceConfig/properties/macroVars",
                   "type": "object",
-                  "title": "The macroVars schema",
-                  "description": "An explanation about the purpose of this instance.",
+                  "title": "The `serviceConfig` macroVars",
+                  "description": "This object allows `sasjs compile` to insert specific macro variables at the start of every service.  In this case, the code generated would be:\n```\n%let mac1=value;\n%let mac2=42;\n```",
                   "default": {},
                   "examples": [
                       {
-                          "name": "value",
-                          "numvar": "42"
+                          "mac1": "value",
+                          "mac2": "42"
                       }
-                  ],
-                  "required": [
-                      "name",
-                      "numvar"
-                  ],
-                  "properties": {
-                      "name": {
-                          "$id": "#/properties/serviceConfig/properties/macroVars/properties/name",
-                          "type": "string",
-                          "title": "The name schema",
-                          "description": "An explanation about the purpose of this instance.",
-                          "default": "",
-                          "examples": [
-                              "value"
-                          ]
-                      },
-                      "numvar": {
-                          "$id": "#/properties/serviceConfig/properties/macroVars/properties/numvar",
-                          "type": "string",
-                          "title": "The numvar schema",
-                          "description": "An explanation about the purpose of this instance.",
-                          "default": "",
-                          "examples": [
-                              "42"
-                          ]
-                      }
-                  },
-                  "additionalProperties": true
+                  ]
               }
-          },
-          "additionalProperties": true
+          }
       },
       "macroFolders": {
           "$id": "#/properties/macroFolders",
