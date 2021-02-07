@@ -7,10 +7,6 @@
   "default": {},
   "examples": [
     {
-      "docConfig": {
-        "displayMacroCore": true,
-        "outDirectory": "/some/folder/mydocs"
-      },
       "buildConfig": {
         "initProgram": "build/buildinit.sas",
         "termProgram": "build/buildterm.sas",
@@ -112,7 +108,6 @@
       ]
     }
   ],
-  "required": ["targets"],
   "properties": {
     "docConfig": {
       "$id": "#/properties/docConfig",
@@ -142,6 +137,14 @@
           "description": "This is the location to which the generated HTML SAS documentation will be written.  If missing, or left blank, the files will be written to the `sasjsbuild/doc` directory (default behaviour).",
           "default": "$projectroot/sasjsbuild/doc",
           "examples": ["/my/preferred/docs/directory"]
+        },
+        "dataControllerUrl": {
+          "$id": "#/properties/docConfig/properties/dataControllerUrl",
+          "type": "string",
+          "title": "The dataControllerUrl docConfig option",
+          "description": "Provide the full URL to Data Controller so that `sasjs doc` can link the lineage diagram directly to the table viewer in Data Controller (https://datacontroller.io).\nIf left blank, or undefined, no links will be generated.",
+          "default": "",
+          "examples": ["https://sas.analytium.co.uk/dcviya/development/#/view/viewer/"]
         }
       }
     },
