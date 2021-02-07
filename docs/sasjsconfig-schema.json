@@ -324,15 +324,87 @@
               }
           }
       },
+      "jobConfig": {
+        "$id": "#/properties/jobConfig",
+        "type": "object",
+        "title": "The jobConfig schema",
+        "description": "The jobConfig object defines how SASjs web services are compiled.  Web services differ from jobs in that they include some fixed pre-code (eg the macros to stream out the result json).",
+        "default": {},
+        "examples": [
+            {
+                "serviceFolders": [
+                    "services/common",
+                    "services/admin"
+                ],
+                "initProgram": "build/serviceinit.sas",
+                "termProgram": "build/serviceterm.sas",
+                "macroVars": {
+                    "mac1": "value",
+                    "mac2": "42"
+                }
+            }
+        ],
+        "required": [
+        ],
+        "properties": {
+            "serviceFolders": {
+                "$id": "#/properties/jobConfig/properties/serviceFolders",
+                "type": "array",
+                "title": "The jobConfig serviceFolders array",
+                "description": "When running `sasjs compile`, all programs in the folders defined in this array are compiled and placed into same-named folders under `sasjsbuild/jobs`. Folders can be absolute, or relative to the `sasjs` folder.",
+                "default": [],
+                "examples": [
+                    [
+                        "jobs/extract",
+                        "jobs/transform",
+                        "jobs/load"
+                    ]
+                ]
+            },
+            "initProgram": {
+                "$id": "#/properties/jobConfig/properties/initProgram",
+                "type": "string",
+                "title": "The jobConfig initProgram",
+                "description": "The jobConfig `initProgram` is a .sas file that is inserted at the start of every SAS Job (after compiled macros and any `macroVars`, and before the Job itself). ",
+                "default": "",
+                "examples": [
+                    "build/serviceinit.sas"
+                ]
+            },
+            "termProgram": {
+                "$id": "#/properties/jobConfig/properties/termProgram",
+                "type": "string",
+                "title": "The jobConfig termProgram",
+                "description": "The jobConfig termProgram is inserted at the end of every Job as part of `sasjs compile`.",
+                "default": "",
+                "examples": [
+                    "build/serviceterm.sas"
+                ]
+            },
+            "macroVars": {
+                "$id": "#/properties/jobConfig/properties/macroVars",
+                "type": "object",
+                "title": "The `jobConfig` macroVars",
+                "description": "This object allows `sasjs compile` to insert specific macro variables at the start of every Job.  In this case, the code generated would be:\n```\n%let mac1=value;\n%let mac2=42;\n```",
+                "default": {},
+                "examples": [
+                    {
+                        "mac1": "value",
+                        "mac2": "42"
+                    }
+                ]
+            }
+        }
+    },
       "macroFolders": {
           "$id": "#/properties/macroFolders",
           "type": "array",
           "title": "The macroFolders array",
-          "description": "The folders in this array are searched when running `sasjs compile` for any dependent SAS Macros.  Dependent SAS macros are inserted at the beginning of all relevant compiled Jobs and Services. SAS Macros are found in Jobs, Services, Init / Term programs, and other Macros, by the existence of a `  <h4> SAS Macros </h4>` entry in the doxygen header (note the leading 2 spaces).\n \n In addition, by default, the [sasjs/core](https://core.sasjs.io/) macro folders are also searched (these are created under `/node_modules/@sasjs/core` after running `npm install`).",
+          "description": "The folders in this array are searched when running `sasjs compile` for any dependent SAS Macros.  Dependent SAS macros are inserted at the beginning of all relevant compiled Jobs and Services. SAS Macros are found in Jobs, Services, Init / Term programs, and other Macros, by the existence of a &nbsp;`  <h4> SAS Macros </h4>` entry in the doxygen header.\n \n In addition, by default, the sasjs/core (https://core.sasjs.io) macro folders are also searched (these are created under `/node_modules/@sasjs/core` after running `npm install`).",
           "default": [],
           "examples": [
               [
-                  "macros"
+                  "macros","../../more_macros"
               ]
           ]
       },
@@ -340,35 +412,19 @@
           "$id": "#/properties/programFolders",
           "type": "array",
           "title": "The programFolders array",
-          "description": "An explanation about the purpose of this instance.",
+          "description": "These folders are searched for any dependent SAS Programs as defined in the doxygen headers of relevant Services and Jobs.  Unlike SAS Macros, which can be easily inserted into the precode of a Service or Job, a SAS program requires some preparation so that it can be invoked on demand. `sasjs compile` will take any dependent SAS programs, and wrap them in a `data _null_` step with put statements, to a user-defined fileref, so that the program can be subsequently `%include`'d according to the developer's preference.\n\nThe doxygen syntax is as follows:\n\n```  <h4> SAS Programs </h4>\n  @li mysasprogram.sas myfref\n```",
           "default": [],
           "examples": [
               [
-                  "programs"
+                  "programs","../../more_programs"
               ]
-          ],
-          "additionalItems": true,
-          "items": {
-              "$id": "#/properties/programFolders/items",
-              "anyOf": [
-                  {
-                      "$id": "#/properties/programFolders/items/anyOf/0",
-                      "type": "string",
-                      "title": "The first anyOf schema",
-                      "description": "An explanation about the purpose of this instance.",
-                      "default": "",
-                      "examples": [
-                          "programs"
-                      ]
-                  }
-              ]
-          }
+          ]
       },
       "targets": {
           "$id": "#/properties/targets",
           "type": "array",
-          "title": "The targets schema",
-          "description": "An explanation about the purpose of this instance.",
+          "title": "The targets object",
+          "description": "a target is an alias for a deployment location, and includes at a minimum, the `serverUrl`, `serverType` and `appLoc`.  Any properties defined here will override same-named properties in the sasjsconfig root.",
           "default": [],
           "examples": [
               [
@@ -526,15 +582,7 @@
                           "name",
                           "serverType",
                           "serverUrl",
-                          "appLoc",
-                          "contextName",
-                          "buildConfig",
-                          "deployConfig",
-                          "serviceConfig",
-                          "jobConfig",
-                          "streamConfig",
-                          "macroFolders",
-                          "programFolders"
+                          "appLoc"
                       ],
                       "properties": {
                           "name": {
@@ -1487,12 +1535,10 @@
                                   "$id": "#/properties/targets/items/anyOf/1/properties/programFolders/items"
                               }
                           }
-                      },
-                      "additionalProperties": true
+                      }
                   }
               ]
           }
       }
-  },
-  "additionalProperties": true
+  }
 }
