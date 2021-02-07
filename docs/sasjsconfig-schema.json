@@ -211,6 +211,10 @@
       "examples": [
         {
           "deployScripts": ["build/deployscript.sh"]
+        },
+        {
+          "deployScripts": ["build/deployscript.sh"],
+          "deployServicePack": true
         }
       ],
       "properties": {
@@ -221,6 +225,13 @@
           "description": "These scripts are executed when running `sasjs deploy`.  If the file is a .sas file, it is executed on the SAS server (Viya only).  Otherwise it is executed locally.  These scripts are run AFTER the deployment of the servicepack, if `deployServicePack:true` (Viya only).",
           "default": [],
           "examples": [["build/deployscript.sh", "build/myprogram.sas"]]
+        },
+        "deployServicePack": {
+          "$id": "#/properties/deployConfig/properties/deployServicePack",
+          "type": "boolean",
+          "title": "The deployConfig deployServicePack flag",
+          "description": "If set to `true` the json pack produced by `sasjs build` will be auto-deployed to the `appLoc` of the specified target (creating all jobs and services in the SAS folder tree).  Currently only Viya is supported for this flag.",
+          "default": [false]
         }
       }
     },
@@ -559,7 +570,7 @@
               "jobConfig": {
                 "$ref": "#/properties/jobConfig"
               },
-              "jobConfig": {
+              "docConfig": {
                 "$ref": "#/properties/docConfig"
               },
               "streamConfig": {
@@ -618,8 +629,7 @@
               "programFolders": {
                 "$ref": "#/properties/programFolders"
               }
-            },
-            "additionalProperties": true
+            }
           }
         ]
       }
