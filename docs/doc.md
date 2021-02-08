@@ -8,6 +8,22 @@ description: Generate documentation for your SAS Data Science projects and SAS b
 
 The `sasjs doc` command enables developers to generate documentation from the Doxygen headers used in SAS programs, macros, services and jobs.
 
+If the doxygen headers in any of the SAS Jobs or Services contain lists of data inputs and/or data outputs in the following format:
+
+```
+  <h4> Data Inputs </h4>
+  @li libref.tablename1
+  @li libref.tablename2
+
+  <h4> Data Outputs </h4>
+  @li libref.tablename3
+
+```
+
+Then a data lineage diagram will also be generated (linking data inputs to programs to data ouputs). In the diagram, programs will link to the documented program, and - if [configured](https://cli.sasjs.io/sasjsconfig.html#docConfig) - the tables will link directly to the viewer in [Data Controller](https://datacontroller.io).
+
+Given that the same headers used to generate the documentation are used to compile the Services and Jobs, the documentation will naturally stay up to date - so long as you are using [`sasjs compile`](https://cli.sasjs.io/compile/) to prepare them.
+
 ## Prerequisites
 
 Before using this command, you will need to [install](/installation) the SASjs CLI and [Doxygen](https://www.doxygen.nl/download.html#srcbin).
