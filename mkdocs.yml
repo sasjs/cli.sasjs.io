@@ -3,7 +3,9 @@ site_url: https://cli.sasjs.io
 nav:
   - Home: index.md
   - Installation: installation.md
-  - Configuration: config.md
+  - Configuration:
+      - SASjs Config File: sasjsconfig.md
+      - Git Hooks: githooks.md
   - Commands:
       - sasjs add: add.md
       - sasjs build: build.md
