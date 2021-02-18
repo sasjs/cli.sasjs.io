@@ -2,10 +2,17 @@
 layout: article
 title: Deploying a SAS Project using SASjs
 description: The `sasjs deploy` command performs the actual deployment of a SASjs project into SAS 9 or Viya
+og_image: https://i.imgur.com/gIYp5OG.png
 ---
 
 sasjs deploy
 ====================
+
+Deploy to multiple servers, server types (SAS9 or SASVIYA), multiple folders (SAS Drive or Metadata) within those folders, and with multiple configurations, each with a simple alias - a target `name`.
+
+The ability to easily deploy (and subsequently execute) your SAS code enables you to develop locally using established GIT workflows.
+
+![](https://i.imgur.com/gIYp5OG.png)
 
 ## Prerequisites
 
