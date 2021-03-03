@@ -10,12 +10,15 @@ sasjs request
 
 The `sasjs request` command enables developers to call SASjs web services from the commandline.
 
+<script id="asciicast-MwkNw7DFXPoxVvUVXBwpsNUji" src="https://asciinema.org/a/MwkNw7DFXPoxVvUVXBwpsNUji.js" async></script>
+
+
 ## Prerequisites
 Before using this command, you will need to [install](/installation) the SASJS CLI and add a deployment [target](/add).
 
 ## sasjs request
 
-This will create a session and execute the relevant SAS service. The output will be returned as a file in the current directory.
+This will create a session and execute the relevant SAS service. The output will be returned as a file in the current directory (`output.json`).
 
 ### Syntax
 
