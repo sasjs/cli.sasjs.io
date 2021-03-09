@@ -21,4 +21,22 @@ A diagram of the rules for determining whether a local or remote target is used 
 
 <!-- source: https://excalidraw.com/#room=0e0163e79c486da603dd,OrjYfbOmt6OTc64ND7Qf6Q -->
 
-![SASJS target](/img/targetBehaviour.svg)
+![SAS target](/img/targetBehaviour.svg)
+
+## How Does Authentication / Token Management work with SAS Viya?
+
+The CLI will only work with client / secret pairs that have the 'authorization_code' grant type.  It will not work with a username / password (Basic Authentication) approach, for security reasons.
+
+For setting up the client / secret you will need the services of an administrator (a user with admin rights on the physical machine) as they need to query a protected a file.
+
+Once you provide the client (and secret) to SASjs, either as part of `sasjs add` or `sasjs add cred` then a URL is presented to which the user must authenticate the CLIENT_ID.
+
+Once the user provides the authorisation code, the CLI uses the client / secret / auth code to obtain an ACCESS_TOKEN and REFRESH_TOKEN.
+
+The ACCESS_TOKEN may then be used for API requests until it expires. On expriy, or getting very close to it, the CLI will use the REFRESH_TOKEN to obtain a fresh ACCESS_TOKEN.
+
+Once the REFRESH_TOKEN expires, the CLIENT must be re-authenticated using SAS Logon.
+
+<!-- source: https://lucid.app/lucidchart/e5ff1d2a-9d6a-4ae5-a990-a2a036d792f3/edit?page=O3h49Ot7ObFc# -->
+
+![SAS token authentication](/img/tokenmanagementviya.svg)
