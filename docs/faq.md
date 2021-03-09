@@ -39,4 +39,4 @@ Once the REFRESH_TOKEN expires, the CLIENT must be re-authenticated using SAS Lo
 
 <!-- source: https://lucid.app/lucidchart/e5ff1d2a-9d6a-4ae5-a990-a2a036d792f3/edit?page=O3h49Ot7ObFc# -->
 
-![SAS token authentication](/img/tokenmanagementviya.svg)
+![SAS token authentication](/img/tokenmanagementsasviya.svg)
