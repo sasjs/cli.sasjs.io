@@ -23,11 +23,51 @@ A diagram of the rules for determining whether a local or remote target is used 
 
 ![SAS target](/img/targetBehaviour.svg)
 
+## How can I obtain a Viya client and secret?
+
+For setting up the client / secret you will need the services of an administrator (a user with admin rights on the physical machine) as they need to query a protected file (the consul token).  The client must have the 'authorization_code' grant type.
+
+SASjs provides two tools to make this easy:
+
+### Viya Token Generator
+
+This is a web app for configuring a client & secret in multiple ways.
+
+To deploy, see here: https://sasjs.io/apps/#viya-client-token-generator
+
+### SAS Code approach
+
+You can also generate a client / secret (and access / refresh token) using SAS code using the @sasjs/core macros.
+
+```sas
+/* compile the macros from github */
+filename mc url "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
+%inc mc;
+
+/* create random client and secret */
+%mv_registerclient(outds=clientinfo)
+```
+
+This will generate a URL in the log, which must be followed to generate a refresh code (one time step).  Paste that code into the macro below to generate an access / refresh token:
+
+```
+/* paste the code below */
+%mv_tokenauth(inds=clientinfo,code=xET8ETs74z)
+
+/* extract client, secret & token to the log */
+data _null_;
+  merge mv_tokenauth clientinfo(drop=error);
+  put access_token=;
+  put refresh_token=;
+  put client_id=;
+  put client_secret=;
+run;
+
+```
+
 ## How Does Authentication / Token Management work with SAS Viya?
 
 The CLI will only work with client / secret pairs that have the 'authorization_code' grant type.  It will not work with a username / password (Basic Authentication) approach, for security reasons.
-
-For setting up the client / secret you will need the services of an administrator (a user with admin rights on the physical machine) as they need to query a protected a file.
 
 Once you provide the client (and secret) to SASjs, either as part of `sasjs add` or `sasjs add cred` then a URL is presented to which the user must authenticate the CLIENT_ID.
 
