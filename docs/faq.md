@@ -33,7 +33,7 @@ SASjs provides two tools to make this easy:
 
 This is a web app for configuring a client & secret in multiple ways.
 
-To deploy, see here: https://sasjs.io/apps/#viya-token-macros
+To deploy, see here: https://sasjs.io/apps/#viya-client-token-generator
 
 ### Viya Token Macros
 
