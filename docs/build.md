@@ -29,7 +29,7 @@ A workflow could be to define a `deployScript` in your `deployConfig` so that th
 
 The .sas file can be executed in SASStudioV *without modification* as proc http will use the `oauth_bearer=sas_services` option to authenticate to the APIs.
 
-If for some reason you need to run the Viya build script in a non SPRE session (eg in SAS 9 or Base SAS) you will need to prepare the access token - see guidance here: https://cli.sasjs.io/faq/#viya-token-macros
+If for some reason you need to run the Viya build script in a non SPRE session (eg in SAS 9 or Base SAS) you will need to prepare the access token - see guidance here: [https://cli.sasjs.io/faq/#viya-token-macros](https://cli.sasjs.io/faq/#viya-token-macros)
 
 Put this access token in a macro variable called ACCESS_TOKEN and it will be used by `proc http` in the [core](https://core.sasjs.io) macros by reference to the `access_token_var=` keyword parameter of each viya macro (the ones that start with `mv_`).
 
