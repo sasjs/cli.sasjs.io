@@ -20,6 +20,7 @@ There is also a feature to let you deploy your frontend as a service, bypassing 
 |:-------:|:----:|
 |   [add](/add)   | Provides a series of prompts used to define a SAS  [target](https://sasjs.io/glossary#target ) along with the relevant connection details (if SAS Viya) |
 |[build](/build)  |takes all of the input jobs and services and creates a build pack|
+|cbd|A shortcut to [compile](/compile), [build](/build) and [deploy](/deploy) your project with one command!|
 |[compile](/compile)|Extracts all the dependencies and input programs for each service / job and includes them in a single file ready for deployment|
 |[context](/context)|List, export, create, edit, and delete SAS Compute contexts|
 |[create](/create)| Initialise a SASjs repository, either in plain form or using a range of templates|
