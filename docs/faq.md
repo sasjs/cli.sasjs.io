@@ -29,13 +29,13 @@ For setting up the client / secret you will need the services of an administrato
 
 SASjs provides two tools to make this easy:
 
-### Viya Token Generator
+### Viya Token Web App
 
 This is a web app for configuring a client & secret in multiple ways.
 
-To deploy, see here: https://sasjs.io/apps/#viya-client-token-generator
+To deploy, see here: https://sasjs.io/apps/#viya-token-macros
 
-### SAS Code approach
+### Viya Token Macros
 
 You can also generate a client / secret (and access / refresh token) using SAS code using the @sasjs/core macros.
 

@@ -13,11 +13,23 @@ From the root of the project, run: `sasjs build`.  This will create a deployment
 If the jobs or services folder does not exist in the temporary `sasjsbuild` folder, then the `sasjs compile` step is also executed.  The alias to run both compile and build steps is `sasjs cb`.
 ![sasjscliflow.png](/img/sasjsbuild.png)
 
+
+### JSON Build File
+
+The JSON file contains all jobs and services and is used by the `sasjs deploy` command to create all the necessary folders, jobs & services (and streamed web apps) in the folder specified in the `appLoc` property of the target config.  This approach can only be used by SAS Viya.
+
+
+## SAS Build Program
+
+The SAS file can be executed directly in SAS 9 or SAS Viya to create all the services programmatically.  This is useful for Viya developers who are not able to obtain a client / secret.  For SAS 9 it is the primary deployment method.
+
+A workflow could be to define a `deployScript` in your `deployConfig` so that the generated SAS program is ssh'd (rsync) to your SAS server, and then you could `curl` a SAS 9 Stored Process that `%include`'s your SAS build program.  This allows fully automated SAS 9 deployments.
+
 ### Viya Build Script
 
-The .sas file can be executed in SASStudioV *without modification* (proc http will use the `oauth_bearer=sas_services` option).
+The .sas file can be executed in SASStudioV *without modification* as proc http will use the `oauth_bearer=sas_services` option to authenticate to the APIs.
 
-If for some reason you need to run the Viya build script in a non SPRE session (eg in SAS 9 or Base SAS) you will need to prepare the access token - see guidance here:
+If for some reason you need to run the Viya build script in a non SPRE session (eg in SAS 9 or Base SAS) you will need to prepare the access token - see guidance here: https://cli.sasjs.io/faq/#viya-token-macros
 
 Put this access token in a macro variable called ACCESS_TOKEN and it will be used by `proc http` in the [core](https://core.sasjs.io) macros by reference to the `access_token_var=` keyword parameter of each viya macro (the ones that start with `mv_`).
 
