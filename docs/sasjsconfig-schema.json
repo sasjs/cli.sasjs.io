@@ -1,614 +1,725 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "http://example.com/example.json",
-  "type": "object",
-  "title": "SASjs Config File",
-  "description": "The SASjs Config file provides the settings and structure for your SASjs project. ",
-  "default": {},
-  "examples": [
-    {
-      "macroFolders": ["macros"],
-      "programFolders": ["programs"],
-      "defaultTarget": "viya",
-      "targets": [
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "title": "SASjs Config File",
+    "description": "The SASjs Config file provides the settings and structure for your SASjs project. ",
+    "default": {},
+    "examples": [
         {
-          "name": "viya",
-          "serverType": "SASVIYA",
-          "serverUrl": "http://sas.analytium.co.uk",
-          "appLoc": "/Public/app",
-          "contextName": "SAS Job Execution compute context",
-          "deployConfig": {
-            "deployServicePack": true,
-            "deployScripts": ["sasjsbuild/myviyadeploy.sas"]
-          },
-          "serviceConfig": {
-            "serviceFolders": ["targets/viya/services/admin"],
-            "initProgram": "build/serviceinit.sas",
-            "termProgram": "build/serviceinit.sas",
-            "macroVars": {
-              "name": "viyavalue",
-              "extravar": "this too"
-            }
-          },
-          "jobConfig": {
-            "jobFolders": [],
-            "initProgram": "",
-            "termProgram": "",
-            "macroVars": {}
-          },
-          "streamConfig": {
-            "assetPaths": [],
-            "streamWeb": false,
-            "streamWebFolder": "webv",
-            "webSourcePath": "dist"
-          },
-          "macroFolders": ["targets/viya/macros"],
-          "programFolders": []
-        },
-        {
-          "name": "sas9",
-          "serverType": "SAS9",
-          "serverUrl": "http://sas.analytium.co.uk:7980",
-          "appLoc": "/User Folders/&sysuserid/My Folder",
-          "serverName": "Foundation",
-          "repositoryName": "SASApp",
-          "buildConfig": {
-            "buildOutputFileName": "mysas9deploy.sas",
-            "initProgram": "",
-            "termProgram": "",
-            "macroVars": {}
-          },
-          "deployConfig": {
-            "deployScripts": ["build/deploysas9.sh"],
-            "deployServicePack": false
-          },
-          "serviceConfig": {
-            "serviceFolders": ["targets/sas9/services/admin"],
-            "initProgram": "",
-            "termProgram": "build/servicetermother.sas",
-            "macroVars": {}
-          },
-          "streamConfig": {
-            "assetPaths": [],
-            "streamWeb": false,
-            "streamWebFolder": "web9",
-            "webSourcePath": "dist"
-          },
-          "macroFolders": ["targets/sas9/macros"],
-          "programFolders": []
+            "macroFolders": [
+                "macros"
+            ],
+            "programFolders": [
+                "programs"
+            ],
+            "defaultTarget": "viya",
+            "targets": [
+                {
+                    "name": "viya",
+                    "serverType": "SASVIYA",
+                    "serverUrl": "http://sas.analytium.co.uk",
+                    "appLoc": "/Public/app",
+                    "contextName": "SAS Job Execution compute context",
+                    "deployConfig": {
+                        "deployServicePack": true,
+                        "deployScripts": [
+                            "sasjsbuild/myviyadeploy.sas"
+                        ]
+                    },
+                    "serviceConfig": {
+                        "serviceFolders": [
+                            "targets/viya/services/admin"
+                        ],
+                        "initProgram": "build/serviceinit.sas",
+                        "termProgram": "build/serviceinit.sas",
+                        "macroVars": {
+                            "name": "viyavalue",
+                            "extravar": "this too"
+                        }
+                    },
+                    "jobConfig": {
+                        "jobFolders": [],
+                        "initProgram": "",
+                        "termProgram": "",
+                        "macroVars": {}
+                    },
+                    "streamConfig": {
+                        "assetPaths": [],
+                        "streamWeb": false,
+                        "streamWebFolder": "webv",
+                        "webSourcePath": "dist"
+                    },
+                    "macroFolders": [
+                        "targets/viya/macros"
+                    ],
+                    "programFolders": []
+                },
+                {
+                    "name": "sas9",
+                    "serverType": "SAS9",
+                    "serverUrl": "http://sas.analytium.co.uk:7980",
+                    "appLoc": "/User Folders/&sysuserid/My Folder",
+                    "serverName": "Foundation",
+                    "repositoryName": "SASApp",
+                    "buildConfig": {
+                        "buildOutputFileName": "mysas9deploy.sas",
+                        "initProgram": "",
+                        "termProgram": "",
+                        "macroVars": {}
+                    },
+                    "deployConfig": {
+                        "deployScripts": [
+                            "build/deploysas9.sh"
+                        ],
+                        "deployServicePack": false
+                    },
+                    "serviceConfig": {
+                        "serviceFolders": [
+                            "targets/sas9/services/admin"
+                        ],
+                        "initProgram": "",
+                        "termProgram": "build/servicetermother.sas",
+                        "macroVars": {}
+                    },
+                    "streamConfig": {
+                        "assetPaths": [],
+                        "streamWeb": false,
+                        "streamWebFolder": "web9",
+                        "webSourcePath": "dist"
+                    },
+                    "macroFolders": [
+                        "targets/sas9/macros"
+                    ],
+                    "programFolders": []
+                }
+            ]
         }
-      ]
-    }
-  ],
-  "properties": {
-    "docConfig": {
-      "$id": "#/properties/docConfig",
-      "type": "object",
-      "title": "The docConfig schema",
-      "description": "SASjs uses doxygen to auto-generate HTML documentation using the headers in your SAS programs, macros, services & jobs. For more info, see [https://cli.sasjs.io/doc](https://cli.sasjs.io/doc).",
-      "default": {},
-      "examples": [
-        {
-          "displayMacroCore": true,
-          "outDirectory": "/some/output/directory",
-          "dataControllerUrl": "https://mysasserver.com/web/datacontroller/#"
-        }
-      ],
-      "properties": {
-        "displayMacroCore": {
-          "$id": "#/properties/docConfig/properties/displayMacroCore",
-          "type": "boolean",
-          "title": "The displayMacroCore docConfig option",
-          "description": "The CLI will autocompile macro dependencies that exist in the SASjs Macro Core library.  These will also show in the documentation under 'node_modules'.  If you'd prefer not to show these in the rendered docs, set this value to false.",
-          "default": true,
-          "examples": [true]
-        },
-        "outDirectory": {
-          "$id": "#/properties/docConfig/properties/outDirectory",
-          "type": "string",
-          "title": "The outDirectory docConfig option",
-          "description": "This is the location to which the generated HTML SAS documentation will be written.  If missing, or left blank, the files will be written to the `sasjsbuild/doc` directory (default behaviour).",
-          "default": "$projectroot/sasjsbuild/doc",
-          "examples": ["/my/preferred/docs/directory"]
-        },
-        "dataControllerUrl": {
-          "$id": "#/properties/docConfig/properties/dataControllerUrl",
-          "type": "string",
-          "title": "The dataControllerUrl docConfig option",
-          "description": "Provide the full URL to Data Controller so that `sasjs doc` can link the lineage diagram directly to the table viewer in [Data Controller](https://datacontroller.io).\nIf left blank, or undefined, no links will be generated.",
-          "default": "",
-          "examples": [
-            "https://yourserver.co.uk/dcviya/#"
-          ]
-        },
-        "enableLineage": {
-          "$id": "#/properties/docConfig/properties/enableLineage",
-          "type": "true",
-          "title": "Enable Lineage",
-          "description": "If true, sasjs doc will generate and display Data Lineage from Jobs and Services.",
-          "default": true
-        }
-      }
-    },
-    "buildConfig": {
-      "$id": "#/properties/buildConfig",
-      "type": "object",
-      "title": "The buildConfig schema",
-      "description": "The buildConfig dictates which files get compiled into the build program (.sas), which can be used to deploy services into SAS 9 or Viya environments (without a client/secret). If you are using this approach to deploy your application (SAS code driven) then you may use this config to include build specific macros, programs or macro variables - to be run a single time, on deployment - for things like database creation, or exporting a SAS 9 SPK after service creation. ",
-      "default": {},
-      "examples": [
-        {
-          "initProgram": "build/buildinit.sas",
-          "termProgram": "build/buildterm.sas",
-          "macroVars": {
-            "name": "value",
-            "numvar": "42"
-          }
-        }
-      ],
-      "properties": {
-        "initProgram": {
-          "$id": "#/properties/buildConfig/properties/initProgram",
-          "type": "string",
-          "title": "The buildConfig initProgram",
-          "description": "The path to a .sas program that will be inserted at the start of the build .sas program (created when running `sasjs build`).",
-          "default": "",
-          "examples": ["build/buildinit.sas"]
-        },
-        "termProgram": {
-          "$id": "#/properties/buildConfig/properties/termProgram",
-          "type": "string",
-          "title": "The buildConfig termProgram",
-          "description": "The path to a .sas program that will be inserted at the end of the build .sas program (created when running `sasjs build`).",
-          "default": "",
-          "examples": ["build/buildterm.sas"]
-        },
-        "macroVars": {
-          "$id": "#/properties/buildConfig/properties/macroVars",
-          "type": "object",
-          "title": "The buildConfig macro variables",
-          "description": "A series of name value pairs that will be turned into SAS macro variables in the build .sas program (generated when running `sasjs build`).  The example provided will generate sas code as follows:\n```\n%let name=value;\n%let numvar=42;\n```",
-          "default": {},
-          "examples": [
-            {
-              "name": "value",
-              "numvar": "42"
-            }
-          ]
-        }
-      }
-    },
-    "deployConfig": {
-      "$id": "#/properties/deployConfig",
-      "type": "object",
-      "title": "The deployConfig schema",
-      "description": "The deployConfig object enables settings that relate to the deployment of a SAS app - be that Viya, or SAS 9, or a pure Base environment.",
-      "default": {},
-      "examples": [
-        {
-          "deployScripts": ["build/deployscript.sh"]
-        },
-        {
-          "deployScripts": ["build/deployscript.sh"],
-          "deployServicePack": true
-        }
-      ],
-      "properties": {
-        "deployScripts": {
-          "$id": "#/properties/deployConfig/properties/deployScripts",
-          "type": "array",
-          "title": "The deployConfig deployScripts array",
-          "description": "These scripts are executed when running `sasjs deploy`.  If the file is a .sas file, it is executed on the SAS server (Viya only).  Otherwise it is executed locally.  These scripts are run AFTER the deployment of the servicepack, if `deployServicePack:true` (Viya only).",
-          "default": [],
-          "examples": [["build/deployscript.sh", "build/myprogram.sas"]]
-        },
-        "deployServicePack": {
-          "$id": "#/properties/deployConfig/properties/deployServicePack",
-          "type": "boolean",
-          "title": "The deployConfig deployServicePack flag",
-          "description": "If set to `true` the json pack produced by `sasjs build` will be auto-deployed to the `appLoc` of the specified target (creating all jobs and services in the SAS folder tree).  Currently only Viya is supported for this flag.",
-          "default": [false]
-        }
-      }
-    },
-    "serviceConfig": {
-      "$id": "#/properties/serviceConfig",
-      "type": "object",
-      "title": "The serviceConfig schema",
-      "description": "The serviceConfig object defines how SASjs web services are compiled.  Web services differ from jobs in that they include some fixed pre-code (eg the macros to stream out the result json).",
-      "default": {},
-      "examples": [
-        {
-          "serviceFolders": ["services/common", "services/admin"],
-          "initProgram": "build/serviceinit.sas",
-          "termProgram": "build/serviceterm.sas",
-          "macroVars": {
-            "mac1": "value",
-            "mac2": "42"
-          }
-        }
-      ],
-      "required": [],
-      "properties": {
-        "serviceFolders": {
-          "$id": "#/properties/serviceConfig/properties/serviceFolders",
-          "type": "array",
-          "title": "The serviceConfig serviceFolders array",
-          "description": "When running `sasjs compile`, all programs in the folders defined in this array are compiled and placed into same-named folders under `sasjsbuild/services`.  They will be compiled as services (so, with the service pre-code).  Folders can be absolute, or relative to the `sasjs` folder.",
-          "default": [],
-          "examples": [["services/common", "services/admin"]]
-        },
-        "initProgram": {
-          "$id": "#/properties/serviceConfig/properties/initProgram",
-          "type": "string",
-          "title": "The serviceConfig initProgram",
-          "description": "The serviceConfig `initProgram` is a .sas file that is inserted at the start of every SAS service (after compiled macros and any `macroVars`, and before the service itself). ",
-          "default": "",
-          "examples": ["build/serviceinit.sas"]
-        },
-        "termProgram": {
-          "$id": "#/properties/serviceConfig/properties/termProgram",
-          "type": "string",
-          "title": "The serviceConfig termProgram",
-          "description": "The serviceConfig termProgram is inserted at the end of every service as part of `sasjs compile`.",
-          "default": "",
-          "examples": ["build/serviceterm.sas"]
-        },
-        "macroVars": {
-          "$id": "#/properties/serviceConfig/properties/macroVars",
-          "type": "object",
-          "title": "The `serviceConfig` macroVars",
-          "description": "This object allows `sasjs compile` to insert specific macro variables at the start of every service.  In this case, the code generated would be:\n```\n%let mac1=value;\n%let mac2=42;\n```",
-          "default": {},
-          "examples": [
-            {
-              "mac1": "value",
-              "mac2": "42"
-            }
-          ]
-        }
-      }
-    },
-    "jobConfig": {
-      "$id": "#/properties/jobConfig",
-      "type": "object",
-      "title": "The jobConfig schema",
-      "description": "The jobConfig object defines how SASjs Jobs are compiled. ",
-      "default": {},
-      "examples": [
-        {
-          "jobFolders": ["jobs/extract", "jobs/load"],
-          "initProgram": "jobs/jobinit.sas",
-          "termProgram": "jobs/jobterm.sas",
-          "macroVars": {
-            "mac1": "value",
-            "mac2": "42"
-          }
-        }
-      ],
-      "properties": {
-        "jobFolders": {
-          "$id": "#/properties/jobConfig/properties/jobFolders",
-          "type": "array",
-          "title": "The jobConfig jobFolders array",
-          "description": "When running `sasjs compile`, all programs in the local folders defined in this array are compiled and placed into same-named folders under `sasjsbuild/jobs`. Folders can be absolute, or relative to the local project `/sasjs` folder.",
-          "default": [],
-          "examples": [["jobs/extract", "jobs/transform", "jobs/load"]]
-        },
-        "initProgram": {
-          "$id": "#/properties/jobConfig/properties/initProgram",
-          "type": "string",
-          "title": "The jobConfig initProgram",
-          "description": "The jobConfig `initProgram` is a local .sas file that is inserted at the start of every SAS Job (after compiled macros and any `macroVars`, and before the Job itself). ",
-          "default": "",
-          "examples": ["jobs/jobinit.sas"]
-        },
-        "termProgram": {
-          "$id": "#/properties/jobConfig/properties/termProgram",
-          "type": "string",
-          "title": "The jobConfig termProgram",
-          "description": "The jobConfig termProgram is inserted at the end of every Job as part of `sasjs compile`.",
-          "default": "",
-          "examples": ["jobs/jobterm.sas"]
-        },
-        "macroVars": {
-          "$id": "#/properties/jobConfig/properties/macroVars",
-          "type": "object",
-          "title": "The `jobConfig` macroVars",
-          "description": "This object allows `sasjs compile` to insert specific macro variables at the start of every Job.  In this case, the code generated would be:\n```\n%let mac1=value;\n%let mac2=42;\n```",
-          "default": {},
-          "examples": [
-            {
-              "mac1": "value",
-              "mac2": "42"
-            }
-          ]
-        }
-      }
-    },
-    "macroFolders": {
-      "$id": "#/properties/macroFolders",
-      "type": "array",
-      "title": "The macroFolders array",
-      "description": "The local folders in this array are searched when running `sasjs compile` for any dependent SAS Macros.  Dependent Macros are inserted at the beginning of all relevant compiled Jobs and Services. SAS Macros are found in Jobs, Services, Init / Term programs, and other Macros, by the existence of a &nbsp;`  <h4> SAS Macros </h4>` entry in the doxygen header.\n \n In addition, by default, the sasjs/core (https://core.sasjs.io) macro folders are also searched (these are created under `/node_modules/@sasjs/core` after running `npm install`).",
-      "default": [],
-      "examples": [["macros", "../../more_macros"]]
-    },
-    "programFolders": {
-      "$id": "#/properties/programFolders",
-      "type": "array",
-      "title": "The programFolders array",
-      "description": "These local folders are searched for any dependent SAS Programs as defined in the doxygen headers of relevant Services and Jobs.  Unlike SAS Macros, which can be easily inserted into the precode of a Service or Job, a SAS program requires some preparation so that it can be invoked on demand. `sasjs compile` will take any dependent SAS programs, and wrap them in a `data _null_` step with put statements, to a user-defined fileref, so that the program can be subsequently `%include`'d according to the developer's preference.\n\nThe doxygen syntax is as follows:\n\n```  <h4> SAS Programs </h4>\n  @li mysasprogram.sas myfref\n```",
-      "default": [],
-      "examples": [["programs", "../../more_programs"]]
-    },
-    "targets": {
-      "$id": "#/properties/targets",
-      "type": "array",
-      "title": "The targets array",
-      "description": "A target is an alias for a deployment location, and includes at a minimum, the `serverUrl`, `serverType` and `appLoc`.  This array allows multiple targets to be defined (eg dev / test / prod).  Any properties defined here will override same-named properties in the sasjsconfig root.",
-      "default": [],
-      "examples": [
-        [
-          {
-            "name": "sas9target",
-            "serverType": "SAS9",
-            "serverUrl": "https://mysas9server",
-            "appLoc": "/Shared Folders/myApp"
-          }
-        ],
-        [
-          {
-            "name": "viya",
-            "serverType": "SASVIYA",
-            "serverUrl": "https://sas.analytium.co.uk",
-            "appLoc": "/Public/app",
-            "contextName": "SAS Job Execution compute context",
-            "buildConfig": {
-              "buildOutputFileName": "myviyadeploy.sas",
-              "initProgram": "build/buildinitviya.sas",
-              "termProgram": "targets/viya/viyabuildterm.sas",
-              "macroVars": {
-                "name": "viyavalue",
-                "extravar": "this too"
-              }
-            },
-            "deployConfig": {
-              "deployServicePack": true,
-              "deployScripts": ["sasjsbuild/myviyadeploy.sas"]
-            },
-            "serviceConfig": {
-              "serviceFolders": ["targets/viya/services/admin"],
-              "initProgram": "build/serviceinit.sas",
-              "termProgram": "build/serviceinit.sas",
-              "macroVars": {
-                "name": "viyavalue",
-                "extravar": "this too"
-              }
-            },
-            "jobConfig": {
-              "jobFolders": [],
-              "initProgram": "",
-              "termProgram": "",
-              "macroVars": {}
-            },
-            "streamConfig": {
-              "assetPaths": [],
-              "streamWeb": false,
-              "streamWebFolder": "webv",
-              "webSourcePath": "dist"
-            },
-            "macroFolders": ["targets/viya/macros"],
-            "programFolders": []
-          },
-          {
-            "name": "sas9",
-            "serverType": "SAS9",
-            "serverUrl": "http://sas.analytium.co.uk:7980",
-            "appLoc": "/User Folders/&sysuserid/My Folder",
-            "serverName": "Foundation",
-            "repositoryName": "SASApp",
-            "buildConfig": {
-              "buildOutputFileName": "mysas9deploy.sas",
-              "initProgram": "",
-              "termProgram": "",
-              "macroVars": {}
-            },
-            "deployConfig": {
-              "deployScripts": ["build/deploysas9.sh"],
-              "deployServicePack": false
-            },
-            "serviceConfig": {
-              "serviceFolders": ["targets/sas9/services/admin"],
-              "initProgram": "",
-              "termProgram": "build/servicetermother.sas",
-              "macroVars": {}
-            },
-            "streamConfig": {
-              "assetPaths": [],
-              "streamWeb": false,
-              "streamWebFolder": "web9",
-              "webSourcePath": "dist"
-            },
-            "macroFolders": ["targets/sas9/macros"],
-            "programFolders": []
-          }
-        ]
-      ],
-      "items": {
-        "$id": "#/properties/targets/items",
-        "anyOf": [
-          {
-            "$id": "#/properties/targets/items/anyOf/0",
+    ],
+    "properties": {
+        "docConfig": {
+            "$id": "#/properties/docConfig",
             "type": "object",
-            "title": "SASjs Targets",
-            "description": "A target provides the configuration specific to a particular deployment, eg DEV / TEST, or SAS9 / SASVIYA.",
+            "title": "The docConfig schema",
+            "description": "SASjs uses doxygen to auto-generate HTML documentation using the headers in your SAS programs, macros, services & jobs. For more info, see [https://cli.sasjs.io/doc](https://cli.sasjs.io/doc).",
             "default": {},
             "examples": [
-              {
-                "name": "viya",
-                "serverType": "SASVIYA",
-                "serverUrl": "https://sas.analytium.co.uk",
-                "appLoc": "/Public/app",
-                "contextName": "SAS Job Execution compute context",
-                "buildConfig": {
-                  "buildOutputFileName": "myviyadeploy.sas",
-                  "initProgram": "build/buildinitviya.sas",
-                  "termProgram": "targets/viya/viyabuildterm.sas",
-                  "macroVars": {
-                    "name": "viyavalue",
-                    "extravar": "this too"
-                  }
-                },
-                "deployConfig": {
-                  "deployServicePack": true,
-                  "deployScripts": ["sasjsbuild/myviyadeploy.sas"]
-                },
-                "serviceConfig": {
-                  "serviceFolders": ["targets/viya/services/admin"],
-                  "initProgram": "build/serviceinit.sas",
-                  "termProgram": "build/serviceinit.sas",
-                  "macroVars": {
-                    "name": "viyavalue",
-                    "extravar": "this too"
-                  }
-                },
-                "jobConfig": {
-                  "jobFolders": [],
-                  "initProgram": "",
-                  "termProgram": "",
-                  "macroVars": {}
-                },
-                "streamConfig": {
-                  "assetPaths": [],
-                  "streamWeb": false,
-                  "streamWebFolder": "webv",
-                  "webSourcePath": "dist"
-                },
-                "macroFolders": ["targets/viya/macros"],
-                "programFolders": []
-              }
-            ],
-            "required": ["name", "serverType", "appLoc"],
-            "properties": {
-              "name": {
-                "$id": "#/properties/targets/items/anyOf/0/properties/name",
-                "type": "string",
-                "title": "Target name property",
-                "description": "A target name can only contain alphanumeric characters and dashes.  It cannot contain spaces. It is used as the alias when referencing the target using the `-t` attribute in many of the SASjs commands.",
-                "default": "",
-                "examples": ["viya"]
-              },
-              "serverType": {
-                "$id": "#/properties/targets/items/anyOf/0/properties/serverType",
-                "type": "string",
-                "title": "The Target serverType",
-                "description": "The serverType can be either SAS9 or SASVIYA.",
-                "default": "",
-                "examples": ["SASVIYA"]
-              },
-              "serverUrl": {
-                "$id": "#/properties/targets/items/anyOf/0/properties/serverUrl",
-                "type": "string",
-                "title": "The Target serverUrl",
-                "description": "The serverUrl is the location to which the app is deployed, and against which any server based operations are performed.  If SAS is served from a particular port, that port should also be included here.",
-                "default": "",
-                "examples": [
-                  "https://sas.analytium.co.uk",
-                  "https://sas.analytium.co.uk:8080"
-                ]
-              },
-              "appLoc": {
-                "$id": "#/properties/targets/items/anyOf/0/properties/appLoc",
-                "type": "string",
-                "title": "The Target appLoc",
-                "description": "The appLoc provides the root SAS folder location under which all jobs and services are deployed and executed.  The SAS folder could be metadata in SAS 9, or SAS Drive in Viya.  When running sasjs server commands with relative paths (without a leading slash) then the appLoc is assumed to be the root component.  This approach allows the same commands to be used with different targets (eg running jobs in different environments).",
-                "default": "",
-                "examples": ["/Public/app"]
-              },
-              "contextName": {
-                "$id": "#/properties/targets/items/anyOf/0/properties/contextName",
-                "type": "string",
-                "title": "The Target contextName",
-                "description": "The name of the compute context used to execute SAS code.  The context determines the way in which the SAS session is spawned (eg user credentials, autoexec code, system options etc).\nContexts can be created / modified / deleted using the `sasjs context` command.",
-                "default": "SAS Job Execution compute context",
-                "examples": ["SAS Job Execution compute context"]
-              },
-              "buildConfig": {
-                "$ref": "#/properties/buildConfig"
-              },
-              "deployConfig": {
-                "$ref": "#/properties/deployConfig"
-              },
-              "serviceConfig": {
-                "$ref": "#/properties/serviceConfig"
-              },
-              "jobConfig": {
-                "$ref": "#/properties/jobConfig"
-              },
-              "docConfig": {
-                "$ref": "#/properties/docConfig"
-              },
-              "streamConfig": {
-                "$id": "#/properties/targets/items/anyOf/0/properties/streamConfig",
-                "type": "object",
-                "title": "The target streamConfig",
-                "description": "SASjs allows the frontend of a local web app to be compiled such that all html, css, javascript, and other assets such as png or mp4 are converted into web services and streamed directly from SAS.\n\nThis approach is convenient as it bypasses the need to deploy to a web server. ",
-                "default": {},
-                "examples": [
-                  {
-                    "assetPaths": [],
-                    "streamWeb": false,
-                    "streamWebFolder": "webv",
-                    "webSourcePath": "dist"
-                  }
-                ],
-                "required": ["streamWeb"],
-                "properties": {
-                  "assetPaths": {
-                    "$id": "#/properties/targets/items/anyOf/0/properties/streamConfig/properties/assetPaths",
-                    "type": "array",
-                    "title": "The streamConfig assetPaths array",
-                    "description": "An array of local folders.  All assets placed in these folders are converted into web services - example file types could be png, svg, mp3, mp4, excel - anything really.",
-                    "default": [],
-                    "examples": [["/myassets"]]
-                  },
-                  "streamWeb": {
-                    "$id": "#/properties/targets/items/anyOf/0/properties/streamConfig/properties/streamWeb",
-                    "type": "boolean",
-                    "title": "The streamConfig streamWeb flag",
-                    "description": "When set to `true`, frontend files saved in the `webSourcePath` will be converted to streaming services in the `streamWebFolder` in SAS.",
-                    "default": false,
-                    "examples": [true]
-                  },
-                  "streamWebFolder": {
-                    "$id": "#/properties/targets/items/anyOf/0/properties/streamConfig/properties/streamWebFolder",
-                    "type": "string",
-                    "title": "The streamConfig streamWebFolder",
-                    "description": "This is the target SAS folder (relative to the appLoc) where the compiled web assets will be created.",
-                    "default": "webv",
-                    "examples": ["webv"]
-                  },
-                  "webSourcePath": {
-                    "$id": "#/properties/targets/items/anyOf/0/properties/streamConfig/properties/webSourcePath",
-                    "type": "string",
-                    "title": "The webSourcePath schema",
-                    "description": "When `streamConfig` is set to `true`, all files in this folder will be converted to streaming web services.  The `index.html` will be taken as a baseline, and all relative URLS will be prefixed such that the links still work and the assets still load.",
-                    "default": "",
-                    "examples": ["dist"]
-                  }
+                {
+                    "displayMacroCore": true,
+                    "outDirectory": "/some/output/directory",
+                    "dataControllerUrl": "https://mysasserver.com/web/datacontroller/#"
                 }
-              },
-              "macroFolders": {
-                "$ref": "#/properties/macroFolders"
-              },
-              "programFolders": {
-                "$ref": "#/properties/programFolders"
-              }
+            ],
+            "properties": {
+                "displayMacroCore": {
+                    "$id": "#/properties/docConfig/properties/displayMacroCore",
+                    "type": "boolean",
+                    "title": "The displayMacroCore docConfig option",
+                    "description": "The CLI will autocompile macro dependencies that exist in the SASjs Macro Core library.  These will also show in the documentation under 'node_modules'.  If you'd prefer not to show these in the rendered docs, set this value to false.",
+                    "default": true,
+                    "examples": [
+                        true
+                    ]
+                },
+                "outDirectory": {
+                    "$id": "#/properties/docConfig/properties/outDirectory",
+                    "type": "string",
+                    "title": "The outDirectory docConfig option",
+                    "description": "This is the location to which the generated HTML SAS documentation will be written.  If missing, or left blank, the files will be written to the `sasjsbuild/doc` directory (default behaviour).",
+                    "default": "$projectroot/sasjsbuild/doc",
+                    "examples": [
+                        "/my/preferred/docs/directory"
+                    ]
+                },
+                "dataControllerUrl": {
+                    "$id": "#/properties/docConfig/properties/dataControllerUrl",
+                    "type": "string",
+                    "title": "The dataControllerUrl docConfig option",
+                    "description": "Provide the full URL to Data Controller so that `sasjs doc` can link the lineage diagram directly to the table viewer in [Data Controller](https://datacontroller.io).\nIf left blank, or undefined, no links will be generated.",
+                    "default": "",
+                    "examples": [
+                        "https://yourserver.co.uk/dcviya/#"
+                    ]
+                },
+                "enableLineage": {
+                    "$id": "#/properties/docConfig/properties/enableLineage",
+                    "type": "boolean",
+                    "title": "Enable Lineage",
+                    "description": "If true, sasjs doc will generate and display Data Lineage from Jobs and Services.",
+                    "default": true
+                }
             }
-          }
-        ]
-      }
+        },
+        "buildConfig": {
+            "$id": "#/properties/buildConfig",
+            "type": "object",
+            "title": "buildConfig",
+            "description": "Dictates which files get compiled into the build program (.sas), used to deploy services into SAS 9 or Viya environments (without a client/secret). You may use this config to include build specific macros, programs or macro variables - which is run a single time, on deployment - for things like database creation, or exporting a SAS 9 SPK after service creation.",
+            "examples": [
+                {
+                    "initProgram": "build/buildinit.sas",
+                    "termProgram": "build/buildterm.sas",
+                    "macroVars": {
+                        "name": "value",
+                        "numvar": "42"
+                    }
+                }
+            ],
+            "properties": {
+                "initProgram": {
+                    "$id": "#/properties/buildConfig/properties/initProgram",
+                    "type": "string",
+                    "title": "The buildConfig initProgram",
+                    "description": "The path to a .sas program that will be inserted at the start of the build .sas program (created when running `sasjs build`).",
+                    "default": "",
+                    "examples": [
+                        "build/buildinit.sas"
+                    ]
+                },
+                "termProgram": {
+                    "$id": "#/properties/buildConfig/properties/termProgram",
+                    "type": "string",
+                    "title": "The buildConfig termProgram",
+                    "description": "The path to a .sas program that will be inserted at the end of the build .sas program (created when running `sasjs build`).",
+                    "default": "",
+                    "examples": [
+                        "build/buildterm.sas"
+                    ]
+                },
+                "macroVars": {
+                    "$id": "#/properties/buildConfig/properties/macroVars",
+                    "type": "object",
+                    "title": "The buildConfig macro variables",
+                    "description": "A series of name value pairs that will be turned into SAS macro variables in the build .sas program (generated when running `sasjs build`).  The example provided will generate sas code as follows:\n```\n%let name=value;\n%let numvar=42;\n```",
+                    "default": {},
+                    "examples": [
+                        {
+                            "name": "value",
+                            "numvar": "42"
+                        }
+                    ]
+                }
+            }
+        },
+        "deployConfig": {
+            "$id": "#/properties/deployConfig",
+            "type": "object",
+            "title": "The deployConfig schema",
+            "description": "The deployConfig object enables settings that relate to the deployment of a SAS app - be that Viya, or SAS 9, or a pure Base environment.",
+            "default": {},
+            "examples": [
+                {
+                    "deployScripts": [
+                        "build/deployscript.sh"
+                    ]
+                },
+                {
+                    "deployScripts": [
+                        "build/deployscript.sh"
+                    ],
+                    "deployServicePack": true
+                }
+            ],
+            "properties": {
+                "deployScripts": {
+                    "$id": "#/properties/deployConfig/properties/deployScripts",
+                    "type": "array",
+                    "title": "The deployConfig deployScripts array",
+                    "description": "These scripts are executed when running `sasjs deploy`.  If the file is a .sas file, it is executed on the SAS server (Viya only).  Otherwise it is executed locally.  These scripts are run AFTER the deployment of the servicepack, if `deployServicePack:true` (Viya only).",
+                    "default": [],
+                    "examples": [
+                        [
+                            "build/deployscript.sh",
+                            "build/myprogram.sas"
+                        ]
+                    ]
+                },
+                "deployServicePack": {
+                    "$id": "#/properties/deployConfig/properties/deployServicePack",
+                    "type": "boolean",
+                    "title": "The deployConfig deployServicePack flag",
+                    "description": "If set to `true` the json pack produced by `sasjs build` will be auto-deployed to the `appLoc` of the specified target (creating all jobs and services in the SAS folder tree).  Currently only Viya is supported for this flag.",
+                    "default": [
+                        false
+                    ]
+                }
+            }
+        },
+        "serviceConfig": {
+            "$id": "#/properties/serviceConfig",
+            "type": "object",
+            "title": "The serviceConfig schema",
+            "description": "The serviceConfig object defines how SASjs web services are compiled.  Web services differ from jobs in that they include some fixed pre-code (eg the macros to stream out the result json).",
+            "default": {},
+            "examples": [
+                {
+                    "serviceFolders": [
+                        "services/common",
+                        "services/admin"
+                    ],
+                    "initProgram": "build/serviceinit.sas",
+                    "termProgram": "build/serviceterm.sas",
+                    "macroVars": {
+                        "mac1": "value",
+                        "mac2": "42"
+                    }
+                }
+            ],
+            "required": [],
+            "properties": {
+                "serviceFolders": {
+                    "$id": "#/properties/serviceConfig/properties/serviceFolders",
+                    "type": "array",
+                    "title": "The serviceConfig serviceFolders array",
+                    "description": "When running `sasjs compile`, all programs in the folders defined in this array are compiled and placed into same-named folders under `sasjsbuild/services`.  They will be compiled as services (so, with the service pre-code).  Folders can be absolute, or relative to the `sasjs` folder.",
+                    "default": [],
+                    "examples": [
+                        [
+                            "services/common",
+                            "services/admin"
+                        ]
+                    ]
+                },
+                "initProgram": {
+                    "$id": "#/properties/serviceConfig/properties/initProgram",
+                    "type": "string",
+                    "title": "The serviceConfig initProgram",
+                    "description": "The serviceConfig `initProgram` is a .sas file that is inserted at the start of every SAS service (after compiled macros and any `macroVars`, and before the service itself). ",
+                    "default": "",
+                    "examples": [
+                        "build/serviceinit.sas"
+                    ]
+                },
+                "termProgram": {
+                    "$id": "#/properties/serviceConfig/properties/termProgram",
+                    "type": "string",
+                    "title": "The serviceConfig termProgram",
+                    "description": "The serviceConfig termProgram is inserted at the end of every service as part of `sasjs compile`.",
+                    "default": "",
+                    "examples": [
+                        "build/serviceterm.sas"
+                    ]
+                },
+                "macroVars": {
+                    "$id": "#/properties/serviceConfig/properties/macroVars",
+                    "type": "object",
+                    "title": "The `serviceConfig` macroVars",
+                    "description": "This object allows `sasjs compile` to insert specific macro variables at the start of every service.  In this case, the code generated would be:\n```\n%let mac1=value;\n%let mac2=42;\n```",
+                    "default": {},
+                    "examples": [
+                        {
+                            "mac1": "value",
+                            "mac2": "42"
+                        }
+                    ]
+                }
+            }
+        },
+        "jobConfig": {
+            "$id": "#/properties/jobConfig",
+            "type": "object",
+            "title": "The jobConfig schema",
+            "description": "The jobConfig object defines how SASjs Jobs are compiled. ",
+            "default": {},
+            "examples": [
+                {
+                    "jobFolders": [
+                        "jobs/extract",
+                        "jobs/load"
+                    ],
+                    "initProgram": "jobs/jobinit.sas",
+                    "termProgram": "jobs/jobterm.sas",
+                    "macroVars": {
+                        "mac1": "value",
+                        "mac2": "42"
+                    }
+                }
+            ],
+            "properties": {
+                "jobFolders": {
+                    "$id": "#/properties/jobConfig/properties/jobFolders",
+                    "type": "array",
+                    "title": "The jobConfig jobFolders array",
+                    "description": "When running `sasjs compile`, all programs in the local folders defined in this array are compiled and placed into same-named folders under `sasjsbuild/jobs`. Folders can be absolute, or relative to the local project `/sasjs` folder.",
+                    "default": [],
+                    "examples": [
+                        [
+                            "jobs/extract",
+                            "jobs/transform",
+                            "jobs/load"
+                        ]
+                    ]
+                },
+                "initProgram": {
+                    "$id": "#/properties/jobConfig/properties/initProgram",
+                    "type": "string",
+                    "title": "The jobConfig initProgram",
+                    "description": "The jobConfig `initProgram` is a local .sas file that is inserted at the start of every SAS Job (after compiled macros and any `macroVars`, and before the Job itself). ",
+                    "default": "",
+                    "examples": [
+                        "jobs/jobinit.sas"
+                    ]
+                },
+                "termProgram": {
+                    "$id": "#/properties/jobConfig/properties/termProgram",
+                    "type": "string",
+                    "title": "The jobConfig termProgram",
+                    "description": "The jobConfig termProgram is inserted at the end of every Job as part of `sasjs compile`.",
+                    "default": "",
+                    "examples": [
+                        "jobs/jobterm.sas"
+                    ]
+                },
+                "macroVars": {
+                    "$id": "#/properties/jobConfig/properties/macroVars",
+                    "type": "object",
+                    "title": "The `jobConfig` macroVars",
+                    "description": "This object allows `sasjs compile` to insert specific macro variables at the start of every Job.  In this case, the code generated would be:\n```\n%let mac1=value;\n%let mac2=42;\n```",
+                    "default": {},
+                    "examples": [
+                        {
+                            "mac1": "value",
+                            "mac2": "42"
+                        }
+                    ]
+                }
+            }
+        },
+        "macroFolders": {
+            "$id": "#/properties/macroFolders",
+            "type": "array",
+            "title": "The macroFolders array",
+            "description": "The local folders in this array are searched when running `sasjs compile` for any dependent SAS Macros.  Dependent Macros are inserted at the beginning of all relevant compiled Jobs and Services. SAS Macros are found in Jobs, Services, Init / Term programs, and other Macros, by the existence of a &nbsp;`  <h4> SAS Macros </h4>` entry in the doxygen header.\n \n In addition, by default, the sasjs/core (https://core.sasjs.io) macro folders are also searched (these are created under `/node_modules/@sasjs/core` after running `npm install`).",
+            "default": [],
+            "examples": [
+                [
+                    "macros",
+                    "../../more_macros"
+                ]
+            ]
+        },
+        "programFolders": {
+            "$id": "#/properties/programFolders",
+            "type": "array",
+            "title": "The programFolders array",
+            "description": "These local folders are searched for any dependent SAS Programs as defined in the doxygen headers of relevant Services and Jobs.  Unlike SAS Macros, which can be easily inserted into the precode of a Service or Job, a SAS program requires some preparation so that it can be invoked on demand. `sasjs compile` will take any dependent SAS programs, and wrap them in a `data _null_` step with put statements, to a user-defined fileref, so that the program can be subsequently `%include`'d according to the developer's preference.\n\nThe doxygen syntax is as follows:\n\n```  <h4> SAS Programs </h4>\n  @li mysasprogram.sas myfref\n```",
+            "default": [],
+            "examples": [
+                [
+                    "programs",
+                    "../../more_programs"
+                ]
+            ]
+        },
+        "targets": {
+            "$id": "#/properties/targets",
+            "type": "array",
+            "title": "The targets array",
+            "description": "A target is an alias for a deployment location, and includes at a minimum, the `serverUrl`, `serverType` and `appLoc`.  This array allows multiple targets to be defined (eg dev / test / prod).  Any properties defined here will override same-named properties in the sasjsconfig root.",
+            "default": [],
+            "examples": [
+                [
+                    {
+                        "name": "sas9target",
+                        "serverType": "SAS9",
+                        "serverUrl": "https://mysas9server",
+                        "appLoc": "/Shared Folders/myApp"
+                    }
+                ],
+                [
+                    {
+                        "name": "viya",
+                        "serverType": "SASVIYA",
+                        "serverUrl": "https://sas.analytium.co.uk",
+                        "appLoc": "/Public/app",
+                        "contextName": "SAS Job Execution compute context",
+                        "buildConfig": {
+                            "buildOutputFileName": "myviyadeploy.sas",
+                            "initProgram": "build/buildinitviya.sas",
+                            "termProgram": "targets/viya/viyabuildterm.sas",
+                            "macroVars": {
+                                "name": "viyavalue",
+                                "extravar": "this too"
+                            }
+                        },
+                        "deployConfig": {
+                            "deployServicePack": true,
+                            "deployScripts": [
+                                "sasjsbuild/myviyadeploy.sas"
+                            ]
+                        },
+                        "serviceConfig": {
+                            "serviceFolders": [
+                                "targets/viya/services/admin"
+                            ],
+                            "initProgram": "build/serviceinit.sas",
+                            "termProgram": "build/serviceinit.sas",
+                            "macroVars": {
+                                "name": "viyavalue",
+                                "extravar": "this too"
+                            }
+                        },
+                        "jobConfig": {
+                            "jobFolders": [],
+                            "initProgram": "",
+                            "termProgram": "",
+                            "macroVars": {}
+                        },
+                        "streamConfig": {
+                            "assetPaths": [],
+                            "streamWeb": false,
+                            "streamWebFolder": "webv",
+                            "webSourcePath": "dist"
+                        },
+                        "macroFolders": [
+                            "targets/viya/macros"
+                        ],
+                        "programFolders": []
+                    },
+                    {
+                        "name": "sas9",
+                        "serverType": "SAS9",
+                        "serverUrl": "http://sas.analytium.co.uk:7980",
+                        "appLoc": "/User Folders/&sysuserid/My Folder",
+                        "serverName": "Foundation",
+                        "repositoryName": "SASApp",
+                        "buildConfig": {
+                            "buildOutputFileName": "mysas9deploy.sas",
+                            "initProgram": "",
+                            "termProgram": "",
+                            "macroVars": {}
+                        },
+                        "deployConfig": {
+                            "deployScripts": [
+                                "build/deploysas9.sh"
+                            ],
+                            "deployServicePack": false
+                        },
+                        "serviceConfig": {
+                            "serviceFolders": [
+                                "targets/sas9/services/admin"
+                            ],
+                            "initProgram": "",
+                            "termProgram": "build/servicetermother.sas",
+                            "macroVars": {}
+                        },
+                        "streamConfig": {
+                            "assetPaths": [],
+                            "streamWeb": false,
+                            "streamWebFolder": "web9",
+                            "webSourcePath": "dist"
+                        },
+                        "macroFolders": [
+                            "targets/sas9/macros"
+                        ],
+                        "programFolders": []
+                    }
+                ]
+            ],
+            "items": {
+                "$id": "#/properties/targets/items",
+                "anyOf": [
+                    {
+                        "$id": "#/properties/targets/items/anyOf/0",
+                        "type": "object",
+                        "title": "SASjs Targets",
+                        "description": "A target provides the configuration specific to a particular deployment, eg DEV / TEST, or SAS9 / SASVIYA.",
+                        "default": {},
+                        "examples": [
+                            {
+                                "name": "viya",
+                                "serverType": "SASVIYA",
+                                "serverUrl": "https://sas.analytium.co.uk",
+                                "appLoc": "/Public/app",
+                                "contextName": "SAS Job Execution compute context",
+                                "buildConfig": {
+                                    "buildOutputFileName": "myviyadeploy.sas",
+                                    "initProgram": "build/buildinitviya.sas",
+                                    "termProgram": "targets/viya/viyabuildterm.sas",
+                                    "macroVars": {
+                                        "name": "viyavalue",
+                                        "extravar": "this too"
+                                    }
+                                },
+                                "deployConfig": {
+                                    "deployServicePack": true,
+                                    "deployScripts": [
+                                        "sasjsbuild/myviyadeploy.sas"
+                                    ]
+                                },
+                                "serviceConfig": {
+                                    "serviceFolders": [
+                                        "targets/viya/services/admin"
+                                    ],
+                                    "initProgram": "build/serviceinit.sas",
+                                    "termProgram": "build/serviceinit.sas",
+                                    "macroVars": {
+                                        "name": "viyavalue",
+                                        "extravar": "this too"
+                                    }
+                                },
+                                "jobConfig": {
+                                    "jobFolders": [],
+                                    "initProgram": "",
+                                    "termProgram": "",
+                                    "macroVars": {}
+                                },
+                                "streamConfig": {
+                                    "assetPaths": [],
+                                    "streamWeb": false,
+                                    "streamWebFolder": "webv",
+                                    "webSourcePath": "dist"
+                                },
+                                "macroFolders": [
+                                    "targets/viya/macros"
+                                ],
+                                "programFolders": []
+                            }
+                        ],
+                        "required": [
+                            "name",
+                            "serverType",
+                            "appLoc"
+                        ],
+                        "properties": {
+                            "name": {
+                                "$id": "#/properties/targets/items/anyOf/0/properties/name",
+                                "type": "string",
+                                "title": "Target name property",
+                                "description": "A target name can only contain alphanumeric characters and dashes.  It cannot contain spaces. It is used as the alias when referencing the target using the `-t` attribute in many of the SASjs commands.",
+                                "default": "",
+                                "examples": [
+                                    "viya"
+                                ]
+                            },
+                            "serverType": {
+                                "$id": "#/properties/targets/items/anyOf/0/properties/serverType",
+                                "type": "string",
+                                "title": "The Target serverType",
+                                "description": "The serverType can be either SAS9 or SASVIYA.",
+                                "default": "",
+                                "examples": [
+                                    "SASVIYA"
+                                ]
+                            },
+                            "serverUrl": {
+                                "$id": "#/properties/targets/items/anyOf/0/properties/serverUrl",
+                                "type": "string",
+                                "title": "The Target serverUrl",
+                                "description": "The serverUrl is the location to which the app is deployed, and against which any server based operations are performed.  If SAS is served from a particular port, that port should also be included here.",
+                                "default": "",
+                                "examples": [
+                                    "https://sas.analytium.co.uk",
+                                    "https://sas.analytium.co.uk:8080"
+                                ]
+                            },
+                            "appLoc": {
+                                "$id": "#/properties/targets/items/anyOf/0/properties/appLoc",
+                                "type": "string",
+                                "title": "The Target appLoc",
+                                "description": "The appLoc provides the root SAS folder location under which all jobs and services are deployed and executed.  The SAS folder could be metadata in SAS 9, or SAS Drive in Viya.  When running sasjs server commands with relative paths (without a leading slash) then the appLoc is assumed to be the root component.  This approach allows the same commands to be used with different targets (eg running jobs in different environments).",
+                                "default": "",
+                                "examples": [
+                                    "/Public/app"
+                                ]
+                            },
+                            "contextName": {
+                                "$id": "#/properties/targets/items/anyOf/0/properties/contextName",
+                                "type": "string",
+                                "title": "The Target contextName",
+                                "description": "The name of the compute context used to execute SAS code.  The context determines the way in which the SAS session is spawned (eg user credentials, autoexec code, system options etc).\nContexts can be created / modified / deleted using the `sasjs context` command.",
+                                "default": "SAS Job Execution compute context",
+                                "examples": [
+                                    "SAS Job Execution compute context"
+                                ]
+                            },
+                            "buildConfig": {
+                                "$ref": "#/properties/buildConfig"
+                            },
+                            "deployConfig": {
+                                "$ref": "#/properties/deployConfig"
+                            },
+                            "serviceConfig": {
+                                "$ref": "#/properties/serviceConfig"
+                            },
+                            "jobConfig": {
+                                "$ref": "#/properties/jobConfig"
+                            },
+                            "docConfig": {
+                                "$ref": "#/properties/docConfig"
+                            },
+                            "streamConfig": {
+                                "$id": "#/properties/targets/items/anyOf/0/properties/streamConfig",
+                                "type": "object",
+                                "title": "The target streamConfig",
+                                "description": "SASjs allows the frontend of a local web app to be compiled such that all html, css, javascript, and other assets such as png or mp4 are converted into web services and streamed directly from SAS.\n\nThis approach is convenient as it bypasses the need to deploy to a web server. ",
+                                "default": {},
+                                "examples": [
+                                    {
+                                        "assetPaths": [],
+                                        "streamWeb": false,
+                                        "streamWebFolder": "webv",
+                                        "webSourcePath": "dist"
+                                    }
+                                ],
+                                "required": [
+                                    "streamWeb"
+                                ],
+                                "properties": {
+                                    "assetPaths": {
+                                        "$id": "#/properties/targets/items/anyOf/0/properties/streamConfig/properties/assetPaths",
+                                        "type": "array",
+                                        "title": "The streamConfig assetPaths array",
+                                        "description": "An array of local folders.  All assets placed in these folders are converted into web services - example file types could be png, svg, mp3, mp4, excel - anything really.",
+                                        "default": [],
+                                        "examples": [
+                                            [
+                                                "/myassets"
+                                            ]
+                                        ]
+                                    },
+                                    "streamWeb": {
+                                        "$id": "#/properties/targets/items/anyOf/0/properties/streamConfig/properties/streamWeb",
+                                        "type": "boolean",
+                                        "title": "The streamConfig streamWeb flag",
+                                        "description": "When set to `true`, frontend files saved in the `webSourcePath` will be converted to streaming services in the `streamWebFolder` in SAS.",
+                                        "default": false,
+                                        "examples": [
+                                            true
+                                        ]
+                                    },
+                                    "streamWebFolder": {
+                                        "$id": "#/properties/targets/items/anyOf/0/properties/streamConfig/properties/streamWebFolder",
+                                        "type": "string",
+                                        "title": "The streamConfig streamWebFolder",
+                                        "description": "This is the target SAS folder (relative to the appLoc) where the compiled web assets will be created.",
+                                        "default": "webv",
+                                        "examples": [
+                                            "webv"
+                                        ]
+                                    },
+                                    "webSourcePath": {
+                                        "$id": "#/properties/targets/items/anyOf/0/properties/streamConfig/properties/webSourcePath",
+                                        "type": "string",
+                                        "title": "The webSourcePath schema",
+                                        "description": "When `streamConfig` is set to `true`, all files in this folder will be converted to streaming web services.  The `index.html` will be taken as a baseline, and all relative URLS will be prefixed such that the links still work and the assets still load.",
+                                        "default": "",
+                                        "examples": [
+                                            "dist"
+                                        ]
+                                    }
+                                }
+                            },
+                            "macroFolders": {
+                                "$ref": "#/properties/macroFolders"
+                            },
+                            "programFolders": {
+                                "$ref": "#/properties/programFolders"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
     }
-  }
 }
