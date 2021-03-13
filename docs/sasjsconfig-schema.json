@@ -147,6 +147,83 @@
                     "title": "Enable Lineage",
                     "description": "If true, sasjs doc will generate and display Data Lineage from Jobs and Services.",
                     "default": true
+                },
+                "doxyContent": {
+                    "$id": "#/properties/docConfig/properties/doxyContent",
+                    "type": "object",
+                    "title": "doxyContent",
+                    "description": "Configuration of the Doxyfile variables",
+                    "default": {},
+                    "examples": [
+                        {
+                            "favIcon": "favicon.ico",
+                            "footer": "new_footer.html",
+                            "header": "new_header.html",
+                            "layout": "DoxygenLayout.xml",
+                            "logo": "logo.png",
+                            "readMe": "../../README.md",
+                            "stylesheet": "new_stylesheet.css",
+                            "path": "sasjs/doxy"
+                        }
+                    ],
+                    "properties": {
+                        "favIcon": {
+                            "$id": "#/properties/docConfig/properties/doxyContent/properties/favIcon",
+                            "type": "string",
+                            "title": "Doxygen favicon",
+                            "description": "The favicon used in the doxygen documentation",
+                            "default": "favicon.ico"
+                        },
+                        "footer": {
+                            "$id": "#/properties/docConfig/properties/doxyContent/properties/footer",
+                            "type": "string",
+                            "title": "Doxygen footer",
+                            "description": "The footer HTML file used in the doxygen documentation",
+                            "default": "new_footer.html"
+                        },
+                        "header": {
+                            "$id": "#/properties/docConfig/properties/doxyContent/properties/header",
+                            "type": "string",
+                            "title": "Doxygen header",
+                            "description": "The header HTML file used in the doxygen documentation",
+                            "default": "new_header.html"
+                        },
+                        "layout": {
+                            "$id": "#/properties/docConfig/properties/doxyContent/properties/layout",
+                            "type": "string",
+                            "title": "Doxygen Layout XML File",
+                            "description": "The layout XML file used to build the doxygen documentation",
+                            "default": "DoxygenLayout.xml"
+                        },
+                        "logo": {
+                            "$id": "#/properties/docConfig/properties/doxyContent/properties/logo",
+                            "type": "string",
+                            "title": "Doxygen Logo",
+                            "description": "The logo file used by doxygen",
+                            "default": "logo.png"
+                        },
+                        "readMe": {
+                            "$id": "#/properties/docConfig/properties/doxyContent/properties/readMe",
+                            "type": "string",
+                            "title": "Doxygen Homepage",
+                            "description": "The file used to generate the doxygen homepage (defaults to the readme.md)",
+                            "default": "../../README.md"
+                        },
+                        "stylesheet": {
+                            "$id": "#/properties/docConfig/properties/doxyContent/properties/stylesheet",
+                            "type": "string",
+                            "title": "Doxygen CSS",
+                            "description": "The CSS file used to extend Doxygen",
+                            "default": "new_stylesheet.css"
+                        },
+                        "path": {
+                            "$id": "#/properties/docConfig/properties/doxyContent/properties/path",
+                            "type": "string",
+                            "title": "Doxygen Path",
+                            "description": "The path to the Doxygen configuration files (relative to sasjs/sasjsconfig.json)",
+                            "default": "sasjs/doxy"
+                        }
+                    }
                 }
             }
         },
@@ -389,7 +466,7 @@
             "$id": "#/properties/macroFolders",
             "type": "array",
             "title": "The macroFolders array",
-            "description": "The local folders in this array are searched when running `sasjs compile` for any dependent SAS Macros.  Dependent Macros are inserted at the beginning of all relevant compiled Jobs and Services. SAS Macros are found in Jobs, Services, Init / Term programs, and other Macros, by the existence of a &nbsp;`  <h4> SAS Macros </h4>` entry in the doxygen header.\n \n In addition, by default, the sasjs/core (https://core.sasjs.io) macro folders are also searched (these are created under `/node_modules/@sasjs/core` after running `npm install`).",
+            "description": "These local folders are searched for SAS Macros when running `sasjs compile`.  Folders are relative to the `sasjs/sasjsconfig.json` file.",
             "default": [],
             "examples": [
                 [
@@ -402,7 +479,7 @@
             "$id": "#/properties/programFolders",
             "type": "array",
             "title": "The programFolders array",
-            "description": "These local folders are searched for any dependent SAS Programs as defined in the doxygen headers of relevant Services and Jobs.  Unlike SAS Macros, which can be easily inserted into the precode of a Service or Job, a SAS program requires some preparation so that it can be invoked on demand. `sasjs compile` will take any dependent SAS programs, and wrap them in a `data _null_` step with put statements, to a user-defined fileref, so that the program can be subsequently `%include`'d according to the developer's preference.\n\nThe doxygen syntax is as follows:\n\n```  <h4> SAS Programs </h4>\n  @li mysasprogram.sas myfref\n```",
+            "description": "These local folders are searched for SAS Programs when running `sasjs compile`.  Folders are relative to the `sasjs/sasjsconfig.json` file.",
             "default": [],
             "examples": [
                 [
@@ -410,6 +487,68 @@
                     "../../more_programs"
                 ]
             ]
+        },
+        "streamConfig": {
+            "$id": "#/properties/streamConfig",
+            "type": "object",
+            "title": "streamConfig",
+            "description": "SASjs allows the frontend of a local web app to be compiled such that all html, css, javascript, and other assets such as png or mp4 are converted into web services and streamed directly from SAS.\n\nThis approach is convenient as it bypasses the need to deploy to a web server. ",
+            "default": {},
+            "examples": [
+                {
+                    "assetPaths": [],
+                    "streamWeb": false,
+                    "streamWebFolder": "webv",
+                    "webSourcePath": "dist"
+                }
+            ],
+            "required": [
+                "streamWeb"
+            ],
+            "properties": {
+                "assetPaths": {
+                    "$id": "#/properties/streamConfig/properties/assetPaths",
+                    "type": "array",
+                    "title": "The streamConfig assetPaths array",
+                    "description": "An array of local folders.  All assets placed in these folders are converted into web services - example file types could be png, svg, mp3, mp4, excel - anything really.",
+                    "default": [],
+                    "examples": [
+                        [
+                            "/myassets"
+                        ]
+                    ]
+                },
+                "streamWeb": {
+                    "$id": "#/properties/streamConfig/properties/streamWeb",
+                    "type": "boolean",
+                    "title": "The streamConfig streamWeb flag",
+                    "description": "When set to `true`, frontend files saved in the `webSourcePath` will be converted to streaming services in the `streamWebFolder` in SAS.",
+                    "default": false,
+                    "examples": [
+                        true
+                    ]
+                },
+                "streamWebFolder": {
+                    "$id": "#/properties/streamConfig/properties/streamWebFolder",
+                    "type": "string",
+                    "title": "The streamConfig streamWebFolder",
+                    "description": "This is the target SAS folder (relative to the appLoc) where the compiled web assets will be created.",
+                    "default": "webv",
+                    "examples": [
+                        "webv"
+                    ]
+                },
+                "webSourcePath": {
+                    "$id": "#/properties/streamConfig/properties/webSourcePath",
+                    "type": "string",
+                    "title": "The webSourcePath schema",
+                    "description": "When `streamConfig` is set to `true`, all files in this folder will be converted to streaming web services.  The `index.html` will be taken as a baseline, and all relative URLS will be prefixed such that the links still work and the assets still load.",
+                    "default": "",
+                    "examples": [
+                        "dist"
+                    ]
+                }
+            }
         },
         "targets": {
             "$id": "#/properties/targets",
@@ -459,12 +598,6 @@
                                 "extravar": "this too"
                             }
                         },
-                        "jobConfig": {
-                            "jobFolders": [],
-                            "initProgram": "",
-                            "termProgram": "",
-                            "macroVars": {}
-                        },
                         "streamConfig": {
                             "assetPaths": [],
                             "streamWeb": false,
@@ -473,8 +606,7 @@
                         },
                         "macroFolders": [
                             "targets/viya/macros"
-                        ],
-                        "programFolders": []
+                        ]
                     },
                     {
                         "name": "sas9",
@@ -617,7 +749,7 @@
                                 "$id": "#/properties/targets/items/anyOf/0/properties/appLoc",
                                 "type": "string",
                                 "title": "The Target appLoc",
-                                "description": "The appLoc provides the root SAS folder location under which all jobs and services are deployed and executed.  The SAS folder could be metadata in SAS 9, or SAS Drive in Viya.  When running sasjs server commands with relative paths (without a leading slash) then the appLoc is assumed to be the root component.  This approach allows the same commands to be used with different targets (eg running jobs in different environments).",
+                                "description": "The appLoc provides the root SAS folder location under which all jobs and services are deployed and executed.  The SAS folder could be metadata in SAS 9, or SAS Drive in Viya. ",
                                 "default": "",
                                 "examples": [
                                     "/Public/app"
@@ -649,66 +781,7 @@
                                 "$ref": "#/properties/docConfig"
                             },
                             "streamConfig": {
-                                "$id": "#/properties/targets/items/anyOf/0/properties/streamConfig",
-                                "type": "object",
-                                "title": "The target streamConfig",
-                                "description": "SASjs allows the frontend of a local web app to be compiled such that all html, css, javascript, and other assets such as png or mp4 are converted into web services and streamed directly from SAS.\n\nThis approach is convenient as it bypasses the need to deploy to a web server. ",
-                                "default": {},
-                                "examples": [
-                                    {
-                                        "assetPaths": [],
-                                        "streamWeb": false,
-                                        "streamWebFolder": "webv",
-                                        "webSourcePath": "dist"
-                                    }
-                                ],
-                                "required": [
-                                    "streamWeb"
-                                ],
-                                "properties": {
-                                    "assetPaths": {
-                                        "$id": "#/properties/targets/items/anyOf/0/properties/streamConfig/properties/assetPaths",
-                                        "type": "array",
-                                        "title": "The streamConfig assetPaths array",
-                                        "description": "An array of local folders.  All assets placed in these folders are converted into web services - example file types could be png, svg, mp3, mp4, excel - anything really.",
-                                        "default": [],
-                                        "examples": [
-                                            [
-                                                "/myassets"
-                                            ]
-                                        ]
-                                    },
-                                    "streamWeb": {
-                                        "$id": "#/properties/targets/items/anyOf/0/properties/streamConfig/properties/streamWeb",
-                                        "type": "boolean",
-                                        "title": "The streamConfig streamWeb flag",
-                                        "description": "When set to `true`, frontend files saved in the `webSourcePath` will be converted to streaming services in the `streamWebFolder` in SAS.",
-                                        "default": false,
-                                        "examples": [
-                                            true
-                                        ]
-                                    },
-                                    "streamWebFolder": {
-                                        "$id": "#/properties/targets/items/anyOf/0/properties/streamConfig/properties/streamWebFolder",
-                                        "type": "string",
-                                        "title": "The streamConfig streamWebFolder",
-                                        "description": "This is the target SAS folder (relative to the appLoc) where the compiled web assets will be created.",
-                                        "default": "webv",
-                                        "examples": [
-                                            "webv"
-                                        ]
-                                    },
-                                    "webSourcePath": {
-                                        "$id": "#/properties/targets/items/anyOf/0/properties/streamConfig/properties/webSourcePath",
-                                        "type": "string",
-                                        "title": "The webSourcePath schema",
-                                        "description": "When `streamConfig` is set to `true`, all files in this folder will be converted to streaming web services.  The `index.html` will be taken as a baseline, and all relative URLS will be prefixed such that the links still work and the assets still load.",
-                                        "default": "",
-                                        "examples": [
-                                            "dist"
-                                        ]
-                                    }
-                                }
+                                "$ref": "#/properties/streamConfig"
                             },
                             "macroFolders": {
                                 "$ref": "#/properties/macroFolders"

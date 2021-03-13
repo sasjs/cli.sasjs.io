@@ -1,0 +1,6 @@
+tasks:
+  - init: npm install && pip install json-schema-for-humans
+
+vscode:
+  extensions:
+    - esbenp.prettier-vscode@5.9.2:/ZjVG4nabMGxTqOcyglnfQ==
