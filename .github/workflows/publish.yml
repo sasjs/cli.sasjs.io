@@ -14,17 +14,6 @@ jobs:
       - name: Checkout master
         uses: actions/checkout@v2
 
-      - name: Setup Python
-        uses: actions/setup-python@v1
-
-      - uses: BSFishy/pip-action@v1
-        with:
-          packages: |
-            json-schema-for-humans
-
-      - name: generate Schema docs
-        run: generate-schema-doc --config-file sasjsconfig-docs.yaml docs/sasjsconfig-schema.json docs/sasjsconfig.html
-
       - name: Deploy docs
         uses: mhausenblas/mkdocs-deploy-gh-pages@master
         env:
