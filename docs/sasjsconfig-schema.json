@@ -3,32 +3,13 @@
   "$id": "http://example.com/example.json",
   "type": "object",
   "title": "SASjs Config File",
-  "description": "The SASjs Config file provides the settings for your SASjs project. ",
+  "description": "The SASjs Config file provides the settings and structure for your SASjs project. ",
   "default": {},
   "examples": [
     {
-      "buildConfig": {
-        "initProgram": "build/buildinit.sas",
-        "termProgram": "build/buildterm.sas",
-        "macroVars": {
-          "name": "value",
-          "numvar": "42"
-        }
-      },
-      "deployConfig": {
-        "deployScripts": ["build/deployscript.sh"]
-      },
-      "serviceConfig": {
-        "serviceFolders": ["services/common", "services/admin"],
-        "initProgram": "build/serviceinit.sas",
-        "termProgram": "build/serviceterm.sas",
-        "macroVars": {
-          "name": "value",
-          "numvar": "42"
-        }
-      },
       "macroFolders": ["macros"],
       "programFolders": ["programs"],
+      "defaultTarget": "viya",
       "targets": [
         {
           "name": "viya",
@@ -36,15 +17,6 @@
           "serverUrl": "http://sas.analytium.co.uk",
           "appLoc": "/Public/app",
           "contextName": "SAS Job Execution compute context",
-          "buildConfig": {
-            "buildOutputFileName": "myviyadeploy.sas",
-            "initProgram": "build/buildinitviya.sas",
-            "termProgram": "targets/viya/viyabuildterm.sas",
-            "macroVars": {
-              "name": "viyavalue",
-              "extravar": "this too"
-            }
-          },
           "deployConfig": {
             "deployServicePack": true,
             "deployScripts": ["sasjsbuild/myviyadeploy.sas"]
@@ -148,6 +120,13 @@
           "examples": [
             "https://yourserver.co.uk/dcviya/#"
           ]
+        },
+        "enableLineage": {
+          "$id": "#/properties/docConfig/properties/enableLineage",
+          "type": "true",
+          "title": "Enable Lineage",
+          "description": "If true, sasjs doc will generate and display Data Lineage from Jobs and Services.",
+          "default": true
         }
       }
     },
