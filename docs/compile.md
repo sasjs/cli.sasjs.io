@@ -29,7 +29,7 @@ Additional arguments include:
 
 ## Compile Single File
 
-Instead of compiling whole project, you can compile single file.
+Instead of compiling an entire project, you can compile a single file.
 
 ### Syntax
 
