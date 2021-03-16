@@ -5,21 +5,21 @@ description: How to create, edit, delete, export and list Compute Contexts on SA
 og_image: https://sasjs.io/img/sasjs-cli-context.png
 ---
 
-sasjs context
-====================
+# sasjs context
 
-The `sasjs context` command allows users to list all and export individual Compute Contexts.  Administrators may also create, edit and delete contexts.
+The `sasjs context` command allows users to list all and export individual Compute Contexts. Administrators may also create, edit and delete contexts.
 
-A compute context is used when firing up a new SAS session (it itself inherits from a Launcher Context).  Example use cases for this tool:
+A compute context is used when firing up a new SAS session (it itself inherits from a Launcher Context). Example use cases for this tool:
 
-* Creating a new compute context as part of a CI/CD deploy
-* Deleting a compute context as part of a tidy up
-* Discovering which compute contexts can actually be used
-* Modifying a compute context, eg to update the autoexec or system account used
+- Creating a new compute context as part of a CI/CD deploy
+- Deleting a compute context as part of a tidy up
+- Discovering which compute contexts can actually be used
+- Modifying a compute context, eg to update the autoexec or system account used
 
 <script id="asciicast-FsXbbv87BFPpzVWkVpysftBnI" src="https://asciinema.org/a/FsXbbv87BFPpzVWkVpysftBnI.js" async></script>
 
 ## Prerequisites
+
 Before using this command, you will need to install the SASJS CLI and [add a deployment target](/add).
 
 ## Syntax
@@ -30,13 +30,12 @@ sasjs context <action> [additional arguments]
 
 Additional arguments include:
 
-* `--source` (alias `-s`) - the source JSON file to create or edit a compute context.  Used in the create and edit actions.
-* `--target` (alias `-t`) - the target environment in which to create the compute context.  If not specified, the first target will be used instead. The target can exist either in the local project configuration or in the global .sasjsrc file.
-
+- `--source` (alias `-s`) - the source JSON file to create or edit a compute context. Used in the create and edit actions.
+- `--target` (alias `-t`) - the target environment in which to create the compute context. If not specified, the first target will be used instead. The target can exist either in the local project configuration or in the global .sasjsrc file.
 
 ## Compute Context Structure
 
-The create and edit actions use the same JSON structure for adding / modifying contexts.  This also matches the context made by the [export](/context#sasjs-context-export) action, which can be used to provide a template for adding / modifying new contexts.  The JSON is defined as follows:
+The create and edit actions use the same JSON structure for adding / modifying contexts. This also matches the context made by the [export](/context#sasjs-context-export) action, which can be used to provide a template for adding / modifying new contexts. The JSON is defined as follows:
 
 ```
 {
@@ -58,16 +57,16 @@ The create and edit actions use the same JSON structure for adding / modifying c
   "launchType": "service",
 }
 ```
+
 To explain the sections:
 
-* `name` - name of the compute context you will create
-* `reuseServerProcesses` - since Viya 3.5 you can re-use sessions, this improves performance significantly but requires the sessions to run under a system account (defined below)
-* `runServerAs` - the system account to use when re-using server processes
-* `autoExecLines` - an array of SAS program lines.  These will execute ONCE when the server process is started, so expensive libname assignments could be placed here, speeding up web service response times.
-* `options` - an array of SAS option settings
-* `contextName` - the name of the _launcher_ context used to spawn the compute context
-* `launchtype` - a mandatory parameter, more details [here](https://support.sas.com/content/dam/SAS/support/en/sas-global-forum-proceedings/2018/2083-2018.pdf)
-
+- `name` - name of the compute context you will create
+- `reuseServerProcesses` - since Viya 3.5 you can re-use sessions, this improves performance significantly but requires the sessions to run under a system account (defined below)
+- `runServerAs` - the system account to use when re-using server processes
+- `autoExecLines` - an array of SAS program lines. These will execute ONCE when the server process is started, so expensive libname assignments could be placed here, speeding up web service response times.
+- `options` - an array of SAS option settings
+- `contextName` - the name of the _launcher_ context used to spawn the compute context
+- `launchtype` - a mandatory parameter, more details [here](https://support.sas.com/content/dam/SAS/support/en/sas-global-forum-proceedings/2018/2083-2018.pdf)
 
 ## sasjs context create
 
@@ -94,9 +93,10 @@ EOL
 # create the context using the target defined in sasjs add
 sasjs context create -s ./myContext.json -t myTarget
 ```
+
 ## sasjs context delete
 
-Used to delete an existing context.  No source JSON needed, contextName is used instead.
+Used to delete an existing context. No source JSON needed, contextName is used instead.
 
 ### Syntax
 
@@ -107,7 +107,6 @@ Used to delete an existing context.  No source JSON needed, contextName is used 
 ```
 sasjs context delete myUndesirableComputeContext -t myTarget
 ```
-
 
 ## sasjs context edit
 
@@ -137,7 +136,7 @@ sasjs context edit myComputeContext -s ./myContext.json -t myTarget
 
 ## sasjs context export
 
-Exports specified compute context to `contextName.json` in the current folder.  No source JSON is needed, just provide the _contextName_.
+Exports specified compute context to `contextName.json` in the current folder. No source JSON is needed, just provide the _contextName_.
 
 ### Syntax
 
@@ -151,7 +150,7 @@ sasjs context export someContext -t myTarget
 
 ## sasjs context list
 
-Outputs a list of all accessible and inaccessible contexts.  Accessible contexts are discovered by attempting to run `%put &=sysuserid;` on each context.
+Outputs a list of all accessible and inaccessible contexts. Accessible contexts are discovered by attempting to run `%put &=sysuserid;` on each context.
 
 ### Syntax
 

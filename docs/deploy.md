@@ -5,8 +5,7 @@ description: The `sasjs deploy` command performs the actual deployment of a SASj
 og_image: https://i.imgur.com/gIYp5OG.png
 ---
 
-sasjs deploy
-====================
+# sasjs deploy
 
 Deploy to multiple servers, server types (SAS9 or SASVIYA), multiple folders (SAS Drive or Metadata) within those folders, and with multiple configurations, each with a simple alias - a target `name`.
 
@@ -18,9 +17,9 @@ The ability to easily deploy (and subsequently execute) your SAS code enables yo
 
 Before using this command, you will need to install the SASJS CLI and:
 
-* [add a deployment target](/add).
-* [compile services](/compile).
-* [build services](/build).
+- [add a deployment target](/add).
+- [compile services](/compile).
+- [build services](/build).
 
 ## Syntax
 
@@ -37,26 +36,32 @@ The build program generated in the previous step can be deployed in 3 ways:
 ```
 sasjs deploy --target(-t) <target name>
 ```
+
 or:
+
 ```
 sasjs d --target(-t) <target name>
 ```
 
 You can compile, build and deploy using:
+
 ```
 sasjs cbd --target(-t) <target name>
 ```
+
 If you don't specify a target (eg `sas9` or `viya`) then the first target in the `sasjsconfig.json` file is used. If local configuration file is not found, global `.sasjsrc` file will be used.
 
 NOTE: By default deploy will overwrite an existing deploy (force deploy).
 
 ### Copy/Paste approach
-The build script (named as per `buildOutputFileName`) can be copy pasted into SAS Studio and executed to create the backend services.  Please note:
 
-* You will be running under your own identity.  If you need files created under the Web Server identity, deploy your build script using a web service.
-* For Viya, you must use SASStudioV (or ensure the client/secret/access_token are provided)
+The build script (named as per `buildOutputFileName`) can be copy pasted into SAS Studio and executed to create the backend services. Please note:
+
+- You will be running under your own identity. If you need files created under the Web Server identity, deploy your build script using a web service.
+- For Viya, you must use SASStudioV (or ensure the client/secret/access_token are provided)
 
 ### SSH approach
+
 You can SSH (rsync or scp) your build script onto the SAS Server then `%inc` it from a web service - the web service could be created using the code below:
 
 ```sas
@@ -68,6 +73,7 @@ parmcards4;
 ;;;;
 %mp_createwebservice(name=Executor, code=ft15f001 ,replace=YES)
 ```
+
 This creates the service in your HOME directory (SAS 9 or Viya).
 
 You can now create a local script (eg `mysas9deploy.sh`) and add it to the `tgtDeployScripts` array (the root is always the `sasjs` folder).
@@ -88,21 +94,23 @@ curl -v -L -k  -b cookiefile -c cookiefile "$URL&$CREDS"
 Any files in your `tgtDeployScripts` array that have a ".sas" extension will be sent to the relevant API (9 or Viya) for execution.
 
 #### Viya API deployment
+
 The Viya deploy requires 3 things:
 
-* access_token
-* serverUrl
-* contextName
+- access_token
+- serverUrl
+- contextName
 
 In order of priority, the `access_token` is taken from the following locations:
 
-* `tgtDeployVars`
-* `tgtBuildVars`
-* the `.env` file.  This is the preferred / recommended location!
+- `tgtDeployVars`
+- `tgtBuildVars`
+- the `.env` file. This is the preferred / recommended location!
 
-The `serverUrl` is the location of your Viya server.  The `contextName` is the execution service on which your SAS code will execute.  You can get a list of available contexts by running a `GET` to the following endpoint:  `/compute/contexts`
+The `serverUrl` is the location of your Viya server. The `contextName` is the execution service on which your SAS code will execute. You can get a list of available contexts by running a `GET` to the following endpoint: `/compute/contexts`
 
 #### SAS 9
+
 For SAS 9 deployment we integrate with SAS9API by Analytium ([https://sas9api.io](https://sas9api.io)), you can contact them for a free trial copy.
 
 Configuration as follows:
@@ -115,10 +123,8 @@ Configuration as follows:
   "serverUrl": "https://SASSERVER:PORT",
 ```
 
-Demo
----------------------
+## Demo
 
 A 2 minute video demonstrating how an app can be built and a deployment script created is shown below.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/hUpBqExNec4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-

@@ -1,14 +1,12 @@
 ---
 layout: article
-title: A Scheduler for executing SAS Viya Jobs 
+title: A Scheduler for executing SAS Viya Jobs
 description: The SASjs CLI allows SAS jobs to be organised into flows, and executed in parallel or sequentially.  The schedule stops in case of warning or error.
-
 ---
 
-sasjs flow
-====================
+# sasjs flow
 
-The `sasjs flow` command allows SAS Administrators to configure a batch schedule using a JSON file, to trigger the batch using a command line, and to capture the results of the flow in a CSV file.  
+The `sasjs flow` command allows SAS Administrators to configure a batch schedule using a JSON file, to trigger the batch using a command line, and to capture the results of the flow in a CSV file.
 
 Jobs can be executed in parallel, or in sequence following the successful completion of the previous job(s).
 
@@ -16,9 +14,9 @@ Jobs can be executed in parallel, or in sequence following the successful comple
 
 Before using this command, you will need to:
 
-* [install](/installation) the SASjs CLI
-* [add](/add) a deployment target.
-* Create a flow source (JSON) file.
+- [install](/installation) the SASjs CLI
+- [add](/add) a deployment target.
+- Create a flow source (JSON) file.
 
 ## Syntax
 
@@ -28,14 +26,14 @@ sasjs flow <action> [additional arguments]
 
 Additional arguments may include:
 
-* `--source` (alias `-s`) - path to the flow definition source file (\*.json).
-* `--logFolder` (alias `-l`) - path to the folder where job logs will be saved.
-* `--csvFile` (alias `-c`) - path to the CSV file containing job statuses will be saved.  This file is replaced if the command is re-executed.
-* `--target` (alias `-t`) - the target environment in which to deploy the services. If not specified, the first target will be used instead. The target can exist either in the local project configuration or in the global .sasjsrc file.
+- `--source` (alias `-s`) - path to the flow definition source file (\*.json).
+- `--logFolder` (alias `-l`) - path to the folder where job logs will be saved.
+- `--csvFile` (alias `-c`) - path to the CSV file containing job statuses will be saved. This file is replaced if the command is re-executed.
+- `--target` (alias `-t`) - the target environment in which to deploy the services. If not specified, default target will be used, mentioned in `sasjsconfig.json`. The target can exist either in the local project configuration or in the global `.sasjsrc` file.
 
 ## Source JSON file
 
-This is the file where the pattern of the flow is configured.  A very simple flow definition might look like this:
+This is the file where the pattern of the flow is configured. A very simple flow definition might look like this:
 
 ```
 {
@@ -58,6 +56,7 @@ This is the file where the pattern of the flow is configured.  A very simple flo
 The above is named "simpleFlow" with one flow named "flow01" and two Viya Jobs - which will execute in parallel (as they are in the same flow).
 
 A more complicated one would look like this:
+
 ```
 {
   "name": "myAmazingFlow",
@@ -117,7 +116,6 @@ The above contains a flow definition with 4 flows:
 3. `"secondflow"` - triggers as soon as firstflow is complete and ONLY if the jobs all finish with SUCCESS status
 4. `"anotherflow"` - triggers once firstflow and secondflow are complete, but ONLY if all finish with SUCCESS
 
-
 ## sasjs flow execute
 
 Used to trigger the execution a flow of jobs on the SAS server.
@@ -137,4 +135,4 @@ This will schedule SAS jobs and execute them according to the flow definition in
 
 ## See Also
 
-* [sasjs job execute](/#sasjs-job-execute)
+- [sasjs job execute](/#sasjs-job-execute)

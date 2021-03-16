@@ -5,15 +5,14 @@ description: The SASjs CLI allows you execute SASjs web services directly from t
 og_image: https://sasjs.io/img/sasjs-cli-request.png?_=1
 ---
 
-sasjs request
-====================
+# sasjs request
 
 The `sasjs request` command enables developers to call SASjs web services from the commandline.
 
 <script id="asciicast-MwkNw7DFXPoxVvUVXBwpsNUji" src="https://asciinema.org/a/MwkNw7DFXPoxVvUVXBwpsNUji.js" async></script>
 
-
 ## Prerequisites
+
 Before using this command, you will need to [install](/installation) the SASJS CLI and add a deployment [target](/add).
 
 ## sasjs request
@@ -30,12 +29,11 @@ sasjs request <sasProgramPath> [additional arguments]
 
 Additional arguments may include:
 
-* `--target` (alias `-t`) - the target environment in which to deploy the services.  If not specified, the first target will be used instead.
-The target can exist either in the local project configuration or in the global .sasjsrc file.
+- `--target` (alias `-t`) - the target environment in which to deploy the services. If not specified, default target will be used, mentioned in `sasjsconfig.json`. The target can exist either in the local project configuration or in the global `.sasjsrc` file.
 
-* `--data` (alias `-d`) - (optional) The path to a `json` file containing the input data passed into the request.
+- `--data` (alias `-d`) - (optional) The path to a `json` file containing the input data passed into the request.
 
-* `--config` (alias `-c`) - (optional) The path to a `json` file containting the config to be used when executing a request.
+- `--config` (alias `-c`) - (optional) The path to a `json` file containting the config to be used when executing a request.
 
 ### data structure
 
@@ -54,7 +52,6 @@ The input data is structured as follows:
     }]
 }
 ```
-
 
 ### Examples
 
