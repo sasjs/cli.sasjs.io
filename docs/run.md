@@ -28,9 +28,9 @@ Additional arguments may include:
 
 ## sasjs run
 
-This will create a session and execute some SAS code. The log will be returned as a file in the current directory. The source file must have a ".sas" extension. 
+This will create a session and execute some SAS code. The log will be returned as a file in the current directory. The source file must have a ".sas" extension.
 
-Note - an additional variable macro variable (`_program`) will be added by the adapter, with the value of the appLoc and the filename (eg `%let _program=/My/AppLoc/runfilename.sas;`).  This is added as a session variable so will not be visible in the logs.
+Note - an additional variable macro variable will be added by the adapter, with the value of the target [appLoc](https://cli.sasjs.io/sasjsconfig.html#targets_items_anyOf_i0_appLoc) and the filename (equivalent to `%let _program=/My/AppLoc/runfilename.sas;`).  This is actually added as a session variable, so will not be visible in the logs.
 
 ### Syntax
 
