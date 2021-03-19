@@ -11,6 +11,7 @@ The `sasjs run` command enables developers to submit SAS code for execution from
 
 <script id="asciicast-FK3Xr2RhqAjhIcqLLLKD7xCvM" src="https://asciinema.org/a/FK3Xr2RhqAjhIcqLLLKD7xCvM.js" async></script>
 
+
 ## Prerequisites
 
 Before using this command, you will need to [install](/installation) the SASJS CLI and add a deployment [target](/add).
@@ -27,7 +28,9 @@ Additional arguments may include:
 
 ## sasjs run
 
-This will create a session and execute some SAS code. The log will be returned as a file in the current directory. The source file must have a ".sas" extension.
+This will create a session and execute some SAS code. The log will be returned as a file in the current directory. The source file must have a ".sas" extension. 
+
+Note - an additional variable macro variable (`_program`) will be added by the adapter, with the value of the appLoc and the filename (eg `%let _program=/My/AppLoc/runfilename.sas;`).  This is added as a session variable so will not be visible in the logs.
 
 ### Syntax
 

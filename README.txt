@@ -1,4 +1,8 @@
-Installation
+This should not be renamed README.md to avoid being part of the published docs.
+
+The site is built automatically on pushing to the main branch as part of a github action.  To contribute, just change the relevant markdown file in the docs folder and push.
+
+For manual / local builds:
 
 1. brew install mkdocs
 2. pip install mkdocs-material
