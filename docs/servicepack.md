@@ -4,16 +4,14 @@ title: Deploying the SASjs Service Pack from commandline
 description: The SASjs Service Pack is a collection of services and folder objects.  The servicepack command lets you deploy them easily.
 ---
 
-sasjs servicepack
-====================
+# sasjs servicepack
 
-The `sasjs servicepack` command allows administrators to deploy the backend services for a SASjs app using a CI/CD framework of choice.  Currently only the `deploy` action is supported, in future the `export` and `create` options will be made available.  If you are waiting on these, please raise a github [issue](https://github.com/sasjs/cli/issues).
-
-
+The `sasjs servicepack` command allows administrators to deploy the backend services for a SASjs app using a CI/CD framework of choice. Currently only the `deploy` action is supported, in future the `export` and `create` options will be made available. If you are waiting on these, please raise a github [issue](https://github.com/sasjs/cli/issues).
 
 <!--script id="asciicast-FsXbbv87BFPpzVWkVpysftBnI" src="https://asciinema.org/a/FsXbbv87BFPpzVWkVpysftBnI.js" async></script-->
 
 ## Prerequisites
+
 Before using this command, you will need to install the SASJS CLI and [add a deployment target](/add).
 
 ## Syntax
@@ -24,13 +22,13 @@ sasjs servicepack <action> [additional arguments]
 
 Additional arguments may include:
 
-* `--source` (alias `-s`) - the source JSON file containin the services and folders.  Used in the deploy action.
-* `--target` (alias `-t`) - the target environment in which to deploy the services.  If not specified, the first target will be used instead. The target can exist either in the local project configuration or in the global .sasjsrc file.
-* `-f` - used to **f**orce a deploy, eg even if the folders / services already exist (they will then be overwritten)
+- `--source` (alias `-s`) - the source JSON file containin the services and folders. Used in the deploy action.
+- `--target` (alias `-t`) - the target environment in which to deploy the services. If not specified, default target will be used, mentioned in `sasjsconfig.json`. The target can exist either in the local project configuration or in the global `.sasjsrc` file.
+- `-f` - used to **f**orce a deploy, eg even if the folders / services already exist (they will then be overwritten)
 
 ## Service Pack Structure
 
-The service pack structure is designed to provide the bare minimum for defining remote services.  It is normally created as part of the `sasjs build` comand when the target `serverType` is VIYA.  For info, it looks like this:
+The service pack structure is designed to provide the bare minimum for defining remote services. It is normally created as part of the `sasjs build` comand when the target `serverType` is VIYA. For info, it looks like this:
 
 ```
 {
@@ -53,10 +51,9 @@ The service pack structure is designed to provide the bare minimum for defining 
 }
 ```
 
-
 ## sasjs servicepack deploy
 
-Used to deploy a servicepack to a Target.  Note that the servicepack will be deployed to the `appLoc` defined in that target.
+Used to deploy a servicepack to a Target. Note that the servicepack will be deployed to the `appLoc` defined in that target.
 
 <script id="asciicast-drF1SqlUStgdc74CjJokqzNef" src="https://asciinema.org/a/drF1SqlUStgdc74CjJokqzNef.js" async></script>
 

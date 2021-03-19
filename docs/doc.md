@@ -47,7 +47,7 @@ sasjs doc -t <targetName> --outDirectory <sasFilePath>
 Additional arguments may include:
 
 - `--target` (alias `-t`) - If a target is provided, the generated docs will ignore content from the other targets.
-  The target can exist either in the local project configuration or in the global .sasjsrc file.
+  The target can exist either in the local project configuration or in the global `.sasjsrc` file.
 
 ### Examples
 
