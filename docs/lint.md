@@ -1,13 +1,14 @@
 ---
 layout: article
 title: sasjs lint
-description: Lint your SAS code and identify issue such as embedded passwords, trailing spaces, sloppy indentation, missing program headers and more.
+og_title: Lint Your SAS and Prevent Sloppy Code Going Into Production
+description: Lint your SAS code and identify issues such as embedded passwords, trailing spaces, sloppy indentation, missing program headers and more.
 og_image: https://user-images.githubusercontent.com/4420615/113478713-800e1d00-9482-11eb-90c1-10a80a41be1a.png
 ---
 
 # sasjs lint
 
-The `sasjs lint` command is used to identify issue such as embedded passwords, trailing spaces, sloppy indentation, missing program headers and more, in your SAS code.
+The `sasjs lint` command is used to identify issues such as embedded passwords, trailing spaces, sloppy indentation, missing program headers and more, in your SAS code.
 
 This means developers can spend less time on code reviews and formatting fixes, as well as preventing dangerous code, or code with hard-to-detect bugs from hitting production servers.
 
