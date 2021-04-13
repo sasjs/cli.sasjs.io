@@ -8,13 +8,15 @@ description: The `sasjs compile` command extracts all the dependencies and input
 
 ## sasjs compile
 
-From the root of the project, run: `sasjs compile`. This will take all of the macros in the `services` folder and create equivalents in the `sasjsbuild` folder.
+From the root of the project, run: `sasjs compile`. This will cycle through all the Jobs / Services / Tests in the `jobFolders` / `serviceFolders` / \ `testFolders` arrays in the `sasjsconfig.json` file, extract all of the dependent SAS Macros and SAS Includes, and create one self-contained file per Job (or Service, or Test) inside the `sasjsbuild` folder.  The self-contained file will also include any `initProgram`, `termProgram` and `macroVariables` defined in the relevant config objects.
 
-Each service will contain all of the dependent macros as listed under `SAS Macros` in the header, as well as the `serviceinit.sas` and `serviceterm.sas` files.
+The `macroFolders` and `programFolders` arrays are searched for SAS Macros and SAS Includes.  If a macro is not found, then then the [macro core](https://core.sasjs.io) library is searched. If the macro is still not found, then the compilation will fail.
+
+
 
 ![sasjscliflow.png](/img/sasjscompile.png)
 
-If `streamWeb` is `true`, then the `index.html` file in your `webSourcePath` is scanned and any linked JS / CSS files are also compiled into the `streamWebFolder` folder. The `index.html` becomes a `clickme` service in your `appLoc` SAS folder root.
+If `streamWeb` is `true`, then the `index.html` file in your `webSourcePath` is also scanned and any linked JS / CSS files are also compiled into the `streamWebFolder` folder. The `index.html` becomes a `clickme` service in your `appLoc` SAS folder root.
 
 ### Syntax
 
