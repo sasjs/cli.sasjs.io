@@ -49,7 +49,7 @@ You can compile, build and deploy using:
 sasjs cbd --target(-t) <target name>
 ```
 
-If you don't specify a target (eg `sas9` or `viya`) then the first target in the `sasjsconfig.json` file is used. If local configuration file is not found, global `.sasjsrc` file will be used.
+If you don't specify a target (eg `sas9` or `viya`) then the default target in the `sasjsconfig.json` file is used. If local configuration file is not found, global `.sasjsrc` file will be used.
 
 NOTE: By default deploy will overwrite an existing deploy (force deploy).
 
@@ -76,9 +76,9 @@ parmcards4;
 
 This creates the service in your HOME directory (SAS 9 or Viya).
 
-You can now create a local script (eg `mysas9deploy.sh`) and add it to the `tgtDeployScripts` array (the root is always the `sasjs` folder).
+You can now create a local script (eg `mysas9deploy.sh`) and add it to the [deployScripts](https://cli.sasjs.io/sasjsconfig.html#targets_items_anyOf_i0_deployConfig_deployScripts) array (the root is always the directory containing the `sasjs` folder).
 
-```Bash
+```bash
 echo "sasjs: uploading frontend"
 rsync -avz /home/me/myapp/dist/* me@sasserver:/var/www/html/myapp
 
@@ -91,7 +91,7 @@ curl -v -L -k  -b cookiefile -c cookiefile "$URL&$CREDS"
 
 ### API Approach
 
-Any files in your `tgtDeployScripts` array that have a ".sas" extension will be sent to the relevant API (9 or Viya) for execution.
+Any files in your `deployScripts` array that have a ".sas" extension will be sent to the relevant API (9 or Viya) for execution.
 
 #### Viya API deployment
 
@@ -101,11 +101,7 @@ The Viya deploy requires 3 things:
 - serverUrl
 - contextName
 
-In order of priority, the `access_token` is taken from the following locations:
-
-- `tgtDeployVars`
-- `tgtBuildVars`
-- the `.env` file. This is the preferred / recommended location!
+In order of priority, the `access_token` is taken from the`.env.targetname` file, then the `.env` file (if not found).
 
 The `serverUrl` is the location of your Viya server. The `contextName` is the execution service on which your SAS code will execute. You can get a list of available contexts by running a `GET` to the following endpoint: `/compute/contexts`
 
