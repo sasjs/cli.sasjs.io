@@ -1,3 +1,11 @@
+---
+layout: article
+title: SASjs Add
+description: The `sasjs add` command provides a series of prompts used to define a SAS target
+og_image: https://sasjs.io/img/sasjsaddcred.png
+---
+
+
 # sasjs add
 
 The `sasjs add` command provides a series of prompts used to define a SAS [target](https://sasjs.io/glossary#target) along with the relevant connection details (if SAS Viya).
@@ -8,6 +16,8 @@ The `sasjs add` command provides a series of prompts used to define a SAS [targe
 
 ```
 sasjs add
+
+sasjs add cred -t targetname # add creds for existing target
 ```
 
 ## Description
@@ -46,4 +56,3 @@ If SAS 9 was chosen as the serverType then the server name should be chosen (eg 
 
 <script id="asciicast-361844" src="https://asciinema.org/a/361844.js" async></script>
 
-<meta name="description" content="The `sasjs add` command provides a series of prompts used to define a SAS target">
