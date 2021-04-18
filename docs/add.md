@@ -2,7 +2,7 @@
 layout: article
 title: SASjs Add
 description: The `sasjs add` command provides a series of prompts used to define a SAS target
-og_image: https://sasjs.io/img/sasjsaddcred.png
+og_image: https://cli.sasjs.io/img/sasjsaddcred.png
 ---
 
 
@@ -12,6 +12,7 @@ The `sasjs add` command provides a series of prompts used to define a SAS [targe
 
 <script id="asciicast-8CZROaVsvobDCumlqgxrhHkE3" src="https://asciinema.org/a/8CZROaVsvobDCumlqgxrhHkE3.js" async></script>
 
+
 ## Syntax
 
 ```
@@ -19,7 +20,7 @@ sasjs add
 
 sasjs add cred -t targetname # add creds for existing target
 ```
-
+![](https://cli.sasjs.io/img/sasjsaddcred.png)
 ## Description
 
 ### Local or Global Config
