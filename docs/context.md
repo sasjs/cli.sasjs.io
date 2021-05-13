@@ -49,7 +49,10 @@ The create and edit actions use the same JSON structure for adding / modifying c
       "%put autoexec line 1;",
       "%put autoexect line 2;"
     ],
-    "options": []
+    "options": [
+     "-BUFNO 10",
+     "-MEMSIZE 4G"
+    ]
   },
   "launchContext": {
     "contextName": "SAS Job Execution launcher context"
