@@ -6,7 +6,9 @@
   "directories": {
     "doc": "docs"
   },
-  "scripts": {},
+  "scripts": {
+    "postinstall": "[ -d .git ] && git config core.hooksPath ./.git-hooks || true"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sasjs/cli.sasjs.io.git"
