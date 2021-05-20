@@ -93,27 +93,27 @@ testConfig: {
 - `termProgram` is inserted at the end of every test
 - `macroVars` are defined at the start of every test
 
-## File name convention
+## File Name Convention
 
 Only files names that match following pattern will be considered as tests. Pattern:
 
 ```
-[name].test.[order(optional)].sas
+[filename].test<.integer>.sas
 ```
 
 Examples:
 
 ```
-someService.test.sas
-someJob.test.0.sas
-someJob.test.1.sas
+some_service.test.sas
+some_job.test.0.sas
+some_job.test.1.sas
 ```
 
-- Providing order number is optional, if provided, test will be executed accordingly to this number (`someJob.test.0.sas` first and `someJob.test.1.sas` second).
+- Providing a test integer is optional, if provided, the tests will be executed accordingly to numerical order - eg `some_job.test.0.sas` first and `some_job.test.1.sas` second.
 
 ## Coverage
 
-A SAS Service, Job or Macro is considered covered if there is a test file with the same name, for example:
+A SAS Service, Job or Macro is considered covered if there is a test file with the same **filename**, for example:
 
 ```
 ├── some_service.sas
@@ -128,14 +128,15 @@ Overall coverage is displayed, along with a group summary for Jobs, Services and
 
 ![sas test coverage](img/coverage.png)
 
-We are planning a more 'intelligent' coverage system that can detect whether a macro / servivce / job was executed as part of the test suite.  If this would be helpful to your project, do [get in touch](https://sasapps.io/contact-us)!
+!!! note
+    We are planning a more 'intelligent' coverage system that can detect whether a macro / servivce / job was executed as part of the test suite.  If this would be helpful to your project, do [get in touch](https://sasapps.io/contact-us)!
 
 
 ## Test body
 
-Test example that provides result:
+Test example that provides a result:
 
-```
+```sas
 data work.test_results;
   test_description="some description";
   test_result="PASS";
@@ -147,11 +148,11 @@ run;
 %webout(CLOSE)
 ```
 
-- Providing `test_result` is required to define if test `PASS` or `FAIL`.
+Providing the `test_results` table with a `test_result` variable is required, in order for the frontend to determine if the test is a `PASS` or `FAIL`.  The `webout()` macro definition will be deployed as precode in the compiled test, and is essentially a wrapper for [mm_webout.sas](https://core.sasjs.io/mm__webout_8sas.html) or [mv_webout.sas](https://core.sasjs.io/mv__webout_8sas.html) according the [serverType](https://cli.sasjs.io/sasjsconfig.html#targets_items_anyOf_i0_serverType) of the [target](https://cli.sasjs.io/faq/#what-is-the-difference-between-local-and-global-targets).
 
 ## Tests flow
 
-SAS unit tests will be executed one after another. Execution order is described in `sasjsbuild/testFlow.json` which is created as part of compilation process (`sasjs build`).
+SAS unit tests will be executed one after another. Execution order is described in `sasjsbuild/testFlow.json` which is created as part of compilation process (`sasjs compile`).
 
 ## Tests results
 
