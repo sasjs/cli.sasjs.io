@@ -16,7 +16,7 @@ sasjs test <filteringString> --source <testFlowPath> --outDirectory <folderPath>
 
 - Providing `filteringString` is optional. If not present, all tests mentioned in test flow file will be executed.
 - Providing `source` flag is optional. If not present, CLI will use test flow located at `sasjsbuild/testFlow.json`.
-- Providing `outDirectory` flag is optional. If not present, CLI will use save outputs into sasjsresults folder.
+- Providing `outDirectory` flag is optional. If not present, CLI will use save outputs into `sasjsresults` folder.
 
 ## Configuration
 
