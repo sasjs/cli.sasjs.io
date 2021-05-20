@@ -132,7 +132,7 @@ Overall coverage is displayed, along with a group summary for Jobs, Services and
     We are planning a more 'intelligent' coverage system that can detect whether a macro / servivce / job was executed as part of the test suite.  If this would be helpful to your project, do [get in touch](https://sasapps.io/contact-us)!
 
 
-## Test body
+## Test Body
 
 Test example that provides a result:
 
@@ -150,11 +150,11 @@ run;
 
 Providing the `test_results` table with a `test_result` variable is required, in order for the frontend to determine if the test is a `PASS` or `FAIL`.  The `webout()` macro definition will be deployed as precode in the compiled test, and is essentially a wrapper for [mm_webout.sas](https://core.sasjs.io/mm__webout_8sas.html) or [mv_webout.sas](https://core.sasjs.io/mv__webout_8sas.html) according the [serverType](https://cli.sasjs.io/sasjsconfig.html#targets_items_anyOf_i0_serverType) of the [target](https://cli.sasjs.io/faq/#what-is-the-difference-between-local-and-global-targets).
 
-## Tests flow
+## Test Flow
 
 SAS unit tests will be executed one after another. Execution order is described in `sasjsbuild/testFlow.json` which is created as part of compilation process (`sasjs compile`).
 
-## Tests results
+## Test Results
 
 By default test results will be saved in the `sasjsresults` folder. An example of `sasjsresults` folder structure:
 
