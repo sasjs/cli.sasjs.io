@@ -14,13 +14,14 @@ nav:
       - sasjs create: create.md
       - sasjs deploy: deploy.md
       - sasjs doc: doc.md
+      - sasjs flow: flow.md
       - sasjs folder: folder.md
       - sasjs job: job.md
       - sasjs lint: lint.md
       - sasjs run: run.md
       - sasjs request: request.md
       - sasjs servicepack: servicepack.md
-      - sasjs flow: flow.md
+      - sasjs test: test.md
   - FAQ: faq.md
 
 markdown_extensions:
