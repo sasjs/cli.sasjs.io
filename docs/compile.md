@@ -8,11 +8,9 @@ description: The `sasjs compile` command extracts all the dependencies and input
 
 ## sasjs compile
 
-From the root of the project, run: `sasjs compile`. This will cycle through all the Jobs / Services / Tests in the `jobFolders` / `serviceFolders` / `testFolders` arrays in the `sasjsconfig.json` file, extract all of the dependent SAS Macros and SAS Includes, and create one self-contained file per Job (or Service, or Test) inside the `sasjsbuild` folder.  The self-contained file will also include any `initProgram`, `termProgram` and `macroVariables` defined in the relevant config objects.
+From the root of the project, run: `sasjs compile`. This will cycle through all the Jobs / Services / Tests in the `jobFolders` / `serviceFolders` / `testFolders` arrays in the `sasjsconfig.json` file, extract all of the dependent SAS Macros and SAS Includes, and create one self-contained file per Job (or Service, or Test) inside the `sasjsbuild` folder. The self-contained file will also include any `initProgram`, `termProgram` and `macroVariables` defined in the relevant config objects.
 
-The `macroFolders` and `programFolders` arrays are searched for SAS Macros and SAS Includes.  If a macro is not found, then then the [macro core](https://core.sasjs.io) library is also searched. If the macro is still not found, then the compilation will fail.
-
-
+The `macroFolders` and `programFolders` arrays are searched for SAS Macros and SAS Includes. If a macro is not found, then then the [macro core](https://core.sasjs.io) library is also searched. If the macro is still not found, then the compilation will fail.
 
 ![sasjscliflow.png](/img/sasjscompile.png)
 
@@ -45,6 +43,10 @@ Additional arguments include:
 - `--source` (alias `-s`) - the path/name.ext of the individual source file to compile (as job or service). MANDATORY
 - `--target` (alias `-t`) - The target to use for obtaining the source folders of programs and macros. If it is not specified, the default target will be used, mentioned in `sasjsconfig.json`. The target can exist either in the local project configuration or in the global `.sasjsrc` file. OPTIONAL
 - `--output` (alias `-o`) - path where output of the compiled job or service will be saved. OPTIONAL. If not provided, the output will go to the root of the `sasjsbuild` folder if in a project (`sasjsbuild` would be emptied first), else in the current working directory.
+
+## Tests compilation
+
+As part of compilation process test files will be compiled as well. Test configuration should be provided in `sasjs/sasjsconfig.json`. Test files should be placed in the same folders with services, jobs and macros. Compiled test files will result in `sasjsbuild/tests` folder under `services`,`jobs` or `macros` subfolder respectively. Tests execution flow will be described in `sasjsbuild/testFlow.json` file.
 
 ## Base64 encoding
 
