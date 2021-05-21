@@ -27,6 +27,16 @@ You can send back one or more test results in a single program by creating a tab
 The results should be sent back using the following macros (which could be in your `termProgram` entry):
 
 ```sas
+data some sas tests;
+  set whatever you like;
+run;
+
+data work.test_results;
+  test_description="some description";
+  test_result="PASS";
+  test_comments="We did this & that happened";
+  output;
+run;
 %webout(OPEN)
 %webout(OBJ, TEST_RESULTS)
 %webout(CLOSE)
@@ -134,7 +144,7 @@ Overall coverage is displayed, along with a group summary for Jobs, Services and
 
 ## Test Body
 
-Test example that provides a result:
+An example of a test that provides a result:
 
 ```sas
 data work.test_results;
