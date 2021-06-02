@@ -1,4 +1,4 @@
-# SASJS-CLI
+# SASjs CLI Documentation
 
 The SASjs Command-Line-Interface is a swiss-army knife with a flexible set of options and utilities for Dev Ops on both SAS 9 and Viya.
 
