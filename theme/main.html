@@ -21,8 +21,16 @@
   {% set og_desc = "Accelerate SAS Dev Ops with the SASjs CLI" %}
 {% endif %}
 <meta name="description" property="og:description" content="{{og_desc}}">
+<meta property='name:description' content="{{og_desc}}"/>
+<meta property="twitter:description" content="{{og_desc}}">
 
-<meta property="og:title" content="The SASjs Command Line Interface - Developer Docs">
+{% if page and page.meta and page.meta.og_title %}
+  {% set og_title = page.meta.og_title %}
+{% elif page %}
+  {% set og_title = 'The SASjs Command Line Interface - Developer Docs' %}
+{% endif %}
+<meta property="og:title" content="{{og_title}}">
+
 <meta property="og:author" content="https://www.linkedin.com/company/19117949">
 
 {% if page and page.meta and page.meta.description %}
@@ -36,14 +44,13 @@
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image">
 <meta property="twitter:title" content="The SASjs CLI">
-<meta property="twitter:description" content="Lightning Fast SAS Dev Ops with SASjs">
 <meta property="twitter:image" content='/img/logo/favicon/32.png'>
 <meta property="twitter:image:alt" content="SASjs logo">
 <meta property='twitter:image:title' content='SASjs Logo'/>
 <meta property="twitter:site" content='https://sasjs.io'>
 <!-- meta name="twitter:creator" content="@_sasensei_" -->
 
-<meta property='name:description' content='Build & Deploy to SAS 9 or Viya with the SASjs CLI tool for automated build and deployment.'/>
+
 <meta property="article:author" content="https://www.linkedin.com/company/19117949" />
 <meta property="article:publisher" content="https://www.linkedin.com/company/19117949" />
 {% endblock %}

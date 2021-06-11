@@ -1,7 +1,8 @@
 ---
 layout: article
 title: Testing
-description: How to run unit tests in SAS projects, using SAS language and SASjs
+og_title: sasjs test - for Jobs, Services and Macros
+description: Create isolated unit tests for SAS Jobs, web Services and Macros.  View coverage reports, export results in CSV, JSON and JUnit XML.
 og_image: img/sasjs_test.png
 ---
 
