@@ -45,12 +45,6 @@ run;
 
 Examples of tests for SAS Macros are available in the [SASjs/CORE library](https://github.com/sasjs/core/tree/main/tests).
 
-Further macros that can help with assertions are:
-
-* [mp_assert](https://core.sasjs.io/mp__assert_8sas.html) - generic assertion
-* [mp_assertcols](https://core.sasjs.io/mp__assertcols_8sas.html) - Asserts the existence (or not) of certain columns
-* [mp_assertcolvals](https://core.sasjs.io/mp__assertcolvals_8sas.html) - Asserts the existence (or not) of particular column values
-* [mp_assertdsobs](https://core.sasjs.io/mp__assertdsobs_8sas.html) - Asserts the existence (or not) of dataset observations
 
 ## Syntax
 
@@ -180,6 +174,15 @@ By default test results will be saved in the `sasjsresults` folder. An example o
 ├── testResults.csv
 └── testResults.json
 ```
+
+## Assertion Macros
+
+A number of ready made assertion macros are available in the SASjs Core library:
+
+* [mp_assert](https://core.sasjs.io/mp__assert_8sas.html) - generic assertion
+* [mp_assertcols](https://core.sasjs.io/mp__assertcols_8sas.html) - Asserts the existence (or not) of certain columns
+* [mp_assertcolvals](https://core.sasjs.io/mp__assertcolvals_8sas.html) - Asserts the existence (or not) of particular column values
+* [mp_assertdsobs](https://core.sasjs.io/mp__assertdsobs_8sas.html) - Asserts the existence (or not) of dataset observations
 
 ## Running SAS Tests with SASjs
 
