@@ -28,27 +28,33 @@ You can send back one or more test results in a single program by creating a tab
 The results should be sent back using the following macros (which could be in your `termProgram` entry):
 
 ```sas
+/* do some tests */
 data some sas tests;
   set whatever you like;
 run;
 
+/* create a test_results table */
 data work.test_results;
+  /* mandatory values */
   test_description="some description";
-  test_result="PASS";
+  test_result="PASS"; /* or FAIL */
+  /* optional value */
   test_comments="We did this & that happened";
   output;
 run;
+
+/* send it back with the precompiled webout macro */
 %webout(OPEN)
 %webout(OBJ, TEST_RESULTS)
 %webout(CLOSE)
 ```
 
-Examples of tests for SAS Macros are available in the [SASjs/CORE library](https://github.com/sasjs/core/tree/main/tests).
+Examples of tests for SAS Macros are available in the [SASjs/CORE library](https://github.com/sasjs/core/tree/main/tests).  There are also a series of [assertion macros](#assertion-macros) available.
 
 
 ## Syntax
 
-```
+```bash
 sasjs test <filteringString> --source <testFlowPath> --outDirectory <folderPath> -t <targetName>
 ```
 
@@ -80,7 +86,7 @@ sasjs test mv_ --outDirectory /somedir/myresults
 
 Test configuration can be provided at root or target level. Configuration example:
 
-```
+```json
 testConfig: {
   "initProgram": "sasjs/tests/testinit.sas",
   "termProgram": "sasjs/tests/testterm.sas",
@@ -173,11 +179,14 @@ By default test results will be saved in the `sasjsresults` folder. An example o
 │  └── testsetup.log
 ├── testResults.csv
 └── testResults.json
+└── testResults.xml
 ```
+
+Results are saved in CSV, JSON and JUnit XML formats.
 
 ## Assertion Macros
 
-A number of ready made assertion macros are available in the SASjs Core library:
+A number of ready made assertion macros are available in the SASjs [Core](https://core.sasjs.io) library:
 
 * [mp_assert](https://core.sasjs.io/mp__assert_8sas.html) - generic assertion
 * [mp_assertcols](https://core.sasjs.io/mp__assertcols_8sas.html) - Asserts the existence (or not) of certain columns
@@ -202,6 +211,9 @@ CSV Format:
 
 JSON Format:
 ![sas test results JSON](img/testresultsjson.png)
+
+JUnit XML Format:
+![sas test results XML](img/testresultsxml.png)
 
 Console Output:
 ![sas test results CONSOLE](img/testresultsconsole.png)
