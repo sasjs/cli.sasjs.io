@@ -28,11 +28,13 @@ sasjs lint <action>
 ## sasjs lint
 
 ### Syntax
+
 ```bash
 sasjs lint
 ```
 
 ### Usage
+
 Simply run the command and the list of exceptions (along with line / column numbers) is shown in the console, eg:
 
 ![sas lint](https://user-images.githubusercontent.com/4420615/113478713-800e1d00-9482-11eb-90c1-10a80a41be1a.png)
@@ -40,11 +42,13 @@ Simply run the command and the list of exceptions (along with line / column numb
 ## sasjs lint fix
 
 ### Syntax
+
 ```bash
 sasjs lint fix
 ```
 
 ### Usage
+
 Simply run the command and the exceptions are fixed!  The following rules are supported for 'autofix':
 
 * noTrailingSpaces
