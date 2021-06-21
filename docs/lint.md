@@ -29,6 +29,8 @@ sasjs lint <action>
 
 ### Syntax
 
+The command works as follows:
+
 ```bash
 sasjs lint
 ```
@@ -42,6 +44,8 @@ Simply run the command and the list of exceptions (along with line / column numb
 ## sasjs lint fix
 
 ### Syntax
+
+The command works as follows:
 
 ```bash
 sasjs lint fix
