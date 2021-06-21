@@ -22,12 +22,35 @@ The lint settings are described [here](https://github.com/sasjs/lint/blob/main/R
 ## Syntax
 
 ```
+sasjs lint <action>
+```
+
+## sasjs lint
+
+### Syntax
+```bash
 sasjs lint
 ```
 
-A list of SAS programs, along with the line / column numbers of the exceptions, is shown in the console, eg:
+### Usage
+Simply run the command and the list of exceptions (along with line / column numbers) is shown in the console, eg:
 
 ![sas lint](https://user-images.githubusercontent.com/4420615/113478713-800e1d00-9482-11eb-90c1-10a80a41be1a.png)
+
+## sasjs lint fix
+
+### Syntax
+```bash
+sasjs lint fix
+```
+
+### Usage
+Simply run the command and the exceptions are fixed!  The following rules are supported for 'autofix':
+
+* noTrailingSpaces
+* hasDoxygenHeader
+* hasMacroNameInMend
+* lowerCaseFileNames
 
 ## Usage in a GIT hook
 
