@@ -8,6 +8,7 @@ nav:
       - Git Hooks: githooks.md
   - Commands:
       - sasjs add: add.md
+      - sasjs auth: auth.md
       - sasjs build: build.md
       - sasjs compile: compile.md
       - sasjs context: context.md
@@ -63,6 +64,6 @@ theme:
       - icon: fontawesome/brands/linkedin
         link: https://linkedin.com/company/sasjs
         name: SASjs on LinkedIn
-copyright: All rights reserved &copy;2020 Macro People Ltd.
+copyright: All rights reserved &copy;2021 Macro People Ltd.
 
 google_analytics: ["UA-109713029-8", "sasjs.io"]

@@ -16,6 +16,7 @@ There is also a feature to let you deploy your frontend as a service, bypassing 
 | Command | Description |
 | :---: |  :---:  |
 | [add](/add) | Provides a series of prompts used to define a SAS [target](https://sasjs.io/glossary#target) along with the relevant connection details (if SAS Viya) |
+| [auth](/auth) | Provides the prompts for authentication against a SAS [target](https://sasjs.io/glossary#target) (SAS 9 or Viya) |
 | [build](/build) | takes all of the input jobs and services and creates a build pack |
 | cbd | A shortcut to [compile](/compile), [build](/build) and [deploy](/deploy) your project with one command! |
 | [compile](/compile) | Extracts all the dependencies and input programs for each service / job and includes them in a single file ready for deployment |
