@@ -19,11 +19,15 @@ The JSON file contains all jobs and services and is used by the `sasjs deploy` c
 
 The SAS file can be executed directly in SAS 9 or SAS Viya to create all the services programmatically. This is useful for Viya developers who are not able to obtain a client / secret. For SAS 9 it is the primary deployment method.
 
-The SAS Build Program can also be executed automatically in SAS 9 as part of `sasjs deploy` when `deployServicePack` is true.  You just need to have a runner in your metadata home directory, and to provide credentials using [sasjs auth](/auth).
+### SAS 9 Build Script
+
+The SAS 9 Build Program can be executed in EG or SAS Studio, and also automatically as part of `sasjs deploy` when `deployServicePack` is true.  You just need to have a runner in your metadata home directory, and to provide credentials using [sasjs auth](/auth).
 
 ### Viya Build Script
 
-The .sas file can be executed in SASStudioV _without modification_ as proc http will use the `oauth_bearer=sas_services` option to authenticate to the APIs.
+The .sas file can be executed in SASStudioV _without modification_ as proc http will use the `oauth_bearer=sas_services` option to authenticate to the APIs.  This is the way to deploy SASjs projects when you do not have a CLIENT or SECRET.
+
+### Running Viya Build Script in Non-Viya-Enabled SAS sessions
 
 If for some reason you need to run the _Viya_ build script in a _non_ SPRE / Viya-enabled session (eg in SAS 9 or Base SAS) you will need to prepare the access token - see guidance here: [https://cli.sasjs.io/faq/#viya-token-macros](https://cli.sasjs.io/faq/#viya-token-macros)
 
