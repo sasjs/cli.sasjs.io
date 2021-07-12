@@ -27,7 +27,7 @@ Additional arguments may include:
 - `--output` (alias `-o`) - path where output of the finished job execution will be saved.
 - `--log` (alias `-l`) - path where the log of the finished job will be saved (if used, `-w` is implied).
 - `--wait` (alias `-w`) - if present, CLI will wait for job completion.
-- `--returnStatusOnly` (alias `-r`) - If present and wait flag is provided, CLI will job status only (0 = success, 1 = warning, 3 = error).
+- `--returnStatusOnly` (alias `-r`) - If present and wait flag is provided, CLI will job status only (0 = success, 1 = warning, 2 = error).
 - `--ignoreWarnings` (alias `-i`) - If present and return status only is provided, CLI will return status '0', when the job state
   is warning.
 
