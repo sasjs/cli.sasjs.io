@@ -23,13 +23,13 @@ sasjs job <action> <job path> [additional arguments]
 
 Additional arguments may include:
 
-- `--target` (alias `-t`) - the target environment in which to deploy the services. If not specified, default target will be used, mentioned in `sasjsconfig.json`. The target can exist either in the local project configuration or in the global `.sasjsrc` file.
-- `--output` (alias `-o`) - path where output of the finished job execution will be saved.
+- `--ignoreWarnings` (alias `-i`) - If present and return status only is provided, CLI will return status '0', when the job state is warning.
 - `--log` (alias `-l`) - path where the log of the finished job will be saved (if used, `-w` is implied).
-- `--wait` (alias `-w`) - if present, CLI will wait for job completion.
+- `--output` (alias `-o`) - path where output of the finished job execution will be saved.
 - `--returnStatusOnly` (alias `-r`) - If present and wait flag is provided, CLI will job status only (0 = success, 1 = warning, 2 = error).
-- `--ignoreWarnings` (alias `-i`) - If present and return status only is provided, CLI will return status '0', when the job state
-  is warning.
+- `--source` (alieas `-s`) - Provide the path to an input JSON containing job variables, structured as follows:  `{"macroVars":{"varname":"value","var2":"val2"}}`
+- `--target` (alias `-t`) - the target environment in which to deploy the services. If not specified, default target will be used, mentioned in `sasjsconfig.json`. The target can exist either in the local project configuration or in the global `.sasjsrc` file.
+- `--wait` (alias `-w`) - if present, CLI will wait for job completion.
 
 ## sasjs job execute
 
