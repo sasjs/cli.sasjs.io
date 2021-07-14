@@ -15,7 +15,11 @@ Before using this command, you will need to:
 - [install](/installation) the SASJS CLI
 - [add](/add) a deployment target.
 
-## Syntax
+## sasjs job execute
+
+Used to execute a job on the SAS server.
+
+### Syntax
 
 ```
 sasjs job <action> <job path> [additional arguments]
@@ -31,19 +35,20 @@ Additional arguments may include:
 - `--target` (alias `-t`) - the target environment in which to deploy the services. If not specified, default target will be used, mentioned in `sasjsconfig.json`. The target can exist either in the local project configuration or in the global `.sasjsrc` file.
 - `--wait` (alias `-w`) - if present, CLI will wait for job completion.
 
-## sasjs job execute
+### Examples
 
-Used to execute a job on the SAS server.
-
-### Syntax
-
-> `sasjs job execute /Public/folder/someJob -l ./jobLog.log -o ./jobOutput.json -t targetName`
-
-### Usage
-
-```
+```bash
 # run the job using the target defined in sasjs add
-sasjs job execute /Public/job -l ./jobLog.log -o ./jobOutput.json -t myTarget
+sasjs job execute /Public/folder/someJob -l ./jobLog.log -o ./jobOutput.json -t myTarget
 ```
 
 This will create a session and run a SAS job. The log and output will be returned as files in the current directory.
+
+
+```bash
+# create an input file with macro variables
+echo '{"macroVars":{"myMacVar":"my macro value!","macvar2":"another value"}}' > sourcevars.json
+# execute the job with the above variables, against the default target
+sasjs job execute /Public/folder/someJob -l ./jobLog.log -s ./sourcevars.json
+```
+
