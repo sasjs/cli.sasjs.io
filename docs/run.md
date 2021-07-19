@@ -11,6 +11,10 @@ The `sasjs run` command enables developers to submit SAS code for execution from
 
 <script id="asciicast-FK3Xr2RhqAjhIcqLLLKD7xCvM" src="https://asciinema.org/a/FK3Xr2RhqAjhIcqLLLKD7xCvM.js" async></script>
 
+The log will be returned as a file in the current directory. The source file must have a ".sas" extension.
+
+Note - an additional variable macro variable will be added by the adapter, with the value of the target [appLoc](https://cli.sasjs.io/sasjsconfig.html#targets_items_anyOf_i0_appLoc) and the filename (equivalent to `%let _program=/My/AppLoc/runfilename.sas;`).  This is actually added as a session variable, so will not be visible in the logs.
+
 
 ## Prerequisites
 
@@ -22,22 +26,24 @@ Before using this command, you will need to [install](/installation) the SASJS C
 sasjs run <sourcecode> [additional arguments]
 ```
 
+`<sourcecode>` can be a local file path or a file on a web server.  If using a URL from github, be sure to link to the _raw_ version of the file, eg:
+
+https://raw.githubusercontent.com/sasjs/core/main/base/mf_getattrc.sas
+
+As opposed to:
+
+https://github.com/sasjs/core/blob/main/base/mf_getattrc.sas
+
+If you click the links above you will see the difference.  Whenever `<sourcecode>` begins with `http://` or `https://` we simply fetch the contents from the URL - so the raw value should be SAS code and nothing else.
+
 Additional arguments may include:
 
 - `--target` (alias `-t`) - the target environment in which to deploy the services. If not specified, default target will be used, mentioned in `sasjsconfig.json`. The target can exist either in the local project configuration or in the global `.sasjsrc` file.
 
-## sasjs run
 
-This will create a session and execute some SAS code. The log will be returned as a file in the current directory. The source file must have a ".sas" extension.
+### Examples
 
-Note - an additional variable macro variable will be added by the adapter, with the value of the target [appLoc](https://cli.sasjs.io/sasjsconfig.html#targets_items_anyOf_i0_appLoc) and the filename (equivalent to `%let _program=/My/AppLoc/runfilename.sas;`).  This is actually added as a session variable, so will not be visible in the logs.
-
-### Syntax
-
-> `sasjs run somecode.sas -t target`
-
-### Usage
-
+Running some local SAS code:
 ```
 # create minimal SAS program
 cat > ./somecode.sas <<'EOL'
@@ -46,6 +52,12 @@ EOL
 
 # run the SAS code on the target
 sasjs run somecode.sas -t myTarget
+```
+
+Running some SAS code from github:
+
+```
+sasjs run https://raw.githubusercontent.com/sasjs/template_jobs/master/includes/someprogram.sas -t viya
 ```
 
 ## Roadmap
