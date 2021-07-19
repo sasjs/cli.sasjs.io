@@ -26,13 +26,10 @@ Before using this command, you will need to [install](/installation) the SASJS C
 sasjs run <sourcecode> [additional arguments]
 ```
 
-`<sourcecode>` can be a local file path or a file on a web server.  If using a URL from github, be sure to link to the _raw_ version of the file, eg:
+`<sourcecode>` can be a local file path or a file on a web server.  If using a URL from github, be sure to link to the _raw_ version of the file, eg: [https://raw.githubusercontent.com/sasjs/core/main/base/mf_getattrc.sas](https://raw.githubusercontent.com/sasjs/core/main/base/mf_getattrc.sas) 
 
-https://raw.githubusercontent.com/sasjs/core/main/base/mf_getattrc.sas
+As opposed to: [https://github.com/sasjs/core/blob/main/base/mf_getattrc.sas](https://github.com/sasjs/core/blob/main/base/mf_getattrc.sas)
 
-As opposed to:
-
-https://github.com/sasjs/core/blob/main/base/mf_getattrc.sas
 
 If you click the links above you will see the difference.  Whenever `<sourcecode>` begins with `http://` or `https://` we simply fetch the contents from the URL - so the raw value should be SAS code and nothing else.
 
