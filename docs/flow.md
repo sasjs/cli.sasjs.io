@@ -124,6 +124,12 @@ Used to trigger the execution a flow of jobs on the SAS server.
 
 > `sasjs flow execute --source /local/flow.json --logFolder /local/log/folder --csvFile /local/some.csv -t targetName`
 
+The following arguments are optional:
+
+* `logFolder` - will default to the `sasjsresults` folder
+* `csvFile` - will also default to the `sasjsresults` folder
+* `t` - will default to the `defaultTarget` attribute (if available)
+
 ### Usage
 
 ```
