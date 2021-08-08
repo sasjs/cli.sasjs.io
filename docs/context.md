@@ -89,7 +89,7 @@ cat > ./myContext.json <<'EOL'
   "launchContext": {
     "contextName": "SAS Job Execution launcher context"
   },
-  "launchType": "service",
+  "launchType": "service"
 }
 EOL
 
@@ -129,7 +129,7 @@ cat > ./myContext.json <<'EOL'
   "launchContext": {
     "contextName": "Some Other launcher context"
   },
-  "launchType": "service",
+  "launchType": "service"
 }
 EOL
 
