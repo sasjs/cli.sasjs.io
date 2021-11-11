@@ -30,10 +30,10 @@ sasjs request <sasProgramPath> [additional arguments]
 Additional arguments may include:
 
 - `--target` (alias `-t`) - the target environment in which to deploy the services. If not specified, default target will be used, mentioned in `sasjsconfig.json`. The target can exist either in the local project configuration or in the global `.sasjsrc` file.
-
 - `--data` (alias `-d`) - (optional) The path to a `json` file containing the input data passed into the request.
-
 - `--config` (alias `-c`) - (optional) The path to a `json` file containting the config to be used when executing a request.
+- `--log` (alias `-l`) - path where the log of the finished job will be saved (if used, `-w` is implied).
+- `--output` (alias `-o`) - path where output of the finished job execution will be saved.
 
 ### data structure
 
@@ -61,4 +61,7 @@ sasjs request /Public/app/myApp/common/appinit
 
 # run a SASjs web service with inputs and a config file
 sasjs request common/getdata -d ./dataFile.json -c ./configFile.json -t myTarget
+
+# run a SASjs web service with log and output files defined
+sasjs request /Public/app/myApp/common/appinit -l ./jobLog.log -o ./jobOutput.json
 ```
