@@ -2,11 +2,12 @@
 layout: article
 title: Compiling SAS Jobs & Services using SASjs
 description: The `sasjs compile` command extracts all the dependencies and input programs for each service / job and includes them in a single file ready for deployment
+og_image: https://cli.sasjs.io/img/sasjscompile.png
 ---
 
 # sasjs compile
 
-## sasjs compile
+## Compile Project
 
 From the root of the project, run: `sasjs compile`. This will cycle through all the Jobs / Services / Tests in the `jobFolders` / `serviceFolders` / `testFolders` arrays in the `sasjsconfig.json` file, extract all of the dependent SAS Macros and SAS Includes, and create one self-contained file per Job (or Service, or Test) inside the `sasjsbuild` folder. The self-contained file will also include any `initProgram`, `termProgram` and `macroVariables` defined in the relevant config objects.
 
@@ -26,9 +27,17 @@ Additional arguments include:
 
 - `--target` (alias `-t`) - The target to use for obtaining the source folders of programs and macros. If it is not specified, default target will be used, mentioned in `sasjsconfig.json`. The target can exist either in the local project configuration or in the global `.sasjsrc` file. OPTIONAL
 
+Examples:
+
+```bash
+sasjs compile
+sasjs c
+sasjs c -t someTarget
+```
+
 ## Compile Single File
 
-Instead of compiling an entire project, you can compile a single file.
+Instead of compiling an entire project, you can compile a single file.  It is necessary to state whether the file being compiled is a job, service or test (as these file types are compiled with differing pre-code).
 
 ### Syntax
 
@@ -36,13 +45,18 @@ Instead of compiling an entire project, you can compile a single file.
 sasjs compile <action> [additional arguments]
 ```
 
-`action` can be `job` or `service`
+`action` can be `job` or `service` or `test`
 
 Additional arguments include:
 
 - `--source` (alias `-s`) - the path/name.ext of the individual source file to compile (as job or service). MANDATORY
 - `--target` (alias `-t`) - The target to use for obtaining the source folders of programs and macros. If it is not specified, the default target will be used, mentioned in `sasjsconfig.json`. The target can exist either in the local project configuration or in the global `.sasjsrc` file. OPTIONAL
 - `--output` (alias `-o`) - path where output of the compiled job or service will be saved. OPTIONAL. If not provided, the output will go to the root of the `sasjsbuild` folder if in a project (`sasjsbuild` would be emptied first), else in the current working directory.
+
+```bash
+sasjs compile job -s sasjs/jobs/admin/somejob -o compiledjobs/folder
+sasjs c service --source sasjs/services/common/appinit -t myTarget
+```
 
 ## Tests compilation
 
