@@ -5,7 +5,7 @@ The runtime environment for the CLI is Node. We recommend using [NVM](https://gi
 ```Bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
 source ~/.bashrc
-nvm install -lts
+nvm install --lts
 ```
 
 The CLI can now be installed using Node Package Manager (npm) as follows:
