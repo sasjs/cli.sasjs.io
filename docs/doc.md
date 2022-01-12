@@ -6,7 +6,9 @@ description: Generate documentation for your SAS Data Science projects and SAS b
 
 # sasjs doc
 
-The `sasjs doc` command enables developers to generate documentation from the Doxygen headers used in SAS programs, macros, services and jobs.
+The `sasjs doc` command enables developers to generate HTML documentation directly from the comment headers used in SAS Jobs, Services, Tests, Macros and Includes.  An example of the generated documentation can be found [here](https://core.sasjs.io).  The comment headers must follow the Doxygen standard.  It is possible to embed images, tables, bullet points, GIFs, links, and even raw HTML.
+
+## Data Lineage
 
 If the doxygen headers in any of the SAS Jobs or Services contain lists of data inputs and/or data outputs in the following format:
 
