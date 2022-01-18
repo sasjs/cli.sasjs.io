@@ -2,7 +2,7 @@
 layout: article
 title: Test
 og_title: sasjs test - for Jobs, Services and Macros
-description: Create isolated unit tests for SAS Jobs, web Services and Macros.  View coverage reports, export results in CSV, JSON and JUnit XML.
+description: Create isolated unit tests for SAS Jobs, Services and Macros.  View coverage reports, export results in CSV, JSON, JUnit XML and LCOV.
 og_image: img/sasjs_test.png
 ---
 
@@ -192,6 +192,7 @@ A number of ready made assertion macros are available in the SASjs [Core](https:
 * [mp_assertcols](https://core.sasjs.io/mp__assertcols_8sas.html) - Asserts the existence (or not) of certain columns
 * [mp_assertcolvals](https://core.sasjs.io/mp__assertcolvals_8sas.html) - Asserts the existence (or not) of particular column values
 * [mp_assertdsobs](https://core.sasjs.io/mp__assertdsobs_8sas.html) - Asserts the existence (or not) of dataset observations
+* [mp_assertscope](https://core.sasjs.io/mp__assertscope_8sas.html) - Compares before/after to detect scope leakage in a SAS Macro
 
 ## Running SAS Tests with SASjs
 
