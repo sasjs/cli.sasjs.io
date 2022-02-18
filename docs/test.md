@@ -2,19 +2,19 @@
 layout: article
 title: Test
 og_title: sasjs test - for Jobs, Services and Macros
-description: Create isolated unit tests for SAS Jobs, web Services and Macros.  View coverage reports, export results in CSV, JSON and JUnit XML.
+description: Create isolated unit tests for SAS Jobs, Services and Macros.  View coverage reports, export results in CSV, JSON, JUnit XML and LCOV.
 og_image: img/sasjs_test.png
 ---
 
 # sasjs test
 
-The `sasjs test` command triggers deployed SAS unit tests for execution, and collects the test results in both JSON and CSV format.
+The `sasjs test` command triggers deployed SAS unit tests for execution, and collects the test results in JSON, JUnit XML, LCOV and CSV formats.
 
-The results are also displayed in the console, as follows:
+Results are also displayed in the console, as follows:
 
 ![sas tests](img/sasjs_test.png)
 
-Tests are compiled & deployed as _services_ (STPs in SAS 9 or Jobs in Viya).  In this way, every test is completely isolated with it's own SAS session.
+Tests are compiled & deployed as _services_ (STPs in SAS 9, Jobs in Viya, Stored Programs in SASjs/server).  In this way, **every test is completely isolated with it's own SAS session**.
 
 To create a test, simply create a file with the same name as the Job / Service / Macro being tested, but with a `.test.sas` extension.  If you have multiple tests, you can add a `.test.[integer].sas` extension, and the tests will proceed according to the integers provided.
 
@@ -192,6 +192,7 @@ A number of ready made assertion macros are available in the SASjs [Core](https:
 * [mp_assertcols](https://core.sasjs.io/mp__assertcols_8sas.html) - Asserts the existence (or not) of certain columns
 * [mp_assertcolvals](https://core.sasjs.io/mp__assertcolvals_8sas.html) - Asserts the existence (or not) of particular column values
 * [mp_assertdsobs](https://core.sasjs.io/mp__assertdsobs_8sas.html) - Asserts the existence (or not) of dataset observations
+* [mp_assertscope](https://core.sasjs.io/mp__assertscope_8sas.html) - Compares before/after to detect scope leakage in a SAS Macro
 
 ## Running SAS Tests with SASjs
 
