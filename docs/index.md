@@ -7,7 +7,7 @@ Core functionalities:
 - Creation of a SAS GIT repository in an 'opinionated' way
 - Compilation each service, including all the dependent macros / macro variables and pre / post code
 - Build - creation of the master SAS deployment, including build macros, macro variables, and pre/post code
-- Deployment - execute an array of local scripts and remote SAS programs to create your app on the SAS Server
+- Deployment - execute an array of local scripts and remote SAS programs to create your app on the SAS Server.
 
 There is also a feature to let you deploy your frontend as a service, bypassing the need to access the SAS Web Server.
 
