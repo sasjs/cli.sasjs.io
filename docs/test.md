@@ -55,12 +55,14 @@ Examples of tests for SAS Macros are available in the [SASjs/CORE library](https
 ## Syntax
 
 ```bash
-sasjs test <filteringString> --source <testFlowPath> --outDirectory <folderPath> -t <targetName>
+sasjs test <filteringString> --source <testFlowPath> --outDirectory <folderPath> -t <targetName> --ignoreFail
 ```
 
 - Providing `filteringString` is optional. If not present, *all* tests mentioned in test flow file will be executed.
 - Providing `source` flag is optional. If not present, CLI will use test flow located at `sasjsbuild/testFlow.json` (created when running `sasjs build`).
 - Providing `outDirectory` flag is optional. If not present, CLI will save outputs into the temporary `sasjsresults` folder.
+- Providing ignore fail (--ignoreFail or -iF) flag is optional. If present CLI will return exit code 0 even if tests are failing. Useful when the requirement is not to make CI Pipeline fail.`
+
 
 ## Examples
 
@@ -80,6 +82,12 @@ Execute all tests starting with "mv_" and save the output in 'myresults' folder
 
 ```sh
 sasjs test mv_ --outDirectory /somedir/myresults
+```
+
+Prevent command fail (for example in CI Pipeline):
+
+```bash
+sasjs test --ignoreFail
 ```
 
 ## Configuration
