@@ -32,8 +32,8 @@ Additional arguments may include:
 - `--target` (alias `-t`) - the target environment in which to deploy the services. If not specified, default target will be used, mentioned in `sasjsconfig.json`. The target can exist either in the local project configuration or in the global `.sasjsrc` file.
 - `--data` (alias `-d`) - (optional) The path to a `json` file containing the input data passed into the request.
 - `--config` (alias `-c`) - (optional) The path to a `json` file containting the config to be used when executing a request.
-- `--log` (alias `-l`) - Location in which to store the log file. If not provided AND an error occurs, the log will be stored in the execution path.
-- `--output` (alias `-o`) - Location to store the output file. If not provided, a file named output.json will be saved in the execution path.
+- `--log` (alias `-l`) - Location in which to store the log file. If not provided AND current directory is a sasjs project, it will be saved in sasjsresults else in the current directory.
+- `--output` (alias `-o`) - Location to store the output file. If not provided AND current directory is a sasjs project, an output file will be saved in the sasjsresults folder else in current directory.
 
 ### data structure
 
