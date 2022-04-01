@@ -6,9 +6,9 @@ The SASjs CLI is available on [Node Package Manager](https://www.npmjs.com/). To
 
 ### Windows
 
-If you only care about using the SASjs CLI then simply download NodeJS directly from the homepage:  https://nodejs.org/en/
+If you only care about using the SASjs CLI then simply download NodeJS directly from the homepage:  [https://nodejs.org/en](https://nodejs.org/en/)
 
-If you're a power user looking to play with different versions of NodeJS then NVM-Windows would be the better choice - available here: https://github.com/coreybutler/nvm-windows#installation--upgrades
+If you're a power user looking to play with different versions of NodeJS then NVM-Windows would be the better choice - available here: [https://github.com/coreybutler/nvm-windows#installation--upgrades](https://github.com/coreybutler/nvm-windows#installation--upgrades)
 
 ### Mac / Linux
 We recommend using [NVM](https://github.com/nvm-sh/nvm) instead of [Node](https://nodejs.org/en/) directly, as this does not require root permissions.
