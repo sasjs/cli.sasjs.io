@@ -11,7 +11,7 @@ og_image: https://cli.sasjs.io/img/sasjscompile.png
 
 From the root of the project, run: `sasjs compile`. This will cycle through all the Jobs / Services / Tests in the `jobFolders` / `serviceFolders` / `testFolders` arrays in the `sasjsconfig.json` file, extract all of the dependent Binary Files, SAS Macros, SAS Includes, and create one self-contained file per Job (or Service, or Test) inside the `sasjsbuild` folder. The self-contained file will also include any `initProgram`, `termProgram` and `macroVariables` defined in the relevant config objects.
 
-The `binaryFolders`, `macroFolders` and `programFolders` arrays are searched for Binary Files, SAS Macros and SAS Includes (first in the target config, then in the root). If a macro is not found, then then the [macro core](https://core.sasjs.io) library is also searched. If the macro is still not found, then the compilation will fail.
+The `binaryFolders`, `macroFolders` and `programFolders` arrays are searched for Binary Files, SAS Macros and SAS Includes (first in the target config, then in the root). If a macro is not found, then then the [macro core](https://core.sasjs.io) library is also searched (either from the local project, the dependency of the local CLI install, or from the global CLI install). If the macro is still not found, then the compilation will fail.
 
 The `serviceConfig`, `jobConfig` and `testConfig` objects may have attributes split at either or both target and root level in the `sasjsconfig.json` file.
 
