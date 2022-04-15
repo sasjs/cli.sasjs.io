@@ -89,7 +89,10 @@ parmcards4;
 %mend sasjs_runner;
 %sasjs_runner()
 ;;;;
-%mm_createwebservice(path=/User Folders/&sysuserid/My Folder/sasjs,name=runner)
+%mm_createwebservice(
+  path=/User Folders/&sysuserid/My Folder/sasjs,
+  name=runner
+)
 ```
 
 
