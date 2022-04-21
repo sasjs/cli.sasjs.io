@@ -31,7 +31,11 @@ If Global is chosen, the target configuration will be added to a `.sasjsrc` file
 
 ### Server Type
 
-The second prompt requests a server type. Choose 1 for SAS Viya, or 2 for SAS 9.
+The second prompt requests a server type. Options:
+
+1. SAS Viya - works on 3.5 and 4
+2. SAS 9 - to execute code on SAS 9
+3. SASjs - for deploying to [SASjs Server](https://github.com/sasjs/server)
 
 ### Target Name
 
