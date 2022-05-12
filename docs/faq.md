@@ -30,21 +30,24 @@ SASjs provides two tools to make this easy:
 
 ### Viya Token Web App
 
-This is a web app for configuring a client & secret in multiple ways.
+This is a web app for configuring a client & secret in multiple ways.  Only valid for Viya 3.5
 
 To deploy, see here: [https://sasjs.io/apps/#viya-client-token-generator](https://sasjs.io/apps/#viya-client-token-generator)
 
 ### Viya Token Macros
 
-You can also generate a client / secret (and access / refresh token) using SAS code using the @sasjs/core macros.
+You can also generate a client / secret (and access / refresh token) using SAS code, on both Viya 3.5 and Viya 4, using the [mv_registerclient](https://core.sasjs.io/mv__registerclient_8sas.html) macro.
 
 ```sas
 /* compile the macros from github */
 filename mc url "https://raw.githubusercontent.com/sasjs/core/main/all.sas";
 %inc mc;
 
-/* create random client and secret */
+/* create random client and secret on Viya 3.5 (admin rights needed) */
 %mv_registerclient(outds=clientinfo)
+
+/* create random client and secret on Viya 4 (consul token needed) */
+%mv_registerclient(consul_token=12x34sa43v2345n234lasd)
 ```
 
 This will generate a URL in the log, which must be followed to generate a refresh code (one time step). Paste that code into the macro below to generate an access / refresh token:
