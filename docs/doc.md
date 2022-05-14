@@ -39,7 +39,7 @@ Generates HTML docs for all .sas files contained in the programFolders / macroFo
 
 `sasjs docs` is an alias for `sasjs doc`.
 
-[![sasjs doc command](https://img.youtube.com/vi/ESNdCtXKRrw/0.jpg)](https://www.youtube.com/watch?v=ESNdCtXKRrw)
+[![sasjs doc command](https://img.youtube.com/vi/ESNdCtXKRrw/0.jpg)](https://www.youtube.com/embed?v=ESNdCtXKRrw)
 
 ### Syntax
 
