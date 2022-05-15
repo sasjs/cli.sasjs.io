@@ -26,8 +26,7 @@ Then a data lineage diagram will also be generated (linking data inputs to progr
 
 Given that the same headers used to generate the documentation are used to compile the Services and Jobs, the documentation will naturally stay up to date - so long as you are using [`sasjs compile`](https://cli.sasjs.io/compile/) to prepare them.
 
-<iframe width="560" height="315" src="https://www.youtube.com/watch?v=Sb1DqTLgVyQ" title="SAS Data Lineage" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Sb1DqTLgVyQ" title="SAS Data Lineage" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Prerequisites
 
