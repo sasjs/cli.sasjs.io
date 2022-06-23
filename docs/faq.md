@@ -84,3 +84,11 @@ The below diagram illustrates this flow, but not precisely - the diagram describ
 <!-- source: https://lucid.app/lucidchart/e5ff1d2a-9d6a-4ae5-a990-a2a036d792f3/edit?page=O3h49Ot7ObFc# -->
 
 ![SAS token authentication](/img/tokenmanagementsasviya.svg)
+
+## Why does SASjs take so long to install?
+
+Actually it doesn't, it should be fast.  If you're waiting a long time (eg, over a minute) then the following _may_ be the root cause:
+
+* Virus Scanner checking every file that is downloaded
+* Proxy settings (in which case, update the PAC file)
+* Slow network connection
