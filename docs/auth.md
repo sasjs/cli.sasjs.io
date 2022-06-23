@@ -6,7 +6,7 @@ description: How to authenticate against SAS (Viya, EBI or Base) using the SASjs
 
 # sasjs auth
 
-`sasjs auth` provides authentication against a predefined SAS _target_.  The following commands make use of authentication:
+The `sasjs auth` command authenticates against a predefined SAS _target_.  The following commands make use of authentication:
 
 * sasjs run
 * sasjs job execute
@@ -46,7 +46,7 @@ For global targets the credentials are stored in the `.sasjsrc` file in the user
 
 ## Server Type
 
-The authentication approach taken will depend on the [serverType](/sasjsconfig.html#targets_items_anyOf_i0_serverType) which can be SAS9 or SASVIYA.
+The authentication approach taken will depend on the [serverType](/sasjsconfig.html#targets_items_anyOf_i0_serverType) (SASVIYA, SAS9 or SASJS).
 
 ### SAS Viya Authentication
 To authenticate with SAS Viya you will need an administrator to provide a CLIENT and SECRET with `authorization_code` grant type (SASjs does not support password authentication grant type).  Further information on this topic is available [here](/faq/#how-can-i-obtain-a-viya-client-and-secret).
@@ -96,7 +96,9 @@ parmcards4;
 )
 ```
 
+### SASJS Authentication
 
+Authentication on SASjs Server is only neccessary in [server mode](https://server.sasjs.io/settings/#mode) (there is no authentication in desktop mode).  The default clientID is `clientID1`.
 
 
 
