@@ -92,3 +92,10 @@ Actually it doesn't, it should be fast.  If you're waiting a long time (eg, over
 * Virus Scanner checking every file that is downloaded
 * Proxy settings (in which case, update the PAC file)
 * Slow network connection
+
+The PAC file issue will only apply in corporate settings.  The steps to address:
+
+1. Look in PAC for your proxy settings
+2. Set them in npm
+    - npm config set proxy <<address>>
+    - npm congig set https-proxy <<address>>
