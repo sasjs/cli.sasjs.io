@@ -109,16 +109,21 @@ If the server certificates are set up correctly (full chain) then no additional 
 
 It means that the webserver you are connecting to is misconfigured (certificate chain is incomplete) and did not include the intermediate certificate.
 
-To resolve, you may follow the following steps.  Replace "4gl.viyacloud.sas.com" with your own SAS server URL.
+To resolve, you may step through the following.  Replace "4gl.viyacloud.sas.com" with your own SAS server URL.
 
 ```bash
+# 1. grap the logcertfile
 openssl s_client -connect 4gl.viyacloud.sas.com:443 -servername 4gl.viyacloud.sas.com | tee logcertfile
+# 2. obtain the issuer URI
 openssl x509 -in logcertfile -noout -text | grep -i "issuer"
-# use URI from last step
+# 3. Fetch CRT from URI above
 # for this case, using "http://cacerts.digicert.com/DigiCertTLSRSASHA2562020CA1-1.crt"
 curl --output intermediate.crt http://cacerts.digicert.com/DigiCertTLSRSASHA2562020CA1-1.crt
+# 4. extract intermediate.pem from the CRT file
 openssl x509 -inform DER -in intermediate.crt -out intermediate.pem -text
 ```
+
+If you don't have a well-formed URI in step 3 above, you might try step 4 directly on the CRT if you are able to find it.  One option is to look in the browser (click the padlock) or check the filesystem - here is a possible location on a Viya platform:  `/opt/sas/viya/config/etc/SASSecurityCertificateFramework/tls/certs`.
 
 Further information on this topic is available in this StackOverflow thread: [https://stackoverflow.com/a/60020493](https://stackoverflow.com/a/60020493)
 
