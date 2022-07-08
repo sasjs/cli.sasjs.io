@@ -96,9 +96,40 @@ parmcards4;
 )
 ```
 
-### SASJS Authentication
+### SASJS Server Authentication
 
 Authentication on SASjs Server is only neccessary in [server mode](https://server.sasjs.io/settings/#mode) (there is no authentication in desktop mode).  The default clientID is `clientID1`.
 
 
+## TLS Config
 
+If the server certificates are set up correctly (full chain) then no additional config is required.  However, sometimes when there are self-signed certificates, the following error may occur:
+
+> unable to verify the first certificate
+
+It means that the webserver you are connecting to is misconfigured (certificate chain is incomplete) and did not include the intermediate certificate.
+
+To resolve, you may follow the following steps.  Replace "4gl.viyacloud.sas.com" with your own SAS server URL.
+
+```bash
+openssl s_client -connect 4gl.viyacloud.sas.com:443 -servername 4gl.viyacloud.sas.com | tee logcertfile
+openssl x509 -in logcertfile -noout -text | grep -i "issuer"
+# use URI from last step
+# for this case, using "http://cacerts.digicert.com/DigiCertTLSRSASHA2562020CA1-1.crt"
+curl --output intermediate.crt http://cacerts.digicert.com/DigiCertTLSRSASHA2562020CA1-1.crt
+openssl x509 -inform DER -in intermediate.crt -out intermediate.pem -text
+```
+
+Further information on this topic is available in this StackOverflow thread: [https://stackoverflow.com/a/60020493](https://stackoverflow.com/a/60020493)
+
+Once you have the PEM file it can be added to the [httpsAgentOptions configuration](https://cli.sasjs.io/sasjsconfig.html#httpsAgentOptions) as follows:
+
+![intermediate certificate](img/intermediatepem.png)
+
+As a last resort, if you are running internally and you trust the target server, you may consider the following property in your `sasjs/sasjsconfig.json` file to temporariliy ignore the certificate errors.  However this is not generally recommended.
+
+```json
+      "httpsAgentOptions": {
+        "allowInsecureRequests": true
+      }
+```
