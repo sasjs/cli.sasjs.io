@@ -131,7 +131,7 @@ Once you have the PEM file it can be added to the [httpsAgentOptions configurati
 
 ![intermediate certificate](img/intermediatepem.png)
 
-As a last resort, if you are running internally and you trust the target server, you may consider the following property in your `sasjs/sasjsconfig.json` file to temporariliy ignore the certificate errors.  However this is not generally recommended.
+For testing, if you are running internally and you trust the target server, you may consider the following property in your `sasjs/sasjsconfig.json` file to temporarily ignore the certificate errors.  However, this is not a recommended approach.
 
 ```json
       "httpsAgentOptions": {
