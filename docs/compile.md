@@ -14,10 +14,14 @@ The benefits of working with compiled files are severalfold:
 * Elimination of SAS Catalogs for macros / programs
 * Elimination of filesystem dependency for code
 * Resilient and Highly Portable Applications
-* Transparent / Easy to debug 
+* Transparent / Easy to debug
 * Simple to deploy
 
 `sasjs compile` can be applied to a single file, or more commonly, to all the files in a project.
+
+The following diagram illustrates the flow:
+
+![](img/compile.dot.svg)
 
 ## Compile Project
 
