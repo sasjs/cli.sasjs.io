@@ -10,20 +10,20 @@ digraph G {
     q1[label="1. Does `sasjsbuild` subfolder exist?", shape=cds];
     q2[label="2. macVars in sasjsconfig.json?",shape=cds ]
     q3[label="3. Binary Files in source?",shape=cds ]
-    q4[label="4. Macros in source, \ninitProgram, or \ntermProgram?",shape=cds ]
+    q4[label="4. Macros in source, \ninitProgram, or \ntermProgram?\nIs source a Service \nor Test?",shape=cds ]
     q5[label="5. SAS Includes in source?",shape=cds ]
     q6[label="6. initProgram in sasjsconfig.json?",shape=cds ]
     q7[label="7. Insert actual Job / Service / Test code", shape=box];
     q8[label="8. termProgram in sasjsconfig.json?",shape=cds ]
   }
 
-    a1[label="Create empty compiled file in \nsasjsbuild subdirectory", shape=box];
-    a2[label="Insert macro variables in compiled file", shape=box];
-    a3[label="Convert to base64 and \nwrap in put statements in compiled\n file with filerefs", shape=box];
-    a4[label="Construct macroFolders list and\n recursively compile all dependencies\n into a compileTree JSON file \nbefore adding to compiled file", shape=box];
-    a5[label="Wrap in put statements in compiled\n file with filerefs", shape=box];
-    a6[label="Insert initProgram (macros were compiled previously)", shape=box];
-    a8[label="Insert termProgram (macros were compiled previously", shape=box];
+  a1[label="Create empty compiled file in \nsasjsbuild subdirectory", shape=box];
+  a2[label="Insert macro variables in compiled file", shape=box];
+  a3[label="Convert to base64 and \nwrap in put statements in compiled\n file with filerefs", shape=box];
+  a4[label="Construct macroFolders list and\n recursively compile all dependencies\n into a compileTree JSON file \nbefore adding to compiled file", shape=box];
+  a5[label="Wrap in put statements in compiled\n file with filerefs", shape=box];
+  a6[label="Insert initProgram (macros were compiled previously)", shape=box];
+  a8[label="Insert termProgram (macros were compiled previously", shape=box];
 
   /* Relationships */
   q1 -> a1 [label="No"];
