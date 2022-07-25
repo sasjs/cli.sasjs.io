@@ -7,6 +7,18 @@ og_image: https://cli.sasjs.io/img/sasjscompile.png
 
 # sasjs compile
 
+Compilation in SASjs is driven from the `sasjs/sasjsconfig.json` file, and results in the creation of a single self-contained SAS program per JOB / SERVICE / TEST.
+
+The benefits of working with compiled files are severalfold:
+
+* Elimination of SAS Catalogs for macros / programs
+* Elimination of filesystem dependency for code
+* Resilient and Highly Portable Applications
+* Transparent / Easy to debug 
+* Simple to deploy
+
+`sasjs compile` can be applied to a single file, or more commonly, to all the files in a project.
+
 ## Compile Project
 
 From the root of the project, run: `sasjs compile`. This will cycle through all the Jobs / Services / Tests in the `jobFolders` / `serviceFolders` / `testFolders` arrays in the `sasjsconfig.json` file, extract all of the dependent Binary Files, SAS Macros, SAS Includes, and create one self-contained file per Job (or Service, or Test) inside the `sasjsbuild` folder. The self-contained file will also include any `initProgram`, `termProgram` and `macroVariables` defined in the relevant config objects.
