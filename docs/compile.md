@@ -52,6 +52,12 @@ SAS Macros are recursively compiled to ensure there is only one copy of each mac
 
 More info [here](/artefacts/#sas-macros)
 
+### 4. SAS Includes
+
+SAS Includes are wrapped in put statements and a filename statement is generated with a user provided fileref.
+
+More info [here](/artefacts/#sas-includes)
+
 ## Compile Project
 
 From the root of the project, run: `sasjs compile`. This will cycle through all the Jobs / Services / Tests in the `jobFolders` / `serviceFolders` / `testFolders` arrays in the `sasjsconfig.json` file, extract all of the dependent Binary Files, SAS Macros, SAS Includes, and create one self-contained file per Job (or Service, or Test) inside the `sasjsbuild` folder. The self-contained file will also include any `initProgram`, `termProgram` and `macroVariables` defined in the relevant config objects.

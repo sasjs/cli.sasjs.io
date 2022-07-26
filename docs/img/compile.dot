@@ -22,9 +22,9 @@ digraph G {
   a3[label="Convert to base64 and \nwrap in put statements in compiled\n file with filerefs", shape=box];
   a4[label="Construct macroFolders list and\n recursively compile all dependencies\nbefore adding to compiled file", shape=box];
   a5[label="Wrap in put statements in compiled\n file with filerefs", shape=box];
-  a6[label="Insert initProgram (macros were compiled previously)", shape=box];
+  a6[label="Insert initProgram (macros \nwere previously compiled &\ninserted in step 4)", shape=box];
   a7[label="Insert source file code", shape=box];
-  a8[label="Insert termProgram (macros were compiled previously", shape=box];
+  a8[label="Insert termProgram (macros \nwere previously compiled &\ninserted in step 4)", shape=box];
 
   /* Relationships */
   q1 -> a1 [label="No"];
