@@ -2,7 +2,7 @@
 layout: article
 title: SASjs Artefacts
 description: SASjs Projects are made up of Primary and Secondary Artefacts. These are distinguished according to the settings in the sasjs/sasjsconfig.json file.
-og_image: ./img/artefacts.jpeg
+og_image: https://cli.sasjs.io/img/artefacts.jpeg
 ---
 
 # SASjs Artefacts

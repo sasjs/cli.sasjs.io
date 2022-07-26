@@ -2,7 +2,7 @@
 layout: article
 title: Compiling SAS Jobs & Services using SASjs
 description: `sasjs compile` extracts all the dependencies for each service / job / test and writes them to a single file ready for deployment
-og_image: https://cli.sasjs.io/img/sasjscompile.jpeg
+og_image: https://cli.sasjs.io/img/sasjscompile.png
 ---
 
 # sasjs compile
