@@ -22,15 +22,15 @@
 <!-- q2 -->
 <g id="node2" class="node">
 <title>q2</title>
-<polygon fill="#ffffff" stroke="#ffffff" points="258.7516,-1185.8 77.9688,-1185.8 77.9688,-1161.8 258.7516,-1161.8 270.7516,-1173.8 258.7516,-1185.8"/>
-<text text-anchor="middle" x="174.3602" y="-1169.6" font-family="Times,serif" font-size="14.00" fill="#000000">2. macVars in sasjsconfig.json?</text>
+<polygon fill="#ffffff" stroke="#ffffff" points="258.4127,-1185.8 66.3077,-1185.8 66.3077,-1161.8 258.4127,-1161.8 270.4127,-1173.8 258.4127,-1185.8"/>
+<text text-anchor="middle" x="168.3602" y="-1169.6" font-family="Times,serif" font-size="14.00" fill="#000000">2. macroVars in sasjsconfig.json?</text>
 </g>
 <!-- q1&#45;&gt;q2 -->
 <g id="edge2" class="edge">
 <title>q1&#45;&gt;q2</title>
-<path fill="none" stroke="#000000" d="M161.8791,-1323.1468C163.9379,-1298.6771 167.3602,-1258 167.3602,-1258 167.3602,-1258 169.9571,-1226.7631 171.9874,-1202.3411"/>
-<polygon fill="#000000" stroke="#000000" points="175.5007,-1202.3258 172.8413,-1192.0701 168.5248,-1201.7458 175.5007,-1202.3258"/>
-<text text-anchor="middle" x="178.2431" y="-1245.4" font-family="Times,serif" font-size="14.00" fill="#000000">Yes</text>
+<path fill="none" stroke="#000000" d="M161.2281,-1323.1468C162.4046,-1298.6771 164.3602,-1258 164.3602,-1258 164.3602,-1258 165.8441,-1226.7631 167.0043,-1202.3411"/>
+<polygon fill="#000000" stroke="#000000" points="170.5137,-1202.225 167.4923,-1192.0701 163.5216,-1201.8928 170.5137,-1202.225"/>
+<text text-anchor="middle" x="175.2431" y="-1245.4" font-family="Times,serif" font-size="14.00" fill="#000000">Yes</text>
 </g>
 <!-- a1 -->
 <g id="node9" class="node">
@@ -55,9 +55,9 @@
 <!-- q2&#45;&gt;q3 -->
 <g id="edge5" class="edge">
 <title>q2&#45;&gt;q3</title>
-<path fill="none" stroke="#000000" d="M174.814,-1155.556C175.4041,-1131.8346 176.3602,-1093.4 176.3602,-1093.4 176.3602,-1093.4 177.4509,-1063.8055 178.317,-1040.3055"/>
-<polygon fill="#000000" stroke="#000000" points="181.8236,-1040.1875 178.6944,-1030.0653 174.8284,-1039.9296 181.8236,-1040.1875"/>
-<text text-anchor="middle" x="184.9135" y="-1080.8" font-family="Times,serif" font-size="14.00" fill="#000000">No</text>
+<path fill="none" stroke="#000000" d="M169.4948,-1155.556C170.97,-1131.8346 173.3602,-1093.4 173.3602,-1093.4 173.3602,-1093.4 175.5416,-1063.8055 177.2738,-1040.3055"/>
+<polygon fill="#000000" stroke="#000000" points="180.7839,-1040.2956 178.0286,-1030.0653 173.8029,-1039.7809 180.7839,-1040.2956"/>
+<text text-anchor="middle" x="181.9135" y="-1080.8" font-family="Times,serif" font-size="14.00" fill="#000000">No</text>
 </g>
 <!-- a2 -->
 <g id="node10" class="node">
@@ -68,9 +68,9 @@
 <!-- q2&#45;&gt;a2 -->
 <g id="edge4" class="edge">
 <title>q2&#45;&gt;a2</title>
-<path fill="none" stroke="#000000" d="M220.7742,-1155.723C257.1435,-1141.5581 307.8764,-1121.799 346.4754,-1106.7657"/>
-<polygon fill="#000000" stroke="#000000" points="347.9632,-1109.9424 356.0112,-1103.0517 345.4227,-1103.4196 347.9632,-1109.9424"/>
-<text text-anchor="middle" x="319.2431" y="-1125.2" font-family="Times,serif" font-size="14.00" fill="#000000">Yes</text>
+<path fill="none" stroke="#000000" d="M215.9956,-1155.723C253.4011,-1141.5281 305.6106,-1121.7152 345.2564,-1106.6702"/>
+<polygon fill="#000000" stroke="#000000" points="346.6839,-1109.8721 354.7915,-1103.0517 344.2002,-1103.3275 346.6839,-1109.8721"/>
+<text text-anchor="middle" x="316.2431" y="-1125.2" font-family="Times,serif" font-size="14.00" fill="#000000">Yes</text>
 </g>
 <!-- q4 -->
 <g id="node4" class="node">
@@ -227,8 +227,8 @@
 <!-- a1&#45;&gt;q2 -->
 <g id="edge3" class="edge">
 <title>a1&#45;&gt;q2</title>
-<path fill="none" stroke="#000000" d="M323.6138,-1228.9874C295.3855,-1218.5498 261.1362,-1205.886 232.5695,-1195.3233"/>
-<polygon fill="#000000" stroke="#000000" points="233.7097,-1192.0133 223.1165,-1191.8279 231.282,-1198.5789 233.7097,-1192.0133"/>
+<path fill="none" stroke="#000000" d="M321.9822,-1228.9874C292.9277,-1218.5498 257.676,-1205.886 228.2732,-1195.3233"/>
+<polygon fill="#000000" stroke="#000000" points="229.138,-1191.915 218.5435,-1191.8279 226.7713,-1198.5028 229.138,-1191.915"/>
 </g>
 <!-- a2&#45;&gt;q3 -->
 <g id="edge6" class="edge">

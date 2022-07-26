@@ -8,7 +8,7 @@ digraph G {
     color="lightgrey";
     node [style=filled,color=white];
     q1[label="1. Does `sasjsbuild` subfolder exist?", shape=cds];
-    q2[label="2. macVars in sasjsconfig.json?",shape=cds ]
+    q2[label="2. macroVars in sasjsconfig.json?",shape=cds ]
     q3[label="3. Binary Files in source file?",shape=cds ]
     q4[label="4. Macros in source file, \ninitProgram, or \ntermProgram?\nIs source file a \nService or Test?",shape=cds ]
     q5[label="5. SAS Includes in source file?",shape=cds ]

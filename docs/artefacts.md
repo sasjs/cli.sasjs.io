@@ -55,7 +55,7 @@ A test may contain:
 
 ## Secondary SASjs File Types
 
-### Macros
+### SAS Macros
 
 Macro dependencies can be specified in the following artefacts:
 

@@ -26,7 +26,32 @@ The following diagram illustrates the flow:
 
 ### 1. sasjsbuild Folder
 
-In a SASjs project, artefacts 
+In every SASjs project, content is split according to whether the [file type](/artefacts/) is Job, Service or Test.  For a project that has all three, and has tests covering SAS Macros / Jobs / Tests, the `sasjsbuild` folder (and ultimately, the SAS folder) will contain the following folder tree:
+
+* `jobs/`
+* `services/`
+* `tests/jobs/`
+* `tests/macros/`
+* `tests/services/`
+
+### 2. Macro Variables
+
+Macro variables are inserted according to the type of the compiled file, ie from one of the following objects:
+
+* `jobConfig`
+* `serviceConfig`
+* `testConfig`
+
+### 3. Binary Files
+
+Binary Files are converted to a base64 string and wrapped in put statements with a user provided fileref as described [here](/artefacts/#binary-files)
+
+### 4. SAS Macros
+
+SAS Macros are recursively compiled to ensure there is only one copy of each macro across the initProgram, termProgram, the primary artefact itself, and the `webout()` macros (if a Service or Test).
+
+More info [here](/artefacts/#sas-macros)
+
 ## Compile Project
 
 From the root of the project, run: `sasjs compile`. This will cycle through all the Jobs / Services / Tests in the `jobFolders` / `serviceFolders` / `testFolders` arrays in the `sasjsconfig.json` file, extract all of the dependent Binary Files, SAS Macros, SAS Includes, and create one self-contained file per Job (or Service, or Test) inside the `sasjsbuild` folder. The self-contained file will also include any `initProgram`, `termProgram` and `macroVariables` defined in the relevant config objects.
