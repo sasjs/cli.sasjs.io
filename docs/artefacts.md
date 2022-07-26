@@ -150,7 +150,7 @@ To add a set of Binary Files to a compiled file, add the following in the source
 
 During compilation, the locations below will be searched for files named `myfile.zip` and `base.xlsx`:
 
-* [target-level binaryFolders array](https://cli.sasjs.io/sasjsconfig.html#binaryFolders) in the sasjsconfig.json file
+* [target-level binaryFolders array](https://cli.sasjs.io/sasjsconfig.html#targets_items_anyOf_i0_binaryFolders) in the sasjsconfig.json file
 * [root-level programFolders array](https://cli.sasjs.io/sasjsconfig.html#binaryFolders) in the sasjsconfig.json file
 
 When the file is found, it is base64 encoded then wrapped in `put` statements and added to the compiled file, along with a `filename` statement corresponding to the user-provided fileref (eg `MYZIP` or `XL`).
@@ -162,3 +162,30 @@ To run this code as part of your Job, Service, or Test - just execute, for examp
 ```
 
 
+### initProgram
+
+The `initProgram` attribute is found in the following objects:
+
+* `jobConfig`
+* `serviceConfig`
+* `testConfig`
+
+Any Macros in the `initProgram` are compiled along with those in the `termProgram`, the Job / Service / Test itself, and the `webout()` macros (if a Service or Test).
+
+The initProgram code itself is inserted without modification into the compiled file right before the main Job / Service / Test code.
+
+Only one initProgram may be used (target level or root level), and it is always applied to ALL instances of the particular type (ie Job / Service / Test).
+
+### termProgram
+
+The `termProgram` attribute is found in the following objects:
+
+* `jobConfig`
+* `serviceConfig`
+* `testConfig`
+
+Any Macros in the `termProgram` are compiled along with those in the `initProgram`, the Job / Service / Test itself, and the `webout()` macros (if a Service or Test).
+
+The termProgram code itself is inserted without modification into the compiled file right after the main Job / Service / Test code.
+
+Only one termProgram may be used (target level or root level), and it is always applied to ALL instances of the particular type (ie Job / Service / Test).
