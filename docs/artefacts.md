@@ -9,7 +9,7 @@ description: In SASjs, .sas files can be many things!  We define them here.
 
 SASjs projects are full of files with .sas extensions.  With the exception of tests, the only way to tell them apart is to start from the [sasjs/sasjsconfig.json](/sasjsconfig) file.  Each file type is described below.
 
-## Primary SASjs File Types
+## Primary Artefacts
 
 ### Job
 
@@ -53,7 +53,7 @@ A test may contain:
 * SAS Includes - listed under `<h4> SAS Includes </h4>`
 * Binary Files - under `<h4> Binary Files </h4>`
 
-## Secondary SASjs File Types
+## Secondary Artefacts
 
 ### SAS Macros
 
@@ -81,8 +81,12 @@ During compilation, these macros will be sourced from the following locations (i
 * target-level macroFolders array in the sasjsconfig.json file
 * root-level macroFolders array in the sasjsconfig.json file
 * [SASjs Core](https://core.sasjs.io) under `node_modules/@sasjs/core`
+* [SASjs Core](https://core.sasjs.io) under `node_modules/@sasjs/cli/node_modules/@sasjs/core`
+* [SASjs Core](https://core.sasjs.io) from the GLOBAL install of the SASjs CLI
 
 As soon as a macro is found, the search stops.  So if an `mf_nobs.sas` macro was placed in a directory from the root-level `macroFolders` array, then the [same-named definition](https://core.sasjs.io/mf__nobs_8sas.html) would NOT be taken from SASjs Core.
+
+If a macro is not found then the compilation will immediately fail.
 
 To avoid continually re-scanning the locations above, macros are added to an internal object (compileTree) as they are found, along with their dependents and source folder location.  This object is exported after compilation to the `sasjsbuild/compileTree.json` location.
 
