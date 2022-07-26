@@ -2,6 +2,7 @@
 layout: article
 title: SASjs Configuration
 description: How to structure the sasjsconfig.json file and what all the attributes actually do
+og_image: https://cli.sasjs.io/img/targetBehaviour.svg
 ---
 
 # SASjs Configuration
