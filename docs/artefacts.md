@@ -126,5 +126,39 @@ To run this code as part of your Job, Service, or Test - just execute as follows
 %inc MOJREF;
 ```
 
+### Binary Files
+
+In rare cases you may wish to embed non textual content into your Job / Service / Test - such as Excel, Zip, Images, even video.  This is all possible thanks to a common technique known as Base64 encoding. This allows ANY binary content to be represented as a text string - with the caveat that the encoded file will be at least 33% larger (4 bytes used for every 3 bytes of input).
+
+The compilation process both base64 encodes the source file AND wraps it in `put` statements with a corresponding fileref for developer use.
+
+Binary Files can be specified in the following artefacts:
+
+* Job
+* Service
+* Test
+
+They are not compiled from Macros or SAS Includes.
+
+To add a set of Binary Files to a compiled file, add the following in the source file (artefact) header:
+
+```
+  <h4> Binary Files </h4>
+  @li myfile.zip MYZIP
+  @li base.xlsx XL
+```
+
+During compilation, the locations below will be searched for files named `myfile.zip` and `base.xlsx`:
+
+* [target-level binaryFolders array](https://cli.sasjs.io/sasjsconfig.html#binaryFolders) in the sasjsconfig.json file
+* [root-level programFolders array](https://cli.sasjs.io/sasjsconfig.html#binaryFolders) in the sasjsconfig.json file
+
+When the file is found, it is base64 encoded then wrapped in `put` statements and added to the compiled file, along with a `filename` statement corresponding to the user-provided fileref (eg `MYZIP` or `XL`).
+
+To run this code as part of your Job, Service, or Test - just execute, for example, as follows:
+
+```sas
+%mp_unzip(ziploc="%sysfunc(pathname(MYZIP))",outdir=&sasjswork)
+```
 
 
