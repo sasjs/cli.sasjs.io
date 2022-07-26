@@ -26,7 +26,7 @@ The following diagram illustrates the flow:
 
 ### 1. sasjsbuild Folder
 
-In every SASjs project, content is split according to whether the [file type](/artefacts/) is Job, Service or Test.  For a project that has all three, and has tests covering SAS Macros / Jobs / Tests, the `sasjsbuild` folder (and ultimately, the SAS folder) will contain the following folder tree:
+In every SASjs project, content is split according to whether the [file type](/artefacts/) is Job, Service or Test.  For a project that has all three, and has tests covering SAS Macros / Jobs / Tests, the `sasjsbuild` folder (and ultimately, the remote SAS folder) will contain the following tree:
 
 * `jobs/`
 * `services/`
@@ -50,13 +50,54 @@ Binary Files are converted to a base64 string and wrapped in put statements with
 
 SAS Macros are recursively compiled to ensure there is only one copy of each macro across the initProgram, termProgram, the primary artefact itself, and the `webout()` macros (if a Service or Test).
 
-More info [here](/artefacts/#sas-macros)
+More info [here](/artefacts/#sas-macros).
 
-### 4. SAS Includes
+### 5. SAS Includes
 
 SAS Includes are wrapped in put statements and a filename statement is generated with a user provided fileref.
 
-More info [here](/artefacts/#sas-includes)
+More info [here](/artefacts/#sas-includes).
+
+### 6. initProgram
+
+The `initProgram` executes right before the main Job / Service / Test.
+
+More info [here](/artefacts/#initprogram).
+
+### 6. initProgram
+
+The `initProgram` executes right before the main Job / Service / Test.
+
+More info [here](/artefacts/#initprogram).
+
+### 7. Source Code
+
+This section contains the actual code inside the Job / Service / Test.
+
+More info [here](/artefacts/#primary-sasjs-file-types).
+
+## Compile Single File
+
+When compiling a single file, it is necessary to state whether the file is being compiled is a job, service or test (as these file types are compiled with differing pre-code).
+
+### Syntax
+
+```
+sasjs compile <action> [additional arguments]
+```
+
+`action` can be `job` or `service` or `test`
+
+Additional arguments include:
+
+- `--source` (alias `-s`) - the path/name.ext of the individual source file to compile (as job or service). MANDATORY
+- `--target` (alias `-t`) - The target to use for obtaining the source folders of programs and macros. If it is not specified, the default target will be used, mentioned in `sasjsconfig.json`. The target can exist either in the local project configuration or in the global `.sasjsrc` file. OPTIONAL
+- `--output` (alias `-o`) - path where output of the compiled job or service will be saved. OPTIONAL. If not provided, the output will go to the root of the `sasjsbuild` folder if in a project (`sasjsbuild` would be emptied first), else in the current working directory.
+
+```bash
+sasjs compile job -s sasjs/jobs/admin/somejob -o compiledjobs/folder
+sasjs c service --source sasjs/services/common/appinit -t myTarget
+```
 
 ## Compile Project
 
@@ -102,28 +143,7 @@ sasjs c
 sasjs c -t someTarget
 ```
 
-## Compile Single File
 
-Instead of compiling an entire project, you can compile a single file.  It is necessary to state whether the file being compiled is a job, service or test (as these file types are compiled with differing pre-code).
-
-### Syntax
-
-```
-sasjs compile <action> [additional arguments]
-```
-
-`action` can be `job` or `service` or `test`
-
-Additional arguments include:
-
-- `--source` (alias `-s`) - the path/name.ext of the individual source file to compile (as job or service). MANDATORY
-- `--target` (alias `-t`) - The target to use for obtaining the source folders of programs and macros. If it is not specified, the default target will be used, mentioned in `sasjsconfig.json`. The target can exist either in the local project configuration or in the global `.sasjsrc` file. OPTIONAL
-- `--output` (alias `-o`) - path where output of the compiled job or service will be saved. OPTIONAL. If not provided, the output will go to the root of the `sasjsbuild` folder if in a project (`sasjsbuild` would be emptied first), else in the current working directory.
-
-```bash
-sasjs compile job -s sasjs/jobs/admin/somejob -o compiledjobs/folder
-sasjs c service --source sasjs/services/common/appinit -t myTarget
-```
 
 ## Tests compilation
 
