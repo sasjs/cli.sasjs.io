@@ -84,21 +84,21 @@ During compilation, these macros will be sourced from the following locations (i
 * [SASjs Core](https://core.sasjs.io) under `node_modules/@sasjs/cli/node_modules/@sasjs/core`
 * [SASjs Core](https://core.sasjs.io) from the GLOBAL install of the SASjs CLI
 
-As soon as a macro is found, the search stops.  So if an `mf_nobs.sas` macro was placed in a directory from the root-level `macroFolders` array, then the [same-named definition](https://core.sasjs.io/mf__nobs_8sas.html) would NOT be taken from SASjs Core.
+As soon as a macro is found, the search stops.  So if an [`mf_nobs.sas`](https://core.sasjs.io/mf__nobs_8sas.html) macro was placed in a directory from the root-level `macroFolders` array, then the same-named definition would NOT be taken from SASjs Core.
 
 If a macro is not found then the compilation will immediately fail.
 
-To avoid continually re-scanning the locations above, macros are added to an internal object (compileTree) as they are found, along with their dependents and source folder location.  This object is exported after compilation to the `sasjsbuild/compileTree.json` location.
+To avoid continually re-scanning the locations above, macros are added to an internal object (compileTree) as they are found, along with their dependents and source folder location.  After compilation this object is exported to `sasjsbuild/compileTree.json`.
 
-As mentioned, the compiled file should not contain duplicate macros.  Therefore when compiling each Job / Service / Test, a 'top level' distinct list of macro names is also taken from any `initProgram` and `termProgram` definition, in addition to the `%webout()` dependencies if a Service or Test.
+The compiled file does not contain duplicate macros. When compiling each Job / Service / Test, a distinct list of 'top level' macro names are taken from any `initProgram` and `termProgram` definitions, in addition to the `%webout()` dependencies if a Service or Test.
 
-When adding macros, the header is also removed in order to reduce the overall file size.
+The header of each macro is removed in order to reduce the overall compiled file size.
 
 ### SAS Includes
 
 Whilst macro definitions can be easily copy pasted into the beginning of a job, arbitrary SAS code files cannot (as they are executed immediately rather than compiled into a macro catalog).
 
-To enable arbitrary SAS code files (SAS Includes), the compile process will wrap the code in data step `put '(source code);';` statements and assign a designated fileref to enable the code to be easily `%inc`'d at the preferred point of execution.
+To enable arbitrary SAS code files (SAS Includes), the compile process will wrap the code in data step `put '(source code);';` statements and assign a user-provided fileref to enable the code to be easily `%inc`'d at the preferred point of execution.
 
 SAS Include dependencies can be specified in the following artefacts:
 
