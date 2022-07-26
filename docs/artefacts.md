@@ -52,3 +52,79 @@ A test may contain:
 * Macros - listed under `<h4> SAS Macros </h4>`
 * SAS Includes - listed under `<h4> SAS Includes </h4>`
 * Binary Files - under `<h4> Binary Files </h4>`
+
+## Secondary SASjs File Types
+
+### Macros
+
+Macro dependencies can be specified in the following artefacts:
+
+* Jobs
+* Services
+* Tests
+* Macros (extracted recursively)
+* initProgram
+* termProgram
+
+They are NOT compiled from SAS Includes or Binary Files.
+
+To add a set of macros to a compiled file, just add the following in the header of the source file (artefact):
+
+```
+  <h4> SAS Macros </h4>
+  @li macro1.sas
+  @li macro2.sas
+```
+
+During compilation, these macros will be sourced from the following locations (in this order):
+
+* target-level macroFolders array in the sasjsconfig.json file
+* root-level macroFolders array in the sasjsconfig.json file
+* [SASjs Core](https://core.sasjs.io) under `node_modules/@sasjs/core`
+
+As soon as a macro is found, the search stops.  So if an `mf_nobs.sas` macro was placed in a directory from the root-level `macroFolders` array, then the [same-named definition](https://core.sasjs.io/mf__nobs_8sas.html) would NOT be taken from SASjs Core.
+
+To avoid continually re-scanning the locations above, macros are added to an internal object (compileTree) as they are found, along with their dependents and source folder location.  This object is exported after compilation to the `sasjsbuild/compileTree.json` location.
+
+As mentioned, the compiled file should not contain duplicate macros.  Therefore when compiling each Job / Service / Test, a 'top level' distinct list of macro names is also taken from any `initProgram` and `termProgram` definition, in addition to the `%webout()` dependencies if a Service or Test.
+
+When adding macros, the header is also removed in order to reduce the overall file size.
+
+### SAS Includes
+
+Whilst macro definitions can be easily copy pasted into the beginning of a job, arbitrary SAS code files cannot (as they are executed immediately rather than compiled into a macro catalog).
+
+To enable arbitrary SAS code files (SAS Includes), the compile process will wrap the code in data step `put '(source code);';` statements and assign a designated fileref to enable the code to be easily `%inc`'d at the preferred point of execution.
+
+SAS Include dependencies can be specified in the following artefacts:
+
+* Jobs
+* Services
+* Tests
+
+They are NOT compiled from macros or other SAS Includes.
+
+To add a set of SAS Includes to a compiled file, add the following in the source file (artefact) header:
+
+```
+  <h4> SAS Includes </h4>
+  @li somefile.sas MYREF
+  @li anotherfile.ddl MOJFREF
+```
+
+During compilation, the locations below will be searched for files named `somefile.sas` and `anotherfile.ddl`:
+
+* [target-level programFolders array](https://cli.sasjs.io/sasjsconfig.html#targets_items_anyOf_i0_programFolders) in the sasjsconfig.json file
+* [root-level programFolders array](https://cli.sasjs.io/sasjsconfig.html#programFolders) in the sasjsconfig.json file
+
+When the file is found, it is wrapped in `put` statements and added to the compiled file, along with a `filename` statement corresponding to the user-provided fileref (eg `MYREF` or `MOJREF`).
+
+To run this code as part of your Job, Service, or Test - just execute as follows:
+
+```sas
+%inc MYREF;
+%inc MOJREF;
+```
+
+
+
