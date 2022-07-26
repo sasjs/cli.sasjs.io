@@ -2,7 +2,7 @@
 layout: article
 title: SASjs Artefacts
 description: In SASjs, .sas files can be many things!  We define them here.
-
+og_image: img/artefacts.png
 ---
 
 # SASjs Artefacts
