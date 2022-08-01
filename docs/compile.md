@@ -12,6 +12,7 @@ Compilation in SASjs is driven from the `sasjs/sasjsconfig.json` file, and resul
 
 The benefits of working with compiled files are severalfold:
 
+* Build on one platform, deploy to three (Viya, EBI, Base)
 * Elimination of SAS Catalogs for macros / programs
 * Elimination of filesystem dependency for code
 * Resilient and Highly Portable Applications
