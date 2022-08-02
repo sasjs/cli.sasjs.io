@@ -12,13 +12,12 @@ Compilation in SASjs is driven from the `sasjs/sasjsconfig.json` file, and resul
 
 The benefits of working with compiled files are severalfold:
 
-* Build on one platform, deploy to three (Viya, EBI, Base)
+* Build on ONE platform, deploy to THREE (Viya, EBI, Base)
 * Elimination of SAS Catalogs for macros / programs
 * Elimination of filesystem dependency for code
 * Resilient and Highly Portable Applications
-* Consistent performance
+* Consistent Performance
 * Easy to debug & test
-* Simple to deploy
 
 `sasjs compile` can be applied to a single file, or more commonly, to all the files in a project.
 
@@ -75,12 +74,6 @@ More info [here](/artefacts/#sas-macros).
 SAS Includes are wrapped in put statements and a filename statement is generated with a user provided fileref.
 
 More info [here](/artefacts/#sas-includes).
-
-### 6. initProgram
-
-The `initProgram` executes right before the main Job / Service / Test.
-
-More info [here](/artefacts/#initprogram).
 
 ### 6. initProgram
 
@@ -146,6 +139,11 @@ The `serviceConfig`, `jobConfig` and `testConfig` objects may have attributes sp
 ### Tests compilation
 
 As part of compilation process test files will be compiled as well. Test configuration should be provided in `sasjs/sasjsconfig.json`. Test files should be placed in the same folders with services, jobs and macros. Compiled test files will result in `sasjsbuild/tests` folder under `services`,`jobs` or `macros` subfolder respectively. Tests execution flow will be described in `sasjsbuild/testFlow.json` file.
+
+The `testConfig` object allows two additional programs to be compiled (as tests):
+
+* `testSetUp` - executed once at the beginning of the test run
+* `testTearDown` - executed once, at the end of the test run
 
 ### SyncFolder Compilation
 
