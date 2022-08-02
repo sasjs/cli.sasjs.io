@@ -7,7 +7,7 @@ og_image: https://i.imgur.com/gIYp5OG.png
 
 # sasjs deploy
 
-Deploy to multiple servers, server types (SAS9 or SASVIYA), multiple folders (SAS Drive or Metadata) within those folders, and with multiple configurations, each with a simple alias - a target `name`.
+Deploy to multiple servers, server types (Viya, EBI, Base), multiple folders (Drive or Metadata) within those folders, and with multiple configurations, each with a simple alias - a target `name`.
 
 The ability to easily deploy (and subsequently execute) your SAS code enables you to develop locally using established GIT workflows.
 
@@ -25,7 +25,7 @@ Before using this command, you will need to install the SASJS CLI and:
 
 The build program generated in the previous step can be deployed in 3 ways:
 
-1 - MANUAL: copy paste the code into SAS Studio or Enterprise Guide and run it
+1 - MANUAL: copy paste the code into Studio or Enterprise Guide and run it
 
 2 - SSH: build a shell script or bat file to load, and execute with a web service
 
@@ -91,7 +91,7 @@ curl -v -L -k  -b cookiefile -c cookiefile "$URL&$CREDS"
 
 ### API Approach
 
-Any files in your `deployScripts` array that have a ".sas" extension will be sent to the relevant API (9 or Viya) for execution.
+Any files in your `deployScripts` array that have a ".sas" extension will be sent to the relevant SAS Server for execution.
 
 #### Viya API deployment
 
@@ -106,8 +106,6 @@ In order of priority, the `access_token` is taken from the`.env.targetname` file
 The `serverUrl` is the location of your Viya server. The `contextName` is the execution service on which your SAS code will execute. You can get a list of available contexts by running a `GET` to the following endpoint: `/compute/contexts`
 
 #### SAS 9
-
-For SAS 9 deployment we integrate with SAS9API by Analytium ([https://sas9api.io](https://sas9api.io)), you can contact them for a free trial copy.
 
 Configuration as follows:
 
