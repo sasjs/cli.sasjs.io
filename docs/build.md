@@ -1,19 +1,25 @@
 ---
 layout: article
 title: Building a SAS Project using SASjs
-description: The `sasjs build` command takes all of the input jobs and services and creates a build pack ready for deployment into SAS 9 or Viya
+description: The `sasjs build` command takes all of the input jobs and services and creates a build pack ready for deployment
 ---
 
 # sasjs build
 
-From the root of the project, run: `sasjs build`. This will create a deployment script that can be executed in SAS to create the backend services. The `appLoc` is configured in the `/sasjs/sasjsconfig.json` file, along with the `serverType` (SAS9 or SASVIYA). All Jobs and Services (as documented in `jobConfig` and `serviceConfig`) will be compiled into a single .sas file (for deployment in SAS 9, Base SAS or SPRE) and a .json file (for deployment using the Viya APIs)
+The `sasjs build` command creates the build artefacts from the compiled jobs, services and tests in the `sasjsbuild` folder.  Specifically, the following items are created (the filename corresponds to the target name unless [buildOutputFileName](https://cli.sasjs.io/sasjsconfig.html#buildConfig_buildOutputFileName) is specified):
+
+* target.sas - used to create the project in SAS 9 or Viya (when no access token is available)
+* target.json - used to deploy using the APIs in Viya or SASjs Server
+* target.json.zip - used for faster uploads of large payloads in SASjs Server
+
 
 If the jobs or services folder does not exist in the temporary `sasjsbuild` folder, then the `sasjs compile` step is also executed. The alias to run both compile and build steps is `sasjs cb`.
+
 ![sasjscliflow.png](/img/sasjsbuild.png)
 
 ### JSON Build File
 
-The JSON file contains all jobs and services and is used by the `sasjs deploy` command to create all the necessary folders, jobs & services (and streamed web apps) in the folder specified in the `appLoc` property of the target config.
+The JSON file contains all jobs and services and is used by the `sasjs deploy` command to create all the necessary folders, jobs & services (and streamed web apps) in the targert the folder specified in the `appLoc` property of the target config.
 
 ## SAS Build Program
 
