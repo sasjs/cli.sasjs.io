@@ -97,5 +97,5 @@ The PAC file issue will only apply in corporate settings.  The steps to address:
 
 1. Look in PAC for your proxy settings
 2. Set them in npm
-    - npm config set proxy <<address>>
-    - npm congig set https-proxy <<address>>
+    - `npm config set proxy <<address>>`
+    -` npm config set https-proxy <<address>>`
