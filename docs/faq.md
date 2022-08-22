@@ -8,9 +8,9 @@ description: Common questions and answers when working with the SASjs Command Li
 
 ## What is the difference between local and global targets?
 
-A target is a set of attributes (eg server URL, SAS Folder location) to which a project will be deployed, or some code executed. When running locally, inside a project (eg a GIT repository) these attributes are taken from the `sasjsconfig.json` file, whilst any authorisation attributes are retrieved from the `.env.$(targetname)` file (where they are typically `.gitignore`'d for security).
+A target is a set of attributes (eg `serverUrl`, `serverType`, `appLoc`) to which a project will be deployed, or some code executed. When running **locally**, inside a project (eg a GIT repository) these attributes are taken from the `sasjs/sasjsconfig.json` file.  By contrast, any (sensitive) authorisation attributes are retrieved from the `.env.$(targetname)` file, which is typically `.gitignore`'d for security.
 
-When running outside of a project, the attributes are taken from the global `~/.sasjsrc` file in the user home directory. In this case, the authorisation details are also stored in the same file (authConfig).
+When running **outside** of a project, the attributes are taken from the global `~/.sasjsrc` file in the user home directory. In this case, authorisation details are also stored in the same file (authConfig).
 
 The `sasjs` command will "discover" if it is inside a local project by the presence of a `sasjs/sasjsconfig.json` file in the current, or any of the parent directories. If not found, then the `~/.sasjsrc` file will be searched instead.
 
