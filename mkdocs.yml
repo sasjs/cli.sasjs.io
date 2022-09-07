@@ -11,6 +11,7 @@ nav:
       - sasjs add: add.md
       - sasjs auth: auth.md
       - sasjs build: build.md
+      - sasjs cbd: cbd.md
       - sasjs compile: compile.md
       - sasjs context: context.md
       - sasjs create: create.md
