@@ -15,13 +15,13 @@ The `sasjs cbd` command is actually shorthand for three seperate commands, namel
 
 If you are changing a source file, then it is typically necessary to run all three commands in order to get your project deployed, so `sasjs cbd` is a handy shortcut.
 
-Sometimes though you need to run separately - for example, say you would like to deploy to a production but WITHOUT the tests.
+Sometimes though you need to run separately - for example, say you would like to deploy to a production but without the tests.
 
 You could run `sasjs compile` first (which includes the tests), then `rm -rf sasjsbuild/tests`, then `sasjs build` (without tests) and finally `sasjs deploy`.
 
 Or perhaps you have run `sasjs cbd` but the process failed during deployment due to an authorisation issue.  You can simply run `sasjs auth` (to re-authorise) and then `sasjs deploy` (to avoid the recompilation and rebuild).
 
-The following diagram illustrates the end to end `cbd` process.
+The following diagram illustrates the end to end `sasjs cbd` process.
 
 ![](https://slides.sasjs.io/img/cbd.png)
 
