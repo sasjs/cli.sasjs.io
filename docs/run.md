@@ -26,7 +26,13 @@ Before using this command, you will need to [install](/installation) the SASJS C
 sasjs run <sourcecode> [additional arguments]
 ```
 
-`<sourcecode>` can be a local file path or a file on a web server.  
+`<sourcecode>` can be a local file path or a URL.
+
+Additional arguments may include:
+
+- `--log` (alias `-l`) - The full or relative (to the folder in which the command is invoked) path to the log file being created.  If ommitted, the log will be created in the current directory, with a timestamp.
+
+- `--target` (alias `-t`) - the target environment in which to deploy the services. If not specified, default target will be used, mentioned in `sasjsconfig.json`. The target can exist either in the local project configuration or in the global `.sasjsrc` file.
 
 ### Using Github Urls
 
@@ -37,12 +43,6 @@ As opposed to: [https://github.com/sasjs/core/blob/main/base/mf_getattrc.sas](ht
 If you click the links above you will see the difference.  Whenever `<sourcecode>` begins with `http://` or `https://` we simply fetch the contents from the URL - so the raw value should be SAS code and nothing else.
 
 You can find the raw version by clicking on the 'raw' button when viewing the program on github (next to the 'blame' button)
-
-
-
-Additional arguments may include:
-
-- `--target` (alias `-t`) - the target environment in which to deploy the services. If not specified, default target will be used, mentioned in `sasjsconfig.json`. The target can exist either in the local project configuration or in the global `.sasjsrc` file.
 
 
 ### Examples
@@ -69,7 +69,6 @@ sasjs run https://raw.githubusercontent.com/sasjs/template_jobs/master/includes/
 We plan to support the following:
 
 - keeping sessions alive
-- directing log output
 - extracting items from the session
 
 If there are items you are looking for, or have problems / ideas, do raise an [issue](https://github.com/sasjs/cli/issues).
