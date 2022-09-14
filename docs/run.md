@@ -32,6 +32,13 @@ Additional arguments may include:
 
 - `--log` (alias `-l`) - The full or relative (to the folder in which the command is invoked) path to the log file being created.  If ommitted, the log will be created in the current directory, with a timestamp.
 
+- `--source` (alias `-s`) - Path to a JSON file that can be used to inject macro variables into the session.  Useful for running existing programs in a "job like" fashion.  The JSON file should have the following structure:  `{"macroVars": {"varname": "value", "var2": "val2"}}`.  This will result in the following code being injected into the session:
+
+```sas
+%let varname=value;
+%let var2=val2;
+```
+
 - `--target` (alias `-t`) - the target environment in which to deploy the services. If not specified, default target will be used, mentioned in `sasjsconfig.json`. The target can exist either in the local project configuration or in the global `.sasjsrc` file.
 
 ### Using Github Urls
