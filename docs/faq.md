@@ -79,6 +79,8 @@ The ACCESS_TOKEN may then be used for API requests until it expires. On expriy, 
 
 Once the REFRESH_TOKEN expires, the CLIENT must be re-authenticated using SAS Logon.
 
+More information on token expiry is available [here](https://communities.sas.com/t5/SAS-Communities-Library/Tuning-the-authentication-timeout-for-long-running-jobs/ta-p/834148).
+
 The below diagram illustrates this flow, but not precisely - the diagram describes the flow for a deployed application, where the secret can be secured at backend.  In the SASjs CLI case the entire app is frontend (nothing to deploy at backend), and so the SECRET must also be kept on the frontend.
 
 <!-- source: https://lucid.app/lucidchart/e5ff1d2a-9d6a-4ae5-a990-a2a036d792f3/edit?page=O3h49Ot7ObFc# -->
