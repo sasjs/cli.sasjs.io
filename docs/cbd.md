@@ -5,9 +5,9 @@ description: Compile, build & deploy SAS projects from a local GIT repository to
 og_image: https://slides.sasjs.io/img/cbd.png
 ---
 
-# `sasjs cbd`
+# sasjs cbd
 
-The `sasjs cbd` command is actually shorthand for three seperate commands, namely:
+The `sasjs cbd` command is actually an alias for _three_ commands, namely:
 
 1. [sasjs compile](/compile)
 2. [sasjs build](/build)
