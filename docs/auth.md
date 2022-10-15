@@ -11,6 +11,7 @@ The `sasjs auth` command authenticates against a predefined SAS _target_.  The f
 * sasjs run
 * sasjs job execute
 * sasjs flow
+* sasjs fs
 * sasjs request
 * sasjs deploy
 * sasjs test

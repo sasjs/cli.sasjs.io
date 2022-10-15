@@ -22,7 +22,7 @@ Used to execute a job on the SAS server.
 ### Syntax
 
 ```
-sasjs job <action> <job path> [additional arguments]
+sasjs job execute <job path> [additional arguments]
 ```
 
 Additional arguments may include:
