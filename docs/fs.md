@@ -29,7 +29,7 @@ Additional arguments may include:
 
 - `--target` (alias `-t`) - the target SAS Environment which contains the filesystem.  Required attributes are `serverUrl` and `serverType`.  If not specified, default target will be used, mentioned in `sasjsconfig.json`. The target can exist either in the local project configuration or in the global `.sasjsrc` file.
 
-## sasjs fs compile
+## sasjs fs compile (coming soon)
 
 Used to generate a single SAS program that contains all the files (and subdirectories) of a given LOCAL folder.  This program can be executed in any flavour of SAS to generate the files on the SAS server - simply set `%let fsTarget=/your/target/folder;` and run the program.
 
@@ -90,3 +90,21 @@ run;
 filename _in64 clear;
 filename _out64 clear;
 ```
+
+## sasjs fs deploy (coming soon)
+
+Will compile AND deploy a local directory tree with one on a remote SAS server.
+
+### Syntax
+
+> `sasjs fs deploy <localFolder> <remoteFolder> -t targetName`
+
+
+## sasjs fs sync (coming soon)
+
+Will hash up a _remote_ SAS filesystem, compare with _local_ hashes, and deploy only the differences.  Much faster than a full `sasjs fs deploy`.
+
+
+### Syntax
+
+> `sasjs fs sync <localFolder> <remoteFolder> -t targetName`
