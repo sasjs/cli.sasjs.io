@@ -26,7 +26,7 @@ jobs:
         run: generate-schema-doc --config-file sasjsconfig-docs.yaml docs/sasjsconfig-schema.json docs/sasjsconfig.html
 
       - name: generate Schema in markdown
-        run: generate-schema-doc --config-file sasjsconfig-docs.yaml docs/sasjsconfig-schema.json docs/sasjsconfig.md
+        run: generate-schema-doc --config template_name=md docs/sasjsconfig-schema.json theme/sasjsconfig.md
 
       - name: Deploy docs
         uses: mhausenblas/mkdocs-deploy-gh-pages@1.16

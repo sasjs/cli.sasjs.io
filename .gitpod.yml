@@ -3,5 +3,5 @@ tasks:
 
 vscode:
   extensions:
-    - esbenp.prettier-vscode@5.9.2:/ZjVG4nabMGxTqOcyglnfQ==
+    - esbenp.prettier-vscode
     - sasjs.sasjs-for-vscode
