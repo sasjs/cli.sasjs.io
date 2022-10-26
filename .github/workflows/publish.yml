@@ -10,7 +10,7 @@ jobs:
     name: Deploy docs
     runs-on: ubuntu-latest
     steps:
-    
+
       - name: Checkout master
         uses: actions/checkout@v2
 
@@ -24,7 +24,10 @@ jobs:
 
       - name: generate Schema docs
         run: generate-schema-doc --config-file sasjsconfig-docs.yaml docs/sasjsconfig-schema.json docs/sasjsconfig.html
-        
+
+      - name: generate Schema in markdown
+        run: generate-schema-doc --config-file sasjsconfig-docs.yaml docs/sasjsconfig-schema.json docs/sasjsconfig.md
+
       - name: Deploy docs
         uses: mhausenblas/mkdocs-deploy-gh-pages@1.16
         env:
