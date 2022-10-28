@@ -43,7 +43,7 @@ Choose a name for your target. Nearly every SASjs command will take this as inpu
 
 ### Target Server URL
 
-This is the protocol / servername / port of your target, for instance: `https://sas.analytium:8080`
+This is the protocol / servername / port of your target, for instance: `https://sas.sasjs.com:8080`
 
 ### SAS Viya Specific
 

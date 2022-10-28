@@ -15,7 +15,7 @@ This means developers can spend less time on code reviews and formatting fixes, 
 
 ## Prerequisites
 
-Before using this command, you simply need to [install](/installation) the SASjsCLI.  It is NOT necessary to configure a sasjsconfig.json file - the `sasjs lint` command can be executed from anywhere - including from within a git hook.  
+Before using this command, you simply need to [install](/installation) the SASjsCLI.  It is NOT necessary to configure a sasjsconfig.json file - the `sasjs lint` command can be executed from anywhere - including from within a git hook.
 
 The lint settings are described [here](https://github.com/sasjs/lint/blob/main/README.md).
 
@@ -83,10 +83,3 @@ SASjs is an open source framework!  Contributions are welcomed.  If you would li
 
 Contact [Allan Bowe](https://www.linkedin.com/in/allanbowe/) for further details.
 
-## SAS 9 Health check
-
-The SASjs Linter (and formatter) is a great way to de-risk and accelerate the delivery of SAS code into production environments.  However, code is just one part of a SAS estate.  If you are running SAS 9, you may be interested to know what 'gremlins' are lurking in your system.  Maybe you are preparing for a migration.  Maybe you are preparing to hand over the control of your environment.  Either way, an assessment of your existing system would put minds at rest and pro-actively identify trouble spots.
-
-The SAS 9 Health Check is a 'plug & play' product by [SAS Apps](https://sasapps.io) partner, [Analytium](https://analytium.co.uk).  It uses the [SAS 9 REST API](https://sas9api.io) to run hundreds of metadata and system checks to identify common problems.  The checks are non-invasive, and because it is a client app, there is nothing to install on your SAS server.  We offer this assessment for a low fixed fee, and if you engage our (competitively priced) services to address the issues we highlight, then the assessment is free.
-
-Contact [Allan Bowe](https://www.linkedin.com/in/allanbowe/) for further details.
