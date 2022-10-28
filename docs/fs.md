@@ -13,6 +13,8 @@ Note that the regular [`sasjs compile`](/compile) command will create self-conta
 
 The `fs` command makes use of the APIs (Viya, SASjs Server) or an STP [runner](/runner) - no SSH or FTP accounts are necessary.
 
+![](https://cli.sasjs.io/img/sasjsfs.png)
+
 ## Prerequisites
 
 Before using this command, you will need to:
