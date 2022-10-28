@@ -2,13 +2,14 @@
 layout: article
 title: Managing Physical Directories with SASjs
 description: Documentation on how to use the SASjs CLI to synchronise and manage remote filesystems
+og_image: https://cli.sasjs.io/img/sasjsfs.png
 ---
 
 # sasjs fs
 
-The `sasjs fs` command allows users to manage a remote SAS (physical) filesystem from a local machine.  Not to be confused with the _logical_ SAS Folders (eg SAS Drive or Metadata BIP Tree).
+The `sasjs fs` command allows users to manage a remote SAS (physical) filesystem from a local machine.  Not to be confused with the _logical_ SAS Folders (eg SAS Drive or Metadata BIP Tree), managed using the `sasjs folder` [command](/folder).
 
-In general it is recommended to use [`sasjs compile`](/compile) to create self-contained Jobs / Services / Tests that do not require a filesystem, however in practical scenarios it is often useful to make filesystem adjustments.
+Note that the regular [`sasjs compile`](/compile) command will create self-contained Jobs / Services / Tests that _do not require a filesystem_.
 
 The `fs` command makes use of the APIs (Viya, SASjs Server) or an STP [runner](/runner) - no SSH or FTP accounts are necessary.
 
@@ -29,7 +30,7 @@ Additional arguments may include:
 
 - `--target` (alias `-t`) - the target SAS Environment which contains the filesystem.  Required attributes are `serverUrl` and `serverType`.  If not specified, default target will be used, mentioned in `sasjsconfig.json`. The target can exist either in the local project configuration or in the global `.sasjsrc` file.
 
-## sasjs fs compile 
+## sasjs fs compile
 
 Used to generate a single SAS program that contains all the files (and subdirectories) of a given LOCAL folder.  This program can be executed in any flavour of SAS to generate the files on the SAS server - simply set `%let fsTarget=/your/target/folder;` and run the program.
 
@@ -100,7 +101,7 @@ Will compile AND deploy a local directory tree with one on a remote SAS server.
 > `sasjs fs deploy <localFolder> <remoteFolder> -t targetName`
 
 
-## sasjs fs sync 
+## sasjs fs sync
 
 Will hash up a _remote_ SAS filesystem, compare with _local_ hashes, and deploy only the differences.  Much faster than a full `sasjs fs deploy`.  Will also create the folder on the remote server if it does not exist.
 
