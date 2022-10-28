@@ -6,7 +6,7 @@ description: Documentation on how to use the SASjs CLI to synchronise and manage
 
 # sasjs fs
 
-The `sasjs fs` command allows users to manage a remote SAS (physical) filesystem from a local machine.  Not to be confused with the logical SAS Folders (eg SAS Drive or Metadata BIP Tree).
+The `sasjs fs` command allows users to manage a remote SAS (physical) filesystem from a local machine.  Not to be confused with the _logical_ SAS Folders (eg SAS Drive or Metadata BIP Tree).
 
 In general it is recommended to use [`sasjs compile`](/compile) to create self-contained Jobs / Services / Tests that do not require a filesystem, however in practical scenarios it is often useful to make filesystem adjustments.
 
@@ -29,7 +29,7 @@ Additional arguments may include:
 
 - `--target` (alias `-t`) - the target SAS Environment which contains the filesystem.  Required attributes are `serverUrl` and `serverType`.  If not specified, default target will be used, mentioned in `sasjsconfig.json`. The target can exist either in the local project configuration or in the global `.sasjsrc` file.
 
-## sasjs fs compile (coming soon)
+## sasjs fs compile 
 
 Used to generate a single SAS program that contains all the files (and subdirectories) of a given LOCAL folder.  This program can be executed in any flavour of SAS to generate the files on the SAS server - simply set `%let fsTarget=/your/target/folder;` and run the program.
 
@@ -100,11 +100,25 @@ Will compile AND deploy a local directory tree with one on a remote SAS server.
 > `sasjs fs deploy <localFolder> <remoteFolder> -t targetName`
 
 
-## sasjs fs sync (coming soon)
+## sasjs fs sync 
 
-Will hash up a _remote_ SAS filesystem, compare with _local_ hashes, and deploy only the differences.  Much faster than a full `sasjs fs deploy`.
+Will hash up a _remote_ SAS filesystem, compare with _local_ hashes, and deploy only the differences.  Much faster than a full `sasjs fs deploy`.  Will also create the folder on the remote server if it does not exist.
+
+Here's a demo video:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/HjUpGGCpx_M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
 ### Syntax
 
 > `sasjs fs sync <localFolder> <remoteFolder> -t targetName`
+
+### Known Limitations
+
+The following issues exist with the current implementation - they do not affect the functionality (syncing local directory with remote) but we do plan to address them in a future release:
+
+* If `remoteFolder` path is relative, or contains a tilde (eg `./somedir` or `~/somedir`), the terminal response will incorrectly state that there were sync issues.  This is due to path expansion affecting the comparison.  In fact the files were deployed successfully.
+* If a file is deleted locally, it will not be deleted remotely.  This part has not been built yet.
+* If a file in a subdirectory is _renamed_ it will not be re-synced.  This is due to hash compares at folder level being based only on file content.  We will change the algorithm to include filenames when hashing folder content into a folder hash.
+
+
