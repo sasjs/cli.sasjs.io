@@ -12,6 +12,8 @@ SASjs projects are full of files with .sas extensions.  With the exception of te
 
 ## Primary Artefacts
 
+The three Primary Artefacts are Job, Service, and Test.  These artefacts are compiled, added to a build pack, and deployed to SAS.
+
 ### Job
 
 A SASjs Job is a .sas program found in a directory listed in the [jobFolders](https://cli.sasjs.io/sasjsconfig.html#jobConfig_jobFolders) array of the `jobConfig` object.  Where there are `jobFolders` at both target and root level in the sasjsconfig.json file, the `subdirectory/jobname.sas` files at target level will take precedence.
