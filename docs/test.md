@@ -51,6 +51,14 @@ run;
 
 Examples of tests for SAS Macros are available in the [SASjs/CORE library](https://github.com/sasjs/core/tree/main/tests).  There are also a series of [assertion macros](#assertion-macros) available.
 
+## Test Locations
+
+Tests will only be compiled if they exist in a folder listed in one of the following sasjsconfig arrays:
+
+* [macroFolders](https://cli.sasjs.io/sasjsconfig.html#macroFolders) 
+* [jobFolders](https://cli.sasjs.io/sasjsconfig.html#jobConfig_jobFolders)
+* [serviceFolders](https://cli.sasjs.io/sasjsconfig.html#serviceConfig_serviceFolders)
+
 
 ## Syntax
 
