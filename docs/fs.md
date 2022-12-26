@@ -9,9 +9,9 @@ og_image: https://cli.sasjs.io/img/sasjsfs.png
 
 The `sasjs fs` command allows users to manage a remote SAS (physical) filesystem from a local machine.  Not to be confused with the _logical_ SAS Folders (eg SAS Drive or Metadata BIP Tree), managed using the `sasjs folder` [command](/folder).
 
-Note that the regular [`sasjs compile`](/compile) command will create self-contained Jobs / Services / Tests that _do not require a filesystem_.
+This also contrasts wit the regular [`sasjs compile`](/compile) command, which creates self-contained Jobs / Services / Tests that _do not require a filesystem_.
 
-The `fs` command makes use of the APIs (Viya, SASjs Server) or an STP [runner](/runner) - no SSH or FTP accounts are necessary.
+The `sasjs fs` command makes use of the APIs (Viya, [SASjs Server](https://server.sasjs.io)) or a SAS EBI STP [runner](/runner) - no SSH or FTP accounts are necessary.
 
 ![](https://cli.sasjs.io/img/sasjsfs.png)
 
@@ -94,18 +94,10 @@ filename _in64 clear;
 filename _out64 clear;
 ```
 
-## sasjs fs deploy (coming soon)
-
-Will compile AND deploy a local directory tree with one on a remote SAS server.
-
-### Syntax
-
-> `sasjs fs deploy <localFolder> <remoteFolder> -t targetName`
-
 
 ## sasjs fs sync
 
-Will hash up a _remote_ SAS filesystem, compare with _local_ hashes, and deploy only the differences.  Much faster than a full `sasjs fs deploy`.  Will also create the folder on the remote server if it does not exist.
+Will hash up a _remote_ SAS filesystem, compare with _local_ hashes, and deploy only the differences. Will also create the folder(s) on the remote server if necessary (if the SAS user account has the requisite permissions).
 
 Here's a demo video:
 
@@ -115,6 +107,14 @@ Here's a demo video:
 ### Syntax
 
 > `sasjs fs sync <localFolder> <remoteFolder> -t targetName`
+
+Can also be used without the arguments, taking values from the sasjsconfig.json file, eg:
+
+> `sasjs fs sync`
+
+or
+
+> `sasjs fs sync -t myTarget`
 
 ### Known Limitations
 
