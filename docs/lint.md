@@ -64,14 +64,20 @@ Simply run the command and the exceptions are fixed!  The following rules are su
 
 The `sasjs lint` command will return a non-zero exit code if any exceptions are found.  A great way to prevent questionable code from ever hitting your GIT repo (let alone the production server) is to run the linter as part of a pre-commit hook.
 
-To configure this, there are two steps.  Firstly, run `npm install ghooks --save-dev`.  Then add the following to your `package.json` file:
+To configure this, there are two steps.  First, add the following to the "scripts" section of your `package.json` file: `"prepare": "git rev-parse --git-dir && git config core.hooksPath ./.git-hooks || true"`
+
+Then, add the following to your `.git-hooks/pre-commit` file (see [example](https://github.com/sasjs/core/blob/main/.git-hooks/pre-commit)):
 
 ```
-  "config": {
-    "ghooks": {
-      "pre-commit": "sasjs lint"
-    }
-  }
+#!/bin/bash
+
+# Ensure lint is passing
+LINT=`sasjs lint`
+if [[ "$LINT" != "✔ All matched files use @sasjs/lint code style!" ]]; then
+  echo "$LINT"
+  echo "To commit in spite of these warnings, use the -n parameter."
+  exit 1
+fi
 ```
 
 If you run `sasjs create SOMEPROJECT -t jobs` you can check out a sample project with this hook already configured.  Or, you can just [click here](https://gitpod.io/#https://github.com/sasjs/template_jobs).
