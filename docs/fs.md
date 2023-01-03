@@ -7,13 +7,16 @@ og_image: https://cli.sasjs.io/img/sasjsfs.png
 
 # sasjs fs
 
-The `sasjs fs` command allows users to manage a remote SAS (physical) filesystem from a local machine.  Not to be confused with the _logical_ SAS Folders (eg SAS Drive or Metadata BIP Tree), managed using the `sasjs folder` [command](/folder).
+The `sasjs fs` command allows users to manage a remote SAS (physical) filesystem from a local machine.  No SSH or FTP accounts are necessary - the tool makes use of the APIs (Viya, [SASjs Server](https://server.sasjs.io)) or a SAS EBI STP [runner](/runner).
 
-This also contrasts wit the regular [`sasjs compile`](/compile) command, which creates self-contained Jobs / Services / Tests that _do not require a filesystem_.
+Not to be confused with:
 
-The `sasjs fs` command makes use of the APIs (Viya, [SASjs Server](https://server.sasjs.io)) or a SAS EBI STP [runner](/runner) - no SSH or FTP accounts are necessary.
+* the _logical_ SAS Folders (eg SAS Drive or Metadata BIP Tree), managed using the `sasjs folder` [command](/folder).
+* the regular [`sasjs compile`](/compile) command, which creates self-contained Jobs / Services / Tests that _do not require a filesystem_.
 
 ![](https://cli.sasjs.io/img/sasjsfs.png)
+
+It is also possible to use this feature natively within the SASjs VSCode Extension - [https://github.com/sasjs/vscode-extension#directory-synchronisation](https://github.com/sasjs/vscode-extension#directory-synchronisation).
 
 ## Prerequisites
 
