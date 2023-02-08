@@ -51,6 +51,22 @@ In every SASjs project, content is split according to whether the [file type](/a
 * `tests/macros/`
 * `tests/services/`
 
+Below the above, the immediate child will be the last child of the `xxxFolder` - eg for a `serviceConfig` as follows:
+
+```json
+{
+  "serviceConfig":{
+    "serviceFolders":[
+      "/some/project/location"
+    ]
+  }
+}
+```
+
+A filepath of `/some/project/location/myservice.sas` will thus be compiled inside: `services/location/myservice.sas`.
+
+Nested directories are supported.  For a filepath of `/some/project/location/subfolder/subsubfolder/here.sas` the compile location would be: `services/location/subfolder/subsubfolder/here.sas`.
+
 ### 2. Macro Variables
 
 Macro variables are inserted according to the type of the compiled file, ie from one of the following objects:
