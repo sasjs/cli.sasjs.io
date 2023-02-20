@@ -103,7 +103,7 @@ sasjs test --ignoreFail
 Test configuration can be provided at root or target level. Configuration example:
 
 ```json
-testConfig: {
+"testConfig": {
   "initProgram": "sasjs/tests/testinit.sas",
   "termProgram": "sasjs/tests/testterm.sas",
   "macroVars": {
