@@ -7,7 +7,7 @@ og_image: https://cli.sasjs.io/img/targetBehaviour.svg
 
 # SASjs Configuration
 
-The SASjs Config file provides the settings for your SASjs project. It is divided between root-level (applies to all targets) and target level (specific to a deployment target) settings. Target level settings always override root settings. The SASjs config file can existing within a project (local file) or in your home directory (global). When running the SASjs CLI, a search is made within the current directory, then all parent directories, for a `./sasjs/sasjsconfig.json` file. If none is found, then the global config is used by default. If the local is found, but the specified target is not found within it, then the global target will be searched then also.
+The SASjs Config file provides the settings for your SASjs project. It is divided between root-level (applies to all targets) and target level (specific to a deployment target) settings. Target level settings always override root settings. The SASjs config file can existing within a project (local file) or in your home directory (global). When running the SASjs CLI, a search is made within the current directory, then all parent directories, for a `./sasjs/sasjsconfig.json` file. If none is found, then the user (home directory) config is used by default. If the project config is found, but the specified target is **not found within it**, then the user target will be searched also.
 
 ![sasjs config target behaviour](/img/targetBehaviour.svg)
 
