@@ -45,7 +45,7 @@ The command works as follows:
 sasjs lint
 ```
 
-### Usage
+### Usage
 
 Simply run the command and the list of exceptions (along with line / column numbers) is shown in the console, eg:
 
