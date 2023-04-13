@@ -15,9 +15,17 @@ This means developers can spend less time on code reviews and formatting fixes, 
 
 ## Prerequisites
 
-Before using this command, you simply need to [install](/installation) the SASjsCLI.  It is NOT necessary to configure a sasjsconfig.json file - the `sasjs lint` command can be executed from anywhere - including from within a git hook.
+Before using this command, you simply need to [install](/installation) the SASjsCLI.  It is NOT necessary to configure a `sasjs/sasjsconfig.json` file - the `sasjs lint` command can be executed from anywhere - including from within a git hook.  
 
-The lint settings are described [here](https://github.com/sasjs/lint/blob/main/README.md).
+The lint settings are described [here](https://github.com/sasjs/lint/blob/main/README.md).  The settings can be made in a project directory (`/your/project/.sasjslint`), with a fallback settings file in the home directory (`~/.sasjslint`).  If a setting is not defined in either the project or the home directory, then the default value is used.
+
+Linting is applied to all .sas files in all subfolders within the Project Directory.  The rule for determining the Project Directory is as follows:
+
+* If the current directory contains a .sasjslint file, then use the current directory
+* Else search all parent directories for a .sasjslint file (ignoring the home directory) and if found, use that
+* If no .sasjslint file is contained in any parent directories, then use the current directory
+
+For clarity, the Project Directory is printed to the console whenever running `sasjs lint`.
 
 ## Syntax
 
