@@ -26,6 +26,9 @@ Then a data lineage diagram will also be generated (linking data inputs to progr
 
 Given that the same headers used to generate the documentation are used to compile the Services and Jobs, the documentation will naturally stay up to date - so long as you are using [`sasjs compile`](https://cli.sasjs.io/compile/) to prepare them.
 
+!!! note
+    Jobs and Services are defined in the jobConfig.jobFolders and serviceConfig.serviceFolders arrays respectively.  Lineage is NOT generated for macros (macroFolders) or programs (programFolders).  
+
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Sb1DqTLgVyQ" title="SAS Data Lineage" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Prerequisites
@@ -79,3 +82,9 @@ For new projects using `sasjs create`, `sasjs doc init` is not required - the do
 ```
 sasjs doc init
 ```
+
+## Tips and Tricks
+
+By default, the project title and description are taken from the `package.json` file in the root of the project.  You can modify this behaviour (and many other doxygen defaults) by editing the `sasjs/doxy/doxyFile` file.
+
+The `docConfig` options are also documented [here](https://cli.sasjs.io/sasjsconfig.html#docConfig)
