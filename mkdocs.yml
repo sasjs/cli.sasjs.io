@@ -27,6 +27,7 @@ nav:
       - sasjs request: request.md
       - sasjs servicepack: servicepack.md
       - sasjs test: test.md
+      - sasjs snippets: snippets.md
   - FAQ: faq.md
 
 markdown_extensions:
