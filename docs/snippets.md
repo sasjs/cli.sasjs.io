@@ -18,7 +18,7 @@ sasjs snippets --outDirectory <folderPath> --target <targetName>
 - `--outDirectory` (alias `-o`) - optional output directory. If not present, the snippets will be saved to the `sasjsresults/sasjs-macro-snippets.json` file.
 - `--target` (alias `-t`) - optional SASjs target that should be used.
 
-## Generating a VS Code snippet - example
+## Generate Snippets File
 
 Consider the file name `my/macros/example.sas`:
 
@@ -75,7 +75,7 @@ Simply run the `sasjs snippets` command within the SASjs project, and the follow
 
 Notice that the doxygen `@brief` value has been placed at the beginning of the description, and `@param` has been put to the `Params` section. The file name has been used to populate the `prefix` and `body` of the VS Code snippet, and placeholders are also created in the `body`.
 
-## Import generated VS Code snippets to your VS Code
+## Import Snippets to VS Code
 
 In order to import the generated VS Code snippets file please follow these steps:
 
