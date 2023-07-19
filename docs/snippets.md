@@ -10,9 +10,11 @@ The `sasjs snippets` command generates VS Code snippets from any SAS macros cont
 Note - snippets are generated from the filename and doxygen header content, **not** the SAS code itself.  
 
 ## Syntax
-```
+
+```bash
 sasjs snippets --outDirectory <folderPath> --target <targetName>
 ```
+
 - `--outDirectory` (alias `-o`) - optional output directory. If not present, the snippets will be saved to the `sasjsresults/sasjs-macro-snippets.json` file.
 - `--target` (alias `-t`) - optional SASjs target that should be used.
 
