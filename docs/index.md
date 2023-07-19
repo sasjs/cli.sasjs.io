@@ -33,4 +33,5 @@ There is also a feature to let you deploy your frontend as a [streaming app](htt
 | [request](/request) | Execute SASjs web services from the commandline |
 | [run](/run) | Run arbitrary SAS code directly from the terminal (or commandline session) |
 | [servicepack](/servicepack) | The SASjs Service Pack is a collection of services and folder objects. The servicepack command lets you deploy them easily |
+| [snippets](/snippets) | Generate a snippets file for autocompletion of your SAS Macros in VS Code|
 | [test](/test) | Execute SAS unit tests and collect results in json/csv formats together with logs |
