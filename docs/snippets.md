@@ -21,6 +21,7 @@ sasjs snippets --outDirectory <folderPath> --target <targetName>
 ## Generating a VS Code snippet - example
 
 Consider the file name `my/macros/example.sas`:
+
 ```sas
 /**
   @file
@@ -45,6 +46,7 @@ Consider the file name `my/macros/example.sas`:
 ```
 
 Assuming a `sasjs/sasjsconfig.json` file as follows:
+
 ```json
 {
   "$schema": "https://cli.sasjs.io/sasjsconfig-schema.json",
@@ -53,11 +55,10 @@ Assuming a `sasjs/sasjsconfig.json` file as follows:
   ]
 }
 ```
+
 Simply run the `sasjs snippets` command within the SASjs project, and the following file will be written to `sasjsresults/sasjs-macro-snippets.json`:
 
-
-
-```
+```json
 {
   "example": {
     "prefix": "%example",
