@@ -9,7 +9,6 @@ og_image: https://sasjs.io/img/sasjs-cli-request.png?_=1
 
 The `sasjs request` command enables developers to call SASjs web services from the commandline.
 
-<script id="asciicast-MwkNw7DFXPoxVvUVXBwpsNUji" src="https://asciinema.org/a/MwkNw7DFXPoxVvUVXBwpsNUji.js" async></script>
 
 ## Prerequisites
 
