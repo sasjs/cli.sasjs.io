@@ -31,11 +31,11 @@ Additional arguments may include:
 - `--output` (alias `-o`) - path where output of the finished job execution will be saved.
 - `--source` (alieas `-s`) - Provide the path to an input JSON containing job variables, structured as follows:  `{"macroVars":{"varname":"value","var2":"val2"}}`
 - `--target` (alias `-t`) - the target environment in which to deploy the services. If not specified, default target will be used, mentioned in `sasjsconfig.json`. The target can exist either in the local project configuration or in the global `.sasjsrc` file.
+- `--verbose` (alias `-v`) - if present, CLI will log summary of every HTTP request/response.
 
 The following flags are only relevant for serverType VIYA:
 
 - `--ignoreWarnings` (alias `-i`) - If present and return status only is provided, CLI will return status '0', when the job state is warning.
-- `--returnStatusOnly` (alias `-r`) - If present and wait flag is provided, CLI will job status only (0 = success, 1 = warning, 2 = error).
 - `--wait` (alias `-w`) - if present, CLI will wait for job completion.
 
 ### Examples

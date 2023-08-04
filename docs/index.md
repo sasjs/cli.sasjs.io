@@ -13,6 +13,19 @@ Core functionalities:
 
 There is also a feature to let you deploy your frontend as a [streaming app](https://sasapps.io/sas-streamed-apps), bypassing the need to access the SAS Web Server.
 
+## Verbose Mode
+
+Verbose mode will log a summary of every HTTP request/response to the console that can help to troubleshoot potential issues.
+
+### Enable Verbose Mode
+
+To enable verbose mode, please add `VERBOSE=on` or `VERBOSE=ON` to the `*.env` file.
+Verbose mode can also be enabled for `sasjs job execute` only by adding `--verbose`(`-v`) flag.
+
+### Disenable Verbose Mode
+
+To disable verbose mode, please remove `VERBOSE` entry from `*.env` file.
+
 ## Commands
 
 | Command | Description |
