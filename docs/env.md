@@ -30,5 +30,7 @@ Verbose mode will log a summary of every HTTP request/response to the console - 
 
 `VERBOSE=ON` (case insensitive) will enable the debug mode. Everything else (eg `VERBOSE=OFF`) will disable it.  The option is disabled by default.
 
+Verbose mode will also be enabled if `LOG_LEVEL` is set to `Trace` (case insensitive) in the `*.env` file.
+
 !!! note
     Verbose mode can also be enabled for a single `sasjs job execute` command by adding the `--verbose`(`-v`) flag.
