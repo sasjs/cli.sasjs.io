@@ -34,3 +34,4 @@ Verbose mode will also be enabled if `LOG_LEVEL` is set to `Trace` (case insensi
 
 !!! note
     Verbose mode can also be enabled for a single `sasjs job execute` command by adding the `--verbose`(`-v`) flag.
+    To enable bleached verbose mode, add `bleached` after `-v` flag (eg `sasjs job execute -v bleached`).
