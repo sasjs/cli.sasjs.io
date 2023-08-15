@@ -28,7 +28,7 @@ Created when running `sasjs auth` against a Viya target.  The CLI will use this 
 
 Verbose mode will log a summary of every HTTP request/response to the console - this is helpful in troubleshooting edge cases and unusual server responses.
 
-`VERBOSE=ON` (case insensitive) will enable the debug mode. Everything else (eg `VERBOSE=OFF`) will disable it.  The option is disabled by default.
+`VERBOSE=ON` (case insensitive) will enable the debug mode. To remove extra colors from logged message, set `VERBOSE=BLEACHED` (case insensitive). Everything else (eg `VERBOSE=OFF`) will disable it.  The option is disabled by default.
 
 Verbose mode will also be enabled if `LOG_LEVEL` is set to `Trace` (case insensitive) in the `.env*` file.
 
