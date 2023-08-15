@@ -31,7 +31,7 @@ Additional arguments may include:
 - `--output` (alias `-o`) - path where output of the finished job execution will be saved.
 - `--source` (alieas `-s`) - Provide the path to an input JSON containing job variables, structured as follows:  `{"macroVars":{"varname":"value","var2":"val2"}}`
 - `--target` (alias `-t`) - the target environment in which to deploy the services. If not specified, default target will be used, mentioned in `sasjsconfig.json`. The target can exist either in the local project configuration or in the global `.sasjsrc` file.
-- `--verbose` (alias `-v`) - if present, CLI will log summary of every HTTP request/response.
+- `--verbose` (alias `-v`) - if present, CLI will log summary of every HTTP request/response. If set to 'bleached' (eg `-v bleached`), CLI will log summary of every HTTP response without extra colors.
 
 The following flags are only relevant for serverType VIYA:
 
