@@ -105,20 +105,4 @@ In order of priority, the `access_token` is taken from the`.env.targetname` file
 
 The `serverUrl` is the location of your Viya server. The `contextName` is the execution service on which your SAS code will execute. You can get a list of available contexts by running a `GET` to the following endpoint: `/compute/contexts`
 
-#### SAS 9
 
-Configuration as follows:
-
-```JSON
-  "tgtDeployVars": {
-      "serverName": "SASApp",
-      "repositoryName": "Foundation"
-  },
-  "serverUrl": "https://SASSERVER:PORT",
-```
-
-## Demo
-
-A 2 minute video demonstrating how an app can be built and a deployment script created is shown below.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/hUpBqExNec4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
