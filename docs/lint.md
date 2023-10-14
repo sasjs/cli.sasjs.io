@@ -15,7 +15,7 @@ This means developers can spend less time on code reviews and formatting fixes, 
 
 ## Prerequisites
 
-Before using this command, you simply need to [install](/installation) the SASjsCLI.  It is NOT necessary to configure a `sasjs/sasjsconfig.json` file - the `sasjs lint` command can be executed from anywhere - including from within a git hook.  
+Before using this command, you simply need to [install](/installation) the SASjs CLI.  It is NOT necessary to configure a `sasjs/sasjsconfig.json` file - the `sasjs lint` command can be executed from anywhere - including from within a git hook.  
 
 ## Configuration
 
@@ -90,12 +90,12 @@ if [[ "$LINT" != "✔ All matched files use @sasjs/lint code style!" ]]; then
 fi
 ```
 
-If you run `sasjs create SOMEPROJECT -t jobs` you can check out a sample project with this hook already configured.  Or, you can just [click here](https://gitpod.io/#https://github.com/sasjs/template_jobs).
+If you run `sasjs create SOMEPROJECT -t jobs` you can check out a sample project with this hook already configured.  Or, you can just [clone this repo](https://github.com/sasjs/template_jobs) and run `npm prepare`.
 
 
 ## Sponsorship & Contributions
 
-SASjs is an open source framework!  Contributions are welcomed.  If you would like to see a feature, because it would be useful in your project, but you don't have the requisite (typescript) experience - then how about you engage us on a short project and we build it for you?
+SASjs is an open source framework!  Contributions are welcomed.  If you would like to see a feature, because it would be useful in your project, but you don't have the requisite (TypeScript) experience - then how about you engage us to build it for you?
 
-Contact [Allan Bowe](https://www.linkedin.com/in/allanbowe/) for further details.
+Contact [Allan Bowe](https://www.linkedin.com/in/allanbowe/) for details.
 
