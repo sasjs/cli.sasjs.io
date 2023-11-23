@@ -92,6 +92,12 @@ fi
 
 If you run `sasjs create SOMEPROJECT -t jobs` you can check out a sample project with this hook already configured.  Or, you can just [clone this repo](https://github.com/sasjs/template_jobs) and run `npm prepare`.
 
+## Further Resources:
+
+* Using the linter on terminal: https://vid.4gl.io/w/vmJspCjcBoc5QtzwZkZRvi
+* Longer intro to sasjs lint: https://vid.4gl.io/w/nDtkQFV1E8rtaa2BuM6U5s
+* Source repo:  https://github.com/sasjs/lint
+
 
 ## Sponsorship & Contributions
 
