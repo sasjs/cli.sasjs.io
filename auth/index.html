@@ -1,0 +1,1030 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="How to authenticate against SAS (Viya, EBI or Base) using the SASjs CLI.  SAS9 requires the SASjs Runner to be deployed first.">
+      
+      
+        <link rel="canonical" href="https://cli.sasjs.io/auth/">
+      
+      
+      <link rel="shortcut icon" href="../img/logo/favicon/32.ico">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.0">
+    
+    
+      
+        <title>Authentication - SAS Dev Ops with SASjs CLI</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.bc7e593a.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab28b872.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#ffffff">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,700%7CUbuntu+Mono&display=fallback">
+        <style>body,input{font-family:"Open Sans",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Ubuntu Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../font-awesome.css">
+    
+    
+      
+        
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-109713029-8","sasjs.io"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}),document.addEventListener("DOMContentSwitch",function(){ga("send","pageview",document.location.pathname)})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="author" content="Allan Bowe">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:locale" content="en_UK" />
+<meta property="og:type" content="website">
+
+
+
+<meta name="image" property="og:image" content="/img/sasjs-cli-run.png">
+<meta property='og:image:alt' content='SASjs Logo' />
+<meta property='og:image:title' content='SASjs Logo' />
+
+
+
+<meta name="description" property="og:description" content="How to authenticate against SAS (Viya, EBI or Base) using the SASjs CLI.  SAS9 requires the SASjs Runner to be deployed first.">
+<meta property='name:description' content="How to authenticate against SAS (Viya, EBI or Base) using the SASjs CLI.  SAS9 requires the SASjs Runner to be deployed first." />
+<meta property="twitter:description" content="How to authenticate against SAS (Viya, EBI or Base) using the SASjs CLI.  SAS9 requires the SASjs Runner to be deployed first.">
+
+
+
+
+<meta property="og:title" content="Authentication">
+
+<meta property="og:author" content="https://www.linkedin.com/company/19117949">
+
+
+<meta property="og:url" content="https://cli.sasjs.io/auth/">
+<meta property="twitter:url" content="https://cli.sasjs.io/auth/">
+
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:title" content="The SASjs CLI">
+<meta property="twitter:image" content='/img/logo/favicon/32.png'>
+<meta property="twitter:image:alt" content="SASjs logo">
+<meta property='twitter:image:title' content='SASjs Logo' />
+<meta property="twitter:site" content='https://cli.sasjs.io'>
+<!-- meta name="twitter:creator" content="@_sasensei_" -->
+
+
+<meta property="article:author" content="https://www.linkedin.com/company/19117949" />
+<meta property="article:publisher" content="https://www.linkedin.com/company/19117949" />
+
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="white" data-md-color-accent="amber">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sasjs-auth" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://cli.sasjs.io" title="SAS Dev Ops with SASjs CLI" class="md-header-nav__button md-logo" aria-label="SAS Dev Ops with SASjs CLI">
+      
+  <img src="../img/logo/favicon/32.png" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            SAS Dev Ops with SASjs CLI
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Authentication
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/sasjs/cli.sasjs.io/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    cli.sasjs.io
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://cli.sasjs.io" title="SAS Dev Ops with SASjs CLI" class="md-nav__button md-logo" aria-label="SAS Dev Ops with SASjs CLI">
+      
+  <img src="../img/logo/favicon/32.png" alt="logo">
+
+    </a>
+    SAS Dev Ops with SASjs CLI
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/sasjs/cli.sasjs.io/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    cli.sasjs.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../installation/" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../artefacts/" class="md-nav__link">
+      Artefacts
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Configuration
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Configuration" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon"></span>
+        Configuration
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../sasjsconfig/" class="md-nav__link">
+      SASjs Config File
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../runner/" class="md-nav__link">
+      SASjs Runner
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../githooks/" class="md-nav__link">
+      Git Hooks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../env/" class="md-nav__link">
+      ENV File
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+    
+    <label class="md-nav__link" for="nav-5">
+      Commands
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Commands" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon"></span>
+        Commands
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../add/" class="md-nav__link">
+      sasjs add
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        sasjs auth
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
+      sasjs auth
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#syntax" class="md-nav__link">
+    Syntax
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scope" class="md-nav__link">
+    Scope
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#server-type" class="md-nav__link">
+    Server Type
+  </a>
+  
+    <nav class="md-nav" aria-label="Server Type">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sas-viya-authentication" class="md-nav__link">
+    SAS Viya Authentication
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sas-9-authentication" class="md-nav__link">
+    SAS 9 Authentication
+  </a>
+  
+    <nav class="md-nav" aria-label="SAS 9 Authentication">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sasjs-runner" class="md-nav__link">
+    SASjs Runner
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sasjs-server-authentication" class="md-nav__link">
+    SASJS Server Authentication
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tls-config" class="md-nav__link">
+    TLS Config
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../build/" class="md-nav__link">
+      sasjs build
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../cbd/" class="md-nav__link">
+      sasjs cbd
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../compile/" class="md-nav__link">
+      sasjs compile
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../context/" class="md-nav__link">
+      sasjs context
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../create/" class="md-nav__link">
+      sasjs create
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../deploy/" class="md-nav__link">
+      sasjs deploy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../doc/" class="md-nav__link">
+      sasjs doc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../flow/" class="md-nav__link">
+      sasjs flow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../folder/" class="md-nav__link">
+      sasjs folder
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../fs/" class="md-nav__link">
+      sasjs fs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../job/" class="md-nav__link">
+      sasjs job
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lint/" class="md-nav__link">
+      sasjs lint
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../run/" class="md-nav__link">
+      sasjs run
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../request/" class="md-nav__link">
+      sasjs request
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../servicepack/" class="md-nav__link">
+      sasjs servicepack
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../snippets/" class="md-nav__link">
+      sasjs snippets
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../test/" class="md-nav__link">
+      sasjs test
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../faq/" class="md-nav__link">
+      FAQ
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#syntax" class="md-nav__link">
+    Syntax
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scope" class="md-nav__link">
+    Scope
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#server-type" class="md-nav__link">
+    Server Type
+  </a>
+  
+    <nav class="md-nav" aria-label="Server Type">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sas-viya-authentication" class="md-nav__link">
+    SAS Viya Authentication
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sas-9-authentication" class="md-nav__link">
+    SAS 9 Authentication
+  </a>
+  
+    <nav class="md-nav" aria-label="SAS 9 Authentication">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sasjs-runner" class="md-nav__link">
+    SASjs Runner
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sasjs-server-authentication" class="md-nav__link">
+    SASJS Server Authentication
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tls-config" class="md-nav__link">
+    TLS Config
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/sasjs/cli.sasjs.io/edit/master/docs/auth.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="sasjs-auth">sasjs auth<a class="headerlink" href="#sasjs-auth" title="Permanent link">&para;</a></h1>
+<p>The <code>sasjs auth</code> command authenticates against a predefined SAS <em>target</em>.  The following commands make use of authentication:</p>
+<ul>
+<li>sasjs run</li>
+<li>sasjs job execute</li>
+<li>sasjs flow</li>
+<li>sasjs fs</li>
+<li>sasjs request</li>
+<li>sasjs deploy</li>
+<li>sasjs test</li>
+<li>sasjs folder</li>
+</ul>
+<p>The <code>sasjs auth</code> command is an alias for <code>sasjs add cred</code> - and it is integrated also into the <code>sasjs add</code> command (for adding a new target).</p>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<p>Before using this command, you will need to:</p>
+<ul>
+<li><a href="/installation">install</a> the SASjs CLI</li>
+<li><a href="/add">add</a> a deployment target.</li>
+</ul>
+<h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>sasjs auth [additional arguments]
+</code></pre></div>
+<p>Additional arguments may include:</p>
+<ul>
+<li><code>--target</code> (alias <code>-t</code>) - the target environment in which to deploy the services. If not specified, the <code>defaultTarget</code> will be used, as defined in <code>sasjsconfig.json</code>. The target can exist either in the local project configuration or in the global <code>.sasjsrc</code> file.</li>
+</ul>
+<h2 id="scope">Scope<a class="headerlink" href="#scope" title="Permanent link">&para;</a></h2>
+<p>Targets can have <em>local</em> (to a project) or <em>global</em> (to a user) <a href="/faq/#what-is-the-difference-between-local-and-global-targets">scope</a>.  For a local target, credentials are stored in a <code>.env.[target name]</code> file.  To have one file that covers all (local) targets you can rename this file to <code>.env</code>.</p>
+<p>All published SASjs projects (and templates) already include this file in the <code>.gitignore</code> file, if you are deploying to your own existing project you should do the same - to prevent accidentally pushing credentials to source control.</p>
+<p>For global targets the credentials are stored in the <code>.sasjsrc</code> file in the users home directory.</p>
+<h2 id="server-type">Server Type<a class="headerlink" href="#server-type" title="Permanent link">&para;</a></h2>
+<p>The authentication approach taken will depend on the <a href="/sasjsconfig.html#targets_items_anyOf_i0_serverType">serverType</a> (SASVIYA, SAS9 or SASJS).</p>
+<h3 id="sas-viya-authentication">SAS Viya Authentication<a class="headerlink" href="#sas-viya-authentication" title="Permanent link">&para;</a></h3>
+<p>To authenticate with SAS Viya you will need an administrator to provide a CLIENT and SECRET with <code>authorization_code</code> grant type (SASjs does not support password authentication grant type).  Further information on this topic is available <a href="/faq/#how-can-i-obtain-a-viya-client-and-secret">here</a>.</p>
+<p>After you provide the client / secret, you are given a link which you must click to obtain the authorisation code.  Be sure to select any scopes (such as openid) if presented.</p>
+<p>Once you provide the authorisation code, the ACESS_TOKEN and REFRESH_TOKEN are saved and used for further connection requests.  If the ACCESS_TOKEN expires (by default after 12 hours) the REFRESH_TOKEN will be used automatically to update, until it also expires (by default after 30 days).  At this point, you will need to run <code>sasjs auth</code> once again.</p>
+<h3 id="sas-9-authentication">SAS 9 Authentication<a class="headerlink" href="#sas-9-authentication" title="Permanent link">&para;</a></h3>
+<p>SAS 9 authentication requires a username and password.  We strongly recommend the use of SAS encoded passwords (method=sas003 and above), however - to enable this you will first need to make a server side change (to the <code>AllowEncodedPassword</code> property) as follows:</p>
+<ol>
+<li>Log on to SAS® Management Console.</li>
+<li>Select Application Management.</li>
+<li>Navigate to Configuration Manager ► Stored Process Web App</li>
+<li>Select Properties ► Advanced (tab).</li>
+<li>Click the Add button and define a new property:<ul>
+<li>Property Name: AllowEncodedPassword</li>
+<li>Property Value: true</li>
+</ul>
+</li>
+<li>Click OK</li>
+<li>Restart the Mid Tier Web Server</li>
+</ol>
+<p>If the password you provide is not sas-encoded, the command will still work, however you will get health warnings in the log.</p>
+<h4 id="sasjs-runner">SASjs Runner<a class="headerlink" href="#sasjs-runner" title="Permanent link">&para;</a></h4>
+<p>SAS 9 operations require the use of a "runner" for executing the SAS code generated by the CLI.  For security, this runner is always stored in your home directory in metadata.</p>
+<p>To deploy the runner:</p>
+<div class="highlight"><pre><span></span><code><span class="c">/* import the macros */</span>
+<span class="k">filename</span> mc url <span class="s">&quot;https://raw.githubusercontent.com/sasjs/core/main/all.sas&quot;</span>;
+<span class="nf">%inc</span> mc;
+<span class="c">/* create the runner */</span>
+<span class="k">filename</span> ft15f001 temp;
+parmcards4;
+<span class="nb">%macro</span> sasjs_runner();
+<span class="nb">%if</span> <span class="nf">%symexist</span>(_webin_fileref) <span class="nb">%then</span> <span class="nb">%do</span>;
+<span class="nf">%inc</span> <span class="nv">&amp;_webin_fileref</span>;
+<span class="nb">%end</span>;
+<span class="nb">%mend</span> sasjs_runner;
+<span class="nf">%sasjs_runner</span>()
+;;;;
+<span class="nf">%mm_createwebservice</span>(
+  path=/User Folders/<span class="nv">&amp;sysuserid</span>/My Folder/sasjs,
+  name=runner
+)
+</code></pre></div>
+<h3 id="sasjs-server-authentication">SASJS Server Authentication<a class="headerlink" href="#sasjs-server-authentication" title="Permanent link">&para;</a></h3>
+<p>Authentication on SASjs Server is only neccessary in <a href="https://server.sasjs.io/settings/#mode">server mode</a> (there is no authentication in desktop mode).  The default clientID is <code>clientID1</code>.</p>
+<h2 id="tls-config">TLS Config<a class="headerlink" href="#tls-config" title="Permanent link">&para;</a></h2>
+<p>If the server certificates are set up correctly (full chain) then no additional config is required.  However, sometimes when there are self-signed certificates, the following error may occur:</p>
+<blockquote>
+<p>unable to verify the first certificate</p>
+</blockquote>
+<p>It means that the webserver you are connecting to is misconfigured (certificate chain is incomplete) and did not include the intermediate certificate.</p>
+<p>To resolve, you may step through the following.  Replace "4gl.viyacloud.sas.com" with your own SAS server URL.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. grap the logcertfile</span>
+openssl s_client -connect 4gl.viyacloud.sas.com:443 -servername 4gl.viyacloud.sas.com <span class="p">|</span> tee logcertfile
+<span class="c1"># 2. obtain the issuer URI</span>
+openssl x509 -in logcertfile -noout -text <span class="p">|</span> grep -i <span class="s2">&quot;issuer&quot;</span>
+<span class="c1"># 3. Fetch CRT from URI above</span>
+<span class="c1"># for this case, using &quot;http://cacerts.digicert.com/DigiCertTLSRSASHA2562020CA1-1.crt&quot;</span>
+curl --output intermediate.crt http://cacerts.digicert.com/DigiCertTLSRSASHA2562020CA1-1.crt
+<span class="c1"># 4. extract intermediate.pem from the CRT file</span>
+openssl x509 -inform DER -in intermediate.crt -out intermediate.pem -text
+</code></pre></div>
+<p>If you don't have a well-formed URI in step 3 above, you might try step 4 directly on the CRT if you are able to find it.  One option is to look in the browser (click the padlock) or check the filesystem - here is a possible location on a Viya platform:  <code>/opt/sas/viya/config/etc/SASSecurityCertificateFramework/tls/certs</code>.</p>
+<p>Further information on this topic is available in this StackOverflow thread: <a href="https://stackoverflow.com/a/60020493">https://stackoverflow.com/a/60020493</a></p>
+<p>Once you have the PEM file it can be added to the <a href="https://cli.sasjs.io/sasjsconfig.html#httpsAgentOptions">httpsAgentOptions configuration</a> as follows:</p>
+<p><img alt="intermediate certificate" src="../img/intermediatepem.png" /></p>
+<p>For testing, if you are running internally and you trust the target server, you may consider the following property in your <code>sasjs/sasjsconfig.json</code> file to temporarily ignore the certificate errors.  However, this is not a recommended approach.</p>
+<div class="highlight"><pre><span></span><code>      <span class="s2">&quot;httpsAgentOptions&quot;</span><span class="err">:</span> <span class="p">{</span>
+        <span class="nt">&quot;allowInsecureRequests&quot;</span><span class="p">:</span> <span class="kc">true</span>
+      <span class="p">}</span>
+</code></pre></div>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../add/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                sasjs add
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../build/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                sasjs build
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            All rights reserved &copy;2021 Macro People Ltd.
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+<!-- Matomo -->
+<script>
+  var _paq = window._paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function () {
+    var u = "https://analytics.4gl.io/";
+    _paq.push(['setTrackerUrl', u + 'matomo.php']);
+    _paq.push(['setSiteId', '5']);
+    var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+    g.async = true; g.src = u + 'matomo.js'; s.parentNode.insertBefore(g, s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+
+  </body>
+</html>

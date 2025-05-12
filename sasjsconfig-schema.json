@@ -1,0 +1,6 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/sasjs/utils/main/src/types/sasjsconfig-schema.json",
+  "$ref": "https://raw.githubusercontent.com/sasjs/utils/main/src/types/sasjsconfig-schema.json",
+  "title": "SASjs Config File"
+}

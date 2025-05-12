@@ -1,0 +1,1013 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation on how to use the SASjs CLI to synchronise and manage remote filesystems">
+      
+      
+        <link rel="canonical" href="https://cli.sasjs.io/fs/">
+      
+      
+      <link rel="shortcut icon" href="../img/logo/favicon/32.ico">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.0">
+    
+    
+      
+        <title>Managing Physical Directories with SASjs - SAS Dev Ops with SASjs CLI</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.bc7e593a.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab28b872.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#ffffff">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,700%7CUbuntu+Mono&display=fallback">
+        <style>body,input{font-family:"Open Sans",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Ubuntu Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../font-awesome.css">
+    
+    
+      
+        
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-109713029-8","sasjs.io"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}),document.addEventListener("DOMContentSwitch",function(){ga("send","pageview",document.location.pathname)})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="author" content="Allan Bowe">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:locale" content="en_UK" />
+<meta property="og:type" content="website">
+
+
+
+<meta name="image" property="og:image" content="https://cli.sasjs.io/img/sasjsfs.png">
+<meta property='og:image:alt' content='SASjs Logo' />
+<meta property='og:image:title' content='SASjs Logo' />
+
+
+
+<meta name="description" property="og:description" content="Documentation on how to use the SASjs CLI to synchronise and manage remote filesystems">
+<meta property='name:description' content="Documentation on how to use the SASjs CLI to synchronise and manage remote filesystems" />
+<meta property="twitter:description" content="Documentation on how to use the SASjs CLI to synchronise and manage remote filesystems">
+
+
+
+
+<meta property="og:title" content="Managing Physical Directories with SASjs">
+
+<meta property="og:author" content="https://www.linkedin.com/company/19117949">
+
+
+<meta property="og:url" content="https://cli.sasjs.io/fs/">
+<meta property="twitter:url" content="https://cli.sasjs.io/fs/">
+
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:title" content="The SASjs CLI">
+<meta property="twitter:image" content='/img/logo/favicon/32.png'>
+<meta property="twitter:image:alt" content="SASjs logo">
+<meta property='twitter:image:title' content='SASjs Logo' />
+<meta property="twitter:site" content='https://cli.sasjs.io'>
+<!-- meta name="twitter:creator" content="@_sasensei_" -->
+
+
+<meta property="article:author" content="https://www.linkedin.com/company/19117949" />
+<meta property="article:publisher" content="https://www.linkedin.com/company/19117949" />
+
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="white" data-md-color-accent="amber">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sasjs-fs" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://cli.sasjs.io" title="SAS Dev Ops with SASjs CLI" class="md-header-nav__button md-logo" aria-label="SAS Dev Ops with SASjs CLI">
+      
+  <img src="../img/logo/favicon/32.png" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            SAS Dev Ops with SASjs CLI
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Managing Physical Directories with SASjs
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/sasjs/cli.sasjs.io/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    cli.sasjs.io
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://cli.sasjs.io" title="SAS Dev Ops with SASjs CLI" class="md-nav__button md-logo" aria-label="SAS Dev Ops with SASjs CLI">
+      
+  <img src="../img/logo/favicon/32.png" alt="logo">
+
+    </a>
+    SAS Dev Ops with SASjs CLI
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/sasjs/cli.sasjs.io/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    cli.sasjs.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../installation/" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../artefacts/" class="md-nav__link">
+      Artefacts
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Configuration
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Configuration" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon"></span>
+        Configuration
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../sasjsconfig/" class="md-nav__link">
+      SASjs Config File
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../runner/" class="md-nav__link">
+      SASjs Runner
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../githooks/" class="md-nav__link">
+      Git Hooks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../env/" class="md-nav__link">
+      ENV File
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+    
+    <label class="md-nav__link" for="nav-5">
+      Commands
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Commands" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon"></span>
+        Commands
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../add/" class="md-nav__link">
+      sasjs add
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../auth/" class="md-nav__link">
+      sasjs auth
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../build/" class="md-nav__link">
+      sasjs build
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../cbd/" class="md-nav__link">
+      sasjs cbd
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../compile/" class="md-nav__link">
+      sasjs compile
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../context/" class="md-nav__link">
+      sasjs context
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../create/" class="md-nav__link">
+      sasjs create
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../deploy/" class="md-nav__link">
+      sasjs deploy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../doc/" class="md-nav__link">
+      sasjs doc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../flow/" class="md-nav__link">
+      sasjs flow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../folder/" class="md-nav__link">
+      sasjs folder
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        sasjs fs
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
+      sasjs fs
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#syntax" class="md-nav__link">
+    Syntax
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sasjs-fs-compile" class="md-nav__link">
+    sasjs fs compile
+  </a>
+  
+    <nav class="md-nav" aria-label="sasjs fs compile">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syntax_1" class="md-nav__link">
+    Syntax
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sasjs-fs-sync" class="md-nav__link">
+    sasjs fs sync
+  </a>
+  
+    <nav class="md-nav" aria-label="sasjs fs sync">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syntax_2" class="md-nav__link">
+    Syntax
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#known-limitations" class="md-nav__link">
+    Known Limitations
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../job/" class="md-nav__link">
+      sasjs job
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lint/" class="md-nav__link">
+      sasjs lint
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../run/" class="md-nav__link">
+      sasjs run
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../request/" class="md-nav__link">
+      sasjs request
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../servicepack/" class="md-nav__link">
+      sasjs servicepack
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../snippets/" class="md-nav__link">
+      sasjs snippets
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../test/" class="md-nav__link">
+      sasjs test
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../faq/" class="md-nav__link">
+      FAQ
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#syntax" class="md-nav__link">
+    Syntax
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sasjs-fs-compile" class="md-nav__link">
+    sasjs fs compile
+  </a>
+  
+    <nav class="md-nav" aria-label="sasjs fs compile">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syntax_1" class="md-nav__link">
+    Syntax
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sasjs-fs-sync" class="md-nav__link">
+    sasjs fs sync
+  </a>
+  
+    <nav class="md-nav" aria-label="sasjs fs sync">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syntax_2" class="md-nav__link">
+    Syntax
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#known-limitations" class="md-nav__link">
+    Known Limitations
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/sasjs/cli.sasjs.io/edit/master/docs/fs.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="sasjs-fs">sasjs fs<a class="headerlink" href="#sasjs-fs" title="Permanent link">&para;</a></h1>
+<p>The <code>sasjs fs</code> command allows users to manage a remote SAS (physical) filesystem from a local machine.  No SSH or FTP accounts are necessary - the tool makes use of the APIs (Viya, <a href="https://server.sasjs.io">SASjs Server</a>) or a SAS EBI STP <a href="/runner">runner</a>.</p>
+<p>Not to be confused with:</p>
+<ul>
+<li>the <em>logical</em> SAS Folders (eg SAS Drive or Metadata BIP Tree), managed using the <code>sasjs folder</code> <a href="/folder">command</a>.</li>
+<li>the regular <a href="/compile"><code>sasjs compile</code></a> command, which creates self-contained Jobs / Services / Tests that <em>do not require a filesystem</em>.</li>
+</ul>
+<p><img alt="" src="https://cli.sasjs.io/img/sasjsfs.png" /></p>
+<p>It is also possible to use this feature natively within the SASjs VSCode Extension - <a href="https://github.com/sasjs/vscode-extension#directory-synchronisation">https://github.com/sasjs/vscode-extension#directory-synchronisation</a>.</p>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<p>Before using this command, you will need to:</p>
+<ul>
+<li><a href="/installation">install</a> the SASjs CLI</li>
+<li><a href="/add">add</a> a deployment target (for all operations except <code>sasjs fs compile</code>)</li>
+</ul>
+<h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>sasjs fs &lt;action&gt; [additional arguments]
+</code></pre></div>
+<p>Additional arguments may include:</p>
+<ul>
+<li><code>--target</code> (alias <code>-t</code>) - the target SAS Environment which contains the filesystem.  Required attributes are <code>serverUrl</code> and <code>serverType</code>.  If not specified, default target will be used, mentioned in <code>sasjsconfig.json</code>. The target can exist either in the local project configuration or in the global <code>.sasjsrc</code> file.</li>
+</ul>
+<h2 id="sasjs-fs-compile">sasjs fs compile<a class="headerlink" href="#sasjs-fs-compile" title="Permanent link">&para;</a></h2>
+<p>Used to generate a single SAS program that contains all the files (and subdirectories) of a given LOCAL folder.  This program can be executed in any flavour of SAS to generate the files on the SAS server - simply set <code>%let fsTarget=/your/target/folder;</code> and run the program.</p>
+<p>To preserve encoding and special characters, as well as to enable the compilation of binary content, all files are base64 encoded.</p>
+<h3 id="syntax_1">Syntax<a class="headerlink" href="#syntax_1" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><code>sasjs fs compile &lt;localFolder&gt; -o &lt;programPath&gt;</code></p>
+</blockquote>
+<h3 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>sasjs fs compile C:\my\project -o C:\temp\deployme.sas
+</code></pre></div>
+<p>An extract from such a compiled program is shown below:</p>
+<div class="highlight"><pre><span></span><code>%mf_mkdir(&amp;fsTarget)
+
+filename _in64 temp lrecl=99999999;
+data _null_;
+file _in64;
+ put &#39;ewogICIkc2NoZW1hIjogImh0dHBzOi8vY2xpLnNhc2pzLmlvL3Nhc2pzY29uZmlnLXNjaGVtYS5qc29uIiwKICAiZG9jQ29uZmlnIjogewogICAgImVuYWJsZUxpbmVhZ2UiOiB0cnVlLAogICAgImRveHlDb250ZW50IjogewogICAgICAicmVhZE1lIjogIi4uLy4uL1JFQURNRS5tZCIKICAg&#39;@;
+ put &#39;IH0sCiAgICAib3V0RGlyZWN0b3J5IjogInB1YmxpYy9kb2NzL3N0YXRpYy9zYXMiCiAgfSwKICAibWFjcm9Gb2xkZXJzIjogWyJzYXNqcy9tYWNyb3MiXSwKICAicHJvZ3JhbUZvbGRlcnMiOiBbXSwKICAic2VydmljZUNvbmZpZyI6IHsKICAgICJzZXJ2aWNlRm9sZGVycyI6IFsic2FzanMv&#39;@;
+ put &#39;c2VydmljZXMvY29tbW9uIiwgInNhc2pzL3NlcnZpY2VzL2ZpbGVzIl0sCiAgICAiaW5pdFByb2dyYW0iOiAic2FzanMvc2VydmljZXMvc2VydmljZWluaXQuc2FzIgogIH0sCiAgInN0cmVhbUNvbmZpZyI6IHsKICAgICJzdHJlYW1XZWIiOiB0cnVlLAogICAgInN0cmVhbVdlYkZvbGRlciI6&#39;@;
+ put &#39;ICJ3ZWJ2IiwKICAgICJ3ZWJTb3VyY2VQYXRoIjogImJ1aWxkIgogIH0sCiAgImRlZmF1bHRUYXJnZXQiOiAidml5YSIsCiAgInRhcmdldHMiOiBbCiAgICB7CiAgICAgICJuYW1lIjogInZpeWEiLAogICAgICAic2VydmVyVXJsIjogImh0dHBzOi8vYXp1cmV1c2UwMTEwNTkubXktdHJpYWxz&#39;@;
+ put &#39;LnNhcy5jb20vIiwKICAgICAgInNlcnZlclR5cGUiOiAiU0FTVklZQSIsCiAgICAgICJhcHBMb2MiOiAiL1B1YmxpYy9hcHAvcmVhY3Qtc2VlZC1hcHAiLAogICAgICAiY29udGV4dE5hbWUiOiAiU0FTIEpvYiBFeGVjdXRpb24gY29tcHV0ZSBjb250ZXh0IgogICAgfSwKICAgIHsKICAgICAg&#39;@;
+ put &#39;Im5hbWUiOiAic2VydmVyIiwKICAgICAgInNlcnZlclVybCI6ICJodHRwOi8vbG9jYWxob3N0OjUwMDAiLAogICAgICAic2VydmVyVHlwZSI6ICJTQVNKUyIsCiAgICAgICJodHRwc0FnZW50T3B0aW9ucyI6IHsKICAgICAgICAiYWxsb3dJbnNlY3VyZVJlcXVlc3RzIjogZmFsc2UKICAgICAg&#39;@;
+ put &#39;fSwKICAgICAgImFwcExvYyI6ICIvUHVibGljL2FwcC9yZWFjdC1zZWVkLWFwcCIsCiAgICAgICJkZXBsb3lDb25maWciOiB7CiAgICAgICAgImRlcGxveVNlcnZpY2VQYWNrIjogdHJ1ZSwKICAgICAgICAiZGVwbG95U2NyaXB0cyI6IFtdCiAgICAgIH0sCiAgICAgICJzdHJlYW1Db25maWci&#39;@;
+ put &#39;OiB7CiAgICAgICAgInN0cmVhbUxvZ28iOiAibG9nbzUxMi5wbmciLAogICAgICAgICJzdHJlYW1TZXJ2aWNlTmFtZSI6ICJSZWFjdCIsCiAgICAgICAgInN0cmVhbVdlYiI6IHRydWUsCiAgICAgICAgInN0cmVhbVdlYkZvbGRlciI6ICJ3ZWIiLAogICAgICAgICJ3ZWJTb3VyY2VQYXRoIjog&#39;@;
+ put &#39;ImJ1aWxkIiwKICAgICAgICAiYXNzZXRQYXRocyI6IFtdCiAgICAgIH0KICAgIH0sCiAgICB7CiAgICAgICJuYW1lIjogInNhczkiLAogICAgICAic2VydmVyVHlwZSI6ICJTQVM5IiwKICAgICAgImFwcExvYyI6ICIvU2hhcmVkIERhdGEvc2FzanMvcmVhY3Qtc2VlZC1hcHAiLAogICAgICAi&#39;@;
+ put &#39;ZGVwbG95Q29uZmlnIjogewogICAgICAgICJkZXBsb3lTZXJ2aWNlUGFjayI6IHRydWUKICAgICAgfSwKICAgICAgInNlcnZlck5hbWUiOiAiU0FTQXBwIiwKICAgICAgInJlcG9zaXRvcnlOYW1lIjogIkZvdW5kYXRpb24iCiAgICB9CiAgXQp9Cg==&#39;;
+run;
+
+filename _out64 &quot;&amp;fsTarget/sasjsconfig.json&quot;;
+
+/* convert from base64 */
+data _null_;
+  length filein 8 fileout 8;
+  filein = fopen(&quot;_in64&quot;,&#39;I&#39;,4,&#39;B&#39;);
+  fileout = fopen(&quot;_out64&quot;,&#39;O&#39;,3,&#39;B&#39;);
+  char= &#39;20&#39;x;
+  do while(fread(filein)=0);
+    length raw $4 ;
+    do i=1 to 4;
+      rc=fget(filein,char,1);
+      substr(raw,i,1)=char;
+    end;
+    rc = fput(fileout, input(raw,$base64X4.));
+    rc =fwrite(fileout);
+  end;
+  rc = fclose(filein);
+  rc = fclose(fileout);
+run;
+
+filename _in64 clear;
+filename _out64 clear;
+</code></pre></div>
+<h2 id="sasjs-fs-sync">sasjs fs sync<a class="headerlink" href="#sasjs-fs-sync" title="Permanent link">&para;</a></h2>
+<p>Will hash up a <em>remote</em> SAS filesystem, compare with <em>local</em> hashes, and deploy only the differences. Will also create the folder(s) on the remote server if necessary (if the SAS user account has the requisite permissions).</p>
+<p>Here's a demo video:</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/HjUpGGCpx_M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<h3 id="syntax_2">Syntax<a class="headerlink" href="#syntax_2" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><code>sasjs fs sync &lt;localFolder&gt; &lt;remoteFolder&gt; -t targetName</code></p>
+</blockquote>
+<p>Can also be used without the arguments, taking values from the sasjsconfig.json file, eg:</p>
+<blockquote>
+<p><code>sasjs fs sync</code></p>
+</blockquote>
+<p>or</p>
+<blockquote>
+<p><code>sasjs fs sync -t myTarget</code></p>
+</blockquote>
+<h3 id="known-limitations">Known Limitations<a class="headerlink" href="#known-limitations" title="Permanent link">&para;</a></h3>
+<p>The following issues exist with the current implementation - they do not affect the functionality (syncing local directory with remote) but we do plan to address them in a future release:</p>
+<ul>
+<li>If <code>remoteFolder</code> path is relative, or contains a tilde (eg <code>./somedir</code> or <code>~/somedir</code>), the terminal response will incorrectly state that there were sync issues.  This is due to path expansion affecting the comparison.  In fact the files were deployed successfully.</li>
+<li>If a file is deleted locally, it will not be deleted remotely.  This part has not been built yet.</li>
+<li>If a file in a subdirectory is <em>renamed</em> it will not be re-synced.  This is due to hash compares at folder level being based only on file content.  We will change the algorithm to include filenames when hashing folder content into a folder hash.</li>
+</ul>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../folder/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                sasjs folder
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../job/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                sasjs job
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            All rights reserved &copy;2021 Macro People Ltd.
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+<!-- Matomo -->
+<script>
+  var _paq = window._paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function () {
+    var u = "https://analytics.4gl.io/";
+    _paq.push(['setTrackerUrl', u + 'matomo.php']);
+    _paq.push(['setSiteId', '5']);
+    var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+    g.async = true; g.src = u + 'matomo.js'; s.parentNode.insertBefore(g, s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+
+  </body>
+</html>
