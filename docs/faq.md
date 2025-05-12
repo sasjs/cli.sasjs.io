@@ -24,17 +24,36 @@ A diagram of the rules for determining whether a local or remote target is used 
 
 ## How can I obtain a Viya client and secret?
 
-For setting up the client / secret you will need the services of an administrator (a user with admin rights on the physical machine) as they need to query a protected file (the consul token). The client must have the 'authorization_code' grant type.  If you are building a standalone application, it is also recommended to increase the expiry period of the refresh token to avoid manual re-authentications.  The default expiry is 24 hours for an access token, and 30 days for a refresh token. This can be extended up to around 60 or 70 years.  
+For setting up the client / secret you will need the services of an administrator (a user with admin rights on the physical machine) as they need to query a protected file (the consul token). The client must be created with the 'authorization_code' grant type.  If you are building a standalone application, it is also recommended to increase the expiry period of the refresh token to avoid manual re-authentications.  The default expiry is 24 hours for an access token, and 30 days for a refresh token. This can be extended up to around 60 or 70 years.  
 
-SASjs provides two tools to make this easy:
+## Viya 2025
 
-### Viya Token Web App
+The latest instructions are available [here](https://developer.sas.com/docs/rest-apis/getting-started/authentication).  Our recommended approach is to use the browser as follows:
+
+1.  Open the following url as an administrator:  `https://<sas-server>/SASLogon/oauth/authorize?client_id=sas.cli&response_type=token`
+2.  This will redirect to a new url.  Extract the `access_token` parameter and use it in the query below:
+
+
+```bash
+curl -k -X POST "https://viya-f0g8ht62vq.engage.sas.com/SASLogon/oauth/clients" \
+   -H "Content-Type: application/json" \
+   -H "Authorization: Bearer VERY_LONG_ACCESS_TOKEN_FROM_STEP_ABOVE" \
+   -d '{"client_id": "YOUR_CLIENT","client_secret": "YOUR_SECRET","scope": ["openid"],"authorized_grant_types": ["authorization_code","refresh_token"], "redirect_uri": "urn:ietf:wg:oauth:2.0:oob"}'
+```
+
+This will create a YOUR_CLIENT and YOUR_SECRET client/secret pair using the authorization_code grant type (suitable for SASjs).
+
+### Legacy Tools
+
+SASjs provides two legacy tools for older versions of Viya:
+
+**Viya Token Web App**
 
 This is a web app for configuring a client & secret in multiple ways.  Only valid for Viya 3.5
 
 To deploy, see here: [https://sasjs.io/apps/#viya-client-token-generator](https://sasjs.io/apps/#viya-client-token-generator)
 
-### Viya Token Macros
+**Viya Token Macros**
 
 You can also generate a client / secret (and access / refresh token) using SAS code, on both Viya 3.5 and Viya 4, using the [mv_registerclient](https://core.sasjs.io/mv__registerclient_8sas.html) macro.
 
