@@ -24,7 +24,7 @@ A diagram of the rules for determining whether a local or remote target is used 
 
 ## How can I obtain a Viya client and secret?
 
-For setting up the client / secret you will need the services of an administrator (a user with admin rights on the physical machine) as they need to query a protected file (the consul token). The client must be created with the 'authorization_code' grant type.  If you are building a standalone application, it is also recommended to increase the expiry period of the refresh token to avoid manual re-authentications.  The default expiry is 24 hours for an access token, and 30 days for a refresh token. This can be extended up to around 60 or 70 years.  
+For setting up the client / secret you will need the services of an administrator (a user with admin rights on the physical machine) as they need to query a protected file (the consul token). The client must be created with the 'authorization_code' grant type.  If you are building a standalone application, it is also recommended to increase the expiry period of the refresh token to avoid manual re-authentications.  The default expiry is 24 hours for an access token, and 30 days for a refresh token. This can be extended up to around 60 or 70 years.
 
 ## Viya 2025
 
@@ -38,7 +38,10 @@ The latest instructions are available [here](https://developer.sas.com/docs/rest
 curl -k -X POST "https://viya-f0g8ht62vq.engage.sas.com/SASLogon/oauth/clients" \
    -H "Content-Type: application/json" \
    -H "Authorization: Bearer VERY_LONG_ACCESS_TOKEN_FROM_STEP_ABOVE" \
-   -d '{"client_id": "YOUR_CLIENT","client_secret": "YOUR_SECRET","scope": ["openid"],"authorized_grant_types": ["authorization_code","refresh_token"], "redirect_uri": "urn:ietf:wg:oauth:2.0:oob"}'
+   -d '{"client_id": "YOUR_CLIENT","client_secret": "YOUR_SECRET",` \
+      `"scope": ["openid"],"autoapprove":true,` \
+      `"authorized_grant_types": ["authorization_code","refresh_token"],` \
+      ` "redirect_uri": "urn:ietf:wg:oauth:2.0:oob"}'
 ```
 
 This will create a YOUR_CLIENT and YOUR_SECRET client/secret pair using the authorization_code grant type (suitable for SASjs).
