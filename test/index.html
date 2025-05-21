@@ -1,0 +1,1130 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Create isolated unit tests for SAS Jobs, Services and Macros.  View coverage reports, export results in CSV, JSON, JUnit XML and LCOV.">
+      
+      
+        <link rel="canonical" href="https://cli.sasjs.io/test/">
+      
+      
+      <link rel="shortcut icon" href="../img/logo/favicon/32.ico">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.0">
+    
+    
+      
+        <title>Test - SAS Dev Ops with SASjs CLI</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.bc7e593a.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab28b872.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#ffffff">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,700%7CUbuntu+Mono&display=fallback">
+        <style>body,input{font-family:"Open Sans",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Ubuntu Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../font-awesome.css">
+    
+    
+      
+        
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-109713029-8","sasjs.io"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}),document.addEventListener("DOMContentSwitch",function(){ga("send","pageview",document.location.pathname)})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="author" content="Allan Bowe">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:locale" content="en_UK" />
+<meta property="og:type" content="website">
+
+
+
+<meta name="image" property="og:image" content="img/sasjs_test.png">
+<meta property='og:image:alt' content='SASjs Logo' />
+<meta property='og:image:title' content='SASjs Logo' />
+
+
+
+<meta name="description" property="og:description" content="Create isolated unit tests for SAS Jobs, Services and Macros.  View coverage reports, export results in CSV, JSON, JUnit XML and LCOV.">
+<meta property='name:description' content="Create isolated unit tests for SAS Jobs, Services and Macros.  View coverage reports, export results in CSV, JSON, JUnit XML and LCOV." />
+<meta property="twitter:description" content="Create isolated unit tests for SAS Jobs, Services and Macros.  View coverage reports, export results in CSV, JSON, JUnit XML and LCOV.">
+
+
+
+
+<meta property="og:title" content="sasjs test - for Jobs, Services and Macros">
+
+<meta property="og:author" content="https://www.linkedin.com/company/19117949">
+
+
+<meta property="og:url" content="https://cli.sasjs.io/test/">
+<meta property="twitter:url" content="https://cli.sasjs.io/test/">
+
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:title" content="The SASjs CLI">
+<meta property="twitter:image" content='/img/logo/favicon/32.png'>
+<meta property="twitter:image:alt" content="SASjs logo">
+<meta property='twitter:image:title' content='SASjs Logo' />
+<meta property="twitter:site" content='https://cli.sasjs.io'>
+<!-- meta name="twitter:creator" content="@_sasensei_" -->
+
+
+<meta property="article:author" content="https://www.linkedin.com/company/19117949" />
+<meta property="article:publisher" content="https://www.linkedin.com/company/19117949" />
+
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="white" data-md-color-accent="amber">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sasjs-test" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://cli.sasjs.io" title="SAS Dev Ops with SASjs CLI" class="md-header-nav__button md-logo" aria-label="SAS Dev Ops with SASjs CLI">
+      
+  <img src="../img/logo/favicon/32.png" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            SAS Dev Ops with SASjs CLI
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Test
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/sasjs/cli.sasjs.io/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    cli.sasjs.io
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://cli.sasjs.io" title="SAS Dev Ops with SASjs CLI" class="md-nav__button md-logo" aria-label="SAS Dev Ops with SASjs CLI">
+      
+  <img src="../img/logo/favicon/32.png" alt="logo">
+
+    </a>
+    SAS Dev Ops with SASjs CLI
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/sasjs/cli.sasjs.io/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    cli.sasjs.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../installation/" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../artefacts/" class="md-nav__link">
+      Artefacts
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Configuration
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Configuration" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon"></span>
+        Configuration
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../sasjsconfig/" class="md-nav__link">
+      SASjs Config File
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../runner/" class="md-nav__link">
+      SASjs Runner
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../githooks/" class="md-nav__link">
+      Git Hooks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../env/" class="md-nav__link">
+      ENV File
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+    
+    <label class="md-nav__link" for="nav-5">
+      Commands
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Commands" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon"></span>
+        Commands
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../add/" class="md-nav__link">
+      sasjs add
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../auth/" class="md-nav__link">
+      sasjs auth
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../build/" class="md-nav__link">
+      sasjs build
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../cbd/" class="md-nav__link">
+      sasjs cbd
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../compile/" class="md-nav__link">
+      sasjs compile
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../context/" class="md-nav__link">
+      sasjs context
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../create/" class="md-nav__link">
+      sasjs create
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../deploy/" class="md-nav__link">
+      sasjs deploy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../doc/" class="md-nav__link">
+      sasjs doc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../flow/" class="md-nav__link">
+      sasjs flow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../folder/" class="md-nav__link">
+      sasjs folder
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../fs/" class="md-nav__link">
+      sasjs fs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../job/" class="md-nav__link">
+      sasjs job
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lint/" class="md-nav__link">
+      sasjs lint
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../run/" class="md-nav__link">
+      sasjs run
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../request/" class="md-nav__link">
+      sasjs request
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../servicepack/" class="md-nav__link">
+      sasjs servicepack
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../snippets/" class="md-nav__link">
+      sasjs snippets
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        sasjs test
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
+      sasjs test
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#test-locations" class="md-nav__link">
+    Test Locations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#syntax" class="md-nav__link">
+    Syntax
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    Examples
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    Configuration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file-name-convention" class="md-nav__link">
+    File Name Convention
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coverage" class="md-nav__link">
+    Coverage
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-body" class="md-nav__link">
+    Test Body
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-flow" class="md-nav__link">
+    Test Flow
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-results" class="md-nav__link">
+    Test Results
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assertion-macros" class="md-nav__link">
+    Assertion Macros
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-sas-tests-with-sasjs" class="md-nav__link">
+    Running SAS Tests with SASjs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#demo-video" class="md-nav__link">
+    Demo Video
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../faq/" class="md-nav__link">
+      FAQ
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#test-locations" class="md-nav__link">
+    Test Locations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#syntax" class="md-nav__link">
+    Syntax
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    Examples
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    Configuration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file-name-convention" class="md-nav__link">
+    File Name Convention
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coverage" class="md-nav__link">
+    Coverage
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-body" class="md-nav__link">
+    Test Body
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-flow" class="md-nav__link">
+    Test Flow
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-results" class="md-nav__link">
+    Test Results
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assertion-macros" class="md-nav__link">
+    Assertion Macros
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-sas-tests-with-sasjs" class="md-nav__link">
+    Running SAS Tests with SASjs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#demo-video" class="md-nav__link">
+    Demo Video
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/sasjs/cli.sasjs.io/edit/master/docs/test.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="sasjs-test">sasjs test<a class="headerlink" href="#sasjs-test" title="Permanent link">&para;</a></h1>
+<p>The <code>sasjs test</code> command triggers deployed SAS unit tests for execution, and collects the test results in JSON, JUnit XML, LCOV and CSV formats.</p>
+<p>Results are also displayed in the console, as follows:</p>
+<p><img alt="sas tests" src="../img/sasjs_test.png" /></p>
+<p>Tests are compiled &amp; deployed as <em>services</em> (STPs in SAS 9, Jobs in Viya, Stored Programs in SASjs/server).  In this way, <strong>every test is completely isolated with it's own SAS session</strong>.</p>
+<p>To create a test, simply create a file with the same name as the Job / Service / Macro being tested, but with a <code>.test.sas</code> extension.  If you have multiple tests, you can add a <code>.test.[integer].sas</code> extension, and the tests will proceed according to the integers provided.</p>
+<p>You can send back one or more test results in a single program by creating a table called <code>work.test_results</code> with the following entries:</p>
+<table>
+<thead>
+<tr>
+<th>TEST_DESCRIPTION:$256</th>
+<th>TEST_RESULT:$4</th>
+<th>TEST_COMMENTS:$256</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Some description</td>
+<td>PASS</td>
+<td>Some run related comment</td>
+</tr>
+<tr>
+<td>Another test description</td>
+<td>FAIL</td>
+<td>some explanation of the failure</td>
+</tr>
+</tbody>
+</table>
+<p>The results should be sent back using the following macros (which could be in your <code>termProgram</code> entry):</p>
+<div class="highlight"><pre><span></span><code><span class="c">/* do some tests */</span>
+<span class="kr">data </span>some sas tests;
+  <span class="k">set</span> whatever you <span class="k">like</span><span class="kr">;</span>
+<span class="kr">run;</span>
+
+<span class="c">/* create a test_results table */</span>
+<span class="kr">data </span>work<span class="m">.</span>test_results;
+  <span class="c">/* mandatory values */</span>
+  test_description=<span class="s">&quot;some description&quot;</span>;
+  test_result=<span class="s">&quot;PASS&quot;</span>; <span class="c">/* or FAIL */</span>
+  <span class="c">/* optional value */</span>
+  test_comments=<span class="s">&quot;We did this </span><span class="nv">&amp;</span><span class="err"> </span><span class="nv">that</span><span class="s"> happened&quot;</span>;
+  <span class="k">output</span><span class="kr">;</span>
+<span class="kr">run;</span>
+
+<span class="c">/* send it back with the precompiled webout macro */</span>
+<span class="nf">%webout</span>(OPEN)
+<span class="nf">%webout</span>(OBJ, TEST_RESULTS)
+<span class="nf">%webout</span>(CLOSE)
+</code></pre></div>
+<p>Examples of tests for SAS Macros are available in the <a href="https://github.com/sasjs/core/tree/main/tests">SASjs/CORE library</a>.  There are also a series of <a href="#assertion-macros">assertion macros</a> available.</p>
+<h2 id="test-locations">Test Locations<a class="headerlink" href="#test-locations" title="Permanent link">&para;</a></h2>
+<p>Tests will only be compiled if they exist in a folder listed in one of the following sasjsconfig arrays:</p>
+<ul>
+<li><a href="https://cli.sasjs.io/sasjsconfig.html#macroFolders">macroFolders</a> </li>
+<li><a href="https://cli.sasjs.io/sasjsconfig.html#jobConfig_jobFolders">jobFolders</a></li>
+<li><a href="https://cli.sasjs.io/sasjsconfig.html#serviceConfig_serviceFolders">serviceFolders</a></li>
+</ul>
+<h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>sasjs <span class="nb">test</span> &lt;filteringString&gt; --source &lt;testFlowPath&gt; --outDirectory &lt;folderPath&gt; -t &lt;targetName&gt; --ignoreFail
+</code></pre></div>
+<ul>
+<li>Providing <code>filteringString</code> is optional. If not present, <em>all</em> tests mentioned in test flow file will be executed.</li>
+<li>Providing <code>source</code> flag is optional. If not present, CLI will use test flow located at <code>sasjsbuild/testFlow.json</code> (created when running <code>sasjs build</code>).</li>
+<li>Providing <code>outDirectory</code> flag is optional. If not present, CLI will save outputs into the temporary <code>sasjsresults</code> folder.</li>
+<li>Providing ignore fail (--ignoreFail or -iF) flag is optional. If present CLI will return exit code 0 even if tests are failing. Useful when the requirement is not to make CI Pipeline fail.`</li>
+</ul>
+<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
+<p>Execute all tests for the default target:</p>
+<div class="highlight"><pre><span></span><code>sasjs <span class="nb">test</span>
+</code></pre></div>
+<p>Execute all tests in the macros folder:</p>
+<div class="highlight"><pre><span></span><code>sasjs <span class="nb">test</span> /macros/
+</code></pre></div>
+<p>Execute all tests starting with "mv_" and save the output in 'myresults' folder</p>
+<div class="highlight"><pre><span></span><code>sasjs <span class="nb">test</span> mv_ --outDirectory /somedir/myresults
+</code></pre></div>
+<p>Prevent command fail (for example in CI Pipeline):</p>
+<div class="highlight"><pre><span></span><code>sasjs <span class="nb">test</span> --ignoreFail
+</code></pre></div>
+<h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
+<p>Test configuration can be provided at root or target level. Configuration example:</p>
+<div class="highlight"><pre><span></span><code><span class="s2">&quot;testConfig&quot;</span><span class="err">:</span> <span class="p">{</span>
+  <span class="nt">&quot;initProgram&quot;</span><span class="p">:</span> <span class="s2">&quot;sasjs/tests/testinit.sas&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;termProgram&quot;</span><span class="p">:</span> <span class="s2">&quot;sasjs/tests/testterm.sas&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;macroVars&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;testVar&quot;</span><span class="p">:</span> <span class="s2">&quot;testValue&quot;</span>
+  <span class="p">},</span>
+  <span class="nt">&quot;testSetUp&quot;</span><span class="p">:</span> <span class="s2">&quot;sasjs/tests/testsetup.sas&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;testTearDown&quot;</span><span class="p">:</span> <span class="s2">&quot;sasjs/tests/testteardown.sas&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li><code>testSetUp</code> will be executed prior to all tests</li>
+<li><code>testTearDown</code> will be executed after all tests have finished</li>
+<li><code>initProgram</code> is inserted at the start of every test</li>
+<li><code>termProgram</code> is inserted at the end of every test</li>
+<li><code>macroVars</code> are defined at the start of every test</li>
+</ul>
+<h2 id="file-name-convention">File Name Convention<a class="headerlink" href="#file-name-convention" title="Permanent link">&para;</a></h2>
+<p>Only files names that match following pattern will be considered as tests. Pattern:</p>
+<div class="highlight"><pre><span></span><code>[filename].test&lt;.integer&gt;.sas
+</code></pre></div>
+<p>Examples:</p>
+<div class="highlight"><pre><span></span><code>some_service.test.sas
+some_job.test.0.sas
+some_job.test.1.sas
+</code></pre></div>
+<ul>
+<li>Providing a test integer is optional, if provided, the tests will be executed accordingly to numerical order - eg <code>some_job.test.0.sas</code> first and <code>some_job.test.1.sas</code> second.</li>
+</ul>
+<h2 id="coverage">Coverage<a class="headerlink" href="#coverage" title="Permanent link">&para;</a></h2>
+<p>A SAS Service, Job or Macro is considered covered if there is a test file with the same <strong>filename</strong>, for example:</p>
+<div class="highlight"><pre><span></span><code>├── some_service.sas
+├── some_service.test.sas
+├── some_job.sas
+└── some_macro.test.sas
+</code></pre></div>
+<p>In the example above, <code>some_service</code> will be considered covered, <code>some_job</code> will be considered <strong>not</strong> covered and <code>some_macro.test</code> will be considered as a standalone test.</p>
+<p>Overall coverage is displayed, along with a group summary for Jobs, Services and Macros.</p>
+<p><img alt="sas test coverage" src="../img/coverage.png" /></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We are planning a more 'intelligent' coverage system that can detect whether a macro / servivce / job was executed as part of the test suite.  If this would be helpful to your project, do <a href="https://sasapps.io/contact-us">get in touch</a>!</p>
+</div>
+<h2 id="test-body">Test Body<a class="headerlink" href="#test-body" title="Permanent link">&para;</a></h2>
+<p>An example of a test that provides a result:</p>
+<div class="highlight"><pre><span></span><code><span class="kr">data </span>work<span class="m">.</span>test_results;
+  test_description=<span class="s">&quot;some description&quot;</span>;
+  test_result=<span class="s">&quot;PASS&quot;</span>;
+  test_comments=<span class="s">&quot;We did this </span><span class="nv">&amp;</span><span class="err"> </span><span class="nv">that</span><span class="s"> happened&quot;</span>;
+  <span class="k">output</span><span class="kr">;</span>
+<span class="kr">run;</span>
+<span class="nf">%webout</span>(OPEN)
+<span class="nf">%webout</span>(OBJ, test_results)
+<span class="nf">%webout</span>(CLOSE)
+</code></pre></div>
+<p>Providing the <code>test_results</code> table with a <code>test_result</code> variable is required, in order for the frontend to determine if the test is a <code>PASS</code> or <code>FAIL</code>.  The <code>webout()</code> macro definition will be deployed as precode in the compiled test, and is essentially a wrapper for <a href="https://core.sasjs.io/mm__webout_8sas.html">mm_webout.sas</a> or <a href="https://core.sasjs.io/mv__webout_8sas.html">mv_webout.sas</a> according the <a href="https://cli.sasjs.io/sasjsconfig.html#targets_items_anyOf_i0_serverType">serverType</a> of the <a href="https://cli.sasjs.io/faq/#what-is-the-difference-between-local-and-global-targets">target</a>.</p>
+<h2 id="test-flow">Test Flow<a class="headerlink" href="#test-flow" title="Permanent link">&para;</a></h2>
+<p>SAS unit tests will be executed one after another. Execution order is described in <code>sasjsbuild/testFlow.json</code> which is created as part of compilation process (<code>sasjs compile</code>).</p>
+<h2 id="test-results">Test Results<a class="headerlink" href="#test-results" title="Permanent link">&para;</a></h2>
+<p>By default test results will be saved in the <code>sasjsresults</code> folder. An example of <code>sasjsresults</code> folder structure:</p>
+<div class="highlight"><pre><span></span><code>├── logs
+│  ├── macros_some_macro.test.1.log
+│  ├── macros_some_macro.test.log
+│  ├── services_some_service.test.log
+│  ├── jobs_some_job.test.log
+│  ├── testteardown.log
+│  └── testsetup.log
+├── testResults.csv
+└── testResults.json
+└── testResults.xml
+</code></pre></div>
+<p>Results are saved in CSV, JSON and JUnit XML formats.</p>
+<h2 id="assertion-macros">Assertion Macros<a class="headerlink" href="#assertion-macros" title="Permanent link">&para;</a></h2>
+<p>A number of ready made assertion macros are available in the SASjs <a href="https://core.sasjs.io">Core</a> library:</p>
+<ul>
+<li><a href="https://core.sasjs.io/mp__assert_8sas.html">mp_assert</a> - generic assertion</li>
+<li><a href="https://core.sasjs.io/mp__assertcols_8sas.html">mp_assertcols</a> - Asserts the existence (or not) of certain columns</li>
+<li><a href="https://core.sasjs.io/mp__assertcolvals_8sas.html">mp_assertcolvals</a> - Asserts the existence (or not) of particular column values</li>
+<li><a href="https://core.sasjs.io/mp__assertdsobs_8sas.html">mp_assertdsobs</a> - Asserts the existence (or not) of dataset observations</li>
+<li><a href="https://core.sasjs.io/mp__assertscope_8sas.html">mp_assertscope</a> - Compares before/after to detect scope leakage in a SAS Macro</li>
+</ul>
+<h2 id="running-sas-tests-with-sasjs">Running SAS Tests with SASjs<a class="headerlink" href="#running-sas-tests-with-sasjs" title="Permanent link">&para;</a></h2>
+<p>In order to run tests, take the following steps:</p>
+<ol>
+<li>Provide tests configuration (testConfig) in the <code>sasjs/sasjsconfig.json</code> file</li>
+<li>Create test files in services, jobs or macro folders (with .test.sas extension).</li>
+<li>Execute <code>sasjs cbd -t &lt;targetName&gt;</code> to compile and deploy the tests as isolated SAS web services</li>
+<li>Execute <code>sasjs test -t &lt;targetName&gt;</code></li>
+<li>Visit the local <code>sasjsresults</code> folder to review results.</li>
+</ol>
+<p>To assist with debugging, all logs are captured, and we generate a URL so that you can easily click and re-run any particular individual test.</p>
+<p>CSV Format:</p>
+<p><img alt="sas test results CSV" src="../img/testresultscsv.png" /></p>
+<p>JSON Format:
+<img alt="sas test results JSON" src="../img/testresultsjson.png" /></p>
+<p>JUnit XML Format:
+<img alt="sas test results XML" src="../img/testresultsxml.png" /></p>
+<p>Console Output:
+<img alt="sas test results CONSOLE" src="../img/testresultsconsole.png" /></p>
+<h2 id="demo-video">Demo Video<a class="headerlink" href="#demo-video" title="Permanent link">&para;</a></h2>
+<p>A demonstration of <code>sasjs test</code> by the developer, <a href="https://www.linkedin.com/in/yuryshkoda">Yury Shkoda</a> was provided at a <a href="https://sasensei.com">Sasensei</a> SID event in July 2021 - available below.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/OF6yhbKJyJs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../snippets/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                sasjs snippets
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../faq/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                FAQ
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            All rights reserved &copy;2021 Macro People Ltd.
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+<!-- Matomo -->
+<script>
+  var _paq = window._paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function () {
+    var u = "https://analytics.4gl.io/";
+    _paq.push(['setTrackerUrl', u + 'matomo.php']);
+    _paq.push(['setSiteId', '5']);
+    var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+    g.async = true; g.src = u + 'matomo.js'; s.parentNode.insertBefore(g, s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+
+  </body>
+</html>

@@ -1,0 +1,943 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Common questions and answers when working with the SASjs Command Line Interface">
+      
+      
+        <link rel="canonical" href="https://cli.sasjs.io/faq/">
+      
+      
+      <link rel="shortcut icon" href="../img/logo/favicon/32.ico">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.0">
+    
+    
+      
+        <title>Frequently Asked SASjs Questions - SAS Dev Ops with SASjs CLI</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.bc7e593a.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab28b872.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#ffffff">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,700%7CUbuntu+Mono&display=fallback">
+        <style>body,input{font-family:"Open Sans",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Ubuntu Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../font-awesome.css">
+    
+    
+      
+        
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-109713029-8","sasjs.io"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}),document.addEventListener("DOMContentSwitch",function(){ga("send","pageview",document.location.pathname)})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="author" content="Allan Bowe">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:locale" content="en_UK" />
+<meta property="og:type" content="website">
+
+
+
+<meta name="image" property="og:image" content="/img/sasjs-cli-run.png">
+<meta property='og:image:alt' content='SASjs Logo' />
+<meta property='og:image:title' content='SASjs Logo' />
+
+
+
+<meta name="description" property="og:description" content="Common questions and answers when working with the SASjs Command Line Interface">
+<meta property='name:description' content="Common questions and answers when working with the SASjs Command Line Interface" />
+<meta property="twitter:description" content="Common questions and answers when working with the SASjs Command Line Interface">
+
+
+
+
+<meta property="og:title" content="Frequently Asked SASjs Questions">
+
+<meta property="og:author" content="https://www.linkedin.com/company/19117949">
+
+
+<meta property="og:url" content="https://cli.sasjs.io/faq/">
+<meta property="twitter:url" content="https://cli.sasjs.io/faq/">
+
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:title" content="The SASjs CLI">
+<meta property="twitter:image" content='/img/logo/favicon/32.png'>
+<meta property="twitter:image:alt" content="SASjs logo">
+<meta property='twitter:image:title' content='SASjs Logo' />
+<meta property="twitter:site" content='https://cli.sasjs.io'>
+<!-- meta name="twitter:creator" content="@_sasensei_" -->
+
+
+<meta property="article:author" content="https://www.linkedin.com/company/19117949" />
+<meta property="article:publisher" content="https://www.linkedin.com/company/19117949" />
+
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="white" data-md-color-accent="amber">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#faq" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://cli.sasjs.io" title="SAS Dev Ops with SASjs CLI" class="md-header-nav__button md-logo" aria-label="SAS Dev Ops with SASjs CLI">
+      
+  <img src="../img/logo/favicon/32.png" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            SAS Dev Ops with SASjs CLI
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Frequently Asked SASjs Questions
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/sasjs/cli.sasjs.io/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    cli.sasjs.io
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://cli.sasjs.io" title="SAS Dev Ops with SASjs CLI" class="md-nav__button md-logo" aria-label="SAS Dev Ops with SASjs CLI">
+      
+  <img src="../img/logo/favicon/32.png" alt="logo">
+
+    </a>
+    SAS Dev Ops with SASjs CLI
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/sasjs/cli.sasjs.io/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    cli.sasjs.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../installation/" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../artefacts/" class="md-nav__link">
+      Artefacts
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Configuration
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Configuration" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon"></span>
+        Configuration
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../sasjsconfig/" class="md-nav__link">
+      SASjs Config File
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../runner/" class="md-nav__link">
+      SASjs Runner
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../githooks/" class="md-nav__link">
+      Git Hooks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../env/" class="md-nav__link">
+      ENV File
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Commands
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Commands" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon"></span>
+        Commands
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../add/" class="md-nav__link">
+      sasjs add
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../auth/" class="md-nav__link">
+      sasjs auth
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../build/" class="md-nav__link">
+      sasjs build
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../cbd/" class="md-nav__link">
+      sasjs cbd
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../compile/" class="md-nav__link">
+      sasjs compile
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../context/" class="md-nav__link">
+      sasjs context
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../create/" class="md-nav__link">
+      sasjs create
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../deploy/" class="md-nav__link">
+      sasjs deploy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../doc/" class="md-nav__link">
+      sasjs doc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../flow/" class="md-nav__link">
+      sasjs flow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../folder/" class="md-nav__link">
+      sasjs folder
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../fs/" class="md-nav__link">
+      sasjs fs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../job/" class="md-nav__link">
+      sasjs job
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lint/" class="md-nav__link">
+      sasjs lint
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../run/" class="md-nav__link">
+      sasjs run
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../request/" class="md-nav__link">
+      sasjs request
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../servicepack/" class="md-nav__link">
+      sasjs servicepack
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../snippets/" class="md-nav__link">
+      sasjs snippets
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../test/" class="md-nav__link">
+      sasjs test
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        FAQ
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
+      FAQ
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-the-difference-between-local-and-global-targets" class="md-nav__link">
+    What is the difference between local and global targets?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-can-i-obtain-a-viya-client-and-secret" class="md-nav__link">
+    How can I obtain a Viya client and secret?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#viya-2025" class="md-nav__link">
+    Viya 2025
+  </a>
+  
+    <nav class="md-nav" aria-label="Viya 2025">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#legacy-tools" class="md-nav__link">
+    Legacy Tools
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-does-authentication-token-management-work-with-sas-viya" class="md-nav__link">
+    How Does Authentication / Token Management work with SAS Viya?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-does-sasjs-take-so-long-to-install" class="md-nav__link">
+    Why does SASjs take so long to install?
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-the-difference-between-local-and-global-targets" class="md-nav__link">
+    What is the difference between local and global targets?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-can-i-obtain-a-viya-client-and-secret" class="md-nav__link">
+    How can I obtain a Viya client and secret?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#viya-2025" class="md-nav__link">
+    Viya 2025
+  </a>
+  
+    <nav class="md-nav" aria-label="Viya 2025">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#legacy-tools" class="md-nav__link">
+    Legacy Tools
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-does-authentication-token-management-work-with-sas-viya" class="md-nav__link">
+    How Does Authentication / Token Management work with SAS Viya?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-does-sasjs-take-so-long-to-install" class="md-nav__link">
+    Why does SASjs take so long to install?
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/sasjs/cli.sasjs.io/edit/master/docs/faq.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="faq">FAQ<a class="headerlink" href="#faq" title="Permanent link">&para;</a></h1>
+<h2 id="what-is-the-difference-between-local-and-global-targets">What is the difference between local and global targets?<a class="headerlink" href="#what-is-the-difference-between-local-and-global-targets" title="Permanent link">&para;</a></h2>
+<p>A target is a set of attributes (eg <code>serverUrl</code>, <code>serverType</code>, <code>appLoc</code>) to which a project will be deployed, or some code executed. When running <strong>locally</strong>, inside a project (eg a GIT repository) these attributes are taken from the <code>sasjs/sasjsconfig.json</code> file.  By contrast, any (sensitive) authorisation attributes are retrieved from the <code>.env.$(targetname)</code> file, which is typically <code>.gitignore</code>'d for security.</p>
+<p>When running <strong>outside</strong> of a project, the attributes are taken from the global <code>~/.sasjsrc</code> file in the user home directory. In this case, authorisation details are also stored in the same file (authConfig).</p>
+<p>The <code>sasjs</code> command will "discover" if it is inside a local project by the presence of a <code>sasjs/sasjsconfig.json</code> file in the current, or any of the parent directories. If not found, then the <code>~/.sasjsrc</code> file will be searched instead.</p>
+<p>It's worth noting that there are typically MORE attributes defind in a <em>local</em> target, because this is where an application is normally configured in detail for deployment. The <em>global</em> target is more for general use, such as running arbitrary jobs or SAS code.</p>
+<p>A diagram of the rules for determining whether a local or remote target is used is available below.</p>
+<!-- source: https://excalidraw.com/#room=0e0163e79c486da603dd,OrjYfbOmt6OTc64ND7Qf6Q -->
+
+<p><img alt="SAS target" src="/img/targetBehaviour.svg" /></p>
+<h2 id="how-can-i-obtain-a-viya-client-and-secret">How can I obtain a Viya client and secret?<a class="headerlink" href="#how-can-i-obtain-a-viya-client-and-secret" title="Permanent link">&para;</a></h2>
+<p>For setting up the client / secret you will need the services of an administrator (a user with admin rights on the physical machine) as they need to query a protected file (the consul token). The client must be created with the 'authorization_code' grant type.  If you are building a standalone application, it is also recommended to increase the expiry period of the refresh token to avoid manual re-authentications.  The default expiry is 24 hours for an access token, and 30 days for a refresh token. This can be extended up to around 60 or 70 years.</p>
+<h2 id="viya-2025">Viya 2025<a class="headerlink" href="#viya-2025" title="Permanent link">&para;</a></h2>
+<p>The latest instructions are available <a href="https://developer.sas.com/docs/rest-apis/getting-started/authentication">here</a>.  Our recommended approach is to use the browser as follows:</p>
+<ol>
+<li>Open the following url as an administrator:  <code>https://&lt;sas-server&gt;/SASLogon/oauth/authorize?client_id=sas.cli&amp;response_type=token</code></li>
+<li>This will redirect to a new url.  Extract the <code>access_token</code> parameter and use it in the query below:</li>
+</ol>
+<div class="highlight"><pre><span></span><code>curl -k -X POST <span class="s2">&quot;https://viya-f0g8ht62vq.engage.sas.com/SASLogon/oauth/clients&quot;</span> <span class="se">\</span>
+   -H <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="se">\</span>
+   -H <span class="s2">&quot;Authorization: Bearer VERY_LONG_ACCESS_TOKEN_FROM_STEP_ABOVE&quot;</span> <span class="se">\</span>
+   -d <span class="s1">&#39;{&quot;client_id&quot;: &quot;YOUR_CLIENT&quot;,&quot;client_secret&quot;: &quot;YOUR_SECRET&quot;,` \</span>
+<span class="s1">      `&quot;scope&quot;: [&quot;openid&quot;],&quot;autoapprove&quot;:true,` \</span>
+<span class="s1">      `&quot;authorized_grant_types&quot;: [&quot;authorization_code&quot;,&quot;refresh_token&quot;],` \</span>
+<span class="s1">      ` &quot;redirect_uri&quot;: &quot;urn:ietf:wg:oauth:2.0:oob&quot;}&#39;</span>
+</code></pre></div>
+<p>This will create a YOUR_CLIENT and YOUR_SECRET client/secret pair using the authorization_code grant type (suitable for SASjs).</p>
+<h3 id="legacy-tools">Legacy Tools<a class="headerlink" href="#legacy-tools" title="Permanent link">&para;</a></h3>
+<p>SASjs provides two legacy tools for older versions of Viya:</p>
+<p><strong>Viya Token Web App</strong></p>
+<p>This is a web app for configuring a client &amp; secret in multiple ways.  Only valid for Viya 3.5</p>
+<p>To deploy, see here: <a href="https://sasjs.io/apps/#viya-client-token-generator">https://sasjs.io/apps/#viya-client-token-generator</a></p>
+<p><strong>Viya Token Macros</strong></p>
+<p>You can also generate a client / secret (and access / refresh token) using SAS code, on both Viya 3.5 and Viya 4, using the <a href="https://core.sasjs.io/mv__registerclient_8sas.html">mv_registerclient</a> macro.</p>
+<div class="highlight"><pre><span></span><code><span class="c">/* compile the macros from github */</span>
+<span class="k">filename</span> mc url <span class="s">&quot;https://raw.githubusercontent.com/sasjs/core/main/all.sas&quot;</span>;
+<span class="nf">%inc</span> mc;
+
+<span class="c">/* create random client and secret on Viya 3.5 (admin rights needed) */</span>
+<span class="nf">%mv_registerclient</span>(outds=clientinfo)
+
+<span class="c">/* create random client and secret on Viya 4 (consul token needed) */</span>
+<span class="nf">%mv_registerclient</span>(consul_token=12x34sa43v2345n234lasd)
+</code></pre></div>
+<p>This will generate a URL in the log, which must be followed to generate a refresh code (one time step). Paste that code into the macro below to generate an access / refresh token:</p>
+<div class="highlight"><pre><span></span><code>/* paste the code below */
+%mv_tokenauth(inds=clientinfo,code=xET8ETs74z)
+
+/* extract client, secret &amp; token to the log */
+data _null_;
+  merge mv_tokenauth clientinfo(drop=error);
+  put access_token=;
+  put refresh_token=;
+  put client_id=;
+  put client_secret=;
+run;
+</code></pre></div>
+<h2 id="how-does-authentication-token-management-work-with-sas-viya">How Does Authentication / Token Management work with SAS Viya?<a class="headerlink" href="#how-does-authentication-token-management-work-with-sas-viya" title="Permanent link">&para;</a></h2>
+<p>The CLI will only work with client / secret pairs that have the 'authorization_code' grant type. It does not support the username / password (Basic Authentication) approach, for security reasons.</p>
+<p>Once you provide the client (and secret) to SASjs, either as part of <code>sasjs add</code> or <code>sasjs auth</code> then a URL is presented to which the user must authenticate the CLIENT_ID.</p>
+<p>Once the user provides the authorisation code, the CLI uses the client / secret / auth code to obtain an ACCESS_TOKEN and REFRESH_TOKEN.</p>
+<p>The ACCESS_TOKEN may then be used for API requests until it expires. On expriy, or getting very close to it, the CLI will use the REFRESH_TOKEN to obtain a fresh ACCESS_TOKEN.</p>
+<p>Once the REFRESH_TOKEN expires, the CLIENT must be re-authenticated using SAS Logon.</p>
+<p>More information on token expiry is available <a href="https://communities.sas.com/t5/SAS-Communities-Library/Tuning-the-authentication-timeout-for-long-running-jobs/ta-p/834148">here</a>.</p>
+<p>The below diagram illustrates this flow, but not precisely - the diagram describes the flow for a deployed application, where the secret can be secured at backend.  In the SASjs CLI case the entire app is frontend (nothing to deploy at backend), and so the SECRET must also be kept on the frontend.</p>
+<!-- source: https://lucid.app/lucidchart/e5ff1d2a-9d6a-4ae5-a990-a2a036d792f3/edit?page=O3h49Ot7ObFc# -->
+
+<p><img alt="SAS token authentication" src="/img/tokenmanagementsasviya.svg" /></p>
+<h2 id="why-does-sasjs-take-so-long-to-install">Why does SASjs take so long to install?<a class="headerlink" href="#why-does-sasjs-take-so-long-to-install" title="Permanent link">&para;</a></h2>
+<p>Actually it doesn't, it should be fast.  If you're waiting a long time (eg, over a minute) then the following <em>may</em> be the root cause:</p>
+<ul>
+<li>Virus Scanner checking every file that is downloaded</li>
+<li>Proxy settings (in which case, update the PAC file)</li>
+<li>Slow network connection</li>
+</ul>
+<p>The PAC file issue will only apply in corporate settings.  The steps to address:</p>
+<ol>
+<li>Look in PAC for your proxy settings</li>
+<li>Set them in npm<ul>
+<li><code>npm config set proxy &lt;&lt;address&gt;&gt;</code>
+-<code>npm config set https-proxy &lt;&lt;address&gt;&gt;</code></li>
+</ul>
+</li>
+</ol>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../test/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                sasjs test
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            All rights reserved &copy;2021 Macro People Ltd.
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+<!-- Matomo -->
+<script>
+  var _paq = window._paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function () {
+    var u = "https://analytics.4gl.io/";
+    _paq.push(['setTrackerUrl', u + 'matomo.php']);
+    _paq.push(['setSiteId', '5']);
+    var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+    g.async = true; g.src = u + 'matomo.js'; s.parentNode.insertBefore(g, s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+
+  </body>
+</html>

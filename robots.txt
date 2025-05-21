@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://cli.sasjs.io/sitemap.xml
