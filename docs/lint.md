@@ -15,7 +15,7 @@ This means developers can spend less time on code reviews and formatting fixes, 
 
 ## Prerequisites
 
-Before using this command, you simply need to [install](/installation) the SASjs CLI.  It is NOT necessary to configure a `sasjs/sasjsconfig.json` file - the `sasjs lint` command can be executed from anywhere - including from within a git hook.  
+Before using this command, you simply need to [install](/installation) the SASjs CLI.  It is NOT necessary to configure a `sasjs/sasjsconfig.json` file - the `sasjs lint` command can be executed from anywhere - including from within a git hook.
 
 ## Configuration
 
@@ -97,6 +97,7 @@ If you run `sasjs create SOMEPROJECT -t jobs` you can check out a sample project
 * [Using the linter on terminal](https://vid.4gl.io/w/vmJspCjcBoc5QtzwZkZRvi)
 * [Longer intro to sasjs lint](https://vid.4gl.io/w/nDtkQFV1E8rtaa2BuM6U5s)
 * Source repo:  [https://github.com/sasjs/lint](https://github.com/sasjs/lint)
+* SAS blog post: [https://blogs.sas.com/content/subconsciousmusings/2025/05/30/automatic-linting-of-sas-code-with-sasjs/](https://blogs.sas.com/content/subconsciousmusings/2025/05/30/automatic-linting-of-sas-code-with-sasjs/)
 
 
 ## Sponsorship & Contributions
