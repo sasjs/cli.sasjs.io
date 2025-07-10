@@ -109,7 +109,7 @@ Here's a demo video:
 
 ### Syntax
 
-> `sasjs fs sync <localFolder> <remoteFolder> -t targetName`
+> `sasjs fs sync -l <localFolder> -r <remoteFolder> -t targetName`
 
 Can also be used without the arguments, taking values from the sasjsconfig.json file, eg:
 

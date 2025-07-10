@@ -28,6 +28,7 @@ There is also a feature to let you deploy your frontend as a [streaming app](htt
 | [doc](/doc) | Generate HTML documentation based on the Doxygen headers used in the SAS Macros, Programs, Jobs & Services. |
 | [flow](/flow) | SAS job scheduler that takes a JSON file as input, and submit all the jobs sequentially, logging the results to an output CSV file |
 | [folder](/folder) | Management of logical Viya folders |
+| [fs](/fs) | Synchronise local files with a remote (physical) directory |
 | [job](/job) | Manage & Execute SAS Jobs |
 | [lint](/lint) | Lint your SAS code and identify commmon problems / undesirable coding practices |
 | [request](/request) | Execute SASjs web services from the commandline |
