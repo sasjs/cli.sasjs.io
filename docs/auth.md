@@ -17,7 +17,10 @@ The `sasjs auth` command authenticates against a predefined SAS _target_.  The f
 * sasjs test
 * sasjs folder
 
-The `sasjs auth` command is an alias for `sasjs add cred` - and it is integrated also into the `sasjs add` command (for adding a new target).
+The `sasjs auth` command has two modes:
+
+* `sasjs auth` (no subcommand) - an alias for `sasjs add cred` (client/secret + authorisation code flow).  It is integrated also into the `sasjs add` command (for adding a new target).
+* `sasjs auth login` - authenticate with a regular **SAS username and password**, without needing a registered client/secret (Viya only).  See [below](#sasjs-auth-login).
 
 ## Prerequisites
 
@@ -50,11 +53,56 @@ For global targets the credentials are stored in the `.sasjsrc` file in the user
 The authentication approach taken will depend on the [serverType](/sasjsconfig.html#targets_items_anyOf_i0_serverType) (SASVIYA, SAS9 or SASJS).
 
 ### SAS Viya Authentication
-To authenticate with SAS Viya you will need an administrator to provide a CLIENT and SECRET with `authorization_code` grant type (SASjs does not support password authentication grant type).  Further information on this topic is available [here](/faq/#how-can-i-obtain-a-viya-client-and-secret).
+
+There are two ways to authenticate with SAS Viya:
+
+1. **`sasjs auth login`** (recommended for developers) - sign in with your regular SAS username and password.  No client/secret is needed.  See [sasjs auth login](#sasjs-auth-login) below.
+2. **`sasjs auth`** (client/secret) - an administrator provides a CLIENT and SECRET with the `authorization_code` grant type.  Further information on this topic is available [here](/faq/#how-can-i-obtain-a-viya-client-and-secret).  This remains the recommended approach for CI pipelines.
 
 After you provide the client / secret, you are given a link which you must click to obtain the authorisation code.  Be sure to select any scopes (such as openid) if presented.
 
 Once you provide the authorisation code, the ACESS_TOKEN and REFRESH_TOKEN are saved and used for further connection requests.  If the ACCESS_TOKEN expires (by default after 12 hours) the REFRESH_TOKEN will be used automatically to update, until it also expires (by default after 30 days).  At this point, you will need to run `sasjs auth` once again.
+
+### sasjs auth login
+
+!!! warning
+    This flow uses the OAuth2 *resource owner password credentials* grant, which is deprecated in OAuth 2.1.  It is intended for dev/demo estates where obtaining a registered client/secret is impractical.  For CI pipelines and production use, use a properly registered client/secret (via `sasjs auth`).
+
+The `sasjs auth login` command authenticates against a SAS Viya target using a regular SAS username and password - **no registered OAuth client/secret is required**.  It uses the password grant against the built-in, secret-less `sas.cli` public client (the same client used by the official SAS Viya CLI), and the resulting token carries full user impersonation.
+
+```
+sasjs auth login -t myviyatarget
+```
+
+You will be prompted for your username and password (the password input is masked).  The password is **never stored** - it is exchanged directly for an ACCESS_TOKEN / REFRESH_TOKEN pair, which is verified (against `/identities/users/@currentUser`) and then persisted exactly as with the regular `sasjs auth` flow (`.env.[target name]` for local targets, `~/.sasjsrc` for global targets).
+
+All authenticated commands (`sasjs run`, `sasjs deploy`, `sasjs job execute`, `sasjs flow`, `sasjs fs`, `sasjs request`, `sasjs context`, `sasjs folder`, `sasjs test`) then work exactly as before - no client/secret is ever needed.
+
+Example:
+
+```bash
+sasjs auth login -t viya
+# Username: viyademo01
+# Password: ********
+# Logged in as viyademo01 (Viya Demo User)
+
+sasjs run myprogram.sas -t viya
+```
+
+#### Token expiry and refresh
+
+The CLI automatically refreshes the access token using the stored refresh token (via the `sas.cli` client) whenever it is close to expiry - this works with or without a registered client/secret.  If the refresh token itself expires (or is rejected by the server), simply run `sasjs auth login -t <target>` again.
+
+!!! note
+    Some estates issue short-lived access tokens for the `sas.cli` client (e.g. 1 hour instead of the usual 12), which means a silent refresh happens on most invocations.  This is normal and harmless.  Note also that Viya refresh tokens are single-use and rotate on every refresh - the CLI persists the rotated pair automatically after every refresh, including refreshes that happen inside long-running job executions.
+
+#### Requirements and limitations
+
+* The password grant must be enabled for the `sas.cli` client (the default on Viya 3.5+ and Viya 4).
+* The account must be a local or LDAP account - `sasjs auth login` **cannot** work on SSO/SAML/MFA-only estates.
+* If the estate has self-signed certificates, configure [httpsAgentOptions](/sasjsconfig.html#httpsAgentOptions) as described in [TLS Config](#tls-config) below.
+* On a cold Viya estate, the first compute session creation can take several minutes (pod spin-up) - the first `sasjs run` may appear to hang.  Subsequent runs are fast.
+* If `sasjs run` fails with a 403 when creating a compute session, your account may not be authorised for the configured compute context - try setting `contextName: "SAS Studio compute context"` on the target.
 
 ### SAS 9 Authentication
 SAS 9 authentication requires a username and password.  We strongly recommend the use of SAS encoded passwords (method=sas003 and above), however - to enable this you will first need to make a server side change (to the `AllowEncodedPassword` property) as follows:
