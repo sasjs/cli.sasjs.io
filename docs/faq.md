@@ -24,6 +24,9 @@ A diagram of the rules for determining whether a local or remote target is used 
 
 ## How can I obtain a Viya client and secret?
 
+!!! tip
+    If you only need to run SAS code as yourself (e.g. `sasjs run`), you may not need a client/secret at all - try [`sasjs auth login`](/auth/#sasjs-auth-login) first, which works with a regular SAS username and password.
+
 For setting up the client / secret you will need the services of an administrator (a user with admin rights on the physical machine) as they need to query a protected file (the consul token). The client must be created with the 'authorization_code' grant type.  If you are building a standalone application, it is also recommended to increase the expiry period of the refresh token to avoid manual re-authentications.  The default expiry is 24 hours for an access token, and 30 days for a refresh token. This can be extended up to around 60 or 70 years.
 
 ## Viya 2025
@@ -91,7 +94,9 @@ run;
 
 ## How Does Authentication / Token Management work with SAS Viya?
 
-The CLI will only work with client / secret pairs that have the 'authorization_code' grant type. It does not support the username / password (Basic Authentication) approach, for security reasons.
+For the client / secret flow (`sasjs auth`), the CLI will only work with pairs that have the 'authorization_code' grant type.
+
+Alternatively, `sasjs auth login` authenticates with a SAS username and password (no client/secret required) using the password grant against the built-in `sas.cli` public client.  See [sasjs auth](/auth/#sasjs-auth-login).
 
 Once you provide the client (and secret) to SASjs, either as part of `sasjs add` or `sasjs auth` then a URL is presented to which the user must authenticate the CLIENT_ID.
 
