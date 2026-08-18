@@ -74,6 +74,11 @@ The `sasjs auth login` command authenticates against a SAS Viya target using a r
 sasjs auth login -t myviyatarget
 ```
 
+Additional arguments may include:
+
+- `--target` (alias `-t`) - the target environment to authenticate against.
+- `--insecure` (alias `-i`) - bypass TLS certificate validation, for Viya servers with self-signed certificates (mirrors the `--insecure` flag on `sasjs add cred`).  For a permanent fix, prefer the [httpsAgentOptions](/sasjsconfig.html#httpsAgentOptions) configuration described in [TLS Config](#tls-config).
+
 You will be prompted for your username and password (the password input is masked).  The password is **never stored** - it is exchanged directly for an ACCESS_TOKEN / REFRESH_TOKEN pair, which is verified (against `/identities/users/@currentUser`) and then persisted exactly as with the regular `sasjs auth` flow (`.env.[target name]` for local targets, `~/.sasjsrc` for global targets).
 
 All authenticated commands (`sasjs run`, `sasjs deploy`, `sasjs job execute`, `sasjs flow`, `sasjs fs`, `sasjs request`, `sasjs context`, `sasjs folder`, `sasjs test`) then work exactly as before - no client/secret is ever needed.
@@ -100,7 +105,7 @@ The CLI automatically refreshes the access token using the stored refresh token 
 
 * The password grant must be enabled for the `sas.cli` client (the default on Viya 3.5+ and Viya 4).
 * The account must be a local or LDAP account - `sasjs auth login` **cannot** work on SSO/SAML/MFA-only estates.
-* If the estate has self-signed certificates, configure [httpsAgentOptions](/sasjsconfig.html#httpsAgentOptions) as described in [TLS Config](#tls-config) below.
+* If the estate has self-signed certificates, use the `--insecure` flag or configure [httpsAgentOptions](/sasjsconfig.html#httpsAgentOptions) as described in [TLS Config](#tls-config) below.
 * On a cold Viya estate, the first compute session creation can take several minutes (pod spin-up) - the first `sasjs run` may appear to hang.  Subsequent runs are fast.
 * If `sasjs run` fails with a 403 when creating a compute session, your account may not be authorised for the configured compute context - try setting `contextName: "SAS Studio compute context"` on the target.
 

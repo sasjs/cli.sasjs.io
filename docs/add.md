@@ -49,6 +49,9 @@ This is the protocol / servername / port of your target, for instance: `https://
 
 If SAS Viya was chosen as the server type you will be prompted for a Viya Client ID and secret - this is used for connecting to the SAS Viya REST APIs. To autogenerate these you can also check out the [Viya Token Generator](https://sasjs.io/videos/#deploying-and-using-the-viya-token-generator).
 
+!!! tip
+    No client/secret?  If you just need to run code as yourself on a dev/demo estate, you can skip this entirely and use [`sasjs auth login`](/auth/#sasjs-auth-login) instead - it authenticates with your regular SAS username and password.
+
 Once you have entered the client and secret, you will be given a link - click this to generate the authorisation code (one time step).
 
 The token will eventually expire - the majority of commands will show the link again at this point to refresh the token. To avoid this happening in batch, be sure your token remains valid, eg by setting a longer expiry period.
