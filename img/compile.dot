@@ -1,0 +1,52 @@
+digraph G {
+  splines="FALSE";
+  rankdir="TD"
+
+  /* Entities */
+  subgraph cluster_0 {
+    style="filled";
+    color="lightgrey";
+    node [style=filled,color=white];
+    q1[label="1. Does `sasjsbuild` subfolder exist?", shape=cds];
+    q2[label="2. macroVars in sasjsconfig.json?",shape=cds ]
+    q3[label="3. Binary Files in source file?",shape=cds ]
+    q4[label="4. Macros in source file, \ninitProgram, or \ntermProgram?\nIs source file a \nService or Test?",shape=cds ]
+    q5[label="5. SAS Includes in source file?",shape=cds ]
+    q6[label="6. initProgram in sasjsconfig.json?",shape=cds ]
+    q7[label="7. Does source file contain \nanything other than a header?", shape=cds];
+    q8[label="8. termProgram in sasjsconfig.json?",shape=cds ]
+  }
+
+  a1[label="Create empty compiled file in \nsasjsbuild subdirectory", shape=box];
+  a2[label="Insert macro variables in compiled file", shape=box];
+  a3[label="Convert to base64 and \nwrap in put statements in compiled\n file with filerefs", shape=box];
+  a4[label="Construct macroFolders list and\n recursively compile all dependencies\nbefore adding to compiled file", shape=box];
+  a5[label="Wrap in put statements in compiled\n file with filerefs", shape=box];
+  a6[label="Insert initProgram (macros \nwere previously compiled &\ninserted in step 4)", shape=box];
+  a7[label="Insert source file code", shape=box];
+  a8[label="Insert termProgram (macros \nwere previously compiled &\ninserted in step 4)", shape=box];
+
+  /* Relationships */
+  q1 -> a1 [label="No"];
+  q1 -> q2 [label="Yes"];
+  a1 -> q2 ;
+  q2 -> a2 [label="Yes"];
+  q2 -> q3 [label="No"];
+  a2 -> q3 ;
+  q3 -> a3 [label="Yes"];
+  q3 -> q4 [label="No"];
+  a3 -> q4 ;
+  q4 -> a4 [label="Yes"];
+  q4 -> q5 [label="No"];
+  a4 -> q5 ;
+  q5 -> a5 [label="Yes"];
+  q5 -> q6 [label="No"];
+  a5 -> q6 ;
+  q6 -> q7 [label="No"];
+  q6 -> a6 [label="Yes"];
+  a6 -> q7
+  q7 -> a7 [label="Yes"];
+  q7 -> q8 [label="No"];
+  q8 -> a8 ;
+
+}
