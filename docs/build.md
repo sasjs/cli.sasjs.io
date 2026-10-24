@@ -78,6 +78,39 @@ The site is written to [`mockWebFolder`](https://cli.sasjs.io/sasjsconfig.html#s
 
 A service worker intercepts the calls the [SASjs Adapter](https://adapter.sasjs.io) makes, invokes the matching JavaScript service, and resolves `webout`, log and headers back to the app. Requests appear in the browser's network tab as they normally would. Anything the services write to the drive is kept in IndexedDB, so a page refresh does not lose it.
 
+### Downloads and file responses
+
+A service answers with a file the same way it does on a server: it declares the response in `_SASJS_WEBOUT_HEADERS` and writes the body where the wrapper points it. The generated wrapper already declares `fs`, so a service uses it rather than requiring it again.
+
+For text - a CSV, a DDL script, a log - assign `_webout` (or write the string to `weboutPath`):
+
+```js
+fs.writeFileSync(
+  _SASJS_WEBOUT_HEADERS,
+  'Content-type: text/csv\nContent-Disposition: attachment;filename="users.csv"'
+)
+_webout = 'id,name\n1,Ann\n'
+```
+
+For bytes - a zip, an xlsx, an image - write them to `weboutPath` as a `Buffer` or a `Uint8Array`:
+
+```js
+fs.writeFileSync(
+  _SASJS_WEBOUT_HEADERS,
+  'Content-type: application/zip\nContent-Disposition: attachment;filename="pack.zip"'
+)
+fs.writeFileSync(weboutPath, Buffer.from(zipBytes))
+```
+
+`Buffer.from()` takes bytes, an array of numbers, or a base64 string with `'base64'` as the second argument, so a library that produces base64 needs no extra step. This is the browser counterpart of `%mp_streamfile` - the same two writes - and the browser offers the response under the name in `Content-Disposition`.
+
+Only `Content-type` and `Content-Disposition` are applied; any other header is ignored, because a static host has no cache to control and no cookies to set. A request made with `_debug` returns the text frame instead, since its body is the webout wrapped in the log.
+
+Two things to keep in mind:
+
+* the drive holds text, so a file a service writes as bytes is stored as base64 and reads back as bytes - it is a demo drive, not a filesystem for large binaries
+* with no `Content-type` declared, a byte body is served as `application/octet-stream`
+
 ### Serving it
 
 Serve the folder over http or https. A service worker needs a secure context, which means `localhost` and `https` both work but `file://` does not:
