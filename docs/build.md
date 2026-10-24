@@ -49,3 +49,45 @@ Put this access token in a macro variable called `ACCESS_TOKEN` and it will be u
 
 !!! Warning
     Saving security tokens in project repositories, especially if they are committed to source control, is a security risk - as anyone with access can use them to make modifications on the Viya platform. If you are running Viya code in non Viya-enabled SAS environments using the ACCESS_TOKEN approach described above, be sure to use a secure mechanism such as `%inc` from a secure directory, or another approved mechanism for securing these kinds of variables. Avoid writing Access Tokens to log files.
+
+## Browser build (`streamConfig.mockWeb`)
+
+Setting [`mockWeb`](https://cli.sasjs.io/sasjsconfig.html#streamConfig_mockWeb) to `true` makes `sasjs build` produce a second artefact: a self-contained static site whose backend runs in the browser. The same services run, the same `webout` and header contract applies, and there is no server, no SAS and no network in the path. It exists so an app whose services are JavaScript can be hosted on any static host - a demo, a review environment, a shared link - and still behave like a deployed SASjs app.
+
+```json
+"streamConfig": {
+  "webSourcePath": "../client/dist",
+  "mockWeb": true,
+  "mockWebFolder": "sasjsbuild/mock"
+}
+```
+
+`mockWeb` is independent of [`streamWeb`](https://cli.sasjs.io/sasjsconfig.html#streamConfig_streamWeb): the same target still deploys for real, so one config serves both the browser build and a normal `sasjs deploy`.
+
+### Requirements
+
+* the target's services must be JavaScript - typically the `mocks` project pattern, where `sas/mocks/sasjs/services` holds `.js` programs. A target that compiles `.sas` cannot be built for the browser, and the build says so
+* [`webSourcePath`](https://cli.sasjs.io/sasjsconfig.html#streamConfig_webSourcePath) has to point at the built frontend (`dist` by default); the site is assembled from that folder
+* the target's `appLoc` has to match the appLoc the frontend was built with, because the services are resolved from it
+
+### What the build produces
+
+The site is written to [`mockWebFolder`](https://cli.sasjs.io/sasjsconfig.html#streamConfig_mockWebFolder), `sasjsbuild/mock` by default. It contains the frontend, the compiled JavaScript services, a service worker and the small runtime that executes them. The virtual drive the services see is seeded from the build output - the same files `sasjs compile` wrote, plus anything `syncFolder` copied in - so a service reading `services/...` or a data file finds it without any upload step.
+
+### How it runs
+
+A service worker intercepts the calls the [SASjs Adapter](https://adapter.sasjs.io) makes, invokes the matching JavaScript service, and resolves `webout`, log and headers back to the app. Requests appear in the browser's network tab as they normally would. Anything the services write to the drive is kept in IndexedDB, so a page refresh does not lose it.
+
+### Serving it
+
+Serve the folder over http or https. A service worker needs a secure context, which means `localhost` and `https` both work but `file://` does not:
+
+```bash
+cd sasjsbuild/mock
+python3 -m http.server 8099
+```
+
+Deploy it like any static site - it is just files.
+
+!!! warning
+    This is a single-user, no-authentication build. Services that read SAS tables, run macros or depend on SAS libraries cannot work in it, because there is no SAS engine in the browser. Treat it as a demo and review artefact, not as a replacement for a real deployment.
