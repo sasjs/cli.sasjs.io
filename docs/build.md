@@ -87,7 +87,34 @@ cd sasjsbuild/mock
 python3 -m http.server 8099
 ```
 
-Deploy it like any static site - it is just files.
+Deploy it like any static site - it is just files. The runtime files under `host/` are referenced with a `?v=<hash>` query that changes with their contents, so a redeploy replaces them for returning visitors too; upload `index.html` and `sw.js` together with everything else, since those two carry the reference.
+
+### Shipping the site with data
+
+Out of the box the drive a visitor gets holds the services and whatever else lives in the build folder - enough to run, but empty of the data those services would have produced. A snapshot changes that: if `mock-snapshot.json` sits in the build folder, the build copies it to `host/vfs-snapshot.json` and the runtime prefers it over the plain seed, so every visitor starts from the captured state instead of an empty drive.
+
+To capture one, open the site, use the app until the drive is in the state you want, and run this in the browser console:
+
+```js
+await window.SASjsMock.download()
+```
+
+That saves `mock-snapshot.json` to your downloads. Put it beside the compiled output - `sasjsbuild/mock-snapshot.json` for the default build folder - and build again. The build reports it in `host/mock-config.json` as `"snapshot": true`.
+
+```json
+{
+  "appLoc": "/Public/app/dc",
+  "snapshot": true,
+  "driveEntries": 97,
+  "jsPrograms": 43
+}
+```
+
+Three things worth knowing:
+
+* the snapshot is a plain JSON map of drive path to file contents, and a real app's drive runs to megabytes, so treat it as a build input you generate rather than something to keep in git
+* state stays tied to where it was captured. A licence issued for one origin does not decrypt on another, so capture the snapshot on the domain you deploy to - if an app asks to be licensed or configured after deployment while it worked locally, this is the usual reason
+* to start over, `window.SASjsMock.reset()` clears the persisted drive and reseeds from the shipped files; to ship the plain seed instead, remove `mock-snapshot.json` from the build folder and build again
 
 !!! warning
     This is a single-user, no-authentication build. Services that read SAS tables, run macros or depend on SAS libraries cannot work in it, because there is no SAS engine in the browser. Treat it as a demo and review artefact, not as a replacement for a real deployment.
