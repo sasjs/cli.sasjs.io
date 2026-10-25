@@ -106,7 +106,7 @@ fs.writeFileSync(weboutPath, Buffer.from(zipBytes))
 
 Only `Content-type` and `Content-Disposition` are applied; any other header is ignored, because a static host has no cache to control and no cookies to set. A request made with `_debug` returns the text frame instead, since its body is the webout wrapped in the log.
 
-Two things to keep in mind:
+Some things to keep in mind:
 
 * the drive holds text, so a file a service writes as bytes is stored as base64 and reads back as bytes - it is a demo drive, not a filesystem for large binaries
 * with no `Content-type` declared, a byte body is served as `application/octet-stream`
