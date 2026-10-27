@@ -105,26 +105,41 @@ More info [here](/artefacts/#primary-sasjs-file-types).
 
 ## Compile Single File
 
-When compiling a single file, it is necessary to state whether the file is being compiled is a job, service or test (as these file types are compiled with differing pre-code).
+A single file can be compiled without compiling the rest of the project. The file type decides the pre-code that wraps it, so either name the type - `job`, `service` or `test` - or pass `identify` and let the file decide: a `*.test.sas` name means a test, a path inside a `serviceConfig.serviceFolders` folder means a service, and a path inside a `jobConfig.jobFolders` folder means a job. `identify` needs those folders to be configured - service and job folders are read from the `serviceConfig` and `jobConfig` objects, not from top level keys.
 
 ### Syntax
 
 ```
-sasjs compile <action> [additional arguments]
+sasjs compile <action> --source <file> [additional arguments]
 ```
 
-`action` can be `job` or `service` or `test`
+`action` can be `job`, `service`, `test` or `identify`
 
 Additional arguments include:
 
-- `--source` (alias `-s`) - the path/name.ext of the individual source file to compile (as job or service). MANDATORY
+- `--source` (alias `-s`) - the path of the individual `.sas` file to compile. MANDATORY
 - `--target` (alias `-t`) - The target to use for obtaining the source folders of programs and macros. If it is not specified, the default target will be used, mentioned in `sasjsconfig.json`. The target can exist either in the local project configuration or in the global `.sasjsrc` file. OPTIONAL
-- `--output` (alias `-o`) - path where output of the compiled job or service will be saved. OPTIONAL. If not provided, the output will go to the root of the `sasjsbuild` folder if in a project (`sasjsbuild` would be emptied first), else in the current working directory.
+- `--output` (alias `-o`) - a folder to write the compiled file below instead of `sasjsbuild`. The structure described under [Destination](#destination) is kept, so the file lands at `<output>/jobs/...`, `<output>/services/...` or `<output>/tests/...`. OPTIONAL.
+
+### Destination
+
+The compiled file is written where a project compile would put the same file, so the two commands agree:
+
+* a **job** goes to `sasjsbuild/jobs/<folder name>/<path below that folder>/`
+* a **service** goes to `sasjsbuild/services/<folder name>/<path below that folder>/`
+* a **test** goes to `sasjsbuild/tests/services|jobs|macros/<folder name>/<path below that folder>/`, the sub folder following where the test lives
+
+The `<folder name>` is the last segment of the `serviceConfig.serviceFolders` or `jobConfig.jobFolders` entry that contains the file, and `<path below that folder>` is the file's own path under it. A file that sits outside every configured folder has no folder name to use and is written straight into the type folder.
+
+Nothing is deleted: the compiled file replaces its own previous copy, so other compiled artefacts in `sasjsbuild` stay where they are.
 
 ```bash
-sasjs compile job -s sasjs/jobs/admin/somejob -o compiledjobs/folder
-sasjs c service --source sasjs/services/common/appinit -t myTarget
+sasjs compile job --source sasjs/jobs/admin/somejob.sas
+sasjs compile identify --source sasjs/services/common/appinit.sas -t myTarget
+sasjs c service --source sasjs/services/common/appinit.sas -o compiledjobs/folder
 ```
+
+The output is a full compile of that one file - the same macro variables, inlined dependencies and init / term programs a project compile would give it.
 
 ## Compile Project
 
