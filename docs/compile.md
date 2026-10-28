@@ -171,6 +171,8 @@ The `serviceConfig`, `jobConfig` and `testConfig` objects may have attributes sp
 
 As part of compilation process test files will be compiled as well. Test configuration should be provided in `sasjs/sasjsconfig.json`. Test files should be placed in the same folders with services, jobs and macros. Compiled test files will result in `sasjsbuild/tests` folder under `services`,`jobs` or `macros` subfolder respectively. Tests execution flow will be described in `sasjsbuild/testFlow.json` file.
 
+Test coverage is written to `sasjsbuild/coverage.json` alongside `testFlow.json`. The file carries the totals the console prints under `summary`, and a `files` map keyed by project-relative path (`macros/myMacro.sas`, `services/common/myService.sas`) in which every compiled service, job and macro is marked `covered` or `not covered`, plus any standalone tests. A pipeline can therefore publish the figures or fail a build on a threshold without scraping the log. A project with no compiled tests writes no coverage file.
+
 The `testConfig` object allows two additional programs to be compiled (as tests):
 
 * `testSetUp` - executed once at the beginning of the test run
