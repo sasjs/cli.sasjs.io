@@ -151,7 +151,7 @@ A SAS Service, Job or Macro is considered covered if there is a test file with t
 
 In the example above, `some_service` will be considered covered, `some_job` will be considered **not** covered and `some_macro.test` will be considered as a standalone test.
 
-Overall coverage is displayed, along with a group summary for Jobs, Services and Macros.
+Overall coverage is displayed, along with a group summary for Jobs, Services and Macros. The table lists every service, job and macro the compile found, marked as covered or not covered, followed by any standalone tests - the same rows and the same keys that `sasjs compile` writes to `sasjsbuild/coverage.json`.
 
 ![sas test coverage](img/coverage.png)
 
