@@ -58,14 +58,16 @@ The single target is a placeholder. Put the real `serverUrl` and `appLoc` in it,
 
 ## Running it in a folder that is already a SASjs project
 
-If `sasjs/sasjsconfig.json` already exists, `sasjs init` aborts without touching anything and exits with a non-zero code:
+If `sasjs/sasjsconfig.json` already exists, `sasjs init` aborts without touching anything:
 
 ```
 $ sasjs init
 ERROR  This folder is already a SASjs project (sasjs/sasjsconfig.json exists). Aborting without making changes.
 $ echo $?
-2
+1
 ```
+
+Exit code `1` means the folder is already a SASjs project, which a script can test for; exit code `2` means the initialisation itself failed.
 
 The refusal is deliberate. A target carries user data - `serverUrl`, `appLoc`, `authInfo`, `contextName` - and an unconditional write would replace it with the placeholder above. `sasjs create` writes a `sasjsconfig.json` of its own, so `sasjs init` is not needed after `sasjs create`, and running it there aborts too.
 
