@@ -16,11 +16,39 @@ The `sasjs add` command provides a series of prompts used to define a SAS [targe
 ## Syntax
 
 ```
-sasjs add
+sasjs add [options]
 
-sasjs add cred -t targetname # add creds for existing target
+sasjs add cred -t targetname [options]   # add creds for an existing target
 ```
+
+| Option | Alias | Used by | Description |
+| --- | --- | --- | --- |
+| `--target` | `-t` | `sasjs add cred` | The existing target to add credentials for. |
+| `--insecure` | `-i` | both | Accept a TLS certificate that cannot be verified - see [Insecure connections](#insecure-connections). |
+
 ![](https://cli.sasjs.io/img/sasjsaddcred.png)
+
+## Insecure connections
+
+The CLI validates the TLS certificate of the server it connects to. On an estate with a self-signed certificate, or a chain that is missing its intermediate certificate, the connection fails with:
+
+```
+unable to verify the first certificate
+```
+
+Adding `--insecure` (alias `-i`) makes the requests of this command accept the certificate anyway:
+
+```bash
+sasjs add --insecure
+
+sasjs add cred -t myTarget --insecure
+```
+
+The flag applies to the requests the command makes - the token request, and the server-mode check on a SASjs Server target - and it is **not** written to `sasjsconfig.json`. Later commands still validate the certificate: to make the setting permanent, put it in the target's [httpsAgentOptions](/sasjsconfig.html#httpsAgentOptions), and preferably fix the certificate chain as described in [TLS Config](/auth/#tls-config).
+
+!!! note
+    `--insecure` is applied from CLI 6.4.6. Earlier releases accept the flag and ignore it.
+
 ## Description
 
 ### Local or Global Config

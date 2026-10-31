@@ -38,6 +38,7 @@ sasjs auth [additional arguments]
 Additional arguments may include:
 
 - `--target` (alias `-t`) - the target environment in which to deploy the services. If not specified, the `defaultTarget` will be used, as defined in `sasjsconfig.json`. The target can exist either in the local project configuration or in the global `.sasjsrc` file.
+- `--insecure` (alias `-i`) - accept a TLS certificate that cannot be verified while obtaining the token, for estates with self-signed certificates or an incomplete chain. It is not saved: later commands still validate the certificate unless the target sets [httpsAgentOptions](/sasjsconfig.html#httpsAgentOptions) - see [TLS Config](#tls-config). Applied from CLI 6.4.6; earlier releases accept the flag and ignore it.
 
 
 ## Scope
