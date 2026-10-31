@@ -1,9 +1,12 @@
-site_name: SAS Dev Ops with SASjs CLI
+site_name: SASjs CLI
 site_url: https://cli.sasjs.io
+site_description: Build, test, document and deploy SAS projects to Viya, SAS 9 EBI and SASjs Server.
+
 nav:
   - Home: index.md
-  - Installation: installation.md
-  - Artefacts: artefacts.md
+  - Getting started:
+      - Installation: installation.md
+      - Artefacts: artefacts.md
   - Configuration:
       - SASjs Config File: sasjsconfig.md
       - SASjs Runner: runner.md
@@ -38,42 +41,84 @@ nav:
 
 markdown_extensions:
   - admonition
-  - pymdownx.superfences
-  - codehilite
+  - attr_list
+  - md_in_html
   - meta
+  - tables
   - toc:
       permalink: true
+      title: On this page
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
 
-extra_css: ["font-awesome.css"]
+extra_css:
+  - font-awesome.css
+  - stylesheets/extra.css
 
 plugins:
   - search
 
 # Repository
-repo_name: "cli.sasjs.io"
-repo_url: "https://github.com/sasjs/cli.sasjs.io"
+repo_name: "sasjs/cli"
+repo_url: "https://github.com/sasjs/cli"
 
 theme:
   name: material
-  logo: "img/logo/favicon/32.png"
-  palette:
-    primary: "White"
-    accent: "Amber"
-  font:
-    text: "Open Sans"
-    code: "Ubuntu Mono"
-  favicon: img/logo/favicon/32.ico
   custom_dir: "theme"
-  highlightjs: true
-  hljs_languages:
-    - SAS
-    - JavaScript
-    - Bash
+  language: en
+  logo: img/logo/favicon/32.svg
+  favicon: img/logo/favicon/32.ico
+  font:
+    text: Inter
+    code: JetBrains Mono
+  # Black and yellow is the SASjs mark; the header stays black in both schemes
+  # and the content surface flips.
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: black
+      accent: amber
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: amber
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.tracking
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.tooltips
+    - toc.follow
   extra:
     social:
       - icon: fontawesome/brands/linkedin
         link: https://linkedin.com/company/sasjs
         name: SASjs on LinkedIn
+      - icon: fontawesome/brands/github
+        link: https://github.com/sasjs/cli
+        name: SASjs CLI on GitHub
+
 copyright: All rights reserved &copy;2026 Macro People Ltd.
 
 # A page link or an anchor that does not resolve is reported as a warning,

@@ -37,3 +37,26 @@ example, or a flag it is explaining the absence of. Those are listed in an HTML
 comment that the check reads and reports:
 
     <!-- cli-docs-ignore: --yes (npm init flag) -->
+
+Look and feel
+-------------
+
+docs/stylesheets/extra.css holds the design tokens and the component tweaks;
+mkdocs.yml holds the palette (light/dark with a toggle), the fonts (Inter,
+JetBrains Mono) and the layout features. Both schemes are stated per scheme
+attribute; Material sets that attribute on <html> and <body>, and its palette
+rules have the same specificity, so anything that must hold carries the element
+qualifier (html[...] / body[...]) and, for the header background, !important.
+
+Writing style
+-------------
+
+The site is written for someone who is mid-task:
+
+  - Present tense, second person. "Running the command applies the fixes", not
+    "simply run the command and the fixes are applied!".
+  - No exclamation marks, no marketing adjectives, no "we are excited".
+  - Command names and flags in backticks, exactly as the CLI spells them.
+  - Sentence case for headings; one idea per paragraph; tables for options.
+  - Every claim about behaviour is worth a check against the published CLI. If
+    the CLI is wrong, fix the CLI (or file it) rather than documenting around it.

@@ -1,34 +1,57 @@
+---
+layout: article
+title: Installation
+description: Install the SASjs CLI with npm, on any OS, and check which version you are running.
+---
+
 # Installation
 
-The SASjs CLI is available on [Node Package Manager](https://www.npmjs.com/). To make NPM available to your terminal, it is first necessary to install NodeJS. The NodeJS installation will vary depending on your OS, as detailed below.
+The SASjs CLI is an npm package, so Node comes first. Both take a few minutes.
 
-## 1. NodeJS
+## 1. Node
 
-### Windows
+=== "Windows"
 
-If you only care about using the SASjs CLI then simply download NodeJS directly from the homepage:  [https://nodejs.org/en](https://nodejs.org/en/).  We recommend you do NOT install chocolatey (leave the checkbox unchecked), unless you have a specific need for it.
+    Download the current LTS release from [nodejs.org](https://nodejs.org/en/) and run the installer. Leave the
+    "tools for native modules" checkbox clear - nothing here needs a compiler.
 
-If you're a power user looking to play with different versions of NodeJS **and** you have admin rights on your machine, then NVM-Windows would be the better choice - available here: [https://github.com/coreybutler/nvm-windows#installation--upgrades](https://github.com/coreybutler/nvm-windows#installation--upgrades)
+    If you work across several Node versions and have admin rights, [nvm-windows](https://github.com/coreybutler/nvm-windows#installation--upgrades)
+    is the tidier option.
 
-### Mac / Linux
-We recommend using [NVM](https://github.com/nvm-sh/nvm) instead of [Node](https://nodejs.org/en/) directly, as this does not require root permissions.
+=== "macOS / Linux"
 
-```Bash
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
-source ~/.bashrc
-nvm install --lts
+    [nvm](https://github.com/nvm-sh/nvm) installs Node without root:
+
+    ```bash
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
+    source ~/.bashrc
+    nvm install --lts
+    ```
+
+Node 22 or newer is supported.
+
+## 2. The CLI
+
+```bash
+npm i -g @sasjs/cli
 ```
 
-## 2. SASjs CLI
-The CLI can now be installed using Node Package Manager (npm) as follows:
+Then check it:
 
-```Bash
-npm i -g @sasjs/cli
+```bash
+sasjs --version
+```
+
+```
+You are using SASjs CLI v6.4.7
 ```
 
 ## Upgrades
 
-Simply run `npm i -g @sasjs/cli@latest` to get the latest package.
+```bash
+npm i -g @sasjs/cli@latest
+```
 
-Note - this approach is [not reliable](https://github.com/npm/cli/issues/1884) if you are using NPM v6.  We recommend that you use the latest version of NPM, for security reasons.  To update NPM, run:  `npm i -g npm@latest`
+`npm` 6 has [a long-standing bug](https://github.com/npm/cli/issues/1884) that makes global upgrades unreliable. Use a current npm (`npm i -g npm@latest`) or, on Node 22 and later, the bundled one.
 
+If a command does not behave as this site describes, run `sasjs version` first: an older CLI is the usual reason.
