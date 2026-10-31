@@ -41,7 +41,7 @@ Additional arguments may include:
 
 - `--target` (alias `-t`) - the target environment in which to deploy the services. If not specified, default target will be used, mentioned in `sasjsconfig.json`. The target can exist either in the local project configuration or in the global `.sasjsrc` file.
 
-- `--compile` (alias `-c`) - optional argument that is used to compile the program prior to execution. Useful for including dependent macros and includes. More info [here](https://cli.sasjs.io/compile).
+- `--compile` (alias `-c`) - optional argument that is used to compile the program prior to execution. Useful for including dependent macros and includes. See [`sasjs compile`](/compile).
 
 ### Using Github Urls
 

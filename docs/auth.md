@@ -58,7 +58,7 @@ The authentication approach taken will depend on the [serverType](/sasjsconfig.h
 There are two ways to authenticate with SAS Viya:
 
 1. **`sasjs auth login`** (recommended for developers) - sign in with your regular SAS username and password.  No client/secret is needed.  See [sasjs auth login](#sasjs-auth-login) below.
-2. **`sasjs auth`** (client/secret) - an administrator provides a CLIENT and SECRET with the `authorization_code` grant type.  Further information on this topic is available [here](/faq/#how-can-i-obtain-a-viya-client-and-secret).  This remains the recommended approach for CI pipelines.
+2. **`sasjs auth`** (client/secret) - an administrator provides a CLIENT and SECRET with the `authorization_code` grant type.  See [how to obtain a Viya client and secret](/faq/#how-can-i-obtain-a-viya-client-and-secret).  This remains the recommended approach for CI pipelines.
 
 After you provide the client / secret, you are given a link which you must click to obtain the authorisation code.  Be sure to select any scopes (such as openid) if presented.
 
@@ -184,7 +184,7 @@ Further information on this topic is available in this StackOverflow thread: [ht
 
 Once you have the PEM file it can be added to the [httpsAgentOptions configuration](https://cli.sasjs.io/sasjsconfig.html#httpsAgentOptions) as follows:
 
-![intermediate certificate](img/intermediatepem.png)
+![intermediate certificate](img/intermediatepem.png){ width="800" height="169" loading="lazy" decoding="async" }
 
 For testing, if you are running internally and you trust the target server, you may consider the following property in your `sasjs/sasjsconfig.json` file to temporarily ignore the certificate errors.  However, this is not a recommended approach.
 

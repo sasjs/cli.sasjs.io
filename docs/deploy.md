@@ -11,7 +11,7 @@ Deploy to multiple servers, server types (Viya, EBI, Base), multiple folders (Dr
 
 The ability to easily deploy (and subsequently execute) your SAS code enables you to develop locally using established GIT workflows.
 
-![](https://i.imgur.com/gIYp5OG.png)
+![Deploying to multiple targets](https://i.imgur.com/gIYp5OG.png){ width="1233" height="100" loading="lazy" decoding="async" }
 
 ## Prerequisites
 

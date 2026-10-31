@@ -6,7 +6,7 @@ description: Generate documentation for your SAS Data Science projects and SAS b
 
 # sasjs doc
 
-The `sasjs doc` command enables developers to generate HTML documentation directly from the comment headers used in SAS Jobs, Services, Tests, Macros and Includes.  An example of the generated documentation can be found [here](https://core.sasjs.io).  The comment headers must follow the Doxygen standard.  It is possible to embed images, tables, bullet points, GIFs, links, and even raw HTML.
+The `sasjs doc` command enables developers to generate HTML documentation directly from the comment headers used in SAS Jobs, Services, Tests, Macros and Includes.  The [core.sasjs.io](https://core.sasjs.io) site is an example of the generated documentation.  The comment headers must follow the Doxygen standard.  It is possible to embed images, tables, bullet points, GIFs, links, and even raw HTML.
 
 ## Data Lineage
 
@@ -29,7 +29,7 @@ Given that the same headers used to generate the documentation are used to compi
 !!! note
     Jobs and Services are defined in the jobConfig.jobFolders and serviceConfig.serviceFolders arrays respectively.  Lineage is NOT generated for macros (macroFolders) or programs (programFolders).  
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Sb1DqTLgVyQ" title="SAS Data Lineage" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe loading="lazy" width="560" height="315" src="https://www.youtube-nocookie.com/embed/Sb1DqTLgVyQ" title="SAS Data Lineage" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Prerequisites
 
@@ -41,7 +41,7 @@ Generates HTML docs for all .sas files contained in the programFolders / macroFo
 
 `sasjs docs` is an alias for `sasjs doc`.
 
-[![sasjs doc command](https://img.youtube.com/vi/ESNdCtXKRrw/0.jpg)](https://www.youtube.com/watch?v=ESNdCtXKRrw)
+[![sasjs doc command](https://img.youtube.com/vi/ESNdCtXKRrw/0.jpg){ width="480" height="360" loading="lazy" }](https://www.youtube.com/watch?v=ESNdCtXKRrw)
 
 ### Syntax
 
@@ -91,4 +91,4 @@ sasjs doc init
 
 By default, the project title and description are taken from the `package.json` file in the root of the project.  You can modify this behaviour (and many other doxygen defaults) by editing the `sasjs/doxy/doxyFile` file.
 
-The `docConfig` options are also documented [here](https://cli.sasjs.io/sasjsconfig.html#docConfig)
+The [`docConfig` settings](/sasjsconfig.html#docConfig) are also documented.

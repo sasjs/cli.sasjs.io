@@ -45,7 +45,7 @@ Or perhaps you have run `sasjs cbd` but the process failed during deployment due
 
 The following diagram illustrates the end to end `sasjs cbd` process.
 
-![](https://slides.sasjs.io/img/cbd.png)
+![The CBD data model](img/cbd.webp){ width="679" height="822" loading="lazy" decoding="async" }
 
 Notes:
 

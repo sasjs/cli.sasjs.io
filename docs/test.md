@@ -12,7 +12,7 @@ The `sasjs test` command triggers deployed SAS unit tests for execution, and col
 
 Results are also displayed in the console, as follows:
 
-![sas tests](img/sasjs_test.png)
+![sas tests](img/sasjs_test.webp){ width="800" height="833" decoding="async" }
 
 Tests are compiled & deployed as _services_ (STPs in SAS 9, Jobs in Viya, Stored Programs in SASjs/server).  In this way, **every test is completely isolated with it's own SAS session**.
 
@@ -158,7 +158,7 @@ In the example above, `some_service` will be considered covered, `some_job` will
 
 Overall coverage is displayed, along with a group summary for Jobs, Services and Macros. The table lists every service, job and macro the compile found, marked as covered or not covered, followed by any standalone tests - the same rows and the same keys that `sasjs compile` writes to `sasjsbuild/coverage.json`.
 
-![sas test coverage](img/coverage.png)
+![sas test coverage](img/coverage.webp){ width="800" height="494" loading="lazy" decoding="async" }
 
 !!! note
     We are planning a more 'intelligent' coverage system that can detect whether a macro / service / job was executed as part of the test suite.  If this would help your project, [get in touch](https://sasapps.io/contact-us).
@@ -229,21 +229,21 @@ To assist with debugging, all logs are captured, and we generate a URL so that y
 
 CSV Format:
 
-![sas test results CSV](img/testresultscsv.png)
+![sas test results CSV](img/testresultscsv.webp){ width="800" height="483" loading="lazy" decoding="async" }
 
 JSON Format:
-![sas test results JSON](img/testresultsjson.png)
+![sas test results JSON](img/testresultsjson.webp){ width="800" height="734" loading="lazy" decoding="async" }
 
 JUnit XML Format:
-![sas test results XML](img/testresultsxml.png)
+![sas test results XML](img/testresultsxml.webp){ width="800" height="465" loading="lazy" decoding="async" }
 
 Console Output:
-![sas test results CONSOLE](img/testresultsconsole.png)
+![sas test results CONSOLE](img/testresultsconsole.webp){ width="800" height="964" loading="lazy" decoding="async" }
 
 
 ## Demo Video
 
 A demonstration of `sasjs test` by the developer, [Yury Shkoda](https://www.linkedin.com/in/yuryshkoda) was provided at a [Sasensei](https://sasensei.com) SID event in July 2021 - available below.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/OF6yhbKJyJs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe loading="lazy" width="560" height="315" src="https://www.youtube-nocookie.com/embed/OF6yhbKJyJs" title="sasjs test demonstration" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 

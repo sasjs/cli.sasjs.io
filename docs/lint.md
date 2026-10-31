@@ -19,7 +19,7 @@ Before using this command, you simply need to [install](/installation) the SASjs
 
 ## Configuration
 
-The lint settings are described [here](https://github.com/sasjs/lint/blob/main/README.md).  The settings can be made in a project directory (`/your/project/.sasjslint`), with a fallback settings file in the home directory (`~/.sasjslint`).  If a setting is not defined in either the project or the home directory, then the default value is used.
+The [lint settings](https://github.com/sasjs/lint/blob/main/README.md) are described in the lint README.  The settings can be made in a project directory (`/your/project/.sasjslint`), with a fallback settings file in the home directory (`~/.sasjslint`).  If a setting is not defined in either the project or the home directory, then the default value is used.
 
 Linting is applied to all .sas files in all subfolders within the Project Directory.  The rule for determining the Project Directory is as follows:
 
@@ -57,7 +57,7 @@ sasjs lint
 
 Simply run the command and the list of exceptions (along with line / column numbers) is shown in the console, eg:
 
-![sas lint](https://user-images.githubusercontent.com/4420615/113478713-800e1d00-9482-11eb-90c1-10a80a41be1a.png)
+![sasjs lint rule output](img/lint.webp){ width="770" height="407" loading="lazy" decoding="async" }
 
 ## sasjs lint fix
 
