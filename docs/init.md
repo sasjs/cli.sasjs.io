@@ -56,16 +56,18 @@ The single target is a placeholder. `serverUrl` is empty rather than a sample UR
 
 ## Running it in a folder that is already a SASjs project
 
-If `sasjs/sasjsconfig.json` already exists, `sasjs init` aborts without touching anything:
+If the folder already contains `sasjs/sasjsconfig.json`, `sasjs init` aborts without touching anything:
 
 ```
 $ sasjs init
 ERROR  This folder is already a SASjs project (sasjs/sasjsconfig.json exists). Aborting without making changes.
 $ echo $?
-1
+4
 ```
 
-Exit code `1` means the folder is already a SASjs project, which a script can test for; exit code `2` means the initialisation itself failed.
+Exit code `4` means the folder is already a SASjs project, which a script can test for. It is its own code: `1` is an unrecognised command and `2` is a genuine failure, so the three cannot be confused.
+
+The check looks at the current folder only. Initialising inside a folder that belongs to a project higher up starts a new project in that folder, which is what a repository holding several separate SASjs apps needs.
 
 The refusal is deliberate. A target carries user data - `serverUrl`, `appLoc`, `authInfo`, `contextName` - and an unconditional write would replace it with the placeholder above. `sasjs create` writes a `sasjsconfig.json` of its own, so `sasjs init` is not needed after `sasjs create`, and running it there aborts too.
 
