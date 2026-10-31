@@ -1,0 +1,1198 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="The `sasjs build` command takes all of the input jobs and services and creates a build pack ready for deployment">
+      
+      
+        <link rel="canonical" href="https://cli.sasjs.io/build/">
+      
+      
+      <link rel="shortcut icon" href="../img/logo/favicon/32.ico">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.0">
+    
+    
+      
+        <title>Building a SAS Project using SASjs - SAS Dev Ops with SASjs CLI</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.bc7e593a.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab28b872.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#ffffff">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,700%7CUbuntu+Mono&display=fallback">
+        <style>body,input{font-family:"Open Sans",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Ubuntu Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../font-awesome.css">
+    
+    
+      
+        
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-109713029-8","sasjs.io"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}),document.addEventListener("DOMContentSwitch",function(){ga("send","pageview",document.location.pathname)})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="author" content="Allan Bowe">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:locale" content="en_UK" />
+<meta property="og:type" content="website">
+
+
+
+<meta name="image" property="og:image" content="/img/sasjs-cli-run.png">
+<meta property='og:image:alt' content='SASjs Logo' />
+<meta property='og:image:title' content='SASjs Logo' />
+
+
+
+<meta name="description" property="og:description" content="The `sasjs build` command takes all of the input jobs and services and creates a build pack ready for deployment">
+<meta property='name:description' content="The `sasjs build` command takes all of the input jobs and services and creates a build pack ready for deployment" />
+<meta property="twitter:description" content="The `sasjs build` command takes all of the input jobs and services and creates a build pack ready for deployment">
+
+
+
+
+<meta property="og:title" content="Building a SAS Project using SASjs">
+
+<meta property="og:author" content="https://www.linkedin.com/company/19117949">
+
+
+<meta property="og:url" content="https://cli.sasjs.io/build/">
+<meta property="twitter:url" content="https://cli.sasjs.io/build/">
+
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:title" content="The SASjs CLI">
+<meta property="twitter:image" content='/img/logo/favicon/32.png'>
+<meta property="twitter:image:alt" content="SASjs logo">
+<meta property='twitter:image:title' content='SASjs Logo' />
+<meta property="twitter:site" content='https://cli.sasjs.io'>
+<!-- meta name="twitter:creator" content="@_sasensei_" -->
+
+
+<meta property="article:author" content="https://www.linkedin.com/company/19117949" />
+<meta property="article:publisher" content="https://www.linkedin.com/company/19117949" />
+
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="white" data-md-color-accent="amber">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sasjs-build" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://cli.sasjs.io" title="SAS Dev Ops with SASjs CLI" class="md-header-nav__button md-logo" aria-label="SAS Dev Ops with SASjs CLI">
+      
+  <img src="../img/logo/favicon/32.png" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            SAS Dev Ops with SASjs CLI
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Building a SAS Project using SASjs
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/sasjs/cli.sasjs.io/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    cli.sasjs.io
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://cli.sasjs.io" title="SAS Dev Ops with SASjs CLI" class="md-nav__button md-logo" aria-label="SAS Dev Ops with SASjs CLI">
+      
+  <img src="../img/logo/favicon/32.png" alt="logo">
+
+    </a>
+    SAS Dev Ops with SASjs CLI
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/sasjs/cli.sasjs.io/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    cli.sasjs.io
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../installation/" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../artefacts/" class="md-nav__link">
+      Artefacts
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Configuration
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Configuration" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon"></span>
+        Configuration
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../sasjsconfig/" class="md-nav__link">
+      SASjs Config File
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../runner/" class="md-nav__link">
+      SASjs Runner
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../githooks/" class="md-nav__link">
+      Git Hooks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../env/" class="md-nav__link">
+      ENV File
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+    
+    <label class="md-nav__link" for="nav-5">
+      Commands
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Commands" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon"></span>
+        Commands
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../add/" class="md-nav__link">
+      sasjs add
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../auth/" class="md-nav__link">
+      sasjs auth
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        sasjs build
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
+      sasjs build
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#syntax" class="md-nav__link">
+    Syntax
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#targetjson-build-artefact" class="md-nav__link">
+    Target.JSON Build Artefact
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#targetjsonzip-build-artefact" class="md-nav__link">
+    Target.json.ZIP Build Artefact
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#targetsas-build-artefact" class="md-nav__link">
+    Target.SAS Build Artefact
+  </a>
+  
+    <nav class="md-nav" aria-label="Target.SAS Build Artefact">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sas-9-build-script" class="md-nav__link">
+    SAS 9 Build Script
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#viya-build-script" class="md-nav__link">
+    Viya Build Script
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-viya-build-script-in-non-viya-enabled-sas-sessions" class="md-nav__link">
+    Running Viya Build Script in Non-Viya-Enabled SAS sessions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#browser-build-streamconfigmockweb" class="md-nav__link">
+    Browser build (streamConfig.mockWeb)
+  </a>
+  
+    <nav class="md-nav" aria-label="Browser build (streamConfig.mockWeb)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    Requirements
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-the-build-produces" class="md-nav__link">
+    What the build produces
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-it-runs" class="md-nav__link">
+    How it runs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#downloads-and-file-responses" class="md-nav__link">
+    Downloads and file responses
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#serving-it" class="md-nav__link">
+    Serving it
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shipping-the-site-with-data" class="md-nav__link">
+    Shipping the site with data
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../cb/" class="md-nav__link">
+      sasjs cb
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../cbd/" class="md-nav__link">
+      sasjs cbd
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../compile/" class="md-nav__link">
+      sasjs compile
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../context/" class="md-nav__link">
+      sasjs context
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../create/" class="md-nav__link">
+      sasjs create
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../db/" class="md-nav__link">
+      sasjs db
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../deploy/" class="md-nav__link">
+      sasjs deploy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../doc/" class="md-nav__link">
+      sasjs doc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../flow/" class="md-nav__link">
+      sasjs flow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../folder/" class="md-nav__link">
+      sasjs folder
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../fs/" class="md-nav__link">
+      sasjs fs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../help/" class="md-nav__link">
+      sasjs help
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../init/" class="md-nav__link">
+      sasjs init
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../job/" class="md-nav__link">
+      sasjs job
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lint/" class="md-nav__link">
+      sasjs lint
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../run/" class="md-nav__link">
+      sasjs run
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../request/" class="md-nav__link">
+      sasjs request
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../servicepack/" class="md-nav__link">
+      sasjs servicepack
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../snippets/" class="md-nav__link">
+      sasjs snippets
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../test/" class="md-nav__link">
+      sasjs test
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../version/" class="md-nav__link">
+      sasjs version
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../web/" class="md-nav__link">
+      sasjs web
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../faq/" class="md-nav__link">
+      FAQ
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#syntax" class="md-nav__link">
+    Syntax
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#targetjson-build-artefact" class="md-nav__link">
+    Target.JSON Build Artefact
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#targetjsonzip-build-artefact" class="md-nav__link">
+    Target.json.ZIP Build Artefact
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#targetsas-build-artefact" class="md-nav__link">
+    Target.SAS Build Artefact
+  </a>
+  
+    <nav class="md-nav" aria-label="Target.SAS Build Artefact">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sas-9-build-script" class="md-nav__link">
+    SAS 9 Build Script
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#viya-build-script" class="md-nav__link">
+    Viya Build Script
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-viya-build-script-in-non-viya-enabled-sas-sessions" class="md-nav__link">
+    Running Viya Build Script in Non-Viya-Enabled SAS sessions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#browser-build-streamconfigmockweb" class="md-nav__link">
+    Browser build (streamConfig.mockWeb)
+  </a>
+  
+    <nav class="md-nav" aria-label="Browser build (streamConfig.mockWeb)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    Requirements
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-the-build-produces" class="md-nav__link">
+    What the build produces
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-it-runs" class="md-nav__link">
+    How it runs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#downloads-and-file-responses" class="md-nav__link">
+    Downloads and file responses
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#serving-it" class="md-nav__link">
+    Serving it
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shipping-the-site-with-data" class="md-nav__link">
+    Shipping the site with data
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/sasjs/cli.sasjs.io/edit/master/docs/build.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="sasjs-build">sasjs build<a class="headerlink" href="#sasjs-build" title="Permanent link">&para;</a></h1>
+<p>For ease of project deployment, <code>sasjs build</code> brings all the compiled Jobs / Services / Tests together into a single file.  Actually, 3 files, as follows:</p>
+<ul>
+<li><code>sasjsbuild/target.json</code> - used to deploy using the APIs in Viya or SASjs Server</li>
+<li><code>sasjsbuild/target.json.zip</code> - used for faster uploads of large payloads in SASjs Server</li>
+<li><code>sasjsbuild/target.sas</code> - used to create the project in SAS 9 or Viya (when no access token is available)</li>
+</ul>
+<p>The filename corresponds to the target name unless <a href="https://cli.sasjs.io/sasjsconfig.html#buildConfig_buildOutputFileName">buildOutputFileName</a> is specified.</p>
+<h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>sasjs build [options]
+</code></pre></div>
+<p><code>sasjs build</code> takes one option:</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Alias</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--target</code></td>
+<td><code>-t</code></td>
+<td>The target whose configuration drives the build. Defaults to the <code>defaultTarget</code> in <code>sasjsconfig.json</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>Examples:</p>
+<div class="highlight"><pre><span></span><code>sasjs build -t myTarget
+
+<span class="c1"># the same, using the alias</span>
+sasjs b -t myTarget
+</code></pre></div>
+<p>Nothing else is passed on the commandline: the artefact name, the folders and any streamed web content all come from the target's configuration - see <a href="../sasjsconfig/">sasjsconfig</a>. To run the compile step and the build step together, use <a href="../cb/"><code>sasjs cb</code></a>; to add the deployment, <a href="../cbd/"><code>sasjs cbd</code></a>.</p>
+<p>If a jobs or services folder does not exist in the temporary <code>sasjsbuild</code> folder, then the <code>sasjs compile</code> step is also executed. The alias to run both compile and build steps is <code>sasjs cb</code>.</p>
+<p>The benefit of having a seperate command to prepare the build artefacts (rather than bundling it into <code>sasjs compile</code>) is that you can then modify the compiled outputs to ensure you have the build you want - for example, removing tests for a production deploy.  If you don't need such changes, then you can just run <code>sasjs cb</code> as a shortcut for both <code>sasjs compile</code> and <code>sasjs build</code>.</p>
+<h2 id="targetjson-build-artefact">Target.JSON Build Artefact<a class="headerlink" href="#targetjson-build-artefact" title="Permanent link">&para;</a></h2>
+<p>The JSON file is used by the <code>sasjs deploy</code> command for the <code>SASVIYA</code> serverType to create all the necessary folders, jobs, services &amp; tests (and streamed web apps) in the target <code>appLoc</code>.</p>
+<h2 id="targetjsonzip-build-artefact">Target.json.ZIP Build Artefact<a class="headerlink" href="#targetjsonzip-build-artefact" title="Permanent link">&para;</a></h2>
+<p>This is simply a zipped version of the target.json file, and is used when uploading apps or deploying projects to <a href="https://server.sasjs.io">SASjs Server</a>.</p>
+<h2 id="targetsas-build-artefact">Target.SAS Build Artefact<a class="headerlink" href="#targetsas-build-artefact" title="Permanent link">&para;</a></h2>
+<p>The generated SAS program can be executed directly in SAS 9 or SAS Viya to create all the jobs/services/tests programmatically. This is especially useful for Viya developers who are unable to obtain a client / secret. For SAS 9 it is the primary deployment method.</p>
+<p><img alt="sasjscliflow.png" src="/img/sasjsbuild.png" /></p>
+<h3 id="sas-9-build-script">SAS 9 Build Script<a class="headerlink" href="#sas-9-build-script" title="Permanent link">&para;</a></h3>
+<p>The SAS 9 Build Program can be executed in EG or SAS Studio, and also automatically as part of <code>sasjs deploy</code> when <code>deployServicePack</code> is true.  You just need to have a runner in your metadata home directory, and to provide credentials using <a href="/auth">sasjs auth</a>.</p>
+<h3 id="viya-build-script">Viya Build Script<a class="headerlink" href="#viya-build-script" title="Permanent link">&para;</a></h3>
+<p>The .sas file can be executed in SASStudioV <em>without modification</em> as proc http will use the <code>oauth_bearer=sas_services</code> option to authenticate to the APIs.  This is the way to deploy SASjs projects when you do not have a CLIENT or SECRET.</p>
+<h3 id="running-viya-build-script-in-non-viya-enabled-sas-sessions">Running Viya Build Script in Non-Viya-Enabled SAS sessions<a class="headerlink" href="#running-viya-build-script-in-non-viya-enabled-sas-sessions" title="Permanent link">&para;</a></h3>
+<p>If for some reason you need to run the <em>Viya</em> build script in a <em>non</em> SPRE / Viya-enabled session (eg in SAS 9 or SASjs Server) you will need to prepare the access token - see guidance here: <a href="https://cli.sasjs.io/faq/#viya-token-macros">https://cli.sasjs.io/faq/#viya-token-macros</a></p>
+<p>Put this access token in a macro variable called <code>ACCESS_TOKEN</code> and it will be used by <code>proc http</code> in the <a href="https://core.sasjs.io">core</a> macros by reference to the <code>access_token_var=</code> keyword parameter of each viya macro (the ones that start with <code>mv*</code>).</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Saving security tokens in project repositories, especially if they are committed to source control, is a security risk - as anyone with access can use them to make modifications on the Viya platform. If you are running Viya code in non Viya-enabled SAS environments using the ACCESS_TOKEN approach described above, be sure to use a secure mechanism such as <code>%inc</code> from a secure directory, or another approved mechanism for securing these kinds of variables. Avoid writing Access Tokens to log files.</p>
+</div>
+<h2 id="browser-build-streamconfigmockweb">Browser build (<code>streamConfig.mockWeb</code>)<a class="headerlink" href="#browser-build-streamconfigmockweb" title="Permanent link">&para;</a></h2>
+<p>Setting <a href="https://cli.sasjs.io/sasjsconfig.html#streamConfig_mockWeb"><code>mockWeb</code></a> to <code>true</code> makes <code>sasjs build</code> produce a second artefact: a self-contained static site whose backend runs in the browser. The same services run, the same <code>webout</code> and header contract applies, and there is no server, no SAS and no network in the path. It exists so an app whose services are JavaScript can be hosted on any static host - a demo, a review environment, a shared link - and still behave like a deployed SASjs app.</p>
+<div class="highlight"><pre><span></span><code><span class="s2">&quot;streamConfig&quot;</span><span class="err">:</span> <span class="p">{</span>
+  <span class="nt">&quot;webSourcePath&quot;</span><span class="p">:</span> <span class="s2">&quot;../client/dist&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;mockWeb&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="nt">&quot;mockWebFolder&quot;</span><span class="p">:</span> <span class="s2">&quot;sasjsbuild/mock&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><code>mockWeb</code> is independent of <a href="https://cli.sasjs.io/sasjsconfig.html#streamConfig_streamWeb"><code>streamWeb</code></a>: the same target still deploys for real, so one config serves both the browser build and a normal <code>sasjs deploy</code>.</p>
+<h3 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h3>
+<ul>
+<li>the target's services must be JavaScript - typically the <code>mocks</code> project pattern, where <code>sas/mocks/sasjs/services</code> holds <code>.js</code> programs. A target that compiles <code>.sas</code> cannot be built for the browser, and the build says so</li>
+<li><a href="https://cli.sasjs.io/sasjsconfig.html#streamConfig_webSourcePath"><code>webSourcePath</code></a> has to point at the built frontend (<code>dist</code> by default); the site is assembled from that folder</li>
+<li>the target's <code>appLoc</code> has to match the appLoc the frontend was built with, because the services are resolved from it</li>
+</ul>
+<h3 id="what-the-build-produces">What the build produces<a class="headerlink" href="#what-the-build-produces" title="Permanent link">&para;</a></h3>
+<p>The site is written to <a href="https://cli.sasjs.io/sasjsconfig.html#streamConfig_mockWebFolder"><code>mockWebFolder</code></a>, <code>sasjsbuild/mock</code> by default. It contains the frontend, the compiled JavaScript services, a service worker and the small runtime that executes them. The virtual drive the services see is seeded from the build output - the same files <code>sasjs compile</code> wrote, plus anything <code>syncFolder</code> copied in - so a service reading <code>services/...</code> or a data file finds it without any upload step.</p>
+<h3 id="how-it-runs">How it runs<a class="headerlink" href="#how-it-runs" title="Permanent link">&para;</a></h3>
+<p>A service worker intercepts the calls the <a href="https://adapter.sasjs.io">SASjs Adapter</a> makes, invokes the matching JavaScript service, and resolves <code>webout</code>, log and headers back to the app. Requests appear in the browser's network tab as they normally would. Anything the services write to the drive is kept in IndexedDB, so a page refresh does not lose it.</p>
+<h3 id="downloads-and-file-responses">Downloads and file responses<a class="headerlink" href="#downloads-and-file-responses" title="Permanent link">&para;</a></h3>
+<p>A service answers with a file the same way it does on a server: it declares the response in <code>_SASJS_WEBOUT_HEADERS</code> and writes the body where the wrapper points it. The generated wrapper already declares <code>fs</code>, so a service uses it rather than requiring it again.</p>
+<p>For text - a CSV, a DDL script, a log - assign <code>_webout</code> (or write the string to <code>weboutPath</code>):</p>
+<div class="highlight"><pre><span></span><code><span class="nx">fs</span><span class="p">.</span><span class="nx">writeFileSync</span><span class="p">(</span>
+  <span class="nx">_SASJS_WEBOUT_HEADERS</span><span class="p">,</span>
+  <span class="s1">&#39;Content-type: text/csv\nContent-Disposition: attachment;filename=&quot;users.csv&quot;&#39;</span>
+<span class="p">)</span>
+<span class="nx">_webout</span> <span class="o">=</span> <span class="s1">&#39;id,name\n1,Ann\n&#39;</span>
+</code></pre></div>
+<p>For bytes - a zip, an xlsx, an image - write them to <code>weboutPath</code> as a <code>Buffer</code> or a <code>Uint8Array</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nx">fs</span><span class="p">.</span><span class="nx">writeFileSync</span><span class="p">(</span>
+  <span class="nx">_SASJS_WEBOUT_HEADERS</span><span class="p">,</span>
+  <span class="s1">&#39;Content-type: application/zip\nContent-Disposition: attachment;filename=&quot;pack.zip&quot;&#39;</span>
+<span class="p">)</span>
+<span class="nx">fs</span><span class="p">.</span><span class="nx">writeFileSync</span><span class="p">(</span><span class="nx">weboutPath</span><span class="p">,</span> <span class="nx">Buffer</span><span class="p">.</span><span class="nx">from</span><span class="p">(</span><span class="nx">zipBytes</span><span class="p">))</span>
+</code></pre></div>
+<p><code>Buffer.from()</code> takes bytes, an array of numbers, or a base64 string with <code>'base64'</code> as the second argument, so a library that produces base64 needs no extra step. This is the browser counterpart of <code>%mp_streamfile</code> - the same two writes - and the browser offers the response under the name in <code>Content-Disposition</code>.</p>
+<p>Only <code>Content-type</code> and <code>Content-Disposition</code> are applied; any other header is ignored, because a static host has no cache to control and no cookies to set. A request made with <code>_debug</code> returns the text frame instead, since its body is the webout wrapped in the log.</p>
+<p>Some things to keep in mind:</p>
+<ul>
+<li>the drive holds text, so a file a service writes as bytes is stored as base64 and reads back as bytes - it is a demo drive, not a filesystem for large binaries</li>
+<li>with no <code>Content-type</code> declared, a byte body is served as <code>application/octet-stream</code></li>
+<li>a filename outside ASCII belongs in RFC 6266 form - <code>Content-Disposition: attachment;filename*=UTF-8''r%C3%A9sum%C3%A9.csv</code>. Raw non-ASCII bytes in a header are not portable: the browser's own download honours the bytes it is given, and the same header sent by a SASjs Server arrives with node's latin1 encoding, so the two only agree on the ASCII form</li>
+</ul>
+<h3 id="serving-it">Serving it<a class="headerlink" href="#serving-it" title="Permanent link">&para;</a></h3>
+<p>Serve the folder over http or https. A service worker needs a secure context, which means <code>localhost</code> and <code>https</code> both work but <code>file://</code> does not:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span> sasjsbuild/mock
+python3 -m http.server <span class="m">8099</span>
+</code></pre></div>
+<p>Deploy it like any static site - it is just files. The runtime files under <code>host/</code> are referenced with a <code>?v=&lt;hash&gt;</code> query that changes with their contents, so a redeploy replaces them for returning visitors too; upload <code>index.html</code> and <code>sw.js</code> together with everything else, since those two carry the reference.</p>
+<h3 id="shipping-the-site-with-data">Shipping the site with data<a class="headerlink" href="#shipping-the-site-with-data" title="Permanent link">&para;</a></h3>
+<p>Out of the box the drive a visitor gets holds the services and whatever else lives in the build folder - enough to run, but empty of the data those services would have produced. A snapshot changes that: if <code>mock-snapshot.json</code> sits in the build folder, the build copies it to <code>host/vfs-snapshot.json</code> and the runtime prefers it over the plain seed, so every visitor starts from the captured state instead of an empty drive.</p>
+<p>To capture one, open the site, use the app until the drive is in the state you want, and run this in the browser console:</p>
+<div class="highlight"><pre><span></span><code><span class="nx">await</span> <span class="nb">window</span><span class="p">.</span><span class="nx">SASjsMock</span><span class="p">.</span><span class="nx">download</span><span class="p">()</span>
+</code></pre></div>
+<p>That saves <code>mock-snapshot.json</code> to your downloads. Put it beside the compiled output - <code>sasjsbuild/mock-snapshot.json</code> for the default build folder - and build again. The build reports it in <code>host/mock-config.json</code> as <code>"snapshot": true</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">&quot;appLoc&quot;</span><span class="p">:</span> <span class="s2">&quot;/Public/app/dc&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;snapshot&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="nt">&quot;driveEntries&quot;</span><span class="p">:</span> <span class="mi">97</span><span class="p">,</span>
+  <span class="nt">&quot;jsPrograms&quot;</span><span class="p">:</span> <span class="mi">43</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Three things worth knowing:</p>
+<ul>
+<li>the snapshot is a plain JSON map of drive path to file contents, and a real app's drive runs to megabytes, so treat it as a build input you generate rather than something to keep in git</li>
+<li>state stays tied to where it was captured. A licence issued for one origin does not decrypt on another, so capture the snapshot on the domain you deploy to - if an app asks to be licensed or configured after deployment while it worked locally, this is the usual reason</li>
+<li>to start over, <code>window.SASjsMock.reset()</code> clears the persisted drive and reseeds from the shipped files; to ship the plain seed instead, remove <code>mock-snapshot.json</code> from the build folder and build again</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This is a single-user, no-authentication build. Services that read SAS tables, run macros or depend on SAS libraries cannot work in it, because there is no SAS engine in the browser. Treat it as a demo and review artefact, not as a replacement for a real deployment.</p>
+</div>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../auth/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                sasjs auth
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../cb/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                sasjs cb
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            All rights reserved &copy;2021 Macro People Ltd.
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+<!-- Matomo -->
+<script>
+  var _paq = window._paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function () {
+    var u = "https://analytics.4gl.io/";
+    _paq.push(['setTrackerUrl', u + 'matomo.php']);
+    _paq.push(['setSiteId', '5']);
+    var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+    g.async = true; g.src = u + 'matomo.js'; s.parentNode.insertBefore(g, s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+
+  </body>
+</html>
