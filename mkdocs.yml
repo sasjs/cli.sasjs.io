@@ -113,14 +113,17 @@ theme:
     - content.code.copy
     - content.tooltips
     - toc.follow
-  extra:
-    social:
-      - icon: fontawesome/brands/linkedin
-        link: https://linkedin.com/company/sasjs
-        name: SASjs on LinkedIn
-      - icon: fontawesome/brands/github
-        link: https://github.com/sasjs/cli
-        name: SASjs CLI on GitHub
+
+# Social links are top level: `extra.social`, not `theme.extra.social`. Nested
+# under theme they are silently ignored and the footer icons never render.
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/sasjs/cli
+      name: sasjs/cli on GitHub
+    - icon: fontawesome/brands/linkedin
+      link: https://linkedin.com/company/sasjs
+      name: SASjs on LinkedIn
 
 copyright: All rights reserved &copy;2026 Macro People Ltd.
 
