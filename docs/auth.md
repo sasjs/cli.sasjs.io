@@ -152,7 +152,7 @@ parmcards4;
 
 ### SASJS Server Authentication
 
-Authentication on SASjs Server is only neccessary in [server mode](https://server.sasjs.io/settings/#mode) (there is no authentication in desktop mode).  The default clientID is `clientID1`.
+Authentication on SASjs Server is only necessary in [server mode](https://server.sasjs.io/settings/#mode) (there is no authentication in desktop mode).  The default clientID is `clientID1`.
 
 
 ## TLS Config
