@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="The sasjs version command prints the version of the SASjs CLI that is installed.">
+        <meta name="description" content="The sasjs version command prints the version of the SASjs CLI that is running - as sasjs version, sasjs v, sasjs -v or sasjs --version.">
       
       
       
@@ -77,9 +77,9 @@
 
 
 
-<meta name="description" property="og:description" content="The sasjs version command prints the version of the SASjs CLI that is installed.">
-<meta property='name:description' content="The sasjs version command prints the version of the SASjs CLI that is installed." />
-<meta property="twitter:description" content="The sasjs version command prints the version of the SASjs CLI that is installed.">
+<meta name="description" property="og:description" content="The sasjs version command prints the version of the SASjs CLI that is running - as sasjs version, sasjs v, sasjs -v or sasjs --version.">
+<meta property='name:description' content="The sasjs version command prints the version of the SASjs CLI that is running - as sasjs version, sasjs v, sasjs -v or sasjs --version." />
+<meta property="twitter:description" content="The sasjs version command prints the version of the SASjs CLI that is running - as sasjs version, sasjs v, sasjs -v or sasjs --version.">
 
 
 
@@ -1413,17 +1413,20 @@
 <p><code>sasjs version</code> prints the version of the SASjs CLI you are running.</p>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>sasjs version
+sasjs v
+sasjs -v
+sasjs --version
 </code></pre></div>
-<p><code>sasjs v</code> is the alias. The command takes no arguments and needs no target or project.</p>
+<p>All four are the same command. It takes no arguments and needs no target or project.</p>
 <p>Example:</p>
-<div class="highlight"><pre><span></span><code>$ sasjs version
-You are using SASjs CLI v6.4.5
+<div class="highlight"><pre><span></span><code>$ sasjs --version
+You are using SASjs CLI v6.4.7
 </code></pre></div>
 <h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
 <ul>
-<li>The version reported is the one resolved from a <strong>global</strong> install (<code>npm list -g @sasjs/cli</code>), so a CLI installed into a project folder, or run through <code>npx</code>, cannot report its version and the command fails. Use a global install (<code>npm i -g @sasjs/cli</code>) if you need this command.</li>
-<li>A CLI linked from source (<code>npm link</code>) is reported as a linked version, with the path it was linked from.</li>
-<li><code>sasjs --version</code> is not a flag - use <code>sasjs version</code> or <code>sasjs v</code>.</li>
+<li>The version is read from the package that is running, so it is right whichever way the CLI was installed - globally, into a project, through <code>npx</code>, or from a temporary prefix.</li>
+<li>A CLI running from a source checkout (<code>npm link</code>, or a local build) reports itself as a linked version, with the path it runs from. A source checkout carries no version of its own until it is packaged, so no version number is shown.</li>
+<li><code>-v</code> and <code>--version</code> are accepted from <strong>6.4.7</strong>. Earlier releases reject them, and report a version only when the CLI is installed globally.</li>
 </ul>
 <p>To see the commands available in the installed version, use <a href="../help/"><code>sasjs help</code></a>.</p>
 
