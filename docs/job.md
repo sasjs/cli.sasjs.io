@@ -1,58 +1,70 @@
 ---
 layout: article
-title: Managing SAS Viya Jobs with SASjs
-description: Documentation on how to use the SASjs CLI to manage SAS Jobs in Viya
+title: Executing SAS jobs with sasjs job
+description: The sasjs job execute command runs a job that is deployed on the SAS server, and can wait for it, save the log and output, and stream the log as it runs.
 ---
 
 # sasjs job
 
-The `sasjs job` command enables developers to perform operations on SAS Viya Jobs.
+`sasjs job execute` runs a job that already exists on the SAS server - a Viya job, a SAS 9 job, or a job on SASjs Server - and brings back what it produced.
 
 ## Prerequisites
 
-Before using this command, you will need to:
+- the SASjs CLI [installed](installation.md)
+- a [target](add.md), with credentials ([`sasjs auth`](auth.md))
+- the job already deployed, by [`sasjs deploy`](deploy.md) or otherwise
 
-- [install](/installation) the SASJS CLI
-- [add](/add) a deployment target.
-
-## sasjs job execute
-
-Used to execute a job on the SAS server.
-
-### Syntax
+## Syntax
 
 ```
-sasjs job execute <job path> [additional arguments]
+sasjs job execute <jobPath> [options]
 ```
 
-Additional arguments may include:
+`exec` is accepted in place of `execute`.
 
-- `--log` (alias `-l`) - path where the log of the finished job will be saved (if used, `-w` is implied).
-- `--output` (alias `-o`) - path where output of the finished job execution will be saved.
-- `--source` (alieas `-s`) - Provide the path to an input JSON containing job variables, structured as follows:  `{"macroVars":{"varname":"value","var2":"val2"}}`
-- `--target` (alias `-t`) - the target environment in which to deploy the services. If not specified, default target will be used, mentioned in `sasjsconfig.json`. The target can exist either in the local project configuration or in the global `.sasjsrc` file.
-- `--verbose` (alias `-v`) - if present, CLI will log summary of every HTTP request/response. If set to 'bleached' (eg `-v bleached`), CLI will log summary of every HTTP response without extra colors.
+`jobPath` is the location of the job on the server. A path that begins with `/` is used as it is; a relative path is prefixed with the target's `appLoc`.
 
-The following flags are only relevant for serverType VIYA:
+## Options
 
-- `--ignoreWarnings` (alias `-i`) - If present and return status only is provided, CLI will return status '0', when the job state is warning.
-- `--wait` (alias `-w`) - if present, CLI will wait for job completion.
-- `--returnStatusOnly` (alias `-r`) - deprecated
+| Option | Alias | Server types | Description |
+| --- | --- | --- | --- |
+| `--target` | `-t` | all | The target to execute against. Defaults to `defaultTarget` in `sasjsconfig.json`. |
+| `--log` | `-l` | all | Path to save the job log to. On Viya, supplying it also makes the CLI wait for the job. |
+| `--output` | `-o` | all | Path to save the job's output to. |
+| `--source` | `-s` | all | Path to a JSON file of job variables - `{"macroVars": {"var": "value"}}`. |
+| `--wait` | `-w` | Viya | Wait for the job to finish before returning. |
+| `--statusFile` | | Viya | Save the job status to this file as it progresses. With no path, the status is printed instead. |
+| `--streamLog` | | Viya | Write the log to the `--log` path while the job runs, rather than at the end. Useful for long jobs. |
+| `--ignoreWarnings` | `-i` | Viya | Return success when the job finishes in the warning state, rather than a failure. |
+| `--returnStatusOnly` | `-r` | Viya | **Deprecated** - prints a warning and is ignored. |
+| `--verbose` | `-v` | all | Log a summary of every HTTP request and response. `-v bleached` drops the colour. |
 
-### Examples
+SAS 9 and SASjs Server execute the job in a single request, so they have nothing to wait for and no status to poll: `--wait`, `--statusFile`, `--streamLog` and `--ignoreWarnings` are Viya only.
+
+## Examples
 
 ```bash
-# run the job using the target defined in sasjs add
+# run a job, keeping the log and the output
 sasjs job execute /Public/folder/someJob -l ./jobLog.log -o ./jobOutput.json -t myTarget
 ```
 
-This will create a session and run a SAS job. The log and output will be returned as files in the current directory.
-
-
 ```bash
-# create an input file with macro variables
+# pass macro variables into the job
 echo '{"macroVars":{"myMacVar":"my macro value!","macvar2":"another value"}}' > sourcevars.json
-# execute the job with the above variables, against the default target
 sasjs job execute /Public/folder/someJob -l ./jobLog.log -s ./sourcevars.json
 ```
 
+```bash
+# follow a long running job: wait, streaming the log, with status written out
+sasjs job execute /Public/folder/someJob -w --streamLog -l ./jobLog.log --statusFile ./jobStatus.json
+```
+
+## What comes back
+
+The log and the output are written where `--log` and `--output` point; with neither, nothing is fetched from the server.
+
+The command exits with a non-zero code when the job fails, so it can gate a pipeline step:
+
+```bash
+sasjs job execute /Public/folder/someJob -w -l ./jobLog.log || echo "job failed"
+```
