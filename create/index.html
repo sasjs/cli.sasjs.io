@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="The `sasjs create` command is used to initialise a SASjs project, either in plain form or using a range of templates.">
+        <meta name="description" content="The sasjs create command scaffolds a SASjs project - the plain folder structure or a template app - complete with sasjsconfig.json, doxygen templates and lint config.">
       
       
       
@@ -27,7 +27,7 @@
     
     
       
-        <title>Creating SAS Projects using SASjs - SAS Dev Ops with SASjs CLI</title>
+        <title>Creating SAS projects with sasjs create - SAS Dev Ops with SASjs CLI</title>
       
     
     
@@ -77,14 +77,14 @@
 
 
 
-<meta name="description" property="og:description" content="The `sasjs create` command is used to initialise a SASjs project, either in plain form or using a range of templates.">
-<meta property='name:description' content="The `sasjs create` command is used to initialise a SASjs project, either in plain form or using a range of templates." />
-<meta property="twitter:description" content="The `sasjs create` command is used to initialise a SASjs project, either in plain form or using a range of templates.">
+<meta name="description" property="og:description" content="The sasjs create command scaffolds a SASjs project - the plain folder structure or a template app - complete with sasjsconfig.json, doxygen templates and lint config.">
+<meta property='name:description' content="The sasjs create command scaffolds a SASjs project - the plain folder structure or a template app - complete with sasjsconfig.json, doxygen templates and lint config." />
+<meta property="twitter:description" content="The sasjs create command scaffolds a SASjs project - the plain folder structure or a template app - complete with sasjsconfig.json, doxygen templates and lint config.">
 
 
 
 
-<meta property="og:title" content="Creating SAS Projects using SASjs">
+<meta property="og:title" content="Creating SAS projects with sasjs create">
 
 <meta property="og:author" content="https://www.linkedin.com/company/19117949">
 
@@ -158,7 +158,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Creating SAS Projects using SASjs
+              Creating SAS projects with sasjs create
             
           </span>
         </div>
@@ -778,6 +778,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    sasjs create
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -794,6 +812,69 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#syntax" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syntax
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-plain-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The plain project
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#templates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Templates
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-it-in-an-existing-folder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running it in an existing folder
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1330,6 +1411,58 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#syntax" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syntax
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-plain-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The plain project
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#templates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Templates
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-it-in-an-existing-folder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running it in an existing folder
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1349,18 +1482,93 @@
 
 
 <h1 id="sasjs-create">sasjs create<a class="headerlink" href="#sasjs-create" title="Permanent link">&para;</a></h1>
-<p>To create a new project, run: <code>sasjs create mynewproject</code></p>
-<p>To install in an <em>existing</em> project, change into that directory and run: <code>sasjs create</code> (without arguments). This will create a <code>sasjs</code> folder inside the directory, and - if a package.json file exists - the @sasjs/core dependency will be added.</p>
-<p>To add SASjs to a folder that already holds code, use <a href="/init"><code>sasjs init</code></a> instead.</p>
-<p>An additional option can be specified to create a web app from a template, eg: <code>sasjs create my-sas-project --template react</code>. The <code>--template</code> alias can be shortened to <code>-t</code> (not to be confused with the <code>-t</code> <em>target</em> shortcut used in many other sasjs commands).</p>
-<p>The following templates are available:</p>
-<ul>
-<li><a href="https://github.com/sasjs/angular-seed-app">Angular</a> - a quickstart for building angular projects</li>
-<li><a href="https://github.com/sasjs/react-seed-app">React</a> - a quickstart for React based projects</li>
-<li><a href="https://github.com/sasjs/minimal-seed-app">minimal</a> - a basic app using vanilla javascript</li>
-<li><a href="https://github.com/sasjs/template_sasonly">sasonly</a> - an app that only contains backend SAS (web) services</li>
-<li><a href="https://github.com/sasjs/template_jobs">jobs</a> - an app that only contains backend SAS jobs (including a flow example)</li>
-</ul>
+<p><code>sasjs create</code> scaffolds a SASjs project: the folder structure, a <code>sasjs/sasjsconfig.json</code> to go with it, the doxygen templates, the lint config, a README and a <code>.gitignore</code>.</p>
+<h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>sasjs create [folder-name] [options]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Alias</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--template</code></td>
+<td><code>-t</code></td>
+<td>The template to scaffold from. One of <code>react</code>, <code>angular</code>, <code>minimal</code>, <code>sasonly</code> or <code>jobs</code>. Omitted, the command writes the plain folder structure instead.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code>-t</code> is the <strong>template</strong> here, not the target used by most other commands. There is no <code>--target</code> option on <code>sasjs create</code> - a new project needs no connection to a SAS server.</p>
+</div>
+<p>Examples:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># a plain SASjs project</span>
+sasjs<span class="w"> </span>create<span class="w"> </span>my-sas-project
+
+<span class="c1"># a React app, with the SASjs backend and the adapter wired up</span>
+sasjs<span class="w"> </span>create<span class="w"> </span>my-web-app<span class="w"> </span>--template<span class="w"> </span>react
+sasjs<span class="w"> </span>create<span class="w"> </span>my-web-app<span class="w"> </span>-t<span class="w"> </span>react
+</code></pre></div>
+<h2 id="the-plain-project">The plain project<a class="headerlink" href="#the-plain-project" title="Permanent link">&para;</a></h2>
+<p>With no <code>--template</code>, <code>sasjs create</code> writes the structure below, and then runs <code>npm init</code> and adds <code>@sasjs/core</code> as a dependency.</p>
+<div class="highlight"><pre><span></span><code>my-sas-project/
+└── sasjs/
+    ├── sasjsconfig.json     &lt;- three targets: viya, sas9 and sasjs
+    ├── build/               &lt;- init/term programs, and the deploy scripts
+    ├── db/                  &lt;- one folder per database, with example DDL and load programs
+    ├── macros/              &lt;- your SAS macros
+    ├── programs/            &lt;- SAS programs included by services
+    ├── services/            &lt;- SASjs web services (common/ and admin/)
+    └── targets/             &lt;- per-target macros, services and programs
+        ├── sas9/
+        └── viya/
+</code></pre></div>
+<p>The generated <code>sasjsconfig.json</code> configures <code>serviceFolders</code>, <code>macroFolders</code> and <code>buildConfig</code> against those folders, and carries the three placeholder targets, so the project can be compiled and built without editing anything. Put the real server details into a target with <a href="../add/"><code>sasjs add</code></a> before you deploy.</p>
+<h2 id="templates">Templates<a class="headerlink" href="#templates" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Template</th>
+<th>Source</th>
+<th>What you get</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>react</code></td>
+<td><a href="https://github.com/sasjs/react-seed-app">sasjs/react-seed-app</a></td>
+<td>A React app, with the <a href="https://adapter.sasjs.io">SASjs Adapter</a> configured and a SASjs backend</td>
+</tr>
+<tr>
+<td><code>angular</code></td>
+<td><a href="https://github.com/sasjs/angular-seed-app">sasjs/angular-seed-app</a></td>
+<td>The same, in Angular</td>
+</tr>
+<tr>
+<td><code>minimal</code></td>
+<td><a href="https://github.com/sasjs/minimal-seed-app">sasjs/minimal-seed-app</a></td>
+<td>A small app in plain JavaScript</td>
+</tr>
+<tr>
+<td><code>jobs</code></td>
+<td><a href="https://github.com/sasjs/template_jobs">sasjs/template_jobs</a></td>
+<td>Backend only: SAS jobs, with a flow example</td>
+</tr>
+<tr>
+<td><code>sasonly</code></td>
+<td><a href="https://github.com/sasjs/template_sasonly">sasjs/template_sasonly</a></td>
+<td>Backend only: SAS web services, no frontend</td>
+</tr>
+</tbody>
+</table>
+<h2 id="running-it-in-an-existing-folder">Running it in an existing folder<a class="headerlink" href="#running-it-in-an-existing-folder" title="Permanent link">&para;</a></h2>
+<p>Run <code>sasjs create</code> with no folder name and the project is written into the current directory - the folder structure is created there, and <code>package.json</code> gains the <code>@sasjs/core</code> dependency if the folder already holds one.</p>
+<p>If the folder already contains SAS code that you want to keep, use <a href="../init/"><code>sasjs init</code></a> instead: it adds the SASjs tooling without writing a folder structure over what is there.</p>
 <script id="asciicast-2HEe1ym63B8BNAvISepe1vmT5" src="https://asciinema.org/a/2HEe1ym63B8BNAvISepe1vmT5.js" async></script>
 
 

@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Documentation on how to use the SASjs CLI to manage SAS Jobs in Viya">
+        <meta name="description" content="The sasjs job execute command runs a job that is deployed on the SAS server, and can wait for it, save the log and output, and stream the log as it runs.">
       
       
       
@@ -27,7 +27,7 @@
     
     
       
-        <title>Managing SAS Viya Jobs with SASjs - SAS Dev Ops with SASjs CLI</title>
+        <title>Executing SAS jobs with sasjs job - SAS Dev Ops with SASjs CLI</title>
       
     
     
@@ -77,14 +77,14 @@
 
 
 
-<meta name="description" property="og:description" content="Documentation on how to use the SASjs CLI to manage SAS Jobs in Viya">
-<meta property='name:description' content="Documentation on how to use the SASjs CLI to manage SAS Jobs in Viya" />
-<meta property="twitter:description" content="Documentation on how to use the SASjs CLI to manage SAS Jobs in Viya">
+<meta name="description" property="og:description" content="The sasjs job execute command runs a job that is deployed on the SAS server, and can wait for it, save the log and output, and stream the log as it runs.">
+<meta property='name:description' content="The sasjs job execute command runs a job that is deployed on the SAS server, and can wait for it, save the log and output, and stream the log as it runs." />
+<meta property="twitter:description" content="The sasjs job execute command runs a job that is deployed on the SAS server, and can wait for it, save the log and output, and stream the log as it runs.">
 
 
 
 
-<meta property="og:title" content="Managing SAS Viya Jobs with SASjs">
+<meta property="og:title" content="Executing SAS jobs with sasjs job">
 
 <meta property="og:author" content="https://www.linkedin.com/company/19117949">
 
@@ -158,7 +158,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Managing SAS Viya Jobs with SASjs
+              Executing SAS jobs with sasjs job
             
           </span>
         </div>
@@ -1092,18 +1092,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#sasjs-job-execute" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        sasjs job execute
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="sasjs job execute">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#syntax" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1113,8 +1101,19 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
+  <a href="#options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Options
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#examples" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1124,9 +1123,15 @@
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#what-comes-back" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What comes back
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1435,18 +1440,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#sasjs-job-execute" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        sasjs job execute
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="sasjs job execute">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#syntax" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1456,8 +1449,19 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
+  <a href="#options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Options
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#examples" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1467,9 +1471,15 @@
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#what-comes-back" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What comes back
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1494,41 +1504,107 @@
 
 
 <h1 id="sasjs-job">sasjs job<a class="headerlink" href="#sasjs-job" title="Permanent link">&para;</a></h1>
-<p>The <code>sasjs job</code> command enables developers to perform operations on SAS Viya Jobs.</p>
+<p><code>sasjs job execute</code> runs a job that already exists on the SAS server - a Viya job, a SAS 9 job, or a job on SASjs Server - and brings back what it produced.</p>
 <h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
-<p>Before using this command, you will need to:</p>
 <ul>
-<li><a href="/installation">install</a> the SASJS CLI</li>
-<li><a href="/add">add</a> a deployment target.</li>
+<li>the SASjs CLI <a href="../installation/">installed</a></li>
+<li>a <a href="../add/">target</a>, with credentials (<a href="../auth/"><code>sasjs auth</code></a>)</li>
+<li>the job already deployed, by <a href="../deploy/"><code>sasjs deploy</code></a> or otherwise</li>
 </ul>
-<h2 id="sasjs-job-execute">sasjs job execute<a class="headerlink" href="#sasjs-job-execute" title="Permanent link">&para;</a></h2>
-<p>Used to execute a job on the SAS server.</p>
-<h3 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>sasjs job execute &lt;job path&gt; [additional arguments]
+<h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>sasjs job execute &lt;jobPath&gt; [options]
 </code></pre></div>
-<p>Additional arguments may include:</p>
-<ul>
-<li><code>--log</code> (alias <code>-l</code>) - path where the log of the finished job will be saved (if used, <code>-w</code> is implied).</li>
-<li><code>--output</code> (alias <code>-o</code>) - path where output of the finished job execution will be saved.</li>
-<li><code>--source</code> (alieas <code>-s</code>) - Provide the path to an input JSON containing job variables, structured as follows:  <code>{"macroVars":{"varname":"value","var2":"val2"}}</code></li>
-<li><code>--target</code> (alias <code>-t</code>) - the target environment in which to deploy the services. If not specified, default target will be used, mentioned in <code>sasjsconfig.json</code>. The target can exist either in the local project configuration or in the global <code>.sasjsrc</code> file.</li>
-<li><code>--verbose</code> (alias <code>-v</code>) - if present, CLI will log summary of every HTTP request/response. If set to 'bleached' (eg <code>-v bleached</code>), CLI will log summary of every HTTP response without extra colors.</li>
-</ul>
-<p>The following flags are only relevant for serverType VIYA:</p>
-<ul>
-<li><code>--ignoreWarnings</code> (alias <code>-i</code>) - If present and return status only is provided, CLI will return status '0', when the job state is warning.</li>
-<li><code>--wait</code> (alias <code>-w</code>) - if present, CLI will wait for job completion.</li>
-<li><code>--returnStatusOnly</code> (alias <code>-r</code>) - deprecated</li>
-</ul>
-<h3 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># run the job using the target defined in sasjs add</span>
+<p><code>exec</code> is accepted in place of <code>execute</code>.</p>
+<p><code>jobPath</code> is the location of the job on the server. A path that begins with <code>/</code> is used as it is; a relative path is prefixed with the target's <code>appLoc</code>.</p>
+<h2 id="options">Options<a class="headerlink" href="#options" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Alias</th>
+<th>Server types</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--target</code></td>
+<td><code>-t</code></td>
+<td>all</td>
+<td>The target to execute against. Defaults to <code>defaultTarget</code> in <code>sasjsconfig.json</code>.</td>
+</tr>
+<tr>
+<td><code>--log</code></td>
+<td><code>-l</code></td>
+<td>all</td>
+<td>Path to save the job log to. On Viya, supplying it also makes the CLI wait for the job.</td>
+</tr>
+<tr>
+<td><code>--output</code></td>
+<td><code>-o</code></td>
+<td>all</td>
+<td>Path to save the job's output to.</td>
+</tr>
+<tr>
+<td><code>--source</code></td>
+<td><code>-s</code></td>
+<td>all</td>
+<td>Path to a JSON file of job variables - <code>{"macroVars": {"var": "value"}}</code>.</td>
+</tr>
+<tr>
+<td><code>--wait</code></td>
+<td><code>-w</code></td>
+<td>Viya</td>
+<td>Wait for the job to finish before returning.</td>
+</tr>
+<tr>
+<td><code>--statusFile</code></td>
+<td></td>
+<td>Viya</td>
+<td>Save the job status to this file as it progresses. With no path, the status is printed instead.</td>
+</tr>
+<tr>
+<td><code>--streamLog</code></td>
+<td></td>
+<td>Viya</td>
+<td>Write the log to the <code>--log</code> path while the job runs, rather than at the end. Useful for long jobs.</td>
+</tr>
+<tr>
+<td><code>--ignoreWarnings</code></td>
+<td><code>-i</code></td>
+<td>Viya</td>
+<td>Return success when the job finishes in the warning state, rather than a failure.</td>
+</tr>
+<tr>
+<td><code>--returnStatusOnly</code></td>
+<td><code>-r</code></td>
+<td>Viya</td>
+<td><strong>Deprecated</strong> - prints a warning and is ignored.</td>
+</tr>
+<tr>
+<td><code>--verbose</code></td>
+<td><code>-v</code></td>
+<td>all</td>
+<td>Log a summary of every HTTP request and response. <code>-v bleached</code> drops the colour.</td>
+</tr>
+</tbody>
+</table>
+<p>SAS 9 and SASjs Server execute the job in a single request, so they have nothing to wait for and no status to poll: <code>--wait</code>, <code>--statusFile</code>, <code>--streamLog</code> and <code>--ignoreWarnings</code> are Viya only.</p>
+<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># run a job, keeping the log and the output</span>
 sasjs<span class="w"> </span>job<span class="w"> </span>execute<span class="w"> </span>/Public/folder/someJob<span class="w"> </span>-l<span class="w"> </span>./jobLog.log<span class="w"> </span>-o<span class="w"> </span>./jobOutput.json<span class="w"> </span>-t<span class="w"> </span>myTarget
 </code></pre></div>
-<p>This will create a session and run a SAS job. The log and output will be returned as files in the current directory.</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># create an input file with macro variables</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># pass macro variables into the job</span>
 <span class="nb">echo</span><span class="w"> </span><span class="s1">'{"macroVars":{"myMacVar":"my macro value!","macvar2":"another value"}}'</span><span class="w"> </span>&gt;<span class="w"> </span>sourcevars.json
-<span class="c1"># execute the job with the above variables, against the default target</span>
 sasjs<span class="w"> </span>job<span class="w"> </span>execute<span class="w"> </span>/Public/folder/someJob<span class="w"> </span>-l<span class="w"> </span>./jobLog.log<span class="w"> </span>-s<span class="w"> </span>./sourcevars.json
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># follow a long running job: wait, streaming the log, with status written out</span>
+sasjs<span class="w"> </span>job<span class="w"> </span>execute<span class="w"> </span>/Public/folder/someJob<span class="w"> </span>-w<span class="w"> </span>--streamLog<span class="w"> </span>-l<span class="w"> </span>./jobLog.log<span class="w"> </span>--statusFile<span class="w"> </span>./jobStatus.json
+</code></pre></div>
+<h2 id="what-comes-back">What comes back<a class="headerlink" href="#what-comes-back" title="Permanent link">&para;</a></h2>
+<p>The log and the output are written where <code>--log</code> and <code>--output</code> point; with neither, nothing is fetched from the server.</p>
+<p>The command exits with a non-zero code when the job fails, so it can gate a pipeline step:</p>
+<div class="highlight"><pre><span></span><code>sasjs<span class="w"> </span>job<span class="w"> </span>execute<span class="w"> </span>/Public/folder/someJob<span class="w"> </span>-w<span class="w"> </span>-l<span class="w"> </span>./jobLog.log<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"job failed"</span>
 </code></pre></div>
 
 
