@@ -2,7 +2,6 @@
 layout: article
 title: Running SAS code from the commandline
 description: SASjs CLI lets you run arbitrary SAS code in a Viya Compute Session, directly from the terminal (or commandline session).
-og_image: https://sasjs.io/img/sasjs-cli-run.png?_=1
 ---
 
 # sasjs run

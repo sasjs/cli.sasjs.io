@@ -2,7 +2,6 @@
 layout: article
 title: Managing SAS Viya Compute Contexts with SASjs
 description: How to create, edit, delete, export and list Compute Contexts on SAS Viya using the SASjs CLI
-og_image: https://sasjs.io/img/sasjs-cli-context.png
 ---
 
 # sasjs context

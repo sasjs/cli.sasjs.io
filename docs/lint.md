@@ -3,7 +3,6 @@ layout: article
 title: sasjs lint
 og_title: Lint Your SAS and Prevent Sloppy Code Going Into Production
 description: Lint your SAS code and identify issues such as embedded passwords, trailing spaces, sloppy indentation, missing program headers and more.
-og_image: https://user-images.githubusercontent.com/4420615/113478713-800e1d00-9482-11eb-90c1-10a80a41be1a.png
 ---
 
 # sasjs lint

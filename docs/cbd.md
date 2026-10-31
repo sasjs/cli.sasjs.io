@@ -2,7 +2,6 @@
 layout: article
 title: sasjs cbd
 description: Compile, build & deploy SAS projects from a local GIT repository to a remote SAS Environment - on Viya, EBI or SASjs Server.
-og_image: https://slides.sasjs.io/img/cbd.png
 ---
 
 # sasjs cbd

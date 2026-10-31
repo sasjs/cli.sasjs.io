@@ -2,7 +2,6 @@
 layout: article
 title: Managing SAS Viya Folders with SASjs
 description: Documentation on how to use the SASjs CLI to create, delete, and move SAS Viya Folders
-og_image: https://cli.sasjs.io/img/sasjs-cli-folder.png
 ---
 
 # sasjs folder

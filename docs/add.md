@@ -2,7 +2,6 @@
 layout: article
 title: SASjs Add
 description: The `sasjs add` command provides a series of prompts used to define a SAS target
-og_image: https://cli.sasjs.io/img/sasjsaddcred.png
 ---
 
 
