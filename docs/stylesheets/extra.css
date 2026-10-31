@@ -1,0 +1,331 @@
+/*
+ * cli.sasjs.io - design tokens and finishing touches for Material for MkDocs.
+ *
+ * The SASjs mark is black and yellow, so the header is black in both schemes
+ * and only the content surface flips. Everything else is derived from the two
+ * token blocks below: change a value here rather than a rule further down.
+ */
+
+/* ---------------------------------------------------------------- tokens */
+
+/* Material sets the scheme attribute on BOTH <html> and <body>, and its own
+ * palette rules are attribute-only (specificity 0,1,0). The element-qualified
+ * selectors below (0,1,1) are what let these tokens win on both elements
+ * without !important. */
+:root,
+html[data-md-color-scheme="default"],
+body[data-md-color-scheme="default"] {
+  --brand: #f6e40c;
+  --brand-ink: #6b5300;
+
+  --md-default-bg-color: #ffffff;
+  --md-default-fg-color: #14140f;
+  --md-default-fg-color--light: #5f5f57;
+  --md-default-fg-color--lighter: #8a8a80;
+  --md-default-fg-color--lightest: #ededea;
+
+  --md-accent-fg-color: #8a6d00;
+
+  --surface: #faf9f5;
+  --surface-border: #e8e6dd;
+  --code-bg: #f7f7f3;
+  --code-border: #e8e6dd;
+
+  --shadow-sm: 0 1px 2px rgba(15, 15, 12, 0.06);
+  --shadow-lg: 0 10px 30px -12px rgba(15, 15, 12, 0.25);
+}
+
+html[data-md-color-scheme="slate"],
+body[data-md-color-scheme="slate"] {
+  --brand: #f6e40c;
+  --brand-ink: #f6e40c;
+
+  --md-default-bg-color: #0e0e11;
+  --md-default-fg-color: #e9e7e0;
+  --md-default-fg-color--light: #a9a9a1;
+  --md-default-fg-color--lighter: #7c7c76;
+  --md-default-fg-color--lightest: #26262d;
+
+  --md-code-bg-color: #16161b;
+  --md-code-fg-color: #e6e4dc;
+
+  --md-accent-fg-color: var(--brand);
+
+  --surface: #16161b;
+  --surface-border: #26262d;
+  --code-bg: #16161b;
+  --code-border: #26262d;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 30px -12px rgba(0, 0, 0, 0.8);
+}
+
+/* ------------------------------------------------------------- typography */
+
+.md-typeset {
+  font-feature-settings: "cv11", "ss01";
+  line-height: 1.65;
+}
+
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3 {
+  letter-spacing: -0.015em;
+  font-weight: 700;
+}
+
+.md-typeset h1 {
+  color: var(--md-default-fg-color);
+  font-size: 2rem;
+  margin-bottom: 0.6rem;
+}
+
+.md-typeset h2 {
+  border-top: 1px solid var(--surface-border);
+  font-size: 1.35rem;
+  margin-top: 2.2em;
+  padding-top: 1.6rem;
+}
+
+.md-typeset h3 {
+  font-size: 1.1rem;
+  margin-top: 1.8em;
+}
+
+.md-typeset code {
+  border-radius: 4px;
+  font-size: 0.82em;
+  padding: 0.12em 0.36em;
+}
+
+.md-typeset pre > code {
+  border: 1px solid var(--code-border);
+  border-radius: 8px;
+  padding: 1rem 1.1rem;
+}
+
+/* The copy button sits inside the block; keep it clear of the border. */
+.md-clipboard {
+  top: 0.7rem;
+  right: 0.6rem;
+}
+
+/* Links keep Material's own colour scheme: it is accessible in both schemes,
+ * and overriding it means beating the palette rules that Material sets on both
+ * <html> and <body>. The brand shows in the header, the logo, the active nav
+ * item and the card borders instead. */
+.md-typeset a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+/* ----------------------------------------------------------------- tables */
+
+.md-typeset table:not([class]) {
+  border: 1px solid var(--surface-border);
+  border-radius: 8px;
+  box-shadow: none;
+  font-size: 0.78rem;
+  overflow: hidden;
+}
+
+.md-typeset table:not([class]) th {
+  background: var(--surface);
+  border-bottom: 1px solid var(--surface-border);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.md-typeset table:not([class]) td {
+  border-top: 1px solid var(--surface-border);
+  vertical-align: top;
+}
+
+.md-typeset table:not([class]) tr:hover td {
+  background: var(--surface);
+}
+
+/* An options table's first column is a flag: keep it on one line. */
+.md-typeset table:not([class]) td:first-child code {
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------ admonitions */
+
+.md-typeset .admonition,
+.md-typeset details {
+  border-left: 3px solid var(--md-accent-fg-color);
+  border-radius: 8px;
+  box-shadow: var(--shadow-sm);
+  font-size: 0.78rem;
+}
+
+.md-typeset .admonition-title,
+.md-typeset summary {
+  font-weight: 600;
+}
+
+/* ------------------------------------------------------------- navigation */
+
+.md-tabs {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.md-tabs__link {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  opacity: 0.75;
+}
+
+.md-tabs__link--active,
+.md-tabs__link:hover {
+  opacity: 1;
+}
+
+.md-tabs__item--active {
+  border-bottom: 2px solid var(--brand);
+}
+
+.md-nav__title {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.md-nav__link--active,
+.md-nav__link:active {
+  color: var(--brand-ink);
+  font-weight: 600;
+}
+
+[data-md-color-scheme="slate"] .md-nav__link--active {
+  color: var(--brand);
+}
+
+/* The command names are the nav's content - keep them monospaced. */
+.md-nav--primary .md-nav__link code {
+  background: none;
+  font-size: 0.72rem;
+  padding: 0;
+}
+
+/* ----------------------------------------------------------- header bits */
+
+.md-header,
+.md-tabs {
+  /* Material's palette re-states this after our stylesheet, so it needs the
+   * stronger declaration to hold. */
+  background-color: #0b0b0c !important;
+}
+
+.md-header {
+  backdrop-filter: saturate(180%) blur(6px);
+  box-shadow: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.md-header__title {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.md-search__form {
+  border-radius: 8px;
+}
+
+.md-search__input {
+  font-size: 0.72rem;
+}
+
+.md-search__input::placeholder {
+  color: var(--md-primary-bg-color);
+  opacity: 0.65;
+}
+
+/* ------------------------------------------------------------ home page */
+
+/* Hero: a single panel that states what the tool is, then gets out of the way. */
+.sasjs-hero {
+  background:
+    radial-gradient(120% 140% at 100% 0%, rgba(246, 228, 12, 0.18) 0%, rgba(246, 228, 12, 0) 45%),
+    var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: 14px;
+  margin: 0 0 1.6rem;
+  padding: 2rem 1.8rem 1.8rem;
+}
+
+.sasjs-hero h1 {
+  border: 0;
+  font-size: 2.1rem;
+  margin: 0 0 0.5rem;
+  padding: 0;
+}
+
+.sasjs-hero p {
+  color: var(--md-default-fg-color--light);
+  font-size: 0.86rem;
+  margin: 0 0 1.2rem;
+  max-width: 44rem;
+}
+
+.sasjs-hero .md-typeset {
+  margin: 0;
+}
+
+/* The install line: one command, visually distinct, copyable. */
+.sasjs-hero pre,
+.sasjs-install {
+  background: #0b0b0c !important;
+  border: 0;
+  border-radius: 10px;
+  box-shadow: var(--shadow-lg);
+  color: #f6e40c;
+  display: inline-block;
+  font-size: 0.8rem;
+  margin: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 0.7rem 1.1rem;
+}
+
+.sasjs-hero pre code {
+  background: none;
+  border: 0;
+  color: inherit;
+  padding: 0;
+}
+
+/* Feature cards: Material's own grid, tightened. */
+/* Material's own card border is scheme-aware; only the lift and the hover
+ * accent are added here. */
+.md-typeset .grid.cards > ul > li {
+  border-radius: 12px;
+  transition: border-color 120ms ease, transform 120ms ease;
+}
+
+.md-typeset .grid.cards > ul > li:hover {
+  border-color: var(--brand);
+  transform: translateY(-2px);
+}
+
+.md-typeset .grid.cards hr {
+  margin: 0.6rem 0;
+}
+
+/* Command index on the home page: flags, not prose. */
+.sasjs-commands table:not([class]) td:first-child {
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------------- footer */
+
+.md-footer {
+  border-top: 1px solid var(--surface-border);
+}
+
+.md-footer-meta {
+  background: #0b0b0c;
+}

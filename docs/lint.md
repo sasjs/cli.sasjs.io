@@ -71,7 +71,7 @@ sasjs lint fix
 
 ### Usage
 
-Simply run the command and the exceptions are fixed!  The following rules are supported for 'autofix':
+Running the command applies the fixes. The following rules support `autofix`:
 
 * noTrailingSpaces
 * hasDoxygenHeader
@@ -110,9 +110,6 @@ If you run `sasjs create SOMEPROJECT -t jobs` you can check out a sample project
 
 ## Sponsorship & Contributions
 
-SASjs is an open source framework!  Contributions are welcomed.  If you would like to see a feature, because it would be useful in your project, but you don't have the requisite (TypeScript) experience - then how about you engage us to build it for you?
-
-Contact [Allan Bowe](https://www.linkedin.com/in/allanbowe/) for details.
-
+SASjs is an open source framework, and contributions are welcome. If a rule or feature would help your project and you do not have the TypeScript experience to build it, [get in touch](https://sasapps.io/contact-us) about building it with us.
 
 <!-- cli-docs-ignore: --git-dir (git rev-parse flag in the hooks example) -->

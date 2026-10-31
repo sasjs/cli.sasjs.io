@@ -1,45 +1,65 @@
 ---
 layout: article
-title: SASjs CLI Documentation
-description: The SASjs CLI compiles, builds, tests, documents and deploys SAS projects to Viya, SAS 9 EBI and SASjs Server.
+title: SASjs CLI
+description: Build, test, document and deploy SAS projects to Viya, SAS 9 EBI and SASjs Server, from the command line.
 ---
 
-# SASjs CLI
+<div class="sasjs-hero" markdown>
 
-The SASjs Command Line Interface is a swiss-army knife for Dev Ops on SAS Viya, SAS 9 EBI and [SASjs Server](https://server.sasjs.io).
+# Build SAS like you build everything else
 
-What it does:
-
-- **Create** - scaffold a project from a template, or add the SASjs tooling to code that already exists
-- **Compile** - inline every dependency of each job, service and test, with the configured macro variables, init and term programs
-- **Build** - collate the compiled artefacts into a single deployable build pack (`.json`, `.json.zip` and `.sas`)
-- **Deploy** - create the folders, jobs, services and tests on the SAS server
-- **Test** - run SAS unit tests, and collect results, logs and coverage
-- **Document** - generate a Doxygen site from the headers in your macros and programs
-- **Lint** - find and fix problems in SAS code with [@sasjs/lint](https://github.com/sasjs/lint)
-
-There is also [streaming](https://sasapps.io/sas-streamed-apps) support, which lets you deploy a frontend as SAS services and skip the SAS Web Server.
-
-## Install
+One command line tool for the whole lifecycle of a SAS project: scaffold it, compile every
+dependency into each service, build a deployable artefact, deploy it to Viya, SAS 9 or SASjs
+Server, and test and document what you shipped.
 
 ```bash
 npm i -g @sasjs/cli
 ```
 
-Node is required first - see [installation](installation.md).
+</div>
 
-## Where to start
+<div class="grid cards" markdown>
 
-| If you want to | run |
-| --- | --- |
-| Start a new project from a template | [`sasjs create`](create.md) |
-| Add SASjs to a folder that already holds SAS code | [`sasjs init`](init.md) |
-| Connect the project to a SAS server | [`sasjs add`](add.md) |
-| Compile, build and deploy in one step | [`sasjs cbd`](cbd.md) |
+-   :material-rocket-launch-outline:{ .lg .middle } **Start a project**
+
+    ---
+
+    Scaffold from a template, or add the SASjs tooling to code that already exists.
+
+    [:octicons-arrow-right-24: `sasjs create`](create.md) - [:octicons-arrow-right-24: `sasjs init`](init.md)
+
+-   :material-lan-connect:{ .lg .middle } **Connect a target**
+
+    ---
+
+    Point the CLI at a SAS environment once, locally or in your home directory, and every command
+    can use it.
+
+    [:octicons-arrow-right-24: `sasjs add`](add.md) - [:octicons-arrow-right-24: `sasjs auth`](auth.md)
+
+-   :material-package-variant-closed:{ .lg .middle } **Ship it**
+
+    ---
+
+    Compile, build and deploy in one step. The artefact is portable between Viya, SAS 9 and SASjs
+    Server.
+
+    [:octicons-arrow-right-24: `sasjs cbd`](cbd.md) - [:octicons-arrow-right-24: how artefacts work](artefacts.md)
+
+-   :material-test-tube:{ .lg .middle } **Test and document**
+
+    ---
+
+    Run SAS unit tests with coverage, and generate a Doxygen site with data lineage from the same
+    headers.
+
+    [:octicons-arrow-right-24: `sasjs test`](test.md) - [:octicons-arrow-right-24: `sasjs doc`](doc.md)
+
+</div>
 
 ## Commands
 
-Every command also has a page in this site; the same list is printed by [`sasjs help`](help.md).
+Every command has a page, and the same list is printed by [`sasjs help`](help.md).
 
 | Command | Alias | What it does |
 | --- | --- | --- |

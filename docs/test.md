@@ -161,7 +161,7 @@ Overall coverage is displayed, along with a group summary for Jobs, Services and
 ![sas test coverage](img/coverage.png)
 
 !!! note
-    We are planning a more 'intelligent' coverage system that can detect whether a macro / servivce / job was executed as part of the test suite.  If this would be helpful to your project, do [get in touch](https://sasapps.io/contact-us)!
+    We are planning a more 'intelligent' coverage system that can detect whether a macro / service / job was executed as part of the test suite.  If this would help your project, [get in touch](https://sasapps.io/contact-us).
 
 
 ## Test Body
