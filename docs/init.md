@@ -24,6 +24,7 @@ It takes no arguments and works on the current working directory. Use [`sasjs cr
 | Path | Purpose |
 | --- | --- |
 | `sasjs/sasjsconfig.json` | Project configuration, including a placeholder target |
+| `sasjs/macros/` | The macro folder `macroFolders` points at - created with a `.gitkeep` so an empty folder survives a commit |
 | `sasjs/doxy/` | Doxygen templates used by [`sasjs doc`](/doc) |
 | `.sasjslint` | Lint rules used by [`sasjs lint`](/lint) - created only if absent |
 | `.gitignore` | Adds `node_modules`, `sasjsbuild`, `sasjsresults` and `.env*` if those rules are missing; existing content is kept |
@@ -31,10 +32,7 @@ It takes no arguments and works on the current working directory. Use [`sasjs cr
 
 `node_modules` and `package-lock.json` follow from that install.
 
-Two things it does **not** do:
-
-- it does not create `sasjs/macros`, the `sasjs/services` or `sasjs/jobs` folders, or any other part of the project layout - `macroFolders` simply points at `sasjs/macros`, so create that folder before you run [`sasjs compile`](/compile)
-- it does not add a README - that comes from [`sasjs create`](/create)
+It does **not** create `sasjs/services`, `sasjs/jobs` or the rest of the layout, and it does not add a README - [`sasjs create`](/create) is the command that lays out a full project.
 
 ## The generated sasjsconfig.json
 
@@ -47,14 +45,14 @@ Two things it does **not** do:
     {
       "name": "mytarget",
       "serverType": "SASJS",
-      "serverUrl": " ",
+      "serverUrl": "",
       "appLoc": "/Public/apps/myapp"
     }
   ]
 }
 ```
 
-The single target is a placeholder. Put the real `serverUrl` and `appLoc` in it, or add a target with [`sasjs add`](/add) / by editing the file - see [the configuration reference](/sasjsconfig).
+The single target is a placeholder. `serverUrl` is empty rather than a sample URL, because an empty value reads as "not configured yet" while a non-empty placeholder has to pass URL validation every time the configuration is read. Put the real `serverUrl` and `appLoc` in it, or add a target with [`sasjs add`](/add) / by editing the file - see [the configuration reference](/sasjsconfig).
 
 ## Running it in a folder that is already a SASjs project
 
@@ -75,10 +73,13 @@ To re-run the initialisation, delete or move `sasjs/sasjsconfig.json` first.
 
 ## After initialisation
 
-Every other SASjs command works in the folder, for example:
+A freshly initialised project compiles straight away: the macro folder exists and the empty `serverUrl` passes validation, so no edit is needed before the first build step. Running `sasjs compile` in the folder compiles the project for the `mytarget` target.
+
+Commands that talk to a SAS server - [`sasjs deploy`](/deploy), [`sasjs run`](/run), [`sasjs request`](/request) and the authentication commands - need a real `serverUrl` first.
+
+The other local commands work in the folder as they are:
 
 ```
-sasjs compile
 sasjs build
 sasjs doc
 sasjs lint
