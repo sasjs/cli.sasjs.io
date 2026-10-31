@@ -20,7 +20,7 @@ A diagram of the rules for determining whether a local or remote target is used 
 
 <!-- source: https://excalidraw.com/#room=0e0163e79c486da603dd,OrjYfbOmt6OTc64ND7Qf6Q -->
 
-![SAS target](/img/targetBehaviour.svg)
+![SAS target](img/targetBehaviour.svg){ width="2755" height="1427" loading="lazy" decoding="async" }
 
 ## How can I obtain a Viya client and secret?
 
@@ -31,7 +31,7 @@ For setting up the client / secret you will need the services of an administrato
 
 ## Viya 2025
 
-The latest instructions are available [here](https://developer.sas.com/docs/rest-apis/getting-started/authentication).  Our recommended approach is to use the browser as follows:
+The latest instructions are in [SAS REST API authentication](https://developer.sas.com/docs/rest-apis/getting-started/authentication).  Our recommended approach is to use the browser as follows:
 
 1.  Open the following url as an administrator:  `https://<sas-server>/SASLogon/oauth/authorize?client_id=sas.cli&response_type=token`
 2.  This will redirect to a new url.  Extract the `access_token` parameter and use it in the query below:
@@ -106,13 +106,13 @@ The ACCESS_TOKEN may then be used for API requests until it expires. On expriy, 
 
 Once the REFRESH_TOKEN expires, the CLIENT must be re-authenticated using SAS Logon.
 
-More information on token expiry is available [here](https://communities.sas.com/t5/SAS-Communities-Library/Tuning-the-authentication-timeout-for-long-running-jobs/ta-p/834148).
+See [Tuning the authentication timeout for long-running jobs](https://communities.sas.com/t5/SAS-Communities-Library/Tuning-the-authentication-timeout-for-long-running-jobs/ta-p/834148).
 
 The below diagram illustrates this flow, but not precisely - the diagram describes the flow for a deployed application, where the secret can be secured at backend.  In the SASjs CLI case the entire app is frontend (nothing to deploy at backend), and so the SECRET must also be kept on the frontend.
 
 <!-- source: https://lucid.app/lucidchart/e5ff1d2a-9d6a-4ae5-a990-a2a036d792f3/edit?page=O3h49Ot7ObFc# -->
 
-![SAS token authentication](/img/tokenmanagementsasviya.svg)
+![SAS token authentication](img/tokenmanagementsasviya.svg){ width="800" height="1300" loading="lazy" decoding="async" }
 
 ## Why does SASjs take so long to install?
 

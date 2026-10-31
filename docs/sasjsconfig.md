@@ -18,7 +18,7 @@ The config file says what a project contains - where its jobs, services, macros 
 
 A named target is looked up in the project file first and then in `.sasjsrc`, so a project can keep its own targets while the user file holds the rest. Where both files carry a target with the same name, the project one wins. Where no target is named, `defaultTarget` decides.
 
-![sasjs config target behaviour](/img/targetBehaviour.svg)
+![sasjs config target behaviour](img/targetBehaviour.svg){ width="2755" height="1427" loading="lazy" decoding="async" }
 
 ## Root level and target level
 

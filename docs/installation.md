@@ -52,6 +52,6 @@ You are using SASjs CLI v6.4.7
 npm i -g @sasjs/cli@latest
 ```
 
-`npm` 6 has [a long-standing bug](https://github.com/npm/cli/issues/1884) that makes global upgrades unreliable. Use a current npm (`npm i -g npm@latest`) or, on Node 22 and later, the bundled one.
+Use the npm that ships with your Node - Node 22 bundles npm 10. If npm has been pinned to an old release, `npm i -g npm@latest` first: global upgrades on npm 6 are unreliable ([npm/cli#1884](https://github.com/npm/cli/issues/1884)) and npm 6 has been end-of-life since 2022.
 
 If a command does not behave as this site describes, run `sasjs version` first: an older CLI is the usual reason.

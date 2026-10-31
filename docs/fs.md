@@ -14,7 +14,7 @@ Not to be confused with:
 * the _logical_ SAS Folders (eg SAS Drive or Metadata BIP Tree), managed using the `sasjs folder` [command](/folder).
 * the regular [`sasjs compile`](/compile) command, which creates self-contained Jobs / Services / Tests that _do not require a filesystem_.
 
-![](https://cli.sasjs.io/img/sasjsfs.png)
+![The sasjs fs folders](img/sasjsfs.webp){ width="1200" height="748" loading="lazy" decoding="async" }
 
 It is also possible to use this feature natively within the SASjs VSCode Extension - [https://github.com/sasjs/vscode-extension#directory-synchronisation](https://github.com/sasjs/vscode-extension#directory-synchronisation).
 
@@ -131,7 +131,7 @@ Will hash up a _remote_ SAS filesystem, compare with _local_ hashes, and deploy 
 
 Here's a demo video:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/HjUpGGCpx_M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe loading="lazy" width="560" height="315" src="https://www.youtube-nocookie.com/embed/HjUpGGCpx_M" title="sasjs fs in use" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
 ### Syntax

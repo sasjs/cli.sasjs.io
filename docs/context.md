@@ -71,7 +71,7 @@ To explain the sections:
 - `autoExecLines` - an array of SAS program lines. These will execute ONCE when the server process is started, so expensive libname assignments could be placed here, speeding up web service response times.
 - `options` - an array of SAS option settings
 - `contextName` - the name of the _launcher_ context used to spawn the compute context
-- `launchtype` - a mandatory parameter, more details [here](https://support.sas.com/content/dam/SAS/support/en/sas-global-forum-proceedings/2018/2083-2018.pdf)
+- `launchtype` - a mandatory parameter, described in [SAS Global Forum 2018 paper 2083](https://support.sas.com/content/dam/SAS/support/en/sas-global-forum-proceedings/2018/2083-2018.pdf)
 
 ## sasjs context create
 

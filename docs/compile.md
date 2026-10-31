@@ -33,13 +33,13 @@ Content is added to each compiled Job/Service/Test in the following order:
 
 The following diagram illustrates the compilation of a [Service](/artefacts/#service) (service_xyz.sas) that includes some macro variables, as well as common macro dependencies across the `initProgram` and `termProgram`:
 
-![sasjscliflow.png](/img/sasjscompile.png)
+![The sasjs folder after compile](img/sasjscompile.webp){ width="715" height="762" loading="lazy" decoding="async" }
 
 Notice that only one copy of the macro is inserted, even though it is defined in multiple artefacts.
 
 The following diagram illustrates the logic flow when compiling a [Primary Artefact](/artefacts/#primary-artefact):
 
-![](img/compile.dot.svg)
+![](img/compile.dot.svg){ width="492" height="1428" loading="lazy" decoding="async" }
 
 ### 1. sasjsbuild Folder
 
@@ -77,31 +77,31 @@ Macro variables are inserted according to the type of the compiled file, ie from
 
 ### 3. Binary Files
 
-Binary Files are converted to a base64 string and wrapped in put statements with a user provided fileref as described [here](/artefacts/#binary-files)
+Binary Files are converted to a base64 string and wrapped in put statements with a user provided fileref as described in [binary files](/artefacts/#binary-files)
 
 ### 4. SAS Macros
 
 SAS Macros are recursively compiled to ensure there is only one copy of each macro across the initProgram, termProgram, the primary artefact itself, and the `webout()` macros (if a Service or Test).
 
-More info [here](/artefacts/#sas-macros).
+See [SAS macros](/artefacts/#sas-macros).
 
 ### 5. SAS Includes
 
 SAS Includes are wrapped in put statements and a filename statement is generated with a user provided fileref.
 
-More info [here](/artefacts/#sas-includes).
+See [SAS includes](/artefacts/#sas-includes).
 
 ### 6. initProgram
 
 The `initProgram` executes right before the main Job / Service / Test.
 
-More info [here](/artefacts/#initprogram).
+See [initProgram](/artefacts/#initprogram).
 
 ### 7. Source Code
 
 This section contains the actual code inside the Job / Service / Test.
 
-More info [here](/artefacts/#primary-sasjs-file-types).
+See [primary SASjs file types](/artefacts/#primary-sasjs-file-types).
 
 ## Compile Single File
 

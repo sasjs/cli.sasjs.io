@@ -26,7 +26,7 @@ sasjs add cred -t targetname [options]   # add creds for an existing target
 | `--target` | `-t` | `sasjs add cred` | The existing target to add credentials for. |
 | `--insecure` | `-i` | both | Accept a TLS certificate that cannot be verified - see [Insecure connections](#insecure-connections). |
 
-![](https://cli.sasjs.io/img/sasjsaddcred.png)
+![The sasjs add credential prompts](img/sasjsaddcred.webp){ width="1200" height="675" loading="lazy" decoding="async" }
 
 ## Insecure connections
 

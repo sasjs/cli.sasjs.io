@@ -1,4 +1,44 @@
 /*
+ * Fonts are served from this site rather than Google Fonts: the build-time
+ * fetch is the only third-party request the site used to make on every page.
+ * The files are the latin subsets of Inter and JetBrains Mono, downloaded by
+ * the same Google Fonts CSS and checked in, so a reader never contacts Google.
+ * `theme.font: false` in mkdocs.yml stops Material emitting its own link.
+ */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/Inter-400.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../assets/fonts/Inter-700.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/JetBrainsMono-400.woff2") format("woff2");
+}
+
+/* Material declares these on <body> (main.css: body{--md-text-font-family:
+ * var(--md-text-font,_),...}), so they are set on both elements and forced -
+ * a declaration on <html> alone is overridden on body and never inherited. */
+html,
+body {
+  --md-text-font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  --md-code-font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace !important;
+}
+
+/*
  * cli.sasjs.io - design tokens and finishing touches for Material for MkDocs.
  *
  * The SASjs mark is black and yellow, so the header is black in both schemes
@@ -295,7 +335,16 @@ body[data-md-color-scheme="slate"] {
   background: none;
   border: 0;
   color: inherit;
-  padding: 0;
+  padding: 0 2.2rem 0 0;
+}
+
+/* The copy button sits in the top-right corner of every code block, over the
+ * code's own viewport. A margin (not padding - padding is inside the scroll
+ * area) reserves a gutter so neither a short line nor a long one can run
+ * underneath the button. */
+.md-typeset pre > code {
+  margin-right: 2.4rem;
+  padding-right: 0.4rem;
 }
 
 /* Feature cards: Material's own grid, tightened. */

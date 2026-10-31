@@ -61,16 +61,19 @@ markdown_extensions:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
 
+hooks:
+  - hooks/html_fixes.py
+
 extra_css:
-  - font-awesome.css
   - stylesheets/extra.css
 
 plugins:
   - search
 
 # Repository
-repo_name: "sasjs/cli"
-repo_url: "https://github.com/sasjs/cli"
+# No repo_url: Material fetches api.github.com for the star count on every page,
+# unauthenticated, which rate-limits and logs a console error. The repository is
+# linked from the footer social icons and from the pages themselves.
 
 theme:
   name: material
@@ -78,9 +81,8 @@ theme:
   language: en
   logo: img/logo/favicon/32.svg
   favicon: img/logo/favicon/32.ico
-  font:
-    text: Inter
-    code: JetBrains Mono
+  # Fonts are self-hosted - see docs/stylesheets/extra.css and docs/assets/fonts.
+  font: false
   # Black and yellow is the SASjs mark; the header stays black in both schemes
   # and the content surface flips.
   palette:

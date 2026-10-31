@@ -55,7 +55,7 @@ This is simply a zipped version of the target.json file, and is used when upload
 
 The generated SAS program can be executed directly in SAS 9 or SAS Viya to create all the jobs/services/tests programmatically. This is especially useful for Viya developers who are unable to obtain a client / secret. For SAS 9 it is the primary deployment method.
 
-![sasjscliflow.png](/img/sasjsbuild.png)
+![sasjscliflow.png](img/sasjsbuild.png){ width="577" height="885" loading="lazy" decoding="async" }
 
 ### SAS 9 Build Script
 
