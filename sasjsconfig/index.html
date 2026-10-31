@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="How to structure the sasjsconfig.json file and what all the attributes actually do">
+        <meta name="description" content="How to structure the sasjs/sasjsconfig.json file - the project and target settings that drive compile, build, deploy, test and doc.">
       
       
       
@@ -77,9 +77,9 @@
 
 
 
-<meta name="description" property="og:description" content="How to structure the sasjsconfig.json file and what all the attributes actually do">
-<meta property='name:description' content="How to structure the sasjsconfig.json file and what all the attributes actually do" />
-<meta property="twitter:description" content="How to structure the sasjsconfig.json file and what all the attributes actually do">
+<meta name="description" property="og:description" content="How to structure the sasjs/sasjsconfig.json file - the project and target settings that drive compile, build, deploy, test and doc.">
+<meta property='name:description' content="How to structure the sasjs/sasjsconfig.json file - the project and target settings that drive compile, build, deploy, test and doc." />
+<meta property="twitter:description" content="How to structure the sasjs/sasjsconfig.json file - the project and target settings that drive compile, build, deploy, test and doc.">
 
 
 
@@ -416,6 +416,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SASjs Config File
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -432,6 +450,80 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#where-the-file-lives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where the file lives
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#root-level-and-target-level" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Root level and target level
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-the-file-holds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the file holds
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-target" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A target
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1302,6 +1394,69 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#where-the-file-lives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where the file lives
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#root-level-and-target-level" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Root level and target level
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-the-file-holds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the file holds
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-target" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A target
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1321,12 +1476,190 @@
 
 
 <h1 id="sasjs-configuration">SASjs Configuration<a class="headerlink" href="#sasjs-configuration" title="Permanent link">&para;</a></h1>
-<p>The SASjs Config file provides the settings for your SASjs project. It is divided between root-level (applies to all targets) and target level (specific to a deployment target) settings. Target level settings always override root settings. The SASjs config file can existing within a project (local file) or in your home directory (global). When running the SASjs CLI, a search is made within the current directory, then all parent directories, for a <code>./sasjs/sasjsconfig.json</code> file. If none is found, then the user (home directory) config is used by default. If the project config is found, but the specified target is <strong>not found within it</strong>, then the user target will be searched also.</p>
+<p>The config file says what a project contains - where its jobs, services, macros and programs are - and where they deploy. Every command starts here.</p>
+<h2 id="where-the-file-lives">Where the file lives<a class="headerlink" href="#where-the-file-lives" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Scope</th>
+<th>Used when</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sasjs/sasjsconfig.json</code></td>
+<td>Project</td>
+<td>Any command run inside the project. The CLI walks up from the current folder and uses the nearest folder that holds a <code>sasjs/sasjsconfig.json</code>.</td>
+</tr>
+<tr>
+<td><code>~/.sasjsrc</code></td>
+<td>User</td>
+<td><code>sasjs add</code> with the global scope, and any command run outside a project.</td>
+</tr>
+</tbody>
+</table>
+<p>A named target is looked up in the project file first and then in <code>.sasjsrc</code>, so a project can keep its own targets while the user file holds the rest. Where both files carry a target with the same name, the project one wins. Where no target is named, <code>defaultTarget</code> decides.</p>
 <p><img alt="sasjs config target behaviour" src="/img/targetBehaviour.svg" /></p>
-<p>The benefit of a global sasjsconfig is that you can use the settings anywhere on your filesystem (with that user account). The benefit of a local config file is that you can share the settings with other developers on your project.</p>
-<p>To view the below in full screen, click <a href="/sasjsconfig.html">here</a>.</p>
-<iframe src="/sasjsconfig.html" width="100%" height="1000" style="border:none;">
-</iframe>
+<h2 id="root-level-and-target-level">Root level and target level<a class="headerlink" href="#root-level-and-target-level" title="Permanent link">&para;</a></h2>
+<p>A setting belongs either at the root of the file, where it applies to every target, or inside a target, where it applies to that one. Three rules cover every key:</p>
+<ul>
+<li>a scalar setting inside a target replaces the root-level value</li>
+<li>folder arrays are combined - root folders first, then target folders, with duplicates removed - so a target adds folders rather than replacing them</li>
+<li>a macro, program or binary file found in an earlier folder is the one used</li>
+</ul>
+<h2 id="what-the-file-holds">What the file holds<a class="headerlink" href="#what-the-file-holds" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Level</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>defaultTarget</code></td>
+<td>root</td>
+<td>the target used when a command runs without <code>--target</code></td>
+</tr>
+<tr>
+<td><code>targets</code></td>
+<td>root</td>
+<td>the targets themselves, described below</td>
+</tr>
+<tr>
+<td><code>macroFolders</code></td>
+<td>root and target</td>
+<td>folders searched for SAS macros</td>
+</tr>
+<tr>
+<td><code>programFolders</code></td>
+<td>root and target</td>
+<td>folders searched for SAS Includes</td>
+</tr>
+<tr>
+<td><code>binaryFolders</code></td>
+<td>root and target</td>
+<td>folders searched for files embedded as base64</td>
+</tr>
+<tr>
+<td><code>serviceConfig</code></td>
+<td>root and target</td>
+<td><code>serviceFolders</code>, <code>initProgram</code>, <code>termProgram</code>, <code>macroVars</code> for services</td>
+</tr>
+<tr>
+<td><code>jobConfig</code></td>
+<td>root and target</td>
+<td>the same for jobs, with <code>jobFolders</code></td>
+</tr>
+<tr>
+<td><code>testConfig</code></td>
+<td>root and target</td>
+<td><code>initProgram</code>, <code>termProgram</code>, <code>macroVars</code>, <code>testSetUp</code> and <code>testTearDown</code></td>
+</tr>
+<tr>
+<td><code>buildConfig</code></td>
+<td>root and target</td>
+<td><code>initProgram</code>, <code>termProgram</code>, <code>buildOutputFileName</code>, <code>macroVars</code> for <a href="../build/"><code>sasjs build</code></a></td>
+</tr>
+<tr>
+<td><code>deployConfig</code></td>
+<td>root and target</td>
+<td><code>deployScripts</code> and <code>deployServicePack</code> for <a href="../deploy/"><code>sasjs deploy</code></a></td>
+</tr>
+<tr>
+<td><code>docConfig</code></td>
+<td>root and target</td>
+<td><code>outDirectory</code>, <code>enableLineage</code>, <code>doxyContent</code>, <code>displayMacroCore</code>, <code>dataControllerUrl</code> for <a href="../doc/"><code>sasjs doc</code></a></td>
+</tr>
+<tr>
+<td><code>streamConfig</code></td>
+<td>root and target</td>
+<td>the streaming app: <code>webSourcePath</code>, <code>streamWebFolder</code>, <code>streamServiceName</code>, <code>streamWeb</code>, <code>streamLogo</code>, <code>assetPaths</code>, and <code>mockWeb</code> / <code>mockWebFolder</code> - see <a href="../web/"><code>sasjs web</code></a></td>
+</tr>
+<tr>
+<td><code>syncFolder</code></td>
+<td>root and target</td>
+<td>a folder copied as it is into the build output</td>
+</tr>
+<tr>
+<td><code>syncDirectories</code></td>
+<td>root and target</td>
+<td>local/remote pairs for <a href="../fs/"><code>sasjs fs sync</code></a></td>
+</tr>
+<tr>
+<td><code>sasjsBuildFolder</code>, <code>sasjsResultsFolder</code></td>
+<td>root and target</td>
+<td>where the build and the results go - <code>sasjsbuild</code> and <code>sasjsresults</code> by default</td>
+</tr>
+<tr>
+<td><code>httpsAgentOptions</code></td>
+<td>root and target</td>
+<td>TLS settings for the requests the CLI makes, such as <code>caPath</code> for an intermediate certificate</td>
+</tr>
+</tbody>
+</table>
+<h2 id="a-target">A target<a class="headerlink" href="#a-target" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>how the target is addressed with <code>--target</code></td>
+</tr>
+<tr>
+<td><code>serverType</code></td>
+<td><code>SASVIYA</code>, <code>SAS9</code> or <code>SASJS</code></td>
+</tr>
+<tr>
+<td><code>serverUrl</code></td>
+<td>protocol, host and port of the SAS environment</td>
+</tr>
+<tr>
+<td><code>appLoc</code></td>
+<td>the SAS folder the project deploys into</td>
+</tr>
+<tr>
+<td><code>contextName</code></td>
+<td>the Viya compute context, eg <code>SAS Job Execution compute context</code></td>
+</tr>
+<tr>
+<td><code>serverName</code>, <code>repositoryName</code></td>
+<td>SAS 9 only - where the SAS web services are deployed</td>
+</tr>
+<tr>
+<td><code>authConfig</code>, <code>authConfigSas9</code></td>
+<td>credentials, saved here for a global target only</td>
+</tr>
+<tr>
+<td><code>httpsAgentOptions</code></td>
+<td>TLS settings for this target</td>
+</tr>
+</tbody>
+</table>
+<p>Credentials for a local target are not in this file: they live in <code>.env.&lt;target&gt;</code> in the project, written by <a href="../add/"><code>sasjs add</code></a> - see <a href="../env/">the ENV file</a>.</p>
+<h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h2>
+<p>Every key, with its type, defaults and allowed values, is generated from the JSON schema: <a href="/sasjsconfig.html">sasjsconfig reference</a>.</p>
+<p>Adding <code>$schema</code> at the top of the file lets an editor that understands JSON schemas complete and check the keys as you type - this is what <a href="../create/"><code>sasjs create</code></a> and <a href="../init/"><code>sasjs init</code></a> write:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://cli.sasjs.io/sasjsconfig-schema.json"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"defaultTarget"</span><span class="p">:</span><span class="w"> </span><span class="s2">"viya"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"viya"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"serverType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SASVIYA"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"serverUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://sas.example.com"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"appLoc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/Public/app"</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
 
 
 

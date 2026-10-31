@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="ENV File configuration options such as ACCESS_TOKEN and VERBOSE are documented here">
+        <meta name="description" content="The .env and .env.<target> files - the variables the SASjs CLI reads for authentication, logging and macro resolution.">
       
       
       
@@ -77,9 +77,9 @@
 
 
 
-<meta name="description" property="og:description" content="ENV File configuration options such as ACCESS_TOKEN and VERBOSE are documented here">
-<meta property='name:description' content="ENV File configuration options such as ACCESS_TOKEN and VERBOSE are documented here" />
-<meta property="twitter:description" content="ENV File configuration options such as ACCESS_TOKEN and VERBOSE are documented here">
+<meta name="description" property="og:description" content="The .env and .env.<target> files - the variables the SASjs CLI reads for authentication, logging and macro resolution.">
+<meta property='name:description' content="The .env and .env.<target> files - the variables the SASjs CLI reads for authentication, logging and macro resolution." />
+<meta property="twitter:description" content="The .env and .env.<target> files - the variables the SASjs CLI reads for authentication, logging and macro resolution.">
 
 
 
@@ -523,10 +523,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#access_token" class="md-nav__link">
+  <a href="#where-the-values-come-from" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ACCESS_TOKEN
+        Where the values come from
       
     </span>
   </a>
@@ -534,10 +534,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#refresh_token" class="md-nav__link">
+  <a href="#variables" class="md-nav__link">
     <span class="md-ellipsis">
       
-        REFRESH_TOKEN
+        Variables
       
     </span>
   </a>
@@ -545,10 +545,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#verbose" class="md-nav__link">
+  <a href="#logging" class="md-nav__link">
     <span class="md-ellipsis">
       
-        VERBOSE
+        Logging
       
     </span>
   </a>
@@ -1379,10 +1379,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#access_token" class="md-nav__link">
+  <a href="#where-the-values-come-from" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ACCESS_TOKEN
+        Where the values come from
       
     </span>
   </a>
@@ -1390,10 +1390,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#refresh_token" class="md-nav__link">
+  <a href="#variables" class="md-nav__link">
     <span class="md-ellipsis">
       
-        REFRESH_TOKEN
+        Variables
       
     </span>
   </a>
@@ -1401,10 +1401,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#verbose" class="md-nav__link">
+  <a href="#logging" class="md-nav__link">
     <span class="md-ellipsis">
       
-        VERBOSE
+        Logging
       
     </span>
   </a>
@@ -1431,24 +1431,76 @@
   
 
 
-<h1 id="env-file">env file<a class="headerlink" href="#env-file" title="Permanent link">&para;</a></h1>
-<p>When running the CLI a number of <em>environment</em> variables are required - for authentication, debugging etc.</p>
-<p>These variables can be actual environment variables (set as part of the shell invocation) or, loaded on startup from a <code>.env</code> file in the root of the SASjs project.</p>
-<p>As different targets often have different variables (eg connection strings) a <code>.env</code> may be "scoped" with the target name, eg <code>.env.TARGETNAME</code>.</p>
-<p>If a <code>.env.TARGETNAME</code> file is not found, then the generic <code>.env</code> file is used.</p>
-<p>The following options may be defined, depending on your use case:</p>
-<h2 id="access_token">ACCESS_TOKEN<a class="headerlink" href="#access_token" title="Permanent link">&para;</a></h2>
-<p>Typically created when running <code>sasjs auth</code>.  Used for authentication to the Viya and SASjs APIs.</p>
-<h2 id="refresh_token">REFRESH_TOKEN<a class="headerlink" href="#refresh_token" title="Permanent link">&para;</a></h2>
-<p>Created when running <code>sasjs auth</code> against a Viya target.  The CLI will use this to auto-refresh the access token if needed.</p>
-<h2 id="verbose">VERBOSE<a class="headerlink" href="#verbose" title="Permanent link">&para;</a></h2>
-<p>Verbose mode will log a summary of every HTTP request/response to the console - this is helpful in troubleshooting edge cases and unusual server responses.</p>
-<p><code>VERBOSE=ON</code> (case insensitive) will enable the debug mode. To remove extra colors from logged message, set <code>VERBOSE=BLEACHED</code> (case insensitive). Everything else (eg <code>VERBOSE=OFF</code>) will disable it.  The option is disabled by default.</p>
-<p>Verbose mode will also be enabled if <code>LOG_LEVEL</code> is set to <code>Trace</code> (case insensitive) in the <code>.env*</code> file.</p>
+<h1 id="env-file">ENV file<a class="headerlink" href="#env-file" title="Permanent link">&para;</a></h1>
+<p>Some values the CLI needs are environment variables rather than configuration: credentials, the access token, and a few switches that are useful when something misbehaves.</p>
+<h2 id="where-the-values-come-from">Where the values come from<a class="headerlink" href="#where-the-values-come-from" title="Permanent link">&para;</a></h2>
+<p>A <code>.env</code> file in the project root is loaded every time the CLI starts. When a command resolves a target, <code>.env.&lt;target&gt;</code> is loaded as well, so each target can carry its own credentials.</p>
+<div class="highlight"><pre><span></span><code>my-project/
+├── .env           &lt;- shared values
+├── .env.viya      &lt;- values for the `viya` target
+└── .env.sas9      &lt;- values for the `sas9` target
+</code></pre></div>
+<p>Both files are looked for in the current directory, and then in the directory above it. A variable that is already set in the shell wins over the file, so <code>ACCESS_TOKEN=xxx sasjs deploy</code> overrides whatever <code>.env</code> holds.</p>
+<p>Neither file belongs in git. <a href="../create/"><code>sasjs create</code></a> and <a href="../init/"><code>sasjs init</code></a> add <code>.env*</code> to the project's <code>.gitignore</code>.</p>
+<h2 id="variables">Variables<a class="headerlink" href="#variables" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Written by</th>
+<th>Read for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ACCESS_TOKEN</code></td>
+<td><code>sasjs add cred</code>, <code>sasjs auth login</code></td>
+<td>authenticating against Viya and SASjs Server</td>
+</tr>
+<tr>
+<td><code>REFRESH_TOKEN</code></td>
+<td><code>sasjs add cred</code>, <code>sasjs auth login</code></td>
+<td>refreshing the access token when it expires</td>
+</tr>
+<tr>
+<td><code>CLIENT</code>, <code>SECRET</code></td>
+<td><code>sasjs add cred</code></td>
+<td>the client/secret used to obtain a Viya token</td>
+</tr>
+<tr>
+<td><code>SAS_USERNAME</code>, <code>SAS_PASSWORD</code></td>
+<td><code>sasjs add cred</code> (SAS 9)</td>
+<td>SAS 9 authentication, and the username/password flow of <a href="../auth/"><code>sasjs auth login</code></a></td>
+</tr>
+<tr>
+<td><code>SASJS_CLIENT</code></td>
+<td>you</td>
+<td>the client id used when signing in to SASjs Server as a non-administrator</td>
+</tr>
+<tr>
+<td><code>LOG_LEVEL</code></td>
+<td>you</td>
+<td>how much the CLI logs - <code>Info</code> by default</td>
+</tr>
+<tr>
+<td><code>VERBOSE</code></td>
+<td>you</td>
+<td>request and response logging, see below</td>
+</tr>
+<tr>
+<td><code>macroCorePath</code></td>
+<td>you</td>
+<td>where to find <code>@sasjs/core</code>, overriding the usual search - see <a href="../artefacts/">artefacts</a></td>
+</tr>
+</tbody>
+</table>
+<p><code>sasjs auth login</code> also reads <code>SAS_USERNAME</code> and <code>SAS_PASSWORD</code> so it can run without prompts in CI, and accepts <code>--password-stdin</code> for the password alone.</p>
+<h2 id="logging">Logging<a class="headerlink" href="#logging" title="Permanent link">&para;</a></h2>
+<p><code>VERBOSE=ON</code> (case insensitive) logs a summary of every HTTP request and response, which is what to reach for when a server answers something unexpected. <code>VERBOSE=BLEACHED</code> does the same without the colour codes, for a log you will read later. Anything else, including <code>VERBOSE=OFF</code>, leaves it off.</p>
+<p>Setting <code>LOG_LEVEL=Trace</code> in the same file has the same effect as <code>VERBOSE=ON</code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Verbose mode can also be enabled for a single <code>sasjs job execute</code> command by adding the <code>--verbose</code>(<code>-v</code>) flag.
-To enable bleached verbose mode, add <code>bleached</code> after <code>-v</code> flag (eg <code>sasjs job execute -v bleached</code>).</p>
+<p>Verbose mode can also be turned on for a single command with <code>--verbose</code> (<code>-v</code>) - for example <code>sasjs job execute -v</code>, or <code>sasjs job execute -v bleached</code> for the uncoloured version.</p>
 </div>
 
 

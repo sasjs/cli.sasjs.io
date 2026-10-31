@@ -1612,8 +1612,8 @@
 <h2 id="primary-artefacts">Primary Artefacts<a class="headerlink" href="#primary-artefacts" title="Permanent link">&para;</a></h2>
 <p>The three Primary Artefacts are Job, Service, and Test.  These artefacts are compiled, added to a build pack, and deployed to SAS.</p>
 <h3 id="job">Job<a class="headerlink" href="#job" title="Permanent link">&para;</a></h3>
-<p>A SASjs Job is a .sas program found in a directory listed in the <a href="https://cli.sasjs.io/sasjsconfig.html#jobConfig_jobFolders">jobFolders</a> array of the <code>jobConfig</code> object.  Where there are <code>jobFolders</code> at both target and root level in the sasjsconfig.json file, the <code>subdirectory/jobname.sas</code> files at target level will take precedence.</p>
-<p>Jobs are not expected to write to <code>_webout</code> and so are not compiled with the <code>%webout()</code> macro and it's dependencies.  Jobs are always created in a <code>/jobs/</code> folder under the target appLoc.</p>
+<p>A SASjs Job is a .sas program found in a directory listed in the <a href="https://cli.sasjs.io/sasjsconfig.html#jobConfig_jobFolders">jobFolders</a> array of the <code>jobConfig</code> object. Root-level and target-level <code>jobFolders</code> are combined - root folders first, then target folders, duplicates removed - so a target adds job folders rather than replacing them.</p>
+<p>Jobs are not expected to write to <code>_webout</code> and so are not compiled with the <code>%webout()</code> macro and its dependencies.  Jobs are always created in a <code>/jobs/</code> folder under the target appLoc.</p>
 <p>A Job may contain:</p>
 <ul>
 <li>Data Inputs / Outputs - used to generate the <a href="/doc/#data-lineage">data lineage</a></li>
@@ -1622,7 +1622,7 @@
 <li>Binary Files - under <code>&lt;h4&gt; Binary Files &lt;/h4&gt;</code></li>
 </ul>
 <h3 id="service">Service<a class="headerlink" href="#service" title="Permanent link">&para;</a></h3>
-<p>A SASjs Service is a .sas program found in a directory listed in the <a href="https://cli.sasjs.io/sasjsconfig.html#serviceConfig_serviceFolders">serviceFolders</a> array of the <code>serviceConfig</code> object.  Where there are <code>serviceFolders</code> at both target and root level in the sasjsconfig.json file, the <code>subdirectory/servicename.sas</code> files at target level will take precedence.</p>
+<p>A SASjs Service is a .sas program found in a directory listed in the <a href="https://cli.sasjs.io/sasjsconfig.html#serviceConfig_serviceFolders">serviceFolders</a> array of the <code>serviceConfig</code> object. As with jobs, root-level and target-level <code>serviceFolders</code> are combined, root folders first, duplicates removed.</p>
 <p>Services are expected to write to <code>_webout</code> and so are compiled along with the <code>%webout()</code> macro and dependencies.  Services are always created in a <code>/services/</code> folder under the target appLoc.</p>
 <p>A Service may contain:</p>
 <ul>
@@ -1662,15 +1662,13 @@
   @li macro1.sas
   @li macro2.sas
 </code></pre></div>
-<p>During compilation, these macros will be sourced from the following locations (in this order):</p>
+<p>During compilation, these macros are sought in the following order, and the first match wins:</p>
 <ul>
-<li>target-level macroFolders array in the sasjsconfig.json file</li>
-<li>root-level macroFolders array in the sasjsconfig.json file</li>
-<li><a href="https://core.sasjs.io">SASjs Core</a> under <code>node_modules/@sasjs/core</code></li>
-<li><a href="https://core.sasjs.io">SASjs Core</a> under <code>node_modules/@sasjs/cli/node_modules/@sasjs/core</code></li>
-<li><a href="https://core.sasjs.io">SASjs Core</a> from the GLOBAL install of the SASjs CLI</li>
+<li>the root-level <code>macroFolders</code>, then the target-level ones</li>
+<li><a href="https://core.sasjs.io">SASjs Core</a> - the copy in the project's <code>node_modules</code> if the project has one, otherwise the one the CLI carries</li>
 </ul>
 <p>As soon as a macro is found, the search stops.  So if an <a href="https://core.sasjs.io/mf__nobs_8sas.html"><code>mf_nobs.sas</code></a> macro was placed in a directory from the root-level <code>macroFolders</code> array, then the same-named definition would NOT be taken from SASjs Core.</p>
+<p>The core macros every compiled file needs (<code>%webout()</code>, <code>%mf_abort()</code> and friends) are resolved separately, from <code>@sasjs/core</code>. Setting the <code>macroCorePath</code> environment variable makes the CLI take them from that folder instead - which is how to build against a local <code>@sasjs/core</code> checkout. See <a href="../env/">the ENV file</a>.</p>
 <p>If a macro is not found then the compilation will immediately fail.</p>
 <p>To avoid continually re-scanning the locations above, macros are added to an internal object (compileTree) as they are found, along with their dependents and source folder location.  After compilation this object is exported to <code>sasjsbuild/compileTree.json</code>.</p>
 <p>The compiled file does not contain duplicate macros. When compiling each Job / Service / Test, a distinct list of 'top level' macro names are taken from any <code>initProgram</code> and <code>termProgram</code> definitions, in addition to the <code>%webout()</code> dependencies if a Service or Test.</p>
