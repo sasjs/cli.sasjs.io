@@ -48,8 +48,7 @@ markdown_extensions:
 extra_css: ["font-awesome.css"]
 
 plugins:
-  - search:
-      prebuild_index: true
+  - search
 
 # Repository
 repo_name: "cli.sasjs.io"
@@ -76,6 +75,15 @@ theme:
       - icon: fontawesome/brands/linkedin
         link: https://linkedin.com/company/sasjs
         name: SASjs on LinkedIn
-copyright: All rights reserved &copy;2021 Macro People Ltd.
+copyright: All rights reserved &copy;2026 Macro People Ltd.
 
-google_analytics: ["UA-109713029-8", "sasjs.io"]
+# A page link or an anchor that does not resolve is reported as a warning,
+# and `mkdocs build --strict` in CI turns a warning into a failure - so a dead
+# link stops the build instead of shipping. Absolute links (the `/add` form the
+# older pages use) are informational: they resolve on the live domain.
+validation:
+  links:
+    not_found: warn
+    absolute_links: info
+    unrecognized_links: info
+  anchors: warn

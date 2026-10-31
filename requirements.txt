@@ -1,0 +1,4 @@
+# Toolchain for the cli.sasjs.io build, pinned so a deploy is reproducible.
+# Install locally with:  pip install -r requirements.txt
+mkdocs-material==9.8.0
+json-schema-for-humans==1.5.1
