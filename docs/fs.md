@@ -33,7 +33,12 @@ sasjs fs <action> [additional arguments]
 
 Additional arguments may include:
 
-- `--target` (alias `-t`) - the target SAS Environment which contains the filesystem.  Required attributes are `serverUrl` and `serverType`.  If not specified, default target will be used, mentioned in `sasjsconfig.json`. The target can exist either in the local project configuration or in the global `.sasjsrc` file.
+| Option | Alias | Sub commands | Description |
+| --- | --- | --- | --- |
+| `--target` | `-t` | all three | The target whose server holds the files. Needs `serverUrl` and `serverType`. Defaults to `defaultTarget` in `sasjsconfig.json`, then the global `.sasjsrc`. |
+| `--local` | `-l` | `sync`, `deploy` | The local folder to send. A relative path is taken from the project root. |
+| `--remote` | `-r` | `sync`, `deploy` | The folder on the SAS server that receives it. |
+| `--output` | `-o` | all three | `compile`: the path of the program to write (a `.sas` extension is added). `sync` and `deploy`: a folder for the log. Both default to a timestamped folder under `sasjsbuild` / `sasjsresults`. |
 
 ## sasjs fs compile
 
@@ -97,6 +102,28 @@ filename _in64 clear;
 filename _out64 clear;
 ```
 
+
+## sasjs fs deploy
+
+Compiles a local folder into a SAS program and executes it on the target in one step, so the files arrive in the remote folder without you saving and running the program yourself.
+
+### Syntax
+
+```
+sasjs fs deploy --local <localFolder> --remote <remoteFolder> [options]
+```
+
+The folders are passed with `--local` (`-l`) and `--remote` (`-r`); `--output` (`-o`) sets a folder for the log.
+
+### Usage
+
+```bash
+sasjs fs deploy -l ./data -r /sasdata/mydata -t viya
+```
+
+### Deploy or sync?
+
+`deploy` always writes the whole tree. [`sync`](#sasjs-fs-sync) compares hashes first and sends only what differs, which is what you want for routine updates; deploy is for a first load, or when the remote copy is suspect.
 
 ## sasjs fs sync
 

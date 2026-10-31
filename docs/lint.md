@@ -32,8 +32,16 @@ For clarity, the Project Directory is printed to the console whenever running `s
 ## Syntax
 
 ```
-sasjs lint <action>
+sasjs lint [find | fix | init] [filterStrings..]
 ```
+
+| Action | What it does |
+| --- | --- |
+| `find` | Reports violations. This is what runs when no action is given. |
+| `fix` | Applies the fixes the configured rules provide. |
+| `init` | Writes a `.sasjslint` configuration file for the project. |
+
+Each `filterStrings` narrows the run: a folder, an absolute file path, or a fragment of a file name. With none, every `.sas` file in the project is linted.
 
 ## sasjs lint
 

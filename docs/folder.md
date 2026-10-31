@@ -23,7 +23,13 @@ sasjs folder <action> [additional arguments]
 
 Additional arguments include:
 
-- `--target` (alias `-t`) - the target environment in which to create the SAS Folder. If not specified, default target will be used, mentioned in `sasjsconfig.json`. The target can exist either in the local project configuration or in the global `.sasjsrc` file.
+| Option | Alias | Sub commands | Description |
+| --- | --- | --- | --- |
+| `--target` | `-t` | all | The target whose server holds the folders. SAS Viya only. Defaults to `defaultTarget` in `sasjsconfig.json`, then the global `.sasjsrc`. |
+| `--force` | | `create` | Delete and re-create the folder when it already exists. |
+
+!!! note
+    `sasjs folder` works on SAS Viya targets only - it manages SAS Drive folders, which SAS 9 does not have.
 
 ## sasjs folder list
 

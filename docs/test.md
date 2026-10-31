@@ -62,14 +62,19 @@ Tests will only be compiled if they exist in a folder listed in one of the follo
 
 ## Syntax
 
-```bash
-sasjs test <filteringString> --source <testFlowPath> --outDirectory <folderPath> -t <targetName> --ignoreFail
+```
+sasjs test [filteringString..] [options]
 ```
 
-- Providing `filteringString` is optional. If not present, *all* tests mentioned in test flow file will be executed.
-- Providing `source` flag is optional. If not present, CLI will use test flow located at `sasjsbuild/testFlow.json` (created when running `sasjs build`).
-- Providing `outDirectory` flag is optional. If not present, CLI will save outputs into the temporary `sasjsresults` folder.
-- Providing ignore fail (--ignoreFail or -iF) flag is optional. If present CLI will return exit code 0 even if tests are failing. Useful when the requirement is not to make CI Pipeline fail.`
+| Option | Alias | Description |
+| --- | --- | --- |
+| `--source` | `-s` | The test flow to execute. Defaults to `sasjsbuild/testFlow.json`, which `sasjs build` writes. |
+| `--outDirectory` | `--out` | Folder for the results. Defaults to `sasjsresults`. |
+| `--force` | `-f` | Run every test even when some fail, and exit 0 - for a pipeline that reports rather than gates. |
+| `--target` | `-t` | The target to run the tests against. Defaults to `defaultTarget` in `sasjsconfig.json`. |
+
+Each `filteringString` is a **regular expression**, matched against the test paths in the flow; only the tests that match are run. With none, every test in the flow runs. The set-up and tear-down programs always run.
+
 
 
 ## Examples
@@ -92,10 +97,10 @@ Execute all tests starting with "mv_" and save the output in 'myresults' folder
 sasjs test mv_ --outDirectory /somedir/myresults
 ```
 
-Prevent command fail (for example in CI Pipeline):
+Prevent the command failing (for example in a CI pipeline that reports rather than gates):
 
 ```bash
-sasjs test --ignoreFail
+sasjs test --force
 ```
 
 ## Configuration

@@ -53,8 +53,12 @@ sasjs doc -t <targetName> --outDirectory <sasFilePath>
 
 Additional arguments may include:
 
-- `--target` (alias `-t`) - If a target is provided, the generated docs will ignore content from the other targets.
-  The target can exist either in the local project configuration or in the global `.sasjsrc` file.
+| Option | Alias | Description |
+| --- | --- | --- |
+| `--outDirectory` | `-o` | Where to write the site. Defaults to `sasjsbuild/docs` (or the target's `docConfig.outDirectory` when it sets one). |
+| `--target` | `-t` | Generate docs from this target only, ignoring the other targets. The target can exist either in the local project configuration or in the global `.sasjsrc` file. |
+
+`sasjs doc init` takes no options - it writes the doxygen configuration into the project.
 
 ### Examples
 
