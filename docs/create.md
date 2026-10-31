@@ -8,7 +8,9 @@ description: The `sasjs create` command is used to initialise a SASjs project, e
 
 To create a new project, run: `sasjs create mynewproject`
 
-To install in an _existing_ project, change into that directory and run: `sasjs create` (without arguments). This will create a `sas` folder inside the directory, and - if a package.json file exists - the @sasjs/core dependency will be added.
+To install in an _existing_ project, change into that directory and run: `sasjs create` (without arguments). This will create a `sasjs` folder inside the directory, and - if a package.json file exists - the @sasjs/core dependency will be added.
+
+To add SASjs to a folder that already holds code, use [`sasjs init`](/init) instead.
 
 An additional option can be specified to create a web app from a template, eg: `sasjs create my-sas-project --template react`. The `--template` alias can be shortened to `-t` (not to be confused with the `-t` _target_ shortcut used in many other sasjs commands).
 
