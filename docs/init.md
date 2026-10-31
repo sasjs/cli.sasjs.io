@@ -65,7 +65,7 @@ $ echo $?
 4
 ```
 
-Exit code `4` means the folder is already a SASjs project, which a script can test for. It is its own code: `1` is an unrecognised command and `2` is a genuine failure, so the three cannot be confused.
+Exit code `4` is the only code that means the folder is already a SASjs project, so a script can branch on it. Code `1` covers an invalid command or invalid arguments, and code `2` a genuine failure.
 
 The check looks at the current folder only. Initialising inside a folder that belongs to a project higher up starts a new project in that folder, which is what a repository holding several separate SASjs apps needs.
 
