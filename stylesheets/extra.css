@@ -265,6 +265,15 @@ body[data-md-color-scheme="slate"] .md-nav__link.md-nav__link--active code {
   border-bottom: 1px solid var(--surface-border);
 }
 
+/* The repository link added by hooks/html_fixes.py sits in the header with the
+ * other icon buttons; the path is filled with the header's foreground colour so
+ * it reads on either banner. */
+.md-header__repo svg {
+  fill: currentColor;
+  height: 1.1rem;
+  width: 1.1rem;
+}
+
 /* The mark is a yellow S on a black tile - round the tile so it reads as a
  * logo rather than a screenshot. */
 .md-header__button.md-logo img,
