@@ -15,6 +15,28 @@ The `sasjs cbd` command is actually an alias for _three_ commands, namely:
 
 If you are changing a source file, then it is typically necessary to run all three commands in order to get your project deployed, so `sasjs cbd` is a handy shortcut.
 
+## Syntax
+
+```
+sasjs cbd [options]
+```
+
+`sasjs compilebuilddeploy` is the long form of the same command.
+
+| Option | Alias | Description |
+| --- | --- | --- |
+| `--target` | `-t` | The target whose configuration drives all three steps. Defaults to the `defaultTarget` in `sasjsconfig.json`. |
+
+Examples:
+
+```bash
+sasjs cbd -t myTarget
+sasjs compilebuilddeploy -t myTarget
+```
+
+If you only want the artefact - not the deployment - use [`sasjs cb`](cb.md), which runs `sasjs compile` and `sasjs build` and stops there.
+
+
 Sometimes though you need to run separately - for example, say you would like to deploy to a production but without the tests.
 
 You could run `sasjs compile` first (which includes the tests), then `rm -rf sasjsbuild/tests`, then `sasjs build` (without tests) and finally `sasjs deploy`.

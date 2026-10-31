@@ -14,7 +14,31 @@ For ease of project deployment, `sasjs build` brings all the compiled Jobs / Ser
 
 The filename corresponds to the target name unless [buildOutputFileName](https://cli.sasjs.io/sasjsconfig.html#buildConfig_buildOutputFileName) is specified.
 
+## Syntax
+
+```
+sasjs build [options]
+```
+
+`sasjs build` takes one option:
+
+| Option | Alias | Description |
+| --- | --- | --- |
+| `--target` | `-t` | The target whose configuration drives the build. Defaults to the `defaultTarget` in `sasjsconfig.json`. |
+
+Examples:
+
+```bash
+sasjs build -t myTarget
+
+# the same, using the alias
+sasjs b -t myTarget
+```
+
+Nothing else is passed on the commandline: the artefact name, the folders and any streamed web content all come from the target's configuration - see [sasjsconfig](sasjsconfig.md). To run the compile step and the build step together, use [`sasjs cb`](cb.md); to add the deployment, [`sasjs cbd`](cbd.md).
+
 If a jobs or services folder does not exist in the temporary `sasjsbuild` folder, then the `sasjs compile` step is also executed. The alias to run both compile and build steps is `sasjs cb`.
+
 
 The benefit of having a seperate command to prepare the build artefacts (rather than bundling it into `sasjs compile`) is that you can then modify the compiled outputs to ensure you have the build you want - for example, removing tests for a production deploy.  If you don't need such changes, then you can just run `sasjs cb` as a shortcut for both `sasjs compile` and `sasjs build`.
 
