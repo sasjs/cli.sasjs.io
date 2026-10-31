@@ -83,12 +83,13 @@ theme:
   favicon: img/logo/favicon/32.ico
   # Fonts are self-hosted - see docs/stylesheets/extra.css and docs/assets/fonts.
   font: false
-  # Black and yellow is the SASjs mark; the header stays black in both schemes
-  # and the content surface flips.
+  # Black and yellow is the SASjs mark, drawn as a yellow S on a black tile, so
+  # it reads on either banner. The banner follows the scheme: white in light,
+  # near-black in dark.
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: black
+      primary: white
       accent: amber
       toggle:
         icon: material/weather-night
