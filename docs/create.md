@@ -19,7 +19,7 @@ sasjs create [folder-name] [options]
 | `--template` | `-t` | The template to scaffold from. One of `react`, `angular`, `minimal`, `sasonly` or `jobs`. Omitted, the command writes the plain folder structure instead. |
 
 !!! warning
-    `-t` is the **template** here, not the target used by most other commands. There is no `--target` option on `sasjs create` - a new project needs no connection to a SAS server.
+    `-t` is the **template** here, not the target used by most other commands. There is no target option on `sasjs create` - a new project needs no connection to a SAS server.
 
 Examples:
 

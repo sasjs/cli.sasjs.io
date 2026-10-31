@@ -37,3 +37,15 @@ jobs:
         # Same command as the deploy, so a pull request cannot be green and the
         # push to master fail. --strict fails on a broken page link or anchor.
         run: mkdocs build --strict
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Check the command reference against the CLI
+        # Every command has a page, every nav command page names a real command,
+        # and no page mentions a flag its command does not declare. The CLI
+        # version is pinned so this job is about the pull request; the weekly
+        # docs-drift workflow runs the same check against @latest.
+        run: node scripts/check-cli-docs.mjs --cli-version 6.4.7
