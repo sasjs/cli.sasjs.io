@@ -7,7 +7,6 @@ nav:
   - Configuration:
       - SASjs Config File: sasjsconfig.md
       - SASjs Runner: runner.md
-      - Git Hooks: githooks.md
       - ENV File: env.md
   - Commands:
       - sasjs add: add.md
