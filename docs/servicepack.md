@@ -22,9 +22,14 @@ sasjs servicepack <action> [additional arguments]
 
 Additional arguments may include:
 
-- `--source` (alias `-s`) - the source JSON file containin the services and folders. Used in the deploy action.
-- `--target` (alias `-t`) - the target environment in which to deploy the services. If not specified, default target will be used, mentioned in `sasjsconfig.json`. The target can exist either in the local project configuration or in the global `.sasjsrc` file.
-- `-f` - used to **f**orce a deploy, eg even if the folders / services already exist (they will then be overwritten)
+| Option | Alias | Description |
+| --- | --- | --- |
+| `--source` | `-s` | The JSON file holding the services and folders to deploy. Required. |
+| `--force` | `-f` | Deploy even where folders and services already exist, overwriting them. |
+| `--target` | `-t` | The target to deploy to. Defaults to `defaultTarget` in `sasjsconfig.json`, then the global `.sasjsrc`. |
+
+!!! note
+    `sasjs servicepack` deploys to **SAS Viya** targets only; on any other server type the command stops with an error.
 
 ## Service Pack Structure
 

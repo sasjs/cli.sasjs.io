@@ -26,10 +26,13 @@ sasjs flow <action> [additional arguments]
 
 Additional arguments may include:
 
-- `--source` (alias `-s`) - path to the flow definition source file (\*.json).
-- `--logFolder` (alias `-l`) - path to the folder where job logs will be saved.
-- `--csvFile` (alias `-c`) - path to the CSV file containing job statuses will be saved. This file is replaced if the command is re-executed.
-- `--target` (alias `-t`) - the target environment in which to deploy the services. If not specified, default target will be used, mentioned in `sasjsconfig.json`. The target can exist either in the local project configuration or in the global `.sasjsrc` file.
+| Option | Alias | Description |
+| --- | --- | --- |
+| `--source` | `-s` | Path to the flow definition - a JSON file listing the jobs. Required. |
+| `--logFolder` | `-l` | Folder in which the job logs are saved. |
+| `--csvFile` | `-c` | Path of the CSV that receives each job's status. It is replaced if the command runs again. |
+| `--streamLog` | | Write each job's log to `--logFolder` while it runs, rather than at the end. Useful for a long flow. |
+| `--target` | `-t` | The target to run the flow against. Defaults to `defaultTarget` in `sasjsconfig.json`, then the global `.sasjsrc`. |
 
 ## Source JSON file
 

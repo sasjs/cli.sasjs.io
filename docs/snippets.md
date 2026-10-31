@@ -11,12 +11,16 @@ Note - snippets are generated from the filename and doxygen header content, **no
 
 ## Syntax
 
-```bash
-sasjs snippets --outDirectory <folderPath> --target <targetName>
+```
+sasjs snippets [options]
 ```
 
-- `--outDirectory` (alias `-o`) - optional output directory. If not present, the snippets will be saved to the `sasjsresults/sasjs-macro-snippets.json` file.
-- `--target` (alias `-t`) - optional SASjs target that should be used.
+| Option | Alias | Description |
+| --- | --- | --- |
+| `--outDirectory` | `-o` | Where to write the snippets file. Defaults to `sasjsresults/sasjs-macro-snippets.json`. |
+| `--target` | `-t` | The target whose `macroFolders` are read. Defaults to `defaultTarget` in `sasjsconfig.json`. |
+
+The macros come from the folders in `macroFolders`, and each snippet is built from the macro's Doxygen header - see [the header conventions](https://core.sasjs.io/styleguide.html).
 
 ## Generate Snippets File
 
