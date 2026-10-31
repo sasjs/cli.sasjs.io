@@ -1030,6 +1030,56 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#sasjs-fs-deploy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        sasjs fs deploy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="sasjs fs deploy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syntax_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syntax
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deploy-or-sync" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deploy or sync?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#sasjs-fs-sync" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1042,7 +1092,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#syntax_2" class="md-nav__link">
+  <a href="#syntax_3" class="md-nav__link">
     <span class="md-ellipsis">
       
         Syntax
@@ -1507,6 +1557,56 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#sasjs-fs-deploy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        sasjs fs deploy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="sasjs fs deploy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syntax_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Syntax
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deploy-or-sync" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deploy or sync?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#sasjs-fs-sync" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1519,7 +1619,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#syntax_2" class="md-nav__link">
+  <a href="#syntax_3" class="md-nav__link">
     <span class="md-ellipsis">
       
         Syntax
@@ -1584,9 +1684,42 @@
 <div class="highlight"><pre><span></span><code>sasjs fs &lt;action&gt; [additional arguments]
 </code></pre></div>
 <p>Additional arguments may include:</p>
-<ul>
-<li><code>--target</code> (alias <code>-t</code>) - the target SAS Environment which contains the filesystem.  Required attributes are <code>serverUrl</code> and <code>serverType</code>.  If not specified, default target will be used, mentioned in <code>sasjsconfig.json</code>. The target can exist either in the local project configuration or in the global <code>.sasjsrc</code> file.</li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Alias</th>
+<th>Sub commands</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--target</code></td>
+<td><code>-t</code></td>
+<td>all three</td>
+<td>The target whose server holds the files. Needs <code>serverUrl</code> and <code>serverType</code>. Defaults to <code>defaultTarget</code> in <code>sasjsconfig.json</code>, then the global <code>.sasjsrc</code>.</td>
+</tr>
+<tr>
+<td><code>--local</code></td>
+<td><code>-l</code></td>
+<td><code>sync</code>, <code>deploy</code></td>
+<td>The local folder to send. A relative path is taken from the project root.</td>
+</tr>
+<tr>
+<td><code>--remote</code></td>
+<td><code>-r</code></td>
+<td><code>sync</code>, <code>deploy</code></td>
+<td>The folder on the SAS server that receives it.</td>
+</tr>
+<tr>
+<td><code>--output</code></td>
+<td><code>-o</code></td>
+<td>all three</td>
+<td><code>compile</code>: the path of the program to write (a <code>.sas</code> extension is added). <code>sync</code> and <code>deploy</code>: a folder for the log. Both default to a timestamped folder under <code>sasjsbuild</code> / <code>sasjsresults</code>.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="sasjs-fs-compile">sasjs fs compile<a class="headerlink" href="#sasjs-fs-compile" title="Permanent link">&para;</a></h2>
 <p>Used to generate a single SAS program that contains all the files (and subdirectories) of a given LOCAL folder.  This program can be executed in any flavour of SAS to generate the files on the SAS server - simply set <code>%let fsTarget=/your/target/folder;</code> and run the program.</p>
 <p>To preserve encoding and special characters, as well as to enable the compilation of binary content, all files are base64 encoded.</p>
@@ -1639,12 +1772,23 @@ run;
 filename _in64 clear;
 filename _out64 clear;
 </code></pre></div>
+<h2 id="sasjs-fs-deploy">sasjs fs deploy<a class="headerlink" href="#sasjs-fs-deploy" title="Permanent link">&para;</a></h2>
+<p>Compiles a local folder into a SAS program and executes it on the target in one step, so the files arrive in the remote folder without you saving and running the program yourself.</p>
+<h3 id="syntax_2">Syntax<a class="headerlink" href="#syntax_2" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>sasjs fs deploy --local &lt;localFolder&gt; --remote &lt;remoteFolder&gt; [options]
+</code></pre></div>
+<p>The folders are passed with <code>--local</code> (<code>-l</code>) and <code>--remote</code> (<code>-r</code>); <code>--output</code> (<code>-o</code>) sets a folder for the log.</p>
+<h3 id="usage_1">Usage<a class="headerlink" href="#usage_1" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>sasjs<span class="w"> </span>fs<span class="w"> </span>deploy<span class="w"> </span>-l<span class="w"> </span>./data<span class="w"> </span>-r<span class="w"> </span>/sasdata/mydata<span class="w"> </span>-t<span class="w"> </span>viya
+</code></pre></div>
+<h3 id="deploy-or-sync">Deploy or sync?<a class="headerlink" href="#deploy-or-sync" title="Permanent link">&para;</a></h3>
+<p><code>deploy</code> always writes the whole tree. <a href="#sasjs-fs-sync"><code>sync</code></a> compares hashes first and sends only what differs, which is what you want for routine updates; deploy is for a first load, or when the remote copy is suspect.</p>
 <h2 id="sasjs-fs-sync">sasjs fs sync<a class="headerlink" href="#sasjs-fs-sync" title="Permanent link">&para;</a></h2>
 <p>Will hash up a <em>remote</em> SAS filesystem, compare with <em>local</em> hashes, and deploy only the differences. Will also create the folder(s) on the remote server if necessary (if the SAS user account has the requisite permissions).</p>
 <p>Here's a demo video:</p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/HjUpGGCpx_M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-<h3 id="syntax_2">Syntax<a class="headerlink" href="#syntax_2" title="Permanent link">&para;</a></h3>
+<h3 id="syntax_3">Syntax<a class="headerlink" href="#syntax_3" title="Permanent link">&para;</a></h3>
 <blockquote>
 <p><code>sasjs fs sync -l &lt;localFolder&gt; -r &lt;remoteFolder&gt; -t targetName</code></p>
 </blockquote>

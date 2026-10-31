@@ -1730,9 +1730,34 @@
 <div class="highlight"><pre><span></span><code>sasjs folder &lt;action&gt; [additional arguments]
 </code></pre></div>
 <p>Additional arguments include:</p>
-<ul>
-<li><code>--target</code> (alias <code>-t</code>) - the target environment in which to create the SAS Folder. If not specified, default target will be used, mentioned in <code>sasjsconfig.json</code>. The target can exist either in the local project configuration or in the global <code>.sasjsrc</code> file.</li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Alias</th>
+<th>Sub commands</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--target</code></td>
+<td><code>-t</code></td>
+<td>all</td>
+<td>The target whose server holds the folders. SAS Viya only. Defaults to <code>defaultTarget</code> in <code>sasjsconfig.json</code>, then the global <code>.sasjsrc</code>.</td>
+</tr>
+<tr>
+<td><code>--force</code></td>
+<td></td>
+<td><code>create</code></td>
+<td>Delete and re-create the folder when it already exists.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>sasjs folder</code> works on SAS Viya targets only - it manages SAS Drive folders, which SAS 9 does not have.</p>
+</div>
 <h2 id="sasjs-folder-list">sasjs folder list<a class="headerlink" href="#sasjs-folder-list" title="Permanent link">&para;</a></h2>
 <p>Used to list first level children folders of given folder.</p>
 <!-- Needs recorded video -->

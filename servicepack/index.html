@@ -1519,11 +1519,36 @@
 <div class="highlight"><pre><span></span><code>sasjs servicepack &lt;action&gt; [additional arguments]
 </code></pre></div>
 <p>Additional arguments may include:</p>
-<ul>
-<li><code>--source</code> (alias <code>-s</code>) - the source JSON file containin the services and folders. Used in the deploy action.</li>
-<li><code>--target</code> (alias <code>-t</code>) - the target environment in which to deploy the services. If not specified, default target will be used, mentioned in <code>sasjsconfig.json</code>. The target can exist either in the local project configuration or in the global <code>.sasjsrc</code> file.</li>
-<li><code>-f</code> - used to <strong>f</strong>orce a deploy, eg even if the folders / services already exist (they will then be overwritten)</li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Alias</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--source</code></td>
+<td><code>-s</code></td>
+<td>The JSON file holding the services and folders to deploy. Required.</td>
+</tr>
+<tr>
+<td><code>--force</code></td>
+<td><code>-f</code></td>
+<td>Deploy even where folders and services already exist, overwriting them.</td>
+</tr>
+<tr>
+<td><code>--target</code></td>
+<td><code>-t</code></td>
+<td>The target to deploy to. Defaults to <code>defaultTarget</code> in <code>sasjsconfig.json</code>, then the global <code>.sasjsrc</code>.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>sasjs servicepack</code> deploys to <strong>SAS Viya</strong> targets only; on any other server type the command stops with an error.</p>
+</div>
 <h2 id="service-pack-structure">Service Pack Structure<a class="headerlink" href="#service-pack-structure" title="Permanent link">&para;</a></h2>
 <p>The service pack structure is designed to provide the bare minimum for defining remote services. It is normally created as part of the <code>sasjs build</code> comand when the target <code>serverType</code> is VIYA. For info, it looks like this:</p>
 <div class="highlight"><pre><span></span><code>{

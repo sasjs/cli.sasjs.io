@@ -1595,10 +1595,28 @@
 </code></pre></div>
 <p><code>sasFilePath</code> - if this has a leading slash (eg /my-docs) then it must be the full path. If it is a relative path (without a leading slash, eg my-docs) then it will be pre-pended with the project root folder.</p>
 <p>Additional arguments may include:</p>
-<ul>
-<li><code>--target</code> (alias <code>-t</code>) - If a target is provided, the generated docs will ignore content from the other targets.
-  The target can exist either in the local project configuration or in the global <code>.sasjsrc</code> file.</li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Alias</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--outDirectory</code></td>
+<td><code>-o</code></td>
+<td>Where to write the site. Defaults to <code>sasjsbuild/docs</code> (or the target's <code>docConfig.outDirectory</code> when it sets one).</td>
+</tr>
+<tr>
+<td><code>--target</code></td>
+<td><code>-t</code></td>
+<td>Generate docs from this target only, ignoring the other targets. The target can exist either in the local project configuration or in the global <code>.sasjsrc</code> file.</td>
+</tr>
+</tbody>
+</table>
+<p><code>sasjs doc init</code> takes no options - it writes the doxygen configuration into the project.</p>
 <h3 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code># generates docs in default folder i.e. ./sasjsbuild/docs, using all targets as a source
 sasjs doc

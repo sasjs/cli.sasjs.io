@@ -1435,12 +1435,30 @@
 <p>The <code>sasjs snippets</code> command generates VS Code snippets from any SAS macros contained in the folders (or subfolders) listed in the <code>macroFolders</code> array of the <code>sasjs/sasjsconfig.json</code> file. If <code>macroFolders</code> is defined at both configuration and target level, the two arrays will be merged in a single array of macro folders. Macros are those that fit the "$(macroname).sas" pattern - tests (such as macroname.test.sas or macroname.test.1.sas) are excluded, as are files with a non ".sas" extension.</p>
 <p>Note - snippets are generated from the filename and doxygen header content, <strong>not</strong> the SAS code itself.  </p>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>sasjs<span class="w"> </span>snippets<span class="w"> </span>--outDirectory<span class="w"> </span>&lt;folderPath&gt;<span class="w"> </span>--target<span class="w"> </span>&lt;targetName&gt;
+<div class="highlight"><pre><span></span><code>sasjs snippets [options]
 </code></pre></div>
-<ul>
-<li><code>--outDirectory</code> (alias <code>-o</code>) - optional output directory. If not present, the snippets will be saved to the <code>sasjsresults/sasjs-macro-snippets.json</code> file.</li>
-<li><code>--target</code> (alias <code>-t</code>) - optional SASjs target that should be used.</li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Alias</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--outDirectory</code></td>
+<td><code>-o</code></td>
+<td>Where to write the snippets file. Defaults to <code>sasjsresults/sasjs-macro-snippets.json</code>.</td>
+</tr>
+<tr>
+<td><code>--target</code></td>
+<td><code>-t</code></td>
+<td>The target whose <code>macroFolders</code> are read. Defaults to <code>defaultTarget</code> in <code>sasjsconfig.json</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>The macros come from the folders in <code>macroFolders</code>, and each snippet is built from the macro's Doxygen header - see <a href="https://core.sasjs.io/styleguide.html">the header conventions</a>.</p>
 <h2 id="generate-snippets-file">Generate Snippets File<a class="headerlink" href="#generate-snippets-file" title="Permanent link">&para;</a></h2>
 <p>Consider the file name <code>my/macros/example.sas</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="cm">/**</span>

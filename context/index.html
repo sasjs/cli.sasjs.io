@@ -1838,10 +1838,30 @@
 <div class="highlight"><pre><span></span><code>sasjs context &lt;action&gt; [additional arguments]
 </code></pre></div>
 <p>Additional arguments include:</p>
-<ul>
-<li><code>--source</code> (alias <code>-s</code>) - the source JSON file to create or edit a compute context. Used in the create and edit actions.</li>
-<li><code>--target</code> (alias <code>-t</code>) - the target environment in which to create the compute context. If not specified, the first target will be used instead. The target can exist either in the local project configuration or in the global .sasjsrc file.</li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Alias</th>
+<th>Sub commands</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--source</code></td>
+<td><code>-s</code></td>
+<td><code>create</code>, <code>edit</code></td>
+<td>The JSON file holding the context definition. Required for both.</td>
+</tr>
+<tr>
+<td><code>--target</code></td>
+<td><code>-t</code></td>
+<td>all</td>
+<td>The target whose server holds the contexts. SAS Viya only. Defaults to <code>defaultTarget</code> in <code>sasjsconfig.json</code>, then the global <code>.sasjsrc</code>.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="compute-context-structure">Compute Context Structure<a class="headerlink" href="#compute-context-structure" title="Permanent link">&para;</a></h2>
 <p>The create and edit actions use the same JSON structure for adding / modifying contexts. This also matches the context made by the <a href="/context#sasjs-context-export">export</a> action, which can be used to provide a template for adding / modifying new contexts. The JSON is defined as follows:</p>
 <div class="highlight"><pre><span></span><code>{

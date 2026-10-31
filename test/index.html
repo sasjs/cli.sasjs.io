@@ -1687,14 +1687,40 @@
 <li><a href="https://cli.sasjs.io/sasjsconfig.html#serviceConfig_serviceFolders">serviceFolders</a></li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>sasjs<span class="w"> </span><span class="nb">test</span><span class="w"> </span>&lt;filteringString&gt;<span class="w"> </span>--source<span class="w"> </span>&lt;testFlowPath&gt;<span class="w"> </span>--outDirectory<span class="w"> </span>&lt;folderPath&gt;<span class="w"> </span>-t<span class="w"> </span>&lt;targetName&gt;<span class="w"> </span>--ignoreFail
+<div class="highlight"><pre><span></span><code>sasjs test [filteringString..] [options]
 </code></pre></div>
-<ul>
-<li>Providing <code>filteringString</code> is optional. If not present, <em>all</em> tests mentioned in test flow file will be executed.</li>
-<li>Providing <code>source</code> flag is optional. If not present, CLI will use test flow located at <code>sasjsbuild/testFlow.json</code> (created when running <code>sasjs build</code>).</li>
-<li>Providing <code>outDirectory</code> flag is optional. If not present, CLI will save outputs into the temporary <code>sasjsresults</code> folder.</li>
-<li>Providing ignore fail (--ignoreFail or -iF) flag is optional. If present CLI will return exit code 0 even if tests are failing. Useful when the requirement is not to make CI Pipeline fail.`</li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Alias</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--source</code></td>
+<td><code>-s</code></td>
+<td>The test flow to execute. Defaults to <code>sasjsbuild/testFlow.json</code>, which <code>sasjs build</code> writes.</td>
+</tr>
+<tr>
+<td><code>--outDirectory</code></td>
+<td><code>--out</code></td>
+<td>Folder for the results. Defaults to <code>sasjsresults</code>.</td>
+</tr>
+<tr>
+<td><code>--force</code></td>
+<td><code>-f</code></td>
+<td>Run every test even when some fail, and exit 0 - for a pipeline that reports rather than gates.</td>
+</tr>
+<tr>
+<td><code>--target</code></td>
+<td><code>-t</code></td>
+<td>The target to run the tests against. Defaults to <code>defaultTarget</code> in <code>sasjsconfig.json</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>Each <code>filteringString</code> is a <strong>regular expression</strong>, matched against the test paths in the flow; only the tests that match are run. With none, every test in the flow runs. The set-up and tear-down programs always run.</p>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <p>Execute all tests for the default target:</p>
 <div class="highlight"><pre><span></span><code>sasjs<span class="w"> </span><span class="nb">test</span>
@@ -1705,8 +1731,8 @@
 <p>Execute all tests starting with "mv_" and save the output in 'myresults' folder</p>
 <div class="highlight"><pre><span></span><code>sasjs<span class="w"> </span><span class="nb">test</span><span class="w"> </span>mv_<span class="w"> </span>--outDirectory<span class="w"> </span>/somedir/myresults
 </code></pre></div>
-<p>Prevent command fail (for example in CI Pipeline):</p>
-<div class="highlight"><pre><span></span><code>sasjs<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--ignoreFail
+<p>Prevent the command failing (for example in a CI pipeline that reports rather than gates):</p>
+<div class="highlight"><pre><span></span><code>sasjs<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--force
 </code></pre></div>
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
 <p>Test configuration can be provided at root or target level. Configuration example:</p>

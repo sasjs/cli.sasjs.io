@@ -1545,12 +1545,42 @@
 <div class="highlight"><pre><span></span><code>sasjs flow &lt;action&gt; [additional arguments]
 </code></pre></div>
 <p>Additional arguments may include:</p>
-<ul>
-<li><code>--source</code> (alias <code>-s</code>) - path to the flow definition source file (*.json).</li>
-<li><code>--logFolder</code> (alias <code>-l</code>) - path to the folder where job logs will be saved.</li>
-<li><code>--csvFile</code> (alias <code>-c</code>) - path to the CSV file containing job statuses will be saved. This file is replaced if the command is re-executed.</li>
-<li><code>--target</code> (alias <code>-t</code>) - the target environment in which to deploy the services. If not specified, default target will be used, mentioned in <code>sasjsconfig.json</code>. The target can exist either in the local project configuration or in the global <code>.sasjsrc</code> file.</li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Alias</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--source</code></td>
+<td><code>-s</code></td>
+<td>Path to the flow definition - a JSON file listing the jobs. Required.</td>
+</tr>
+<tr>
+<td><code>--logFolder</code></td>
+<td><code>-l</code></td>
+<td>Folder in which the job logs are saved.</td>
+</tr>
+<tr>
+<td><code>--csvFile</code></td>
+<td><code>-c</code></td>
+<td>Path of the CSV that receives each job's status. It is replaced if the command runs again.</td>
+</tr>
+<tr>
+<td><code>--streamLog</code></td>
+<td></td>
+<td>Write each job's log to <code>--logFolder</code> while it runs, rather than at the end. Useful for a long flow.</td>
+</tr>
+<tr>
+<td><code>--target</code></td>
+<td><code>-t</code></td>
+<td>The target to run the flow against. Defaults to <code>defaultTarget</code> in <code>sasjsconfig.json</code>, then the global <code>.sasjsrc</code>.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="source-json-file">Source JSON file<a class="headerlink" href="#source-json-file" title="Permanent link">&para;</a></h2>
 <p>This is the file where the pattern of the flow is configured. A very simple flow definition might look like this:</p>
 <div class="highlight"><pre><span></span><code>{

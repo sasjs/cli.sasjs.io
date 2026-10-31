@@ -1668,8 +1668,31 @@
 </ul>
 <p>For clarity, the Project Directory is printed to the console whenever running <code>sasjs lint</code>.</p>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>sasjs lint &lt;action&gt;
+<div class="highlight"><pre><span></span><code>sasjs lint [find | fix | init] [filterStrings..]
 </code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>find</code></td>
+<td>Reports violations. This is what runs when no action is given.</td>
+</tr>
+<tr>
+<td><code>fix</code></td>
+<td>Applies the fixes the configured rules provide.</td>
+</tr>
+<tr>
+<td><code>init</code></td>
+<td>Writes a <code>.sasjslint</code> configuration file for the project.</td>
+</tr>
+</tbody>
+</table>
+<p>Each <code>filterStrings</code> narrows the run: a folder, an absolute file path, or a fragment of a file name. With none, every <code>.sas</code> file in the project is linted.</p>
 <h2 id="sasjs-lint_1">sasjs lint<a class="headerlink" href="#sasjs-lint_1" title="Permanent link">&para;</a></h2>
 <h3 id="syntax_1">Syntax<a class="headerlink" href="#syntax_1" title="Permanent link">&para;</a></h3>
 <p>The command works as follows:</p>

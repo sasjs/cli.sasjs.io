@@ -1538,15 +1538,29 @@
 <p>2 - SSH: build a shell script or bat file to load, and execute with a web service</p>
 <p>3 - API: use the SAS APIs</p>
 <p>2nd and 3rd options can be configured and executed with a single command:</p>
-<div class="highlight"><pre><span></span><code>sasjs deploy --target(-t) &lt;target name&gt;
+<div class="highlight"><pre><span></span><code>sasjs deploy [options]
 </code></pre></div>
-<p>or:</p>
-<div class="highlight"><pre><span></span><code>sasjs d --target(-t) &lt;target name&gt;
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Alias</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--target</code></td>
+<td><code>-t</code></td>
+<td>The target to deploy to. Defaults to <code>defaultTarget</code> in <code>sasjsconfig.json</code>; if there is no project config, the global <code>.sasjsrc</code> is used.</td>
+</tr>
+</tbody>
+</table>
+<p>Examples:</p>
+<div class="highlight"><pre><span></span><code>sasjs<span class="w"> </span>deploy<span class="w"> </span>-t<span class="w"> </span>myTarget
+sasjs<span class="w"> </span>d<span class="w"> </span>-t<span class="w"> </span>myTarget
 </code></pre></div>
-<p>You can compile, build and deploy using:</p>
-<div class="highlight"><pre><span></span><code>sasjs cbd --target(-t) &lt;target name&gt;
-</code></pre></div>
-<p>If you don't specify a target (eg <code>sas9</code> or <code>viya</code>) then the default target in the <code>sasjsconfig.json</code> file is used. If local configuration file is not found, global <code>.sasjsrc</code> file will be used.</p>
+<p>To compile, build and deploy in one step, use <a href="../cbd/"><code>sasjs cbd</code></a>.</p>
 <p>NOTE: By default deploy will overwrite an existing deploy (force deploy).</p>
 <h3 id="copypaste-approach">Copy/Paste approach<a class="headerlink" href="#copypaste-approach" title="Permanent link">&para;</a></h3>
 <p>The build script (named as per <code>buildOutputFileName</code>) can be copy pasted into SAS Studio and executed to create the backend services. Please note:</p>

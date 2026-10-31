@@ -1498,13 +1498,42 @@
 </code></pre></div>
 <p><code>sasProgramPath</code> - if this has a leading slash (eg /Public/app/folder/servicename) then it must be the full path. If it is a relative path (eg path/servicename) then it will be pre-pended with the appLoc - defined in the config JSON file.</p>
 <p>Additional arguments may include:</p>
-<ul>
-<li><code>--target</code> (alias <code>-t</code>) - the target environment in which to deploy the services. If not specified, default target will be used, mentioned in <code>sasjsconfig.json</code>. The target can exist either in the local project configuration or in the global <code>.sasjsrc</code> file.</li>
-<li><code>--data</code> (alias <code>-d</code>) - (optional) The path to a <code>json</code> file containing the input data passed into the request.</li>
-<li><code>--config</code> (alias <code>-c</code>) - (optional) The path to a <code>json</code> file containing the config to be used when executing a request.</li>
-<li><code>--log</code> (alias <code>-l</code>) - Location in which to store the log file. If not provided AND current directory is a sasjs project, it will be saved in sasjsresults else in the current directory.</li>
-<li><code>--output</code> (alias <code>-o</code>) - Location to store the output file. If not provided AND current directory is a sasjs project, an output file will be saved in the sasjsresults folder else in current directory.</li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Alias</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--target</code></td>
+<td><code>-t</code></td>
+<td>The target to send the request to. Defaults to <code>defaultTarget</code> in <code>sasjsconfig.json</code>, then the global <code>.sasjsrc</code>.</td>
+</tr>
+<tr>
+<td><code>--data</code></td>
+<td><code>-d</code></td>
+<td>A JSON file of input data - the tables the service reads.</td>
+</tr>
+<tr>
+<td><code>--config</code></td>
+<td><code>-c</code></td>
+<td>A JSON file of configuration for the request.</td>
+</tr>
+<tr>
+<td><code>--log</code></td>
+<td><code>-l</code></td>
+<td>Where to save the log. Inside a project it defaults to <code>sasjsresults</code>, otherwise the current directory.</td>
+</tr>
+<tr>
+<td><code>--output</code></td>
+<td><code>-o</code></td>
+<td>Where to save the output. Inside a project it defaults to <code>sasjsresults</code>, otherwise the current directory.</td>
+</tr>
+</tbody>
+</table>
 <h3 id="data-structure">data structure<a class="headerlink" href="#data-structure" title="Permanent link">&para;</a></h3>
 <p>The input data is structured as follows:</p>
 <div class="highlight"><pre><span></span><code>{
