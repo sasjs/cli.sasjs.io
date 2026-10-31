@@ -1694,6 +1694,7 @@
 <p>Additional arguments may include:</p>
 <ul>
 <li><code>--target</code> (alias <code>-t</code>) - the target environment in which to deploy the services. If not specified, the <code>defaultTarget</code> will be used, as defined in <code>sasjsconfig.json</code>. The target can exist either in the local project configuration or in the global <code>.sasjsrc</code> file.</li>
+<li><code>--insecure</code> (alias <code>-i</code>) - accept a TLS certificate that cannot be verified while obtaining the token, for estates with self-signed certificates or an incomplete chain. It is not saved: later commands still validate the certificate unless the target sets <a href="/sasjsconfig.html#httpsAgentOptions">httpsAgentOptions</a> - see <a href="#tls-config">TLS Config</a>. Applied from CLI 6.4.6; earlier releases accept the flag and ignore it.</li>
 </ul>
 <h2 id="scope">Scope<a class="headerlink" href="#scope" title="Permanent link">&para;</a></h2>
 <p>Targets can have <em>local</em> (to a project) or <em>global</em> (to a user) <a href="/faq/#what-is-the-difference-between-local-and-global-targets">scope</a>.  For a local target, credentials are stored in a <code>.env.[target name]</code> file.  To have one file that covers all (local) targets you can rename this file to <code>.env</code>.</p>

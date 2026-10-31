@@ -616,6 +616,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#insecure-connections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Insecure connections
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#description" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1451,6 +1462,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#insecure-connections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Insecure connections
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#description" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1558,11 +1580,49 @@
 <script id="asciicast-8CZROaVsvobDCumlqgxrhHkE3" src="https://asciinema.org/a/8CZROaVsvobDCumlqgxrhHkE3.js" async></script>
 
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<p><div class="highlight"><pre><span></span><code>sasjs add
+<div class="highlight"><pre><span></span><code>sasjs add [options]
 
-sasjs add cred -t targetname # add creds for existing target
+sasjs add cred -t targetname [options]   # add creds for an existing target
 </code></pre></div>
-<img alt="" src="https://cli.sasjs.io/img/sasjsaddcred.png" /></p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Alias</th>
+<th>Used by</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--target</code></td>
+<td><code>-t</code></td>
+<td><code>sasjs add cred</code></td>
+<td>The existing target to add credentials for.</td>
+</tr>
+<tr>
+<td><code>--insecure</code></td>
+<td><code>-i</code></td>
+<td>both</td>
+<td>Accept a TLS certificate that cannot be verified - see <a href="#insecure-connections">Insecure connections</a>.</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="" src="https://cli.sasjs.io/img/sasjsaddcred.png" /></p>
+<h2 id="insecure-connections">Insecure connections<a class="headerlink" href="#insecure-connections" title="Permanent link">&para;</a></h2>
+<p>The CLI validates the TLS certificate of the server it connects to. On an estate with a self-signed certificate, or a chain that is missing its intermediate certificate, the connection fails with:</p>
+<div class="highlight"><pre><span></span><code>unable to verify the first certificate
+</code></pre></div>
+<p>Adding <code>--insecure</code> (alias <code>-i</code>) makes the requests of this command accept the certificate anyway:</p>
+<div class="highlight"><pre><span></span><code>sasjs<span class="w"> </span>add<span class="w"> </span>--insecure
+
+sasjs<span class="w"> </span>add<span class="w"> </span>cred<span class="w"> </span>-t<span class="w"> </span>myTarget<span class="w"> </span>--insecure
+</code></pre></div>
+<p>The flag applies to the requests the command makes - the token request, and the server-mode check on a SASjs Server target - and it is <strong>not</strong> written to <code>sasjsconfig.json</code>. Later commands still validate the certificate: to make the setting permanent, put it in the target's <a href="/sasjsconfig.html#httpsAgentOptions">httpsAgentOptions</a>, and preferably fix the certificate chain as described in <a href="/auth/#tls-config">TLS Config</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>--insecure</code> is applied from CLI 6.4.6. Earlier releases accept the flag and ignore it.</p>
+</div>
 <h2 id="description">Description<a class="headerlink" href="#description" title="Permanent link">&para;</a></h2>
 <h3 id="local-or-global-config">Local or Global Config<a class="headerlink" href="#local-or-global-config" title="Permanent link">&para;</a></h3>
 <p>The first prompt requests scope. If Local is chosen, the target configuration will be added in the <code>/sasjs/sasjsconfig.json</code> file, and any credentials (eg tokens) will be saved in a <code>.env.[targetName]</code> file in the current SASjs project directory.</p>
