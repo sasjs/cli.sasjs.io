@@ -207,10 +207,6 @@ body[data-md-color-scheme="slate"] {
 
 /* ------------------------------------------------------------- navigation */
 
-.md-tabs {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-}
-
 .md-tabs__link {
   font-size: 0.72rem;
   font-weight: 600;
@@ -234,14 +230,18 @@ body[data-md-color-scheme="slate"] {
   text-transform: uppercase;
 }
 
-.md-nav__link--active,
-.md-nav__link:active {
-  color: var(--brand-ink);
+/* Material colours the current page's nav link with its own muted grey, which
+ * reads as less important than the links around it. The brand ink is used
+ * instead, scheme by scheme. */
+.md-nav__link.md-nav__link--active,
+.md-nav__link.md-nav__link--active code {
+  color: #6b5300 !important;
   font-weight: 600;
 }
 
-[data-md-color-scheme="slate"] .md-nav__link--active {
-  color: var(--brand);
+body[data-md-color-scheme="slate"] .md-nav__link.md-nav__link--active,
+body[data-md-color-scheme="slate"] .md-nav__link.md-nav__link--active code {
+  color: var(--brand) !important;
 }
 
 /* The command names are the nav's content - keep them monospaced. */
@@ -253,17 +253,25 @@ body[data-md-color-scheme="slate"] {
 
 /* ----------------------------------------------------------- header bits */
 
-.md-header,
-.md-tabs {
-  /* Material's palette re-states this after our stylesheet, so it needs the
-   * stronger declaration to hold. */
-  background-color: #0b0b0c !important;
-}
-
+/* The banner takes its colour from the palette (white in light, near-black in
+ * dark), so the hairline under it has to come from the scheme too. */
 .md-header {
   backdrop-filter: saturate(180%) blur(6px);
   box-shadow: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--surface-border);
+}
+
+.md-tabs {
+  border-bottom: 1px solid var(--surface-border);
+}
+
+/* The mark is a yellow S on a black tile - round the tile so it reads as a
+ * logo rather than a screenshot. */
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg {
+  border-radius: 6px;
+  height: 1.5rem;
+  width: 1.5rem;
 }
 
 .md-header__title {
