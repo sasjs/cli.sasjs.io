@@ -88,3 +88,5 @@ sasjs lint
 ```
 
 The configuration, the build and deploy settings, and the target attributes are described in [the sasjsconfig reference](/sasjsconfig), and the full command list is on the [home page](/).
+
+<!-- cli-docs-ignore: --yes (npm init flag) -->

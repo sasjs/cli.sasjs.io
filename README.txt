@@ -1,17 +1,39 @@
-This should not be renamed README.md to avoid being part of the published docs.
+This file is deliberately README.txt, not README.md, so it is not part of the
+published docs.
 
-The site is built automatically on pushing to the main branch as part of a github action.  To contribute, just change the relevant markdown file in the docs folder and push.
+The site at https://cli.sasjs.io is built and deployed by GitHub Actions when a
+change reaches master. To contribute, edit the markdown in docs/ and add the page
+to the nav in mkdocs.yml.
 
-For manual / local builds:
+Building locally
+----------------
 
-1. brew install mkdocs
-2. pip install mkdocs-material
-3. pip install fontawesome_markdown
-4. pip install mkdocs-redirects
-5. pip install json-schema-for-humans
+    pip install -r requirements.txt
+    ./build.sh
 
-To build, navigate to the root of this repo and run:
-    mkdocs build --clean
-    mkdocs serve
+build.sh runs the same two steps as CI: it generates the sasjsconfig schema page
+(docs/sasjsconfig.html, which docs/sasjsconfig.md frames) and then runs
+`mkdocs build --strict`. The output lands in ./site, which is gitignored.
 
-Deployment is automatic on being merged to master branch.
+`mkdocs serve` is the live-reload variant, for writing rather than checking.
+
+Checking the command reference
+------------------------------
+
+    node scripts/check-cli-docs.mjs --cli-version 6.4.7
+
+This installs the named CLI from npm into a temporary folder and compares it with
+the site: every command must have a page in the nav, every nav command page must
+name a command the CLI registers, every page must be in the nav, and no page may
+mention a `--flag` its command does not declare.
+
+It runs on every pull request against the version pinned in
+.github/workflows/build.yml, and weekly against @latest (docs-drift.yml), which is
+how a CLI release that renames a flag shows up. Bumping the pin is part of
+picking up a CLI release.
+
+A page may legitimately name a flag it does not own - another tool's flag in an
+example, or a flag it is explaining the absence of. Those are listed in an HTML
+comment that the check reads and reports:
+
+    <!-- cli-docs-ignore: --yes (npm init flag) -->

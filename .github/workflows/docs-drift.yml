@@ -1,0 +1,30 @@
+name: Docs drift
+
+# Weekly heartbeat: runs the command reference check against the NEWEST
+# published CLI, not the version pinned in build.yml. A CLI release that
+# renames or drops a flag turns this red, which is the signal to update the
+# pages and move the pin.
+
+on:
+  schedule:
+    - cron: "0 7 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  drift:
+    name: Command reference vs @latest
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Check against the latest CLI
+        run: node scripts/check-cli-docs.mjs --cli-version latest

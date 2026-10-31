@@ -114,3 +114,5 @@ SASjs is an open source framework!  Contributions are welcomed.  If you would li
 
 Contact [Allan Bowe](https://www.linkedin.com/in/allanbowe/) for details.
 
+
+<!-- cli-docs-ignore: --git-dir (git rev-parse flag in the hooks example) -->
