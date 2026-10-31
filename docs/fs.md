@@ -2,7 +2,6 @@
 layout: article
 title: Managing Physical Directories with SASjs
 description: Documentation on how to use the SASjs CLI to synchronise and manage remote filesystems
-og_image: https://cli.sasjs.io/img/sasjsfs.png
 ---
 
 # sasjs fs

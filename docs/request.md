@@ -2,7 +2,6 @@
 layout: article
 title: Execute SASjs web services from the commandline
 description: The SASjs CLI allows you execute SASjs web services directly from the command line
-og_image: https://sasjs.io/img/sasjs-cli-request.png?_=1
 ---
 
 # sasjs request

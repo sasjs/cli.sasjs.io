@@ -2,7 +2,6 @@
 layout: article
 title: SASjs Configuration
 description: How to structure the sasjs/sasjsconfig.json file - the project and target settings that drive compile, build, deploy, test and doc.
-og_image: https://cli.sasjs.io/img/targetBehaviour.svg
 ---
 
 # SASjs Configuration

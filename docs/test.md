@@ -3,7 +3,6 @@ layout: article
 title: Test
 og_title: sasjs test - for Jobs, Services and Macros
 description: Create isolated unit tests for SAS Jobs, Services and Macros.  View coverage reports, export results in CSV, JSON, JUnit XML and LCOV.
-og_image: img/sasjs_test.png
 ---
 
 # sasjs test

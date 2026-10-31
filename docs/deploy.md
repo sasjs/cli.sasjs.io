@@ -2,7 +2,6 @@
 layout: article
 title: Deploying a SAS Project using SASjs
 description: The `sasjs deploy` command performs the actual deployment of a SASjs project into SAS 9 or Viya
-og_image: https://i.imgur.com/gIYp5OG.png
 ---
 
 # sasjs deploy
