@@ -140,6 +140,39 @@ sasjs c service --source sasjs/services/common/appinit.sas -o compiledjobs/folde
 
 The output is a full compile of that one file - the same macro variables, inlined dependencies and init / term programs a project compile would give it.
 
+## Compiling only what changed
+
+Compile records the content it read in `sasjsbuild/.compile-manifest.json` and compares it before doing any work:
+
+```
+$ sasjs compile -t myTarget
+Skipping compilation.
+```
+
+When a source did change it says which one, and then recompiles the project:
+
+```
+$ sasjs compile -t myTarget
+Compiling: Changed since the last compile: /project/sasjs/services/common/getdata.sas
+```
+
+The manifest covers everything the compile reads, so a skip is only taken when the build folder really does match the sources:
+
+* the service and job folders, including `*.test.sas` files
+* `macroFolders` and `programFolders` - these are inlined into the services that need them
+* `webSourcePath` and `syncFolder`
+* a `macroCorePath` that lives inside the project
+* the configured `testSetUp` and `testTearDown` programs
+* `package.json`, `package-lock.json` and the installed `@sasjs/core` version, so a core bump forces a rebuild
+
+A deleted source counts as a change: the build folder is rebuilt from the sources, so the file is gone from `sasjsbuild` afterwards. A file that cannot be read is skipped rather than failing the compile, and a manifest that cannot be written costs one extra compile rather than failing the build.
+
+`sasjs cb` and `sasjs cbd` always force a recompile. `sasjs build` and `sasjs bd` do not compile at all.
+
+## Non-SAS files
+
+A file in a service or job folder that is not a `.sas` program is copied into the build folder unchanged and shipped under its own name - see [JavaScript services and other non-SAS files](js-services.md).
+
 ## Compile Project
 
 ### Syntax

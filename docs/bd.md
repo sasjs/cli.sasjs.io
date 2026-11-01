@@ -24,7 +24,7 @@ The difference from [`sasjs cbd`](cbd.md) is the compile step.
 
 So `bd` is the tight loop: change one service, compile that service, ship it. `cbd` is the safe loop: rebuild everything from source, then ship. If you have any doubt that the build folder matches your source, use `cbd`.
 
-`build` compiles on its own if the build folder is missing, so `sasjs bd` in a clean checkout is not an error - it simply compiles first.
+`build` does not compile: with no build folder, `sasjs bd` fails with `Run 'sasjs compile' (or 'sasjs cbd') first`. Run [`sasjs compile`](compile.md) once in a fresh checkout, or use [`sasjs cbd`](cbd.md) if you want the compile every time.
 
 ## Syntax
 
