@@ -37,7 +37,14 @@ sasjs b -t myTarget
 
 Nothing else is passed on the commandline: the artefact name, the folders and any streamed web content all come from the target's configuration - see [sasjsconfig](sasjsconfig.md). To run the compile step and the build step together, use [`sasjs cb`](cb.md); to add the deployment, [`sasjs cbd`](cbd.md).
 
-If a jobs or services folder does not exist in the temporary `sasjsbuild` folder, then the `sasjs compile` step is also executed. The alias to run both compile and build steps is `sasjs cb`.
+`sasjs build` packages what is already in the build folder; it does not compile. If that folder is missing, the command stops and says so:
+
+```
+ERROR  An error has occurred when building services.
+Run 'sasjs compile' (or 'sasjs cbd') first.
+```
+
+That keeps the build folder the input to the build step - which is what allows a compiled output to be adjusted by hand, or a single service to be compiled with [`sasjs compile service`](compile.md#compile-single-file) and then shipped. To compile and build in one step use [`sasjs cb`](cb.md), or [`sasjs cbd`](cbd.md) to add the deployment.
 
 
 The benefit of having a seperate command to prepare the build artefacts (rather than bundling it into `sasjs compile`) is that you can then modify the compiled outputs to ensure you have the build you want - for example, removing tests for a production deploy.  If you don't need such changes, then you can just run `sasjs cb` as a shortcut for both `sasjs compile` and `sasjs build`.

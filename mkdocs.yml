@@ -11,6 +11,8 @@ nav:
       - SASjs Config File: sasjsconfig.md
       - SASjs Runner: runner.md
       - ENV File: env.md
+  - Guides:
+      - JavaScript services: js-services.md
   - Commands:
       - sasjs add: add.md
       - sasjs auth: auth.md

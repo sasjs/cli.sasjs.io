@@ -21,7 +21,7 @@
  * The CLI is installed into a temp folder from npm, so the check runs against
  * what a user actually has, not against a checkout. Pin the version:
  *
- *   node scripts/check-cli-docs.mjs --cli-version 6.4.7
+ *   node scripts/check-cli-docs.mjs --cli-version 6.6.0
  *   CLI_DOCS_VERSION=latest node scripts/check-cli-docs.mjs
  */
 
@@ -39,7 +39,7 @@ const readArg = (name, fallback) => {
   return index > -1 ? process.argv[index + 1] : fallback
 }
 
-const cliVersion = readArg('--cli-version', process.env.CLI_DOCS_VERSION || '6.4.7')
+const cliVersion = readArg('--cli-version', process.env.CLI_DOCS_VERSION || '6.6.0')
 const docsDir = path.join(repoRoot, readArg('--docs', 'docs'))
 const navFile = path.join(repoRoot, readArg('--nav', 'mkdocs.yml'))
 
