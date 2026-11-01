@@ -780,6 +780,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../bd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    sasjs bd
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../build/" class="md-nav__link">
         
   
@@ -1615,13 +1643,29 @@
 <p><code>sasjs db</code> gathers the database scripts of a project into one program per database. Each sub folder of <code>sasjs/db</code> is treated as a database, and its files are concatenated into <code>sasjsbuild/db/&lt;database&gt;.&lt;extension&gt;</code>.</p>
 <p>The command exists so that a database build can be run as a single SAS program - the same shape as the compiled jobs and services - rather than as a folder of loose scripts.</p>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sasjs db
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sasjs db [options]
 </span></code></pre></div>
 <p><code>sasjs build-DB</code> and <code>sasjs build-db</code> are accepted as alternative names for the same command.</p>
-<p>The command takes no options. It works on the project it is run in, reading <code>sasjs/db</code> and writing below the project's build folder.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Alias</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--target</code></td>
+<td><code>-t</code></td>
+<td>The target whose <code>sasjsBuildFolder</code> the output goes into. Defaults to the <code>defaultTarget</code> in <code>sasjsconfig.json</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>The command reads <code>sasjs/db</code> and writes below the build folder of the resolved target.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>In CLI 6.4.7 and earlier the command fails before writing anything, with <code>Cannot read properties of undefined (reading 'buildSourceDbFolder')</code> - it never resolves the target, so the build folders are unset. Fix in sasjs/cli#1525 (reported as sasjs/cli#1524). That release also adds <code>--target</code> (<code>-t</code>), which picks the target whose <code>sasjsBuildFolder</code> the output goes into; this page gains the option when the release is out.</p>
+<p>CLI 6.4.7 and earlier fail before writing anything, with <code>Cannot read properties of undefined (reading 'buildSourceDbFolder')</code> - the command never resolved a target, so the build folders were unset (sasjs/cli#1524, fixed in sasjs/cli#1525, first released in 6.4.8). Those versions also have no <code>--target</code> option.</p>
 </div>
 <h2 id="input">Input<a class="headerlink" href="#input" title="Permanent link">&para;</a></h2>
 <p>Every immediate sub folder of <code>sasjs/db</code> is a database. Only two file extensions are read: <code>.ddl</code> and <code>.sas</code>. Other files in the folder are ignored.</p>
@@ -1664,7 +1708,6 @@
 <li>the extension is the last segment of the file name, so <code>01-tables.ddl</code> counts as <code>.ddl</code></li>
 </ul>
 <p>The result is plain SAS code, so it can be executed like any other program - <code>%include</code> it from a deployment script, or run it with <a href="../run/"><code>sasjs run</code></a>.</p>
-<!-- cli-docs-ignore: --target (added by sasjs/cli#1525, not in this release) -->
 
 
 
