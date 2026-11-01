@@ -23,7 +23,7 @@ Example:
 
 ```
 $ sasjs --version
-You are using SASjs CLI v6.4.7
+You are using SASjs CLI v6.5.0
 ```
 
 ## Notes

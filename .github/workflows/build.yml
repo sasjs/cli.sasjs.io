@@ -48,7 +48,7 @@ jobs:
         # and no page mentions a flag its command does not declare. The CLI
         # version is pinned so this job is about the pull request; the weekly
         # docs-drift workflow runs the same check against @latest.
-        run: node scripts/check-cli-docs.mjs --cli-version 6.4.7
+        run: node scripts/check-cli-docs.mjs --cli-version 6.5.0
 
       - name: Serve the built site
         # Lighthouse needs HTTP, and the scores depend on the response headers a

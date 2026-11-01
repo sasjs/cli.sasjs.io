@@ -13,15 +13,19 @@ The command exists so that a database build can be run as a single SAS program -
 ## Syntax
 
 ```
-sasjs db
+sasjs db [options]
 ```
 
 `sasjs build-DB` and `sasjs build-db` are accepted as alternative names for the same command.
 
-The command takes no options. It works on the project it is run in, reading `sasjs/db` and writing below the project's build folder.
+| Option | Alias | Description |
+| --- | --- | --- |
+| `--target` | `-t` | The target whose `sasjsBuildFolder` the output goes into. Defaults to the `defaultTarget` in `sasjsconfig.json`. |
+
+The command reads `sasjs/db` and writes below the build folder of the resolved target.
 
 !!! warning
-    In CLI 6.4.7 and earlier the command fails before writing anything, with `Cannot read properties of undefined (reading 'buildSourceDbFolder')` - it never resolves the target, so the build folders are unset. Fix in sasjs/cli#1525 (reported as sasjs/cli#1524). That release also adds `--target` (`-t`), which picks the target whose `sasjsBuildFolder` the output goes into; this page gains the option when the release is out.
+    CLI 6.4.7 and earlier fail before writing anything, with `Cannot read properties of undefined (reading 'buildSourceDbFolder')` - the command never resolved a target, so the build folders were unset (sasjs/cli#1524, fixed in sasjs/cli#1525, first released in 6.4.8). Those versions also have no `--target` option.
 
 ## Input
 
@@ -53,5 +57,3 @@ Notes:
 - the extension is the last segment of the file name, so `01-tables.ddl` counts as `.ddl`
 
 The result is plain SAS code, so it can be executed like any other program - `%include` it from a deployment script, or run it with [`sasjs run`](run.md).
-
-<!-- cli-docs-ignore: --target (added by sasjs/cli#1525, not in this release) -->

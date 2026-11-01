@@ -65,6 +65,7 @@ Every command has a page, and the same list is printed by [`sasjs help`](help.md
 | --- | --- | --- |
 | [`sasjs add`](add.md) | | Prompts for the connection details of a SAS target and saves them; `sasjs add cred` adds credentials to an existing target |
 | [`sasjs auth`](auth.md) | | Obtains an access token for a target - client/secret (`sasjs auth`), or SAS username and password (`sasjs auth login`) |
+| [`sasjs bd`](bd.md) | | Runs [`build`](build.md) and then [`deploy`](deploy.md), without recompiling first |
 | [`sasjs build`](build.md) | `b` | Collates the compiled jobs, services and tests into a deployable build pack |
 | [`sasjs cb`](cb.md) | | Runs [`compile`](compile.md) and then [`build`](build.md) |
 | [`sasjs cbd`](cbd.md) | | Runs [`compile`](compile.md), [`build`](build.md) and then [`deploy`](deploy.md) |

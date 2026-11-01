@@ -65,6 +65,8 @@ Tests will only be compiled if they exist in a folder listed in one of the follo
 sasjs test [filteringString..] [options]
 ```
 
+`sasjs t` is a shorthand for the same command - `sasjs t -t myTarget` runs every test in the flow.
+
 | Option | Alias | Description |
 | --- | --- | --- |
 | `--source` | `-s` | The test flow to execute. Defaults to `sasjsbuild/testFlow.json`, which `sasjs build` writes. |

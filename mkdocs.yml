@@ -14,6 +14,7 @@ nav:
   - Commands:
       - sasjs add: add.md
       - sasjs auth: auth.md
+      - sasjs bd: bd.md
       - sasjs build: build.md
       - sasjs cb: cb.md
       - sasjs cbd: cbd.md
