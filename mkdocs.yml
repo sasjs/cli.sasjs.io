@@ -33,6 +33,7 @@ nav:
       - sasjs init: init.md
       - sasjs job: job.md
       - sasjs lint: lint.md
+      - sasjs logcheck: logcheck.md
       - sasjs run: run.md
       - sasjs request: request.md
       - sasjs servicepack: servicepack.md

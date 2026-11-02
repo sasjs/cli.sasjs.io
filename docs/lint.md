@@ -11,6 +11,8 @@ The `sasjs lint` command is used to identify issues such as embedded passwords, 
 
 This means developers can spend less time on code reviews and formatting fixes, as well as preventing dangerous code, or code with hard-to-detect bugs from hitting production servers.
 
+`lint` reads your source. For what SAS printed when the code actually ran - `ERROR`s, `WARNING`s and the notes that flag a problem - see [sasjs logcheck](/logcheck), which is the post-execution counterpart.
+
 
 ## Prerequisites
 
