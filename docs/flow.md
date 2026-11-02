@@ -1,6 +1,6 @@
 ---
 layout: article
-title: A Scheduler for executing SAS Viya Jobs
+title: A scheduler for executing SAS jobs
 description: The SASjs CLI allows SAS jobs to be organised into flows, and executed in parallel or sequentially.  The schedule stops in case of warning or error.
 ---
 
@@ -56,7 +56,7 @@ This is the file where the pattern of the flow is configured. A very simple flow
 }
 ```
 
-The above is named "simpleFlow" with one flow named "flow01" and two Viya Jobs - which will execute in parallel (as they are in the same flow).
+The above is named "simpleFlow" with one flow named "flow01" and two jobs - which will execute in parallel (as they are in the same flow).
 
 A more complicated one would look like this:
 
@@ -119,6 +119,21 @@ The above contains a flow definition with 4 flows:
 3. `"secondflow"` - triggers as soon as firstflow is complete and ONLY if the jobs all finish with SUCCESS status
 4. `"anotherflow"` - triggers once firstflow and secondflow are complete, but ONLY if all finish with SUCCESS
 
+## Which servers
+
+A flow runs on SAS Viya and on SASjs Server. Both are dispatched and polled the same way - the job is started, its state is followed until it finishes, and its log is fetched when it does - so a flow definition and a command line are the same on either.
+
+One thing differs: how a job's `location` is resolved.
+
+| `location` | Resolved as |
+| --- | --- |
+| `jobs/common/load.sas` | relative - prefixed with the target's `appLoc` |
+| `/Public/app/jobs/load.sas` | absolute - used exactly as written |
+
+On Viya a job is a job definition and the path is the folder it lives in. On SASjs Server a job is a `.sas` file in the drive, and the runtime is chosen from its extension as it is for `sasjs run`. Both forms are deliberate. A relative location follows the target's `appLoc`, which is what makes one flow file portable between targets and app locations; a leading `/` overrides `appLoc` on purpose, for a job that lives outside the app location or on a shared path that several targets point at.
+
+If the job cannot be found, the flow reports the server's own message rather than a count of failures - `The Program at (/jobs/common/load) does not exist.` names the path it tried.
+
 ## sasjs flow execute
 
 Used to trigger the execution a flow of jobs on the SAS server.
@@ -132,6 +147,7 @@ The following arguments are optional:
 * `logFolder` - will default to the `sasjsresults` folder
 * `csvFile` - will also default to the `sasjsresults` folder
 * `t` - will default to the `defaultTarget` attribute (if available)
+* `streamLog` - writes each job's log to `logFolder` while it runs rather than at the end. Viya only: on SASjs Server a job's log is written when the job finishes, so there is nothing to stream.
 
 ### Usage
 
@@ -141,6 +157,8 @@ sasjs flow execute -s /local/flow.json -l /local/log/folder --csvFile /local/som
 ```
 
 This will schedule SAS jobs and execute them according to the flow definition in the JSON file. Job logs will be returned as ".log' text files and saved to the local (`--logFolder`) folder. Details of the Job Executions and their status will be saved to the CSV file.
+
+A flow that finishes with a job that did not succeed exits `6`, and the failure message names the job and the results file. A flow that could not be run at all - a source file that will not parse, an unreachable server - exits `2`. That distinction is what lets a pipeline tell "the batch failed" from "the CLI could not start it".
 
 ## Log checking
 
