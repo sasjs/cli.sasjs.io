@@ -39,6 +39,10 @@ Additional arguments may include:
 | `--remote` | `-r` | `sync`, `deploy` | The folder on the SAS server that receives it. |
 | `--output` | `-o` | all three | `compile`: the path of the program to write (a `.sas` extension is added). `sync` and `deploy`: a folder for the log. Both default to a timestamped folder under `sasjsbuild` / `sasjsresults`. |
 
+## Log checking
+
+`fs deploy` and `fs sync` build a SAS program, execute it and receive the log. Both read it for `ERROR`s, `WARNING`s and the notes that flag a problem, and `--logcheck` makes them fail on what it says - a program can print `ERROR` and still return cleanly, which is the case this catches. `fs compile` executes nothing, so there is no log to check. See [sasjs logcheck](/logcheck) for the policy, the suppressions and the output formats.
+
 ## sasjs fs compile
 
 Used to generate a single SAS program that contains all the files (and subdirectories) of a given LOCAL folder.  This program can be executed in any flavour of SAS to generate the files on the SAS server - simply set `%let fsTarget=/your/target/folder;` and run the program.
@@ -144,10 +148,6 @@ Can also be used without the arguments, taking values from the sasjsconfig.json 
 or
 
 > `sasjs fs sync -t myTarget`
-
-## Log checking
-
-The log this command receives is read for `ERROR`s, `WARNING`s and the notes that flag a problem, and reported when there is anything in it. Pass `--logcheck` to fail the command on what the log says - a program can print `ERROR` and still return cleanly, which is the case this catches. See [sasjs logcheck](/logcheck) for the policy, the suppressions and the output formats.
 
 ### Known Limitations
 
