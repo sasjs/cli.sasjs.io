@@ -38,6 +38,7 @@ A setting belongs either at the root of the file, where it applies to every targ
 | `binaryFolders` | root and target | folders searched for files embedded as base64 |
 | `serviceConfig` | root and target | `serviceFolders`, `initProgram`, `termProgram`, `macroVars` for services |
 | `jobConfig` | root and target | the same for jobs, with `jobFolders` |
+| `logCheck` | root | failure policy and suppressions for [sasjs logcheck](/logcheck) |
 | `testConfig` | root and target | `initProgram`, `termProgram`, `macroVars`, `testSetUp` and `testTearDown` |
 | `buildConfig` | root and target | `initProgram`, `termProgram`, `buildOutputFileName`, `macroVars` for [`sasjs build`](build.md) |
 | `deployConfig` | root and target | `deployScripts` and `deployServicePack` for [`sasjs deploy`](deploy.md) |

@@ -53,6 +53,10 @@ The input data is structured as follows:
 }
 ```
 
+## Log checking
+
+The log this command receives is read for `ERROR`s, `WARNING`s and the notes that flag a problem, and reported when there is anything in it. Pass `--logcheck` to fail the command on what the log says - a program can print `ERROR` and still return cleanly, which is the case this catches. See [sasjs logcheck](/logcheck) for the policy, the suppressions and the output formats.
+
 ### Examples
 
 ```

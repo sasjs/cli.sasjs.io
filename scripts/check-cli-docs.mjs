@@ -39,7 +39,7 @@ const readArg = (name, fallback) => {
   return index > -1 ? process.argv[index + 1] : fallback
 }
 
-const cliVersion = readArg('--cli-version', process.env.CLI_DOCS_VERSION || '6.6.0')
+const cliVersion = readArg('--cli-version', process.env.CLI_DOCS_VERSION || '6.8.1')
 const docsDir = path.join(repoRoot, readArg('--docs', 'docs'))
 const navFile = path.join(repoRoot, readArg('--nav', 'mkdocs.yml'))
 

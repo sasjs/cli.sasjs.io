@@ -145,6 +145,10 @@ or
 
 > `sasjs fs sync -t myTarget`
 
+## Log checking
+
+The log this command receives is read for `ERROR`s, `WARNING`s and the notes that flag a problem, and reported when there is anything in it. Pass `--logcheck` to fail the command on what the log says - a program can print `ERROR` and still return cleanly, which is the case this catches. See [sasjs logcheck](/logcheck) for the policy, the suppressions and the output formats.
+
 ### Known Limitations
 
 The following issues exist with the current implementation - they do not affect the functionality (syncing local directory with remote) but we do plan to address them in a future release:
