@@ -82,6 +82,7 @@ Every command has a page, and the same list is printed by [`sasjs help`](help.md
 | [`sasjs init`](init.md) | | Adds SASjs to an existing project - config, doxygen templates, lint config and `@sasjs/core` |
 | [`sasjs job`](job.md) | | Executes a SAS job on the target, with options for waiting, logging and streaming |
 | [`sasjs lint`](lint.md) | | Lints your SAS code and reports problems, or fixes them |
+| [`sasjs logcheck`](logcheck.md) | `lc` | Checks SAS logs for what SAS itself printed, and fails when the policy is broken |
 | [`sasjs request`](request.md) | `rq` | Calls a SASjs web service from the commandline |
 | [`sasjs run`](run.md) | `r` | Runs an arbitrary SAS file (local path or URL) on the target |
 | [`sasjs servicepack`](servicepack.md) | | Deploys a service pack - a JSON collection of folders and services |

@@ -8,6 +8,11 @@
  *   A  coverage - every command the CLI registers has a page in the nav, every
  *      entry in the nav's Commands section names a real command, and every page
  *      in docs/ appears in the nav.
+ *   C  homepage - every command the CLI registers appears in the "## Commands"
+ *      table on `docs/index.md`, and that table names no command the CLI does
+ *      not register. Without it a new command can be added, given a page and a
+ *      nav entry, and still be invisible to anyone who arrives at the site.
+ *
  *   B1 direction - every `--flag` a command page mentions is declared by that
  *      command. This is the check that catches a renamed or removed option
  *      (a page promising `--datafile` when the CLI has `--data`), and a flag a
@@ -288,8 +293,51 @@ for (const { label, file } of navCommands) {
   }
 }
 
+// C - the homepage table. Every other page is reachable from it, so a command
+// missing here is a command a reader never learns about, and nothing else fails
+// when the row is forgotten.
+const homepage = readFileSync(path.join(docsDir, 'index.md'), 'utf8')
+const homepageCommandsSection = homepage.split(/^## Commands\s*$/m)[1]
+const homepageRows = homepageCommandsSection
+  ? [
+      ...homepageCommandsSection
+        .split(/^## /m)[0]
+        .matchAll(/^\|\s*\[`sasjs ([^`]+)`\]\(([^)]+\.md)\)/gm)
+    ].map((match) => ({ name: match[1].trim(), file: match[2].trim() }))
+  : []
+
+if (!homepageRows.length) {
+  fail('index.md: no command rows found under "## Commands"')
+}
+
+const homepageCommands = new Set()
+for (const { name, file } of homepageRows) {
+  const command = unalias(name)
+
+  if (!commandList.includes(command)) {
+    fail(
+      `index.md: lists "sasjs ${name}", which is not a command the CLI registers`
+    )
+    continue
+  }
+
+  if (!docFiles.includes(file)) {
+    fail(`index.md: "sasjs ${name}" links to ${file}, which does not exist`)
+  }
+
+  homepageCommands.add(command)
+}
+
+for (const command of commandList) {
+  if (!homepageCommands.has(command)) {
+    fail(
+      `index.md: the "## Commands" table does not list "sasjs ${command}", so the homepage hides it`
+    )
+  }
+}
+
 console.log(
-  `Checked ${commandList.length} commands, ${navCommands.length} command pages, ${flagsChecked} flag mentions.`
+  `Checked ${commandList.length} commands, ${navCommands.length} command pages, ${homepageRows.length} homepage rows, ${flagsChecked} flag mentions.`
 )
 
 if (ignoredFlags.length) {
