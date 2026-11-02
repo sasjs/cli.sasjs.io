@@ -1413,6 +1413,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#log-checking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Log checking
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#what-comes-back" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1447,6 +1458,34 @@
     
   
     sasjs lint
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../logcheck/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    sasjs logcheck
   
 
     
@@ -1763,6 +1802,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#log-checking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Log checking
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#what-comes-back" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1888,6 +1938,8 @@
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># follow a long running job: wait, streaming the log, with status written out</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>sasjs<span class="w"> </span>job<span class="w"> </span>execute<span class="w"> </span>/Public/folder/someJob<span class="w"> </span>-w<span class="w"> </span>--streamLog<span class="w"> </span>-l<span class="w"> </span>./jobLog.log<span class="w"> </span>--statusFile<span class="w"> </span>./jobStatus.json
 </span></code></pre></div>
+<h2 id="log-checking">Log checking<a class="headerlink" href="#log-checking" title="Permanent link">&para;</a></h2>
+<p>The log this command receives is read for <code>ERROR</code>s, <code>WARNING</code>s and the notes that flag a problem, and reported when there is anything in it. Pass <code>--logcheck</code> to fail the command on what the log says - a program can print <code>ERROR</code> and still return cleanly, which is the case this catches. See <a href="/logcheck">sasjs logcheck</a> for the policy, the suppressions and the output formats.</p>
 <h2 id="what-comes-back">What comes back<a class="headerlink" href="#what-comes-back" title="Permanent link">&para;</a></h2>
 <p>The log and the output are written where <code>--log</code> and <code>--output</code> point; with neither, nothing is fetched from the server.</p>
 <p>The command exits with a non-zero code when the job fails, so it can gate a pipeline step:</p>

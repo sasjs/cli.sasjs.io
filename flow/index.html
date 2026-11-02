@@ -1301,6 +1301,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#log-checking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Log checking
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#see-also" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1475,6 +1486,34 @@
     
   
     sasjs lint
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../logcheck/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    sasjs logcheck
   
 
     
@@ -1819,6 +1858,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#log-checking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Log checking
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#see-also" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1990,6 +2040,8 @@
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>sasjs flow execute -s /local/flow.json -l /local/log/folder --csvFile /local/some.csv -t myTarget
 </span></code></pre></div>
 <p>This will schedule SAS jobs and execute them according to the flow definition in the JSON file. Job logs will be returned as ".log' text files and saved to the local (<code>--logFolder</code>) folder. Details of the Job Executions and their status will be saved to the CSV file.</p>
+<h2 id="log-checking">Log checking<a class="headerlink" href="#log-checking" title="Permanent link">&para;</a></h2>
+<p>The log this command receives is read for <code>ERROR</code>s, <code>WARNING</code>s and the notes that flag a problem, and reported when there is anything in it. Pass <code>--logcheck</code> to fail the command on what the log says - a program can print <code>ERROR</code> and still return cleanly, which is the case this catches. See <a href="/logcheck">sasjs logcheck</a> for the policy, the suppressions and the output formats.</p>
 <h2 id="see-also">See Also<a class="headerlink" href="#see-also" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="/#sasjs-job-execute">sasjs job execute</a></li>

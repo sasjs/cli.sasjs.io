@@ -17,7 +17,7 @@
         <link rel="prev" href="../job/">
       
       
-        <link rel="next" href="../run/">
+        <link rel="next" href="../logcheck/">
       
       
         
@@ -1556,6 +1556,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../logcheck/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    sasjs logcheck
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../run/" class="md-nav__link">
         
   
@@ -1971,6 +1999,7 @@
 <h1 id="sasjs-lint">sasjs lint<a class="headerlink" href="#sasjs-lint" title="Permanent link">&para;</a></h1>
 <p>The <code>sasjs lint</code> command is used to identify issues such as embedded passwords, trailing spaces, sloppy indentation, missing program headers and more, in your SAS code.</p>
 <p>This means developers can spend less time on code reviews and formatting fixes, as well as preventing dangerous code, or code with hard-to-detect bugs from hitting production servers.</p>
+<p><code>lint</code> reads your source. For what SAS printed when the code actually ran - <code>ERROR</code>s, <code>WARNING</code>s and the notes that flag a problem - see <a href="/logcheck">sasjs logcheck</a>, which is the post-execution counterpart.</p>
 <h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
 <p>Before using this command, you simply need to <a href="/installation">install</a> the SASjs CLI.  It is NOT necessary to configure a <code>sasjs/sasjsconfig.json</code> file - the <code>sasjs lint</code> command can be executed from anywhere - including from within a git hook.</p>
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
@@ -2109,13 +2138,13 @@
         
         
           
-          <a href="../run/" class="md-footer__link md-footer__link--next" aria-label="Next: sasjs run">
+          <a href="../logcheck/" class="md-footer__link md-footer__link--next" aria-label="Next: sasjs logcheck">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                sasjs run
+                sasjs logcheck
               </div>
             </div>
             <div class="md-footer__button md-icon">

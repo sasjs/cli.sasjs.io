@@ -1307,6 +1307,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#log-checking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Log checking
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#sasjs-fs-compile" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1542,6 +1553,34 @@
     
   
     sasjs lint
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../logcheck/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    sasjs logcheck
   
 
     
@@ -1836,6 +1875,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#log-checking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Log checking
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#sasjs-fs-compile" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2035,6 +2085,8 @@
 </tr>
 </tbody>
 </table>
+<h2 id="log-checking">Log checking<a class="headerlink" href="#log-checking" title="Permanent link">&para;</a></h2>
+<p><code>fs deploy</code> and <code>fs sync</code> build a SAS program, execute it and receive the log. Both read it for <code>ERROR</code>s, <code>WARNING</code>s and the notes that flag a problem, and <code>--logcheck</code> makes them fail on what it says - a program can print <code>ERROR</code> and still return cleanly, which is the case this catches. <code>fs compile</code> executes nothing, so there is no log to check. See <a href="/logcheck">sasjs logcheck</a> for the policy, the suppressions and the output formats.</p>
 <h2 id="sasjs-fs-compile">sasjs fs compile<a class="headerlink" href="#sasjs-fs-compile" title="Permanent link">&para;</a></h2>
 <p>Used to generate a single SAS program that contains all the files (and subdirectories) of a given LOCAL folder.  This program can be executed in any flavour of SAS to generate the files on the SAS server - simply set <code>%let fsTarget=/your/target/folder;</code> and run the program.</p>
 <p>To preserve encoding and special characters, as well as to enable the compilation of binary content, all files are base64 encoded.</p>

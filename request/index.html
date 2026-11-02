@@ -1363,6 +1363,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../logcheck/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    sasjs logcheck
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../run/" class="md-nav__link">
         
   
@@ -1510,6 +1538,17 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#log-checking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Log checking
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1785,6 +1824,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#log-checking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Log checking
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1873,6 +1923,8 @@
 </span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a># run a SASjs web service with log and output files defined
 </span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>sasjs request /Public/app/myApp/common/appinit -l ./jobLog.log -o ./jobOutput.json
 </span></code></pre></div>
+<h2 id="log-checking">Log checking<a class="headerlink" href="#log-checking" title="Permanent link">&para;</a></h2>
+<p>The log this command receives is read for <code>ERROR</code>s, <code>WARNING</code>s and the notes that flag a problem, and reported when there is anything in it. Pass <code>--logcheck</code> to fail the command on what the log says - a program can print <code>ERROR</code> and still return cleanly, which is the case this catches. See <a href="/logcheck">sasjs logcheck</a> for the policy, the suppressions and the output formats.</p>
 
 
 

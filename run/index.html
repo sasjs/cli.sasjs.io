@@ -14,7 +14,7 @@
         <link rel="canonical" href="https://cli.sasjs.io/run/">
       
       
-        <link rel="prev" href="../lint/">
+        <link rel="prev" href="../logcheck/">
       
       
         <link rel="next" href="../request/">
@@ -1360,6 +1360,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../logcheck/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    sasjs logcheck
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -1471,6 +1499,17 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#log-checking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Log checking
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1775,6 +1814,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#log-checking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Log checking
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#roadmap" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1852,6 +1902,8 @@
 <p>Running some SAS code from github:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sasjs run https://raw.githubusercontent.com/sasjs/template_jobs/master/includes/someprogram.sas -t viya
 </span></code></pre></div>
+<h2 id="log-checking">Log checking<a class="headerlink" href="#log-checking" title="Permanent link">&para;</a></h2>
+<p>The log this command receives is read for <code>ERROR</code>s, <code>WARNING</code>s and the notes that flag a problem, and reported when there is anything in it. Pass <code>--logcheck</code> to fail the command on what the log says - a program can print <code>ERROR</code> and still return cleanly, which is the case this catches. See <a href="/logcheck">sasjs logcheck</a> for the policy, the suppressions and the output formats.</p>
 <h2 id="roadmap">Roadmap<a class="headerlink" href="#roadmap" title="Permanent link">&para;</a></h2>
 <p>We plan to support the following:</p>
 <ul>
@@ -1897,7 +1949,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../lint/" class="md-footer__link md-footer__link--prev" aria-label="Previous: sasjs lint">
+          <a href="../logcheck/" class="md-footer__link md-footer__link--prev" aria-label="Previous: sasjs logcheck">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1907,7 +1959,7 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                sasjs lint
+                sasjs logcheck
               </div>
             </div>
           </a>
