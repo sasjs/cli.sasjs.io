@@ -28,7 +28,7 @@
     
     
       
-        <title>A Scheduler for executing SAS Viya Jobs - SASjs CLI</title>
+        <title>A scheduler for executing SAS jobs - SASjs CLI</title>
       
     
     
@@ -143,7 +143,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              A Scheduler for executing SAS Viya Jobs
+              A scheduler for executing SAS jobs
             
           </span>
         </div>
@@ -1262,6 +1262,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#which-servers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Which servers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#sasjs-flow-execute" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1819,6 +1830,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#which-servers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Which servers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#sasjs-flow-execute" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1964,7 +1986,7 @@
 </span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>  }
 </span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>}
 </span></code></pre></div>
-<p>The above is named "simpleFlow" with one flow named "flow01" and two Viya Jobs - which will execute in parallel (as they are in the same flow).</p>
+<p>The above is named "simpleFlow" with one flow named "flow01" and two jobs - which will execute in parallel (as they are in the same flow).</p>
 <p>A more complicated one would look like this:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>{
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  "name": "myAmazingFlow",
@@ -2023,6 +2045,29 @@
 <li><code>"secondflow"</code> - triggers as soon as firstflow is complete and ONLY if the jobs all finish with SUCCESS status</li>
 <li><code>"anotherflow"</code> - triggers once firstflow and secondflow are complete, but ONLY if all finish with SUCCESS</li>
 </ol>
+<h2 id="which-servers">Which servers<a class="headerlink" href="#which-servers" title="Permanent link">&para;</a></h2>
+<p>A flow runs on SAS Viya and on SASjs Server. Both are dispatched and polled the same way - the job is started, its state is followed until it finishes, and its log is fetched when it does - so a flow definition and a command line are the same on either.</p>
+<p>One thing differs: how a job's <code>location</code> is resolved.</p>
+<table>
+<thead>
+<tr>
+<th><code>location</code></th>
+<th>Resolved as</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>jobs/common/load.sas</code></td>
+<td>relative - prefixed with the target's <code>appLoc</code></td>
+</tr>
+<tr>
+<td><code>/Public/app/jobs/load.sas</code></td>
+<td>absolute - used exactly as written</td>
+</tr>
+</tbody>
+</table>
+<p>On Viya a job is a job definition and the path is the folder it lives in. On SASjs Server a job is a <code>.sas</code> file in the drive, and the runtime is chosen from its extension as it is for <code>sasjs run</code>. Both forms are deliberate. A relative location follows the target's <code>appLoc</code>, which is what makes one flow file portable between targets and app locations; a leading <code>/</code> overrides <code>appLoc</code> on purpose, for a job that lives outside the app location or on a shared path that several targets point at.</p>
+<p>If the job cannot be found, the flow reports the server's own message rather than a count of failures - <code>The Program at (/jobs/common/load) does not exist.</code> names the path it tried.</p>
 <h2 id="sasjs-flow-execute">sasjs flow execute<a class="headerlink" href="#sasjs-flow-execute" title="Permanent link">&para;</a></h2>
 <p>Used to trigger the execution a flow of jobs on the SAS server.</p>
 <h3 id="syntax_1">Syntax<a class="headerlink" href="#syntax_1" title="Permanent link">&para;</a></h3>
@@ -2034,12 +2079,14 @@
 <li><code>logFolder</code> - will default to the <code>sasjsresults</code> folder</li>
 <li><code>csvFile</code> - will also default to the <code>sasjsresults</code> folder</li>
 <li><code>t</code> - will default to the <code>defaultTarget</code> attribute (if available)</li>
+<li><code>streamLog</code> - writes each job's log to <code>logFolder</code> while it runs rather than at the end. Viya only: on SASjs Server a job's log is written when the job finishes, so there is nothing to stream.</li>
 </ul>
 <h3 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h3>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a># run the flow of jobs using the target defined in sasjs add
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>sasjs flow execute -s /local/flow.json -l /local/log/folder --csvFile /local/some.csv -t myTarget
 </span></code></pre></div>
 <p>This will schedule SAS jobs and execute them according to the flow definition in the JSON file. Job logs will be returned as ".log' text files and saved to the local (<code>--logFolder</code>) folder. Details of the Job Executions and their status will be saved to the CSV file.</p>
+<p>A flow that finishes with a job that did not succeed exits <code>6</code>, and the failure message names the job and the results file. A flow that could not be run at all - a source file that will not parse, an unreachable server - exits <code>2</code>. That distinction is what lets a pipeline tell "the batch failed" from "the CLI could not start it".</p>
 <h2 id="log-checking">Log checking<a class="headerlink" href="#log-checking" title="Permanent link">&para;</a></h2>
 <p>The log this command receives is read for <code>ERROR</code>s, <code>WARNING</code>s and the notes that flag a problem, and reported when there is anything in it. Pass <code>--logcheck</code> to fail the command on what the log says - a program can print <code>ERROR</code> and still return cleanly, which is the case this catches. See <a href="/logcheck">sasjs logcheck</a> for the policy, the suppressions and the output formats.</p>
 <h2 id="see-also">See Also<a class="headerlink" href="#see-also" title="Permanent link">&para;</a></h2>
