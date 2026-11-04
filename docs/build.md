@@ -157,7 +157,7 @@ The drive endpoints answer the same contract a SASjs Server does, so a client th
 | `DELETE /SASjsApi/drive/folder?_folderPath=/data/reports` | delete a folder and everything under it |
 | `POST /SASjsApi/drive/rename` | move a file or folder, from a JSON body `{ "oldPath": "...", "newPath": "..." }` |
 
-A successful write answers `{"status":"success"}`, a create over a file that already exists answers `409`, and replacing or deleting a file that is not there answers `404` - the statuses the server's routes use. Paths are drive-relative: a leading slash means "under the drive root", never the host's filesystem, and a path that climbs out with `..` is refused with a `400`. A file whose extension is `.exe`, `.sh` or `.htaccess` is refused, as it is on a server.
+A successful write answers `{"status":"success"}`, a create over a file that already exists answers `409`, and replacing or deleting a file that is not there answers `404` - the statuses the server's routes use. Paths are drive-relative: a leading slash means "under the drive root", never the host's filesystem, and a path that climbs out with `..` is refused with a `400`. A file whose extension is `.exe`, `.sh` or `.htaccess` is refused on every route that creates, replaces, deletes or renames it, as it is on a server.
 
 What a visitor writes stays in that visitor's drive: it is kept in IndexedDB in their own browser, so it survives a refresh but is not shared with anyone else, and an empty folder is not kept across a reload because the drive is stored as a map of files. Preloaded data is still shipped as a snapshot, below.
 
