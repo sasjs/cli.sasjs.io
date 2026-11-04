@@ -141,7 +141,25 @@ Some things to keep in mind:
 
 * the drive holds text, so a file a service writes as bytes is stored as base64 and reads back as bytes - it is a demo drive, not a filesystem for large binaries
 * with no `Content-type` declared, a byte body is served as `application/octet-stream`
+* a text response with no `Content-type` declared is served as `text/html; charset=utf-8`, the line a SASjs Server starts a session with - a service that answers with anything else should declare it, exactly as it has to on a server
 * a filename outside ASCII belongs in RFC 6266 form - `Content-Disposition: attachment;filename*=UTF-8''r%C3%A9sum%C3%A9.csv`. Raw non-ASCII bytes in a header are not portable: the browser's own download honours the bytes it is given, and the same header sent by a SASjs Server arrives with node's latin1 encoding, so the two only agree on the ASCII form
+
+### Writing to the drive
+
+The drive endpoints answer the same contract a SASjs Server does, so a client that uploads, renames or deletes needs no change for a mock build - only the storage differs:
+
+| Request | Effect |
+| --- | --- |
+| `POST /SASjsApi/drive/file?_filePath=/data/up.csv` | create a file, from a multipart body with the field `file` (`filePath` may be sent as a form field instead of the query) |
+| `PATCH /SASjsApi/drive/file?_filePath=/data/up.csv` | replace a file that exists |
+| `DELETE /SASjsApi/drive/file?_filePath=/data/up.csv` | delete a file |
+| `POST /SASjsApi/drive/folder` | create a folder, from a JSON body `{ "folderPath": "/data/reports" }` |
+| `DELETE /SASjsApi/drive/folder?_folderPath=/data/reports` | delete a folder and everything under it |
+| `POST /SASjsApi/drive/rename` | move a file or folder, from a JSON body `{ "oldPath": "...", "newPath": "..." }` |
+
+A successful write answers `{"status":"success"}`, a create over a file that already exists answers `409`, and replacing or deleting a file that is not there answers `404` - the statuses the server's routes use. Paths are drive-relative: a leading slash means "under the drive root", never the host's filesystem, and a path that climbs out with `..` is refused with a `400`. A file whose extension is `.exe`, `.sh` or `.htaccess` is refused, as it is on a server.
+
+What a visitor writes stays in that visitor's drive: it is kept in IndexedDB in their own browser, so it survives a refresh but is not shared with anyone else, and an empty folder is not kept across a reload because the drive is stored as a map of files. Preloaded data is still shipped as a snapshot, below.
 
 ### Serving it
 
