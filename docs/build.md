@@ -109,6 +109,10 @@ The site is written to [`mockWebFolder`](https://cli.sasjs.io/sasjsconfig.html#s
 
 A service worker intercepts the calls the [SASjs Adapter](https://adapter.sasjs.io) makes, invokes the matching JavaScript service, and resolves `webout`, log and headers back to the app. Requests appear in the browser's network tab as they normally would. Anything the services write to the drive is kept in IndexedDB, so a page refresh does not lose it.
 
+The site boots from `host/boot.js`: the build takes every script tag the page has, in document order, and the loader registers the worker, waits for it to control the page, and then replays those tags in the same order. Nothing about the app changes - same tags, same order, same globals - so a page that loads one bundled `main.<hash>.js` and a page that loads several plain scripts both work, and a bundler is not a requirement. Non-executable script blocks (`application/ld+json`, templates) are left alone.
+
+The loader is a file rather than an inline script on purpose: an app that sets a strict Content-Security-Policy (`default-src 'self'`, no `unsafe-inline`) refuses an inline script, and the build cannot add a hash or nonce to a policy it does not own. A strict-CSP app therefore builds and runs unchanged.
+
 ### Downloads and file responses
 
 A service answers with a file the same way it does on a server: it declares the response in `_SASJS_WEBOUT_HEADERS` and writes the body where the wrapper points it. The generated wrapper already declares `fs`, so a service uses it rather than requiring it again.
