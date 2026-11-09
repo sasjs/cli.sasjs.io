@@ -60,6 +60,41 @@ Simply run the command and the list of exceptions (along with line / column numb
 
 ![sasjs lint rule output](img/lint.webp){ width="770" height="407" loading="lazy" decoding="async" }
 
+## Failing on warnings
+
+By default an `ERROR` fails the run (exit code 3) and a `WARNING` does not - it is reported, and the command still succeeds. Two ways to make a warning fail instead.
+
+For a single run, set the lowest severity that fails:
+
+```bash
+sasjs lint --fail-on warning
+```
+
+`--fail-on` takes `error` (the default) or `warning`. The exit code stays `3`, so a pipeline still tells a lint failure from an internal error, and the `sasjs lint fix` action is unaffected.
+
+For the project, so that every run - including the one the VS Code extension makes - treats warnings the same way, set a default in `.sasjslint`:
+
+```json
+{
+  "severityLevel": { "default": "error" }
+}
+```
+
+`default` applies to every rule that has no entry of its own, including the rules added in later versions, so a new rule needs no `.sasjslint` change to be treated like the rest. A rule named in the same object still wins:
+
+```json
+{
+  "severityLevel": {
+    "default": "error",
+    "maxLineLength": "warn"
+  }
+}
+```
+
+Precedence is the rule's own entry, then `default`, then the severity built into the rule. The setting needs `@sasjs/lint` 5.1.0 or later, which ships with `@sasjs/cli` 6.21.0 - an earlier version ignores it silently, which reads as the setting having no effect.
+
+The two are independent: `--fail-on` changes the verdict of one run without touching the configuration, and `severityLevel.default` changes what is reported, so it also changes how the editor colours the violations.
+
 ## sasjs lint fix
 
 ### Syntax
