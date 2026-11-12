@@ -1416,6 +1416,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#editor-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Editor support
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1866,6 +1883,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#editor-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Editor support
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -2033,8 +2067,17 @@
 <li>If no .sasjslint file is contained in any parent directories, then use the current directory</li>
 </ul>
 <p>For clarity, the Project Directory is printed to the console whenever running <code>sasjs lint</code>.</p>
+<h3 id="editor-support">Editor support<a class="headerlink" href="#editor-support" title="Permanent link">&para;</a></h3>
+<p>Every setting, its type and its default are described by the lint schema: <a href="https://cli.sasjs.io/sasjslint-schema.json">sasjslint-schema.json</a>.</p>
+<p>Adding <code>$schema</code> at the top of the file lets an editor that understands JSON schemas complete and check the settings as you type, and shows each rule's description on hover:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://cli.sasjs.io/sasjslint-schema.json"</span><span class="p">,</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">"noTrailingSpaces"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>The file is read as strict JSON, so it cannot carry comments - <code>$schema</code> is how the settings are documented where they are written. A file that fails to parse is an error for <code>sasjs lint</code>, so keep the additions inside the object.</p>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sasjs lint [find | fix | init] [filterStrings..]
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sasjs lint [find | fix | init] [filterStrings..]
 </span></code></pre></div>
 <table>
 <thead>
@@ -2062,7 +2105,7 @@
 <h2 id="sasjs-lint_1">sasjs lint<a class="headerlink" href="#sasjs-lint_1" title="Permanent link">&para;</a></h2>
 <h3 id="syntax_1">Syntax<a class="headerlink" href="#syntax_1" title="Permanent link">&para;</a></h3>
 <p>The command works as follows:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sasjs<span class="w"> </span>lint
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sasjs<span class="w"> </span>lint
 </span></code></pre></div>
 <h3 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h3>
 <p>Simply run the command and the list of exceptions (along with line / column numbers) is shown in the console, eg:</p>
@@ -2070,28 +2113,28 @@
 <h2 id="failing-on-warnings">Failing on warnings<a class="headerlink" href="#failing-on-warnings" title="Permanent link">&para;</a></h2>
 <p>By default an <code>ERROR</code> fails the run (exit code 3) and a <code>WARNING</code> does not - it is reported, and the command still succeeds. Two ways to make a warning fail instead.</p>
 <p>For a single run, set the lowest severity that fails:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sasjs<span class="w"> </span>lint<span class="w"> </span>--fail-on<span class="w"> </span>warning
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sasjs<span class="w"> </span>lint<span class="w"> </span>--fail-on<span class="w"> </span>warning
 </span></code></pre></div>
 <p><code>--fail-on</code> takes <code>error</code> (the default) or <code>warning</code>. The exit code stays <code>3</code>, so a pipeline still tells a lint failure from an internal error, and the <code>sasjs lint fix</code> action is unaffected.</p>
 <p>For the project, so that every run - including the one the VS Code extension makes - treats warnings the same way, set a default in <code>.sasjslint</code>:</p>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">"severityLevel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"error"</span><span class="w"> </span><span class="p">}</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="p">}</span>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">"severityLevel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"error"</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="p">}</span>
 </span></code></pre></div>
 <p><code>default</code> applies to every rule that has no entry of its own, including the rules added in later versions, so a new rule needs no <code>.sasjslint</code> change to be treated like the rest. A rule named in the same object still wins:</p>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">"severityLevel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"error"</span><span class="p">,</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nt">"maxLineLength"</span><span class="p">:</span><span class="w"> </span><span class="s2">"warn"</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span><span class="p">}</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="p">}</span>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">{</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">"severityLevel"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"error"</span><span class="p">,</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="nt">"maxLineLength"</span><span class="p">:</span><span class="w"> </span><span class="s2">"warn"</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="p">}</span>
 </span></code></pre></div>
 <p>Precedence is the rule's own entry, then <code>default</code>, then the severity built into the rule. The setting needs <code>@sasjs/lint</code> 5.1.0 or later, which ships with <code>@sasjs/cli</code> 6.21.0 - an earlier version ignores it silently, which reads as the setting having no effect.</p>
 <p>The two are independent: <code>--fail-on</code> changes the verdict of one run without touching the configuration, and <code>severityLevel.default</code> changes what is reported, so it also changes how the editor colours the violations.</p>
 <h2 id="sasjs-lint-fix">sasjs lint fix<a class="headerlink" href="#sasjs-lint-fix" title="Permanent link">&para;</a></h2>
 <h3 id="syntax_2">Syntax<a class="headerlink" href="#syntax_2" title="Permanent link">&para;</a></h3>
 <p>The command works as follows:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sasjs<span class="w"> </span>lint<span class="w"> </span>fix
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>sasjs<span class="w"> </span>lint<span class="w"> </span>fix
 </span></code></pre></div>
 <h3 id="usage_1">Usage<a class="headerlink" href="#usage_1" title="Permanent link">&para;</a></h3>
 <p>Running the command applies the fixes. The following rules support <code>autofix</code>:</p>
@@ -2105,15 +2148,15 @@
 <p>The <code>sasjs lint</code> command will return a non-zero exit code if any exceptions are found.  A great way to prevent questionable code from ever hitting your GIT repo (let alone the production server) is to run the linter as part of a pre-commit hook.</p>
 <p>To configure this, there are two steps.  First, add the following to the "scripts" section of your <code>package.json</code> file: <code>"prepare": "git rev-parse --git-dir &amp;&amp; git config core.hooksPath ./.git-hooks || true"</code></p>
 <p>Then, add the following to your <code>.git-hooks/pre-commit</code> file (see <a href="https://github.com/sasjs/core/blob/main/.git-hooks/pre-commit">example</a>):</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>#!/bin/bash
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a># Ensure lint is passing
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>LINT=`sasjs lint`
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>if [[ "$LINT" != "✔ All matched files use @sasjs/lint code style!" ]]; then
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>  echo "$LINT"
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>  echo "To commit in spite of these warnings, use the -n parameter."
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>  exit 1
-</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>fi
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>#!/bin/bash
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a># Ensure lint is passing
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>LINT=`sasjs lint`
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>if [[ "$LINT" != "✔ All matched files use @sasjs/lint code style!" ]]; then
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>  echo "$LINT"
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>  echo "To commit in spite of these warnings, use the -n parameter."
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>  exit 1
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>fi
 </span></code></pre></div>
 <p>If you run <code>sasjs create SOMEPROJECT -t jobs</code> you can check out a sample project with this hook already configured.  Or, you can just <a href="https://github.com/sasjs/template_jobs">clone this repo</a> and run <code>npm prepare</code>.</p>
 <h2 id="further-resources">Further Resources:<a class="headerlink" href="#further-resources" title="Permanent link">&para;</a></h2>
