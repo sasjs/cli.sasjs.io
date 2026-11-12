@@ -860,6 +860,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#hosting-a-javascript-backend-as-a-single-page-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hosting a JavaScript backend as a single page app
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1801,6 +1812,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#hosting-a-javascript-backend-as-a-single-page-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hosting a JavaScript backend as a single page app
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1890,6 +1912,10 @@
 </span></code></pre></div>
 <p>With <code>streamWeb</code> enabled the web assets are deployed and the app stream is registered in <code>appStreamConfig.json</code> in the same run.</p>
 <p>The phrase "service pack" is the name of the artefact, not a requirement for SAS: it is the <code>sasjsbuild/&lt;target&gt;.json</code> (and <code>.zip</code>) that every target deploys from.</p>
+<h2 id="hosting-a-javascript-backend-as-a-single-page-app">Hosting a JavaScript backend as a single page app<a class="headerlink" href="#hosting-a-javascript-backend-as-a-single-page-app" title="Permanent link">&para;</a></h2>
+<p>A JavaScript backend needs no process at all. Setting <code>streamConfig.mockWeb</code> on the target makes <code>sasjs build</code> write the compiled services, a service worker and the runtime that executes them into a static site, so the frontend in <code>webSourcePath</code> opens as a single page app and its <code>SASjsApi</code> calls are answered inside the visitor's browser. Nothing is deployed and no server runs - the site is files, and the drive the services read is seeded from the build folder.</p>
+<p><a href="https://staging.datacontroller.io">staging.datacontroller.io</a> is such a build: the Data Controller interface, the same JavaScript services, a captured drive shipped with it, and no backend behind it.</p>
+<p>The target's <code>appLoc</code> has to be the one the frontend was built with, because the site resolves every service from that path. See <a href="../build/#browser-build-streamconfigmockweb">sasjs build</a> for the config block, how a request is answered, serving the folder, and the snapshot that ships the drive with data.</p>
 
 
 
