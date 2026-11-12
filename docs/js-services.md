@@ -92,3 +92,11 @@ Services have been successfully deployed
 With `streamWeb` enabled the web assets are deployed and the app stream is registered in `appStreamConfig.json` in the same run.
 
 The phrase "service pack" is the name of the artefact, not a requirement for SAS: it is the `sasjsbuild/<target>.json` (and `.zip`) that every target deploys from.
+
+## Hosting a JavaScript backend as a single page app
+
+A JavaScript backend needs no process at all. Setting `streamConfig.mockWeb` on the target makes `sasjs build` write the compiled services, a service worker and the runtime that executes them into a static site, so the frontend in `webSourcePath` opens as a single page app and its `SASjsApi` calls are answered inside the visitor's browser. Nothing is deployed and no server runs - the site is files, and the drive the services read is seeded from the build folder.
+
+[staging.datacontroller.io](https://staging.datacontroller.io) is such a build: the Data Controller interface, the same JavaScript services, a captured drive shipped with it, and no backend behind it.
+
+The target's `appLoc` has to be the one the frontend was built with, because the site resolves every service from that path. See [sasjs build](build.md#browser-build-streamconfigmockweb) for the config block, how a request is answered, serving the folder, and the snapshot that ships the drive with data.
