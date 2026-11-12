@@ -30,6 +30,21 @@ Linting is applied to all .sas files in all subfolders within the Project Direct
 
 For clarity, the Project Directory is printed to the console whenever running `sasjs lint`.
 
+### Editor support
+
+Every setting, its type and its default are described by the lint schema: [sasjslint-schema.json](https://cli.sasjs.io/sasjslint-schema.json).
+
+Adding `$schema` at the top of the file lets an editor that understands JSON schemas complete and check the settings as you type, and shows each rule's description on hover:
+
+```json
+{
+  "$schema": "https://cli.sasjs.io/sasjslint-schema.json",
+  "noTrailingSpaces": true
+}
+```
+
+The file is read as strict JSON, so it cannot carry comments - `$schema` is how the settings are documented where they are written. A file that fails to parse is an error for `sasjs lint`, so keep the additions inside the object.
+
 ## Syntax
 
 ```
