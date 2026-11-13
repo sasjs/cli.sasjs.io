@@ -178,7 +178,7 @@ Deploy it like any static site - it is just files. The runtime files under `host
 
 ### Shipping the site with data
 
-Out of the box the drive a visitor gets holds the services and whatever else lives in the build folder - enough to run, but empty of the data those services would have produced. A snapshot changes that: if `mock-snapshot.json` sits in the build folder, the build copies it to `host/vfs-snapshot.json` and the runtime prefers it over the plain seed, so every visitor starts from the captured state instead of an empty drive.
+Out of the box the drive a visitor gets holds the services and whatever else lives in the build folder - enough to run, but empty of the data those services would have produced. A snapshot changes that: if `mock-snapshot.json` sits in the build folder, the build ships it with the site and the runtime prefers it over the plain seed, so every visitor starts from the captured state instead of an empty drive.
 
 To capture one, open the site, use the app until the drive is in the state you want, and run this in the browser console:
 
@@ -186,16 +186,27 @@ To capture one, open the site, use the app until the drive is in the state you w
 await window.SASjsMock.download()
 ```
 
-That saves `mock-snapshot.json` to your downloads. Put it beside the compiled output - `sasjsbuild/mock-snapshot.json` for the default build folder - and build again. The build reports it in `host/mock-config.json` as `"snapshot": true`.
+That saves `mock-snapshot.json` to your downloads. Put it beside the compiled output - `sasjsbuild/mock-snapshot.json` for the default build folder - and build again. The build reports it in `host/mock-config.json` as `"snapshot": true`, with the number of pieces it was split into.
 
 ```json
 {
   "appLoc": "/Public/app/dc",
   "snapshot": true,
+  "snapshotShards": 6,
   "driveEntries": 97,
   "jsPrograms": 43
 }
 ```
+
+#### How the snapshot is shipped
+
+A real app's drive runs to megabytes, and a visitor's first page does not read most of it: a list of apps reads a config and a few logos, not the bundles behind them. So the build splits the capture into pieces:
+
+* `host/vfs-snapshot-0.json` is the **boot shard**: the files under 256KB whose folder comes to less than 64KB - a listing, the configuration, an app's logo. It is fetched with the page.
+* a file of 256KB or more gets a shard of its own, and a folder whose files come to more than 64KB gets one shard. These are fetched when something reads a path in them: a drive route, an app being opened, a service reading a file at run time.
+* `host/vfs-snapshot.json` is the **index**: every path with its piece and size. A listing, a size or an existence check is answered from it without fetching anything.
+
+Nothing in a project changes: `mock-snapshot.json` is still one plain JSON map of drive path to file contents, and an existing snapshot builds as before. Upload the whole `host/` folder - the index names its pieces by relative path.
 
 Three things worth knowing:
 
