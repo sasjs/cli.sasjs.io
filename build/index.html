@@ -1146,6 +1146,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Shipping the site with data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-the-snapshot-is-shipped" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How the snapshot is shipped
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -2038,6 +2055,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Shipping the site with data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-the-snapshot-is-shipped" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How the snapshot is shipped
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -2212,18 +2246,27 @@
 </span></code></pre></div>
 <p>Deploy it like any static site - it is just files. The runtime files under <code>host/</code> are referenced with a <code>?v=&lt;hash&gt;</code> query that changes with their contents, so a redeploy replaces them for returning visitors too; upload <code>index.html</code> and <code>sw.js</code> together with everything else, since those two carry the reference.</p>
 <h3 id="shipping-the-site-with-data">Shipping the site with data<a class="headerlink" href="#shipping-the-site-with-data" title="Permanent link">&para;</a></h3>
-<p>Out of the box the drive a visitor gets holds the services and whatever else lives in the build folder - enough to run, but empty of the data those services would have produced. A snapshot changes that: if <code>mock-snapshot.json</code> sits in the build folder, the build copies it to <code>host/vfs-snapshot.json</code> and the runtime prefers it over the plain seed, so every visitor starts from the captured state instead of an empty drive.</p>
+<p>Out of the box the drive a visitor gets holds the services and whatever else lives in the build folder - enough to run, but empty of the data those services would have produced. A snapshot changes that: if <code>mock-snapshot.json</code> sits in the build folder, the build ships it with the site and the runtime prefers it over the plain seed, so every visitor starts from the captured state instead of an empty drive.</p>
 <p>To capture one, open the site, use the app until the drive is in the state you want, and run this in the browser console:</p>
 <div class="language-js highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">await</span><span class="w"> </span><span class="nb">window</span><span class="p">.</span><span class="nx">SASjsMock</span><span class="p">.</span><span class="nx">download</span><span class="p">()</span>
 </span></code></pre></div>
-<p>That saves <code>mock-snapshot.json</code> to your downloads. Put it beside the compiled output - <code>sasjsbuild/mock-snapshot.json</code> for the default build folder - and build again. The build reports it in <code>host/mock-config.json</code> as <code>"snapshot": true</code>.</p>
+<p>That saves <code>mock-snapshot.json</code> to your downloads. Put it beside the compiled output - <code>sasjsbuild/mock-snapshot.json</code> for the default build folder - and build again. The build reports it in <code>host/mock-config.json</code> as <code>"snapshot": true</code>, with the number of pieces it was split into.</p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">{</span>
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">"appLoc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/Public/app/dc"</span><span class="p">,</span>
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="nt">"snapshot"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">  </span><span class="nt">"driveEntries"</span><span class="p">:</span><span class="w"> </span><span class="mi">97</span><span class="p">,</span>
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">  </span><span class="nt">"jsPrograms"</span><span class="p">:</span><span class="w"> </span><span class="mi">43</span>
-</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="p">}</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">  </span><span class="nt">"snapshotShards"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">  </span><span class="nt">"driveEntries"</span><span class="p">:</span><span class="w"> </span><span class="mi">97</span><span class="p">,</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">  </span><span class="nt">"jsPrograms"</span><span class="p">:</span><span class="w"> </span><span class="mi">43</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="p">}</span>
 </span></code></pre></div>
+<h4 id="how-the-snapshot-is-shipped">How the snapshot is shipped<a class="headerlink" href="#how-the-snapshot-is-shipped" title="Permanent link">&para;</a></h4>
+<p>A real app's drive runs to megabytes, and a visitor's first page does not read most of it: a list of apps reads a config and a few logos, not the bundles behind them. So the build splits the capture into pieces:</p>
+<ul>
+<li><code>host/vfs-snapshot-0.json</code> is the <strong>boot shard</strong>: the files under 256KB whose folder comes to less than 64KB - a listing, the configuration, an app's logo. It is fetched with the page.</li>
+<li>a file of 256KB or more gets a shard of its own, and a folder whose files come to more than 64KB gets one shard. These are fetched when something reads a path in them: a drive route, an app being opened, a service reading a file at run time.</li>
+<li><code>host/vfs-snapshot.json</code> is the <strong>index</strong>: every path with its piece and size. A listing, a size or an existence check is answered from it without fetching anything.</li>
+</ul>
+<p>Nothing in a project changes: <code>mock-snapshot.json</code> is still one plain JSON map of drive path to file contents, and an existing snapshot builds as before. Upload the whole <code>host/</code> folder - the index names its pieces by relative path.</p>
 <p>Three things worth knowing:</p>
 <ul>
 <li>the snapshot is a plain JSON map of drive path to file contents, and a real app's drive runs to megabytes, so treat it as a build input you generate rather than something to keep in git</li>
