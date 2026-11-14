@@ -178,7 +178,7 @@ Deploy it like any static site - it is just files. The runtime files under `host
 
 ### Trying the API (`/api`)
 
-Every browser build ships an API console at `<base>/api/`. It lists the operations the host answers, renders a form for each from the parameters the API declares, and sends the request the way an application does - same origin, same service worker, so the answer is the mock's real answer. It is generated at build time from the same route table the worker dispatches, so a route the package adds appears on the next build.
+A browser build ships an API console at `<base>/api/` unless the site already carries files there: `api/index.html`, `api/console.js`, `api/console.css` or `api/operations.json` are taken as the project's own, so the build keeps them, warns that it left the console out, and the rest of this section does not apply. It lists the operations the host answers, renders a form for each from the parameters the API declares, and sends the request the way an application does - same origin, same service worker, so the answer is the mock's real answer. It is generated at build time from the same route table the worker dispatches, so a route the package adds appears on the next build.
 
 Type the URL rather than looking for a link: the console is a developer surface, nothing in the application points at it, and nothing preloads it.
 
