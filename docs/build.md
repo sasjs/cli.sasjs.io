@@ -176,6 +176,30 @@ python3 -m http.server 8099
 
 Deploy it like any static site - it is just files. The runtime files under `host/` are referenced with a `?v=<hash>` query that changes with their contents, so a redeploy replaces them for returning visitors too; upload `index.html` and `sw.js` together with everything else, since those two carry the reference.
 
+### Trying the API (`/api`)
+
+Every browser build ships an API console at `<base>/api/`. It lists the operations the host answers, renders a form for each from the parameters the API declares, and sends the request the way an application does - same origin, same service worker, so the answer is the mock's real answer. It is generated at build time from the same route table the worker dispatches, so a route the package adds appears on the next build.
+
+Type the URL rather than looking for a link: the console is a developer surface, nothing in the application points at it, and nothing preloads it.
+
+* writes are allowed on purpose. A demo exists to be played with, and everything is recoverable: add `?reset=1` to the console's URL and it clears the stored drive and seeds it again from the shipped state. A browser's hard refresh does **not** do that - it only bypasses the HTTP cache.
+* the demo accounts are printed on the page, with the password, because a browser build has no login wall to protect and a visitor needs to know what to type after logging out. **Act as** sends every call with that account's token, so a refusal a restricted user gets is the refusal an application gets.
+* uploads are not sent by the console. A route whose body is `multipart/form-data` (a file upload, a deployment archive) is listed, and the page says to use the application or a client of your own.
+
+Turn it off with `mockApi: false` in the target's `streamConfig`, for a site whose output must be the application and nothing else:
+
+```json
+{
+  "targets": [
+    {
+      "name": "mock",
+      "appLoc": "/Public/app/demo",
+      "streamConfig": { "mockWeb": true, "webSourcePath": "build", "mockApi": false }
+    }
+  ]
+}
+```
+
 ### Shipping the site with data
 
 Out of the box the drive a visitor gets holds the services and whatever else lives in the build folder - enough to run, but empty of the data those services would have produced. A snapshot changes that: if `mock-snapshot.json` sits in the build folder, the build ships it with the site and the runtime prefers it over the plain seed, so every visitor starts from the captured state instead of an empty drive.
