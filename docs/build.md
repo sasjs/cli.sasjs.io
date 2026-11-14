@@ -176,9 +176,11 @@ python3 -m http.server 8099
 
 Deploy it like any static site - it is just files. The runtime files under `host/` are referenced with a `?v=<hash>` query that changes with their contents, so a redeploy replaces them for returning visitors too; upload `index.html` and `sw.js` together with everything else, since those two carry the reference.
 
-### Trying the API (`/api`)
+### Trying the API (`/api-console`)
 
-A browser build ships an API console at `<base>/api/` unless the site already carries files there: `api/index.html`, `api/console.js`, `api/console.css` or `api/operations.json` are taken as the project's own, so the build keeps them, warns that it left the console out, and the rest of this section does not apply. It lists the operations the host answers, renders a form for each from the parameters the API declares, and sends the request the way an application does - same origin, same service worker, so the answer is the mock's real answer. It is generated at build time from the same route table the worker dispatches, so a route the package adds appears on the next build.
+From `@sasjs/cli` 6.32.0 a browser build ships an API console at `<base>/api-console/` - a path no application routes to, so `/api` stays the application's; 6.31.0 wrote it to `<base>/api/`, which collides with an application that answers that route. The console is not written when the site already carries files there: `api-console/index.html`, `api-console/console.js`, `api-console/console.css` or `api-console/operations.json` are taken as the project's own, so the build keeps them, warns that it left the console out, and the rest of this section does not apply.
+
+It lists the operations the host answers, renders a form for each from the parameters the API declares, and sends the request the way an application does - same origin, same service worker, so the answer is the mock's real answer. It is generated at build time from the same route table the worker dispatches, so a route the package adds appears on the next build.
 
 Type the URL rather than looking for a link: the console is a developer surface, nothing in the application points at it, and nothing preloads it.
 
@@ -186,7 +188,7 @@ Type the URL rather than looking for a link: the console is a developer surface,
 * the demo accounts are printed on the page, with the password, because a browser build has no login wall to protect and a visitor needs to know what to type after logging out. **Act as** restarts the page as that account and sends every call after it with that account's token, so a refusal a restricted user gets is the refusal an application gets.
 * uploads are not sent by the console. A route whose body is `multipart/form-data` (a file upload, a deployment archive) is listed, and the page says to use the application or a client of your own.
 
-Turn it off with `mockApi: false` in the target's `streamConfig`, for a site whose output must be the application and nothing else:
+Turn it off with `mockApi: false` in the target's `streamConfig` - a key that is not yet in the published [config reference](/sasjsconfig.html) - for a site whose output must be the application and nothing else:
 
 ```json
 {
@@ -194,7 +196,7 @@ Turn it off with `mockApi: false` in the target's `streamConfig`, for a site who
     {
       "name": "mock",
       "appLoc": "/Public/app/demo",
-      "streamConfig": { "mockWeb": true, "webSourcePath": "build", "mockApi": false }
+      "streamConfig": { "mockWeb": true, "webSourcePath": "../client/dist", "mockApi": false }
     }
   ]
 }
