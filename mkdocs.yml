@@ -13,6 +13,7 @@ nav:
       - ENV File: env.md
   - Guides:
       - JavaScript services: js-services.md
+      - Releasing with @sasjs/release: release.md
   - Commands:
       - sasjs add: add.md
       - sasjs auth: auth.md
