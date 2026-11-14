@@ -183,7 +183,7 @@ Every browser build ships an API console at `<base>/api/`. It lists the operatio
 Type the URL rather than looking for a link: the console is a developer surface, nothing in the application points at it, and nothing preloads it.
 
 * writes are allowed on purpose. A demo exists to be played with, and everything is recoverable: add `?reset=1` to the console's URL and it clears the stored drive and seeds it again from the shipped state. A browser's hard refresh does **not** do that - it only bypasses the HTTP cache.
-* the demo accounts are printed on the page, with the password, because a browser build has no login wall to protect and a visitor needs to know what to type after logging out. **Act as** sends every call with that account's token, so a refusal a restricted user gets is the refusal an application gets.
+* the demo accounts are printed on the page, with the password, because a browser build has no login wall to protect and a visitor needs to know what to type after logging out. **Act as** restarts the page as that account and sends every call after it with that account's token, so a refusal a restricted user gets is the refusal an application gets.
 * uploads are not sent by the console. A route whose body is `multipart/form-data` (a file upload, a deployment archive) is listed, and the page says to use the application or a client of your own.
 
 Turn it off with `mockApi: false` in the target's `streamConfig`, for a site whose output must be the application and nothing else:
