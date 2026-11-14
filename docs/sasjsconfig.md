@@ -43,7 +43,7 @@ A setting belongs either at the root of the file, where it applies to every targ
 | `buildConfig` | root and target | `initProgram`, `termProgram`, `buildOutputFileName`, `macroVars` for [`sasjs build`](build.md) |
 | `deployConfig` | root and target | `deployScripts` and `deployServicePack` for [`sasjs deploy`](deploy.md) |
 | `docConfig` | root and target | `outDirectory`, `enableLineage`, `doxyContent`, `displayMacroCore`, `dataControllerUrl` for [`sasjs doc`](doc.md) |
-| `streamConfig` | root and target | the streaming app: `webSourcePath`, `streamWebFolder`, `streamServiceName`, `streamWeb`, `streamLogo`, `assetPaths`, and `mockWeb` / `mockWebFolder` - see [`sasjs web`](web.md) |
+| `streamConfig` | root and target | the streaming app: `webSourcePath`, `streamWebFolder`, `streamServiceName`, `streamWeb`, `streamLogo`, `assetPaths`, and `mockWeb` / `mockWebFolder` / `mockApi` - see [`sasjs web`](web.md) and the mock build's [API console](build.md#trying-the-api-api-console) |
 | `syncFolder` | root and target | a folder copied as it is into the build output |
 | `syncDirectories` | root and target | local/remote pairs for [`sasjs fs sync`](fs.md) |
 | `sasjsBuildFolder`, `sasjsResultsFolder` | root and target | where the build and the results go - `sasjsbuild` and `sasjsresults` by default |
