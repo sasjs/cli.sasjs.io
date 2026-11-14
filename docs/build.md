@@ -176,6 +176,32 @@ python3 -m http.server 8099
 
 Deploy it like any static site - it is just files. The runtime files under `host/` are referenced with a `?v=<hash>` query that changes with their contents, so a redeploy replaces them for returning visitors too; upload `index.html` and `sw.js` together with everything else, since those two carry the reference.
 
+### Trying the API (`/api-console`)
+
+From `@sasjs/cli` 6.32.0 a browser build ships an API console at `<base>/api-console/` - a path no application routes to, so `/api` stays the application's; 6.31.0 wrote it to `<base>/api/`, which collides with an application that answers that route. The console is not written when the site already carries files there: `api-console/index.html`, `api-console/console.js`, `api-console/console.css` or `api-console/operations.json` are taken as the project's own, so the build keeps them, warns that it left the console out, and the rest of this section does not apply.
+
+It lists the operations the host answers, renders a form for each from the parameters the API declares, and sends the request the way an application does - same origin, same service worker, so the answer is the mock's real answer. It is generated at build time from the same route table the worker dispatches, so a route the package adds appears on the next build.
+
+Type the URL rather than looking for a link: the console is a developer surface, nothing in the application points at it, and nothing preloads it.
+
+* writes are allowed on purpose. A demo exists to be played with, and everything is recoverable: add `?reset=1` to the console's URL and it clears the stored drive and seeds it again from the shipped state. A browser's hard refresh does **not** do that - it only bypasses the HTTP cache.
+* the demo accounts are printed on the page, with the password, because a browser build has no login wall to protect and a visitor needs to know what to type after logging out. **Act as** restarts the page as that account and sends every call after it with that account's token, so a refusal a restricted user gets is the refusal an application gets.
+* uploads are not sent by the console. A route whose body is `multipart/form-data` (a file upload, a deployment archive) is listed, and the page says to use the application or a client of your own.
+
+Turn it off with `mockApi: false` in the target's `streamConfig` - a key that is not yet in the published [config reference](/sasjsconfig.html) - for a site whose output must be the application and nothing else:
+
+```json
+{
+  "targets": [
+    {
+      "name": "mock",
+      "appLoc": "/Public/app/demo",
+      "streamConfig": { "mockWeb": true, "webSourcePath": "../client/dist", "mockApi": false }
+    }
+  ]
+}
+```
+
 ### Shipping the site with data
 
 Out of the box the drive a visitor gets holds the services and whatever else lives in the build folder - enough to run, but empty of the data those services would have produced. A snapshot changes that: if `mock-snapshot.json` sits in the build folder, the build ships it with the site and the runtime prefers it over the plain seed, so every visitor starts from the captured state instead of an empty drive.
