@@ -11,6 +11,17 @@ Building locally
     pip install -r requirements.txt
     ./build.sh
 
+Git hooks
+---------
+
+    npm install
+    npm run hooks
+
+`npm install` does not run install scripts here (`.npmrc` sets `ignore-scripts`,
+because this repository has no dependency that needs one), so the hook path is set
+explicitly. It points git at `.git-hooks`, which is what the repository used to do
+from a `postinstall` script.
+
 build.sh runs the same two steps as CI: it generates the sasjsconfig schema page
 (docs/sasjsconfig.html, which docs/sasjsconfig.md frames) and then runs
 `mkdocs build --strict`. The output lands in ./site, which is gitignored.

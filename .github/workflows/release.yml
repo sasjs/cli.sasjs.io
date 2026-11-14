@@ -44,6 +44,27 @@ jobs:
       - name: Install the release tool
         run: npm ci
 
+      - name: The tool that runs here is audited, or shown to need no audit
+        # nothing in this repository ships, so `npm audit` has no production tree
+        # to speak for; the dependency that matters is the one running on a job
+        # holding contents: write, and `--omit=dev` skips it. Assert the property
+        # that makes skipping it safe - it resolves to nothing of its own - read
+        # from the lockfile, so no install is needed to answer.
+        run: |
+          set -euo pipefail
+          npm audit --omit=dev
+          entry="$(node -p "JSON.stringify(require('./package-lock.json').packages['node_modules/@sasjs/release'] || null)")"
+          if [ "$entry" = "null" ]; then
+            echo "::error::@sasjs/release is not in package-lock.json - is it still a devDependency?"
+            exit 1
+          fi
+          deps="$(node -p "const p=JSON.parse(process.argv[1]);const b=Array.isArray(p.bundleDependencies)?p.bundleDependencies:Object.keys(p.bundleDependencies||{});[...Object.keys(p.dependencies||{}),...Object.keys(p.peerDependencies||{}),...Object.keys(p.optionalDependencies||{}),...b].join(', ')" "$entry")"
+          if [ -n "$deps" ]; then
+            echo "::error::@sasjs/release now depends on: $deps - nothing audits the tool that runs with contents: write, so decide what the gate should be before bumping"
+            exit 1
+          fi
+          echo "@sasjs/release declares no dependencies"
+
       - name: Tag and release, if there is anything to release
         id: release
         env:
