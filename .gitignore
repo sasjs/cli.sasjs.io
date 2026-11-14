@@ -4,3 +4,5 @@ site
 docs/sasjsconfig.html
 .lighthouseci
 lighthouse-reports
+# the repository's first dependency: nothing here is meant to be committed
+node_modules

@@ -1,0 +1,72 @@
+name: Release
+
+# Cuts the tag and the GitHub release from the conventional commits merged since
+# the last tag, with @sasjs/release. Nothing is committed and no branch is
+# written: the tag is created by the release API at the commit being released,
+# so this job holds contents: write and no git credential.
+#
+# The site is NOT deployed from here - publish.yml deploys on every push to
+# master, because documentation should go live when it is merged whether or not
+# the commit type cuts a release. A release marks a state of the docs; it is not
+# what publishes them.
+on:
+  push:
+    branches: [master]
+  # a manual run releases whatever has been merged since the last tag
+  workflow_dispatch:
+
+permissions:
+  contents: write # the tag and the release
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # the range is classified from tags: a shallow clone sees one commit
+          # and invents a version
+          fetch-depth: 0
+          # the tag is created over the API, so the checkout token does not need
+          # to stay in the git config
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+
+      # The tool comes from the lockfile, so the bytes are pinned as well as the
+      # version: `npx @sasjs/release@x.y.z` would resolve whatever the registry
+      # served at release time, on the one job that can tag and publish.
+      - name: Install the release tool
+        run: npm ci
+
+      - name: The tool that runs here is audited, or shown to need no audit
+        # nothing in this repository ships, so `npm audit` has no production tree
+        # to speak for; the dependency that matters is the one running on a job
+        # holding contents: write, and `--omit=dev` skips it. Assert the property
+        # that makes skipping it safe - it resolves to nothing of its own - read
+        # from the lockfile, so no install is needed to answer.
+        run: |
+          set -euo pipefail
+          npm audit --omit=dev
+          entry="$(node -p "JSON.stringify(require('./package-lock.json').packages['node_modules/@sasjs/release'] || null)")"
+          if [ "$entry" = "null" ]; then
+            echo "::error::@sasjs/release is not in package-lock.json - is it still a devDependency?"
+            exit 1
+          fi
+          deps="$(node -p "const p=JSON.parse(process.argv[1]);const b=Array.isArray(p.bundleDependencies)?p.bundleDependencies:Object.keys(p.bundleDependencies||{});[...Object.keys(p.dependencies||{}),...Object.keys(p.peerDependencies||{}),...Object.keys(p.optionalDependencies||{}),...b].join(', ')" "$entry")"
+          if [ -n "$deps" ]; then
+            echo "::error::@sasjs/release now depends on: $deps - nothing audits the tool that runs with contents: write, so decide what the gate should be before bumping"
+            exit 1
+          fi
+          echo "@sasjs/release declares no dependencies"
+
+      - name: Tag and release, if there is anything to release
+        id: release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: npm run release -- --host github --release --output "$GITHUB_OUTPUT"
