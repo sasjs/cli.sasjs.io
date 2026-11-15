@@ -1138,6 +1138,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#trying-the-api-api-console" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trying the API (/api-console)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#shipping-the-site-with-data" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2047,6 +2058,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#trying-the-api-api-console" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trying the API (/api-console)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#shipping-the-site-with-data" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2245,19 +2267,39 @@
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>python3<span class="w"> </span>-m<span class="w"> </span>http.server<span class="w"> </span><span class="m">8099</span>
 </span></code></pre></div>
 <p>Deploy it like any static site - it is just files. The runtime files under <code>host/</code> are referenced with a <code>?v=&lt;hash&gt;</code> query that changes with their contents, so a redeploy replaces them for returning visitors too; upload <code>index.html</code> and <code>sw.js</code> together with everything else, since those two carry the reference.</p>
+<h3 id="trying-the-api-api-console">Trying the API (<code>/api-console</code>)<a class="headerlink" href="#trying-the-api-api-console" title="Permanent link">&para;</a></h3>
+<p>A browser build ships an API console at <code>&lt;base&gt;/api-console/</code> - a path no application routes to, so <code>/api</code> stays the application's. The console is not written when the site already carries files there: <code>api-console/index.html</code>, <code>api-console/console.js</code>, <code>api-console/console.css</code> or <code>api-console/operations.json</code> are taken as the project's own, so the build keeps them, warns that it left the console out, and the rest of this section does not apply.</p>
+<p>It lists the operations the host answers, renders a form for each from the parameters the API declares, and sends the request the way an application does - same origin, same service worker, so the answer is the mock's real answer. It is generated at build time from the same route table the worker dispatches, so a route the package adds appears on the next build.</p>
+<p>Type the URL rather than looking for a link: the console is a developer surface, nothing in the application points at it, and nothing preloads it.</p>
+<ul>
+<li>writes are allowed on purpose. A demo exists to be played with, and everything is recoverable: add <code>?reset=1</code> to the console's URL and it clears the stored drive and seeds it again from the shipped state. A browser's hard refresh does <strong>not</strong> do that - it only bypasses the HTTP cache.</li>
+<li>the demo accounts are printed on the page, with the password, because a browser build has no login wall to protect and a visitor needs to know what to type after logging out. <strong>Act as</strong> restarts the page as that account and sends every call after it with that account's token, so a refusal a restricted user gets is the refusal an application gets.</li>
+<li>uploads are not sent by the console. A route whose body is <code>multipart/form-data</code> (a file upload, a deployment archive) is listed, and the page says to use the application or a client of your own.</li>
+</ul>
+<p>Turn it off with <code>mockApi: false</code> in the target's <code>streamConfig</code> - see <a href="/sasjsconfig.html">the config reference</a> - for a site whose output must be the application and nothing else:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">{</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="p">{</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mock"</span><span class="p">,</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">      </span><span class="nt">"appLoc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/Public/app/demo"</span><span class="p">,</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">      </span><span class="nt">"streamConfig"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"mockWeb"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="nt">"webSourcePath"</span><span class="p">:</span><span class="w"> </span><span class="s2">"../client/dist"</span><span class="p">,</span><span class="w"> </span><span class="nt">"mockApi"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">  </span><span class="p">]</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="p">}</span>
+</span></code></pre></div>
 <h3 id="shipping-the-site-with-data">Shipping the site with data<a class="headerlink" href="#shipping-the-site-with-data" title="Permanent link">&para;</a></h3>
 <p>Out of the box the drive a visitor gets holds the services and whatever else lives in the build folder - enough to run, but empty of the data those services would have produced. A snapshot changes that: if <code>mock-snapshot.json</code> sits in the build folder, the build ships it with the site and the runtime prefers it over the plain seed, so every visitor starts from the captured state instead of an empty drive.</p>
 <p>To capture one, open the site, use the app until the drive is in the state you want, and run this in the browser console:</p>
-<div class="language-js highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">await</span><span class="w"> </span><span class="nb">window</span><span class="p">.</span><span class="nx">SASjsMock</span><span class="p">.</span><span class="nx">download</span><span class="p">()</span>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">await</span><span class="w"> </span><span class="nb">window</span><span class="p">.</span><span class="nx">SASjsMock</span><span class="p">.</span><span class="nx">download</span><span class="p">()</span>
 </span></code></pre></div>
 <p>That saves <code>mock-snapshot.json</code> to your downloads. Put it beside the compiled output - <code>sasjsbuild/mock-snapshot.json</code> for the default build folder - and build again. The build reports it in <code>host/mock-config.json</code> as <code>"snapshot": true</code>, with the number of pieces it was split into.</p>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">{</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">"appLoc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/Public/app/dc"</span><span class="p">,</span>
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="nt">"snapshot"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">  </span><span class="nt">"snapshotShards"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span>
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">  </span><span class="nt">"driveEntries"</span><span class="p">:</span><span class="w"> </span><span class="mi">97</span><span class="p">,</span>
-</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">  </span><span class="nt">"jsPrograms"</span><span class="p">:</span><span class="w"> </span><span class="mi">43</span>
-</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="p">}</span>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">{</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="nt">"appLoc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/Public/app/dc"</span><span class="p">,</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span><span class="nt">"snapshot"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">  </span><span class="nt">"snapshotShards"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">  </span><span class="nt">"driveEntries"</span><span class="p">:</span><span class="w"> </span><span class="mi">97</span><span class="p">,</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">  </span><span class="nt">"jsPrograms"</span><span class="p">:</span><span class="w"> </span><span class="mi">43</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="p">}</span>
 </span></code></pre></div>
 <h4 id="how-the-snapshot-is-shipped">How the snapshot is shipped<a class="headerlink" href="#how-the-snapshot-is-shipped" title="Permanent link">&para;</a></h4>
 <p>A real app's drive runs to megabytes, and a visitor's first page does not read most of it: a list of apps reads a config and a few logos, not the bundles behind them. So the build splits the capture into pieces:</p>
