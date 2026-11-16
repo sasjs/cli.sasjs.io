@@ -131,14 +131,14 @@ A browser build is not a subset of the API. It answers every operation the [publ
 
 Two rules hold across all of them:
 
-* a route the host cannot serve answers `501` with the capability it is missing named in the message, never a bare `404`. A `404` from a browser build therefore means the path is not part of the API at all, while a `501` means this host does not have the facility - a SAS engine, a node filesystem, an external identity provider.
+* a route the host cannot serve answers `501` with the capability it is missing named in the message. A `404` can mean the path is not part of the API, but it can also mean a resource on a defined route is missing, such as a file being replaced or deleted. A `501` means this host does not have the facility - a SAS engine, a node filesystem, an external identity provider.
 * the per-operation list, with the parameters each declares, is generated at build time into the [API console](#trying-the-api-api-console) from the same table the worker dispatches with, so the console is the detail and this table is the summary.
 
 #### Running SAS
 
 There is no SAS binary in a browser and there never was, so a `.sas` program cannot be executed. It is still answered as a run rather than refused: a complete session comes back - log, listing and webout - so a code editor's log panel behaves the way it does against a server, errors and warnings included.
 
-By default that session is a mocked one, written the way a SAS log is written (source lines, notes, an error, the process-time block), with a webout of `{"MOCKED":true}`.
+By default that session is a mocked one, written the way a SAS log is written (source lines, notes, an error, the process-time block), with a webout carrying `"MOCKED":true`.
 
 For a demo that needs real numbers, record a session and ship it as `sas-transcript.json` in the build folder (`sasjsbuild/sas-transcript.json` by default) - the same place `mock-snapshot.json` goes. The build copies it into the site, and a run of a program it names answers with the recording instead. The shape is `{ "<program path>": { "log": "...", "print": "...", "webout": "..." } }`, all three strings; the path is matched as a person sees it, with the `/sasjs/drive/files` prefix and the `.sas` suffix ignored, and `{{program}}` in any of the three is replaced with the program's path.
 
@@ -204,10 +204,10 @@ A successful write answers `{"status":"success"}`, a create over a file that alr
 
 Two limits are particular to a browser, because the whole payload is held in memory before it is written:
 
-* a single uploaded file is capped at 10 MB
-* a deploy tree is capped at 10,000 entries, 100 MB decoded in total and 20 MB for any one file
+* the single-file drive create and replace routes (`POST` and `PATCH /SASjsApi/drive/file`) cap the uploaded file at 10 MB
+* the deploy routes cap a deploy tree at 10,000 entries, 100 MB decoded in total and 20 MB for any one file
 
-A refusal is `413`, answered before anything is written so a refused deploy leaves the drive exactly as it was, and the message names the limit that was exceeded - `The file tree exceeds the deploy limit: 6412 entries (maximum 10000).` rather than a bare "deployment failed".
+A refusal is `413`, answered before anything is written so a refused deploy leaves the drive exactly as it was, and the message names the limit that was exceeded - `The file tree exceeds the deploy limit: 10001 entries (maximum 10000).` rather than a bare "deployment failed".
 
 What a visitor writes stays in that visitor's drive: it is kept in IndexedDB in their own browser, so it survives a refresh but is not shared with anyone else, and an empty folder is not kept across a reload because the drive is stored as a map of files. Preloaded data is still shipped as a snapshot, below.
 
