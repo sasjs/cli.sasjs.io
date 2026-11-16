@@ -115,19 +115,19 @@ The loader is a file rather than an inline script on purpose: an app that sets a
 
 ### What a browser host answers
 
-A browser build is not a subset of the API. It answers every operation the [published reference](https://server.sasjs.io/api/) describes - 62 of them at the time of writing, across drive, runs, sessions, editor, identity, info, admin and app stream - from the same route table a SASjs Server answers from. What differs is what sits behind each route, so the differences are stated here rather than left to be found in the network tab.
+A browser build is not a subset of the API. It answers the operations in the [published reference](https://server.sasjs.io/api/) across drive, runs, sessions, editor, identity, sign-in pages, info, admin and app stream, from the same route table a SASjs Server answers from. What differs is what sits behind each route, so the differences are stated here rather than left to be found in the network tab.
 
-| Area | Operations | What answers it |
-| --- | --- | --- |
-| Drive | 12 | the visitor's own drive in IndexedDB: create, replace, delete, rename, folder create and delete, deploy, deploy upload, file read, folder list, file tree |
-| Runs | 5 | the JavaScript service runs for real; a SAS program or buffer is answered from a recorded session, below |
-| Sessions | 5 | a real session record, so log, output and state answer |
-| Editor | 2 | `@sasjs/lint` in the worker, against the nearest `.sasjslint` at or above the file |
-| Identity and sign-in | 27 | the identity fixture the build ships, persisted per visitor, below |
-| Sign-in pages | 4 | the same fixture: `SASLogon/login`, `authorize`, `logout`, and the `GET /` shell |
-| Info | 3 | the host's own answers, including the run times it offers |
-| Admin | 3 | the worker's diagnostics and its own activity, not a process's |
-| App Stream | 1 | the drive's app index |
+| Area | What answers it |
+| --- | --- |
+| Drive | the visitor's own drive in IndexedDB: create, replace, delete, rename, folder create and delete, deploy, deploy upload, file read, folder list, file tree |
+| Runs | the JavaScript service runs for real; a SAS program or buffer is answered from a recorded session, below |
+| Sessions | a real session record, so log, output and state answer |
+| Editor | `@sasjs/lint` in the worker, against the nearest `.sasjslint` at or above the file |
+| Identity and sign-in | the identity fixture the build ships, persisted per visitor, below |
+| Sign-in pages | the same fixture: `SASLogon/login`, `authorize`, `logout`, and the `GET /` shell |
+| Info | the host's own answers, including the run times it offers |
+| Admin | the worker's diagnostics and its own activity, not a process's |
+| App Stream | the drive's app index |
 
 Two rules hold across all of them:
 
