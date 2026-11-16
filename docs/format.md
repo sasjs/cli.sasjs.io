@@ -85,7 +85,7 @@ A file that cannot be read, formatted or written is named with the reason and th
 
 ## When the engine cannot load
 
-The layout pass needs `@sasjs/sas-language`, which the CLI installs with itself. If it cannot be loaded the rules still run, but the command **fails** and says why: a rule-only run must not read as a clean one, or a broken install would pass the very gate `--check` exists to provide.
+The layout pass needs `@sasjs/sas-language`, which the CLI installs with itself. If it cannot be loaded the command **fails** and says why, and **writes nothing** - a rule-only run is not the canonical form, so leaving it to change the tree would be the worst of both: a run reported as failed that has altered the user's sources.
 
 ## Keyword case
 
