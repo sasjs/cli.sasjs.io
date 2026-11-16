@@ -1105,6 +1105,45 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#what-a-browser-host-answers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What a browser host answers
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What a browser host answers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#running-sas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running SAS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-identity-is-a-fixture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The identity is a fixture
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#downloads-and-file-responses" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2053,6 +2092,45 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#what-a-browser-host-answers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What a browser host answers
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What a browser host answers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#running-sas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running SAS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-identity-is-a-fixture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The identity is a fixture
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#downloads-and-file-responses" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2226,6 +2304,72 @@
 <p>A service worker intercepts the calls the <a href="https://adapter.sasjs.io">SASjs Adapter</a> makes, invokes the matching JavaScript service, and resolves <code>webout</code>, log and headers back to the app. Requests appear in the browser's network tab as they normally would. Anything the services write to the drive is kept in IndexedDB, so a page refresh does not lose it.</p>
 <p>The site boots from <code>host/boot.js</code>: the build takes every script tag the page has, in document order, and the loader registers the worker, waits for it to control the page, and then replays those tags in the same order. Nothing about the app changes - same tags, same order, same globals - so a page that loads one bundled <code>main.&lt;hash&gt;.js</code> and a page that loads several plain scripts both work, and a bundler is not a requirement. Non-executable script blocks (<code>application/ld+json</code>, templates) are left alone.</p>
 <p>The loader is a file rather than an inline script on purpose: an app that sets a strict Content-Security-Policy (<code>default-src 'self'</code>, no <code>unsafe-inline</code>) refuses an inline script, and the build cannot add a hash or nonce to a policy it does not own. A strict-CSP app therefore builds and runs unchanged.</p>
+<h3 id="what-a-browser-host-answers">What a browser host answers<a class="headerlink" href="#what-a-browser-host-answers" title="Permanent link">&para;</a></h3>
+<p>A browser build is not a subset of the API. It answers the operations in the <a href="https://server.sasjs.io/api/">published reference</a> across drive, runs, sessions, editor, identity, sign-in pages, info, admin and app stream, from the same route table a SASjs Server answers from. What differs is what sits behind each route, so the differences are stated here rather than left to be found in the network tab.</p>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>What answers it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Drive</td>
+<td>the visitor's own drive in IndexedDB: create, replace, delete, rename, folder create and delete, deploy, deploy upload, file read, folder list, file tree</td>
+</tr>
+<tr>
+<td>Runs</td>
+<td>the JavaScript service runs for real; a SAS program or buffer is answered from a recorded session, below</td>
+</tr>
+<tr>
+<td>Sessions</td>
+<td>a real session record, so log, output and state answer</td>
+</tr>
+<tr>
+<td>Editor</td>
+<td><code>@sasjs/lint</code> in the worker, against the nearest <code>.sasjslint</code> at or above the file</td>
+</tr>
+<tr>
+<td>Identity and sign-in</td>
+<td>the identity fixture the build ships, persisted per visitor, below</td>
+</tr>
+<tr>
+<td>Sign-in pages</td>
+<td>the same fixture: <code>SASLogon/login</code>, <code>authorize</code>, <code>logout</code>, and the <code>GET /</code> shell</td>
+</tr>
+<tr>
+<td>Info</td>
+<td>the host's own answers, including the run times it offers</td>
+</tr>
+<tr>
+<td>Admin</td>
+<td>the worker's diagnostics and its own activity, not a process's</td>
+</tr>
+<tr>
+<td>App Stream</td>
+<td>the drive's app index</td>
+</tr>
+</tbody>
+</table>
+<p>Two rules hold across all of them:</p>
+<ul>
+<li>a route the host cannot serve answers <code>501</code> with the capability it is missing named in the message. A <code>404</code> can mean the path is not part of the API, but it can also mean a resource on a defined route is missing, such as a file being replaced or deleted. A <code>501</code> means this host does not have the facility - a SAS engine, a node filesystem, an external identity provider.</li>
+<li>the per-operation list, with the parameters each declares, is generated at build time into the <a href="#trying-the-api-api-console">API console</a> from the same table the worker dispatches with, so the console is the detail and this table is the summary.</li>
+</ul>
+<h4 id="running-sas">Running SAS<a class="headerlink" href="#running-sas" title="Permanent link">&para;</a></h4>
+<p>There is no SAS binary in a browser and there never was, so a <code>.sas</code> program cannot be executed. It is still answered as a run rather than refused: a complete session comes back - log, listing and webout - so a code editor's log panel behaves the way it does against a server, errors and warnings included.</p>
+<p>By default that session is a mocked one, written the way a SAS log is written (source lines, notes, an error, the process-time block), with a webout carrying <code>"MOCKED":true</code>.</p>
+<p>For a demo that needs real numbers, record a session and ship it as <code>sas-transcript.json</code> in the build folder (<code>sasjsbuild/sas-transcript.json</code> by default) - the same place <code>mock-snapshot.json</code> goes. The build copies it into the site, and a run of a program it names answers with the recording instead. The shape is <code>{ "&lt;program path&gt;": { "log": "...", "print": "...", "webout": "..." } }</code>, all three strings; the path is matched as a person sees it, with the <code>/sasjs/drive/files</code> prefix and the <code>.sas</code> suffix ignored, and <code>{{program}}</code> in any of the three is replaced with the program's path.</p>
+<h4 id="the-identity-is-a-fixture">The identity is a fixture<a class="headerlink" href="#the-identity-is-a-fixture" title="Permanent link">&para;</a></h4>
+<p>Sign-in, the permission list and the record routes are answered from a fixture the build ships as <code>host/identity.json</code>, so an app that reads its menus from <code>GET /SASjsApi/permission</code> and signs in through <code>POST /SASjsApi/auth/token</code> renders in a browser build with no server behind it.</p>
+<ul>
+<li>it holds one administrator (<code>sasjsadmin</code>) and one restricted user (<code>sasjsuser</code>), both with the demo password the console prints, two groups and a handful of permission rules. Replace it with <code>mock-identity.json</code> in the build folder, the arrangement <code>mock-snapshot.json</code> already uses.</li>
+<li>the refusals are the API's own, and only those. A request carrying an unknown or expired token answers <code>401</code>, and the answers to <code>GET /SASjsApi/permission</code> and <code>GET /SASjsApi/info/myAuthorizedRoutes</code> come from the fixture, so an app that builds its menu from them shows a restricted account a smaller menu. What a browser host does not do is enforce the rules on the call itself: a SASjs Server mounts an administrator check in front of the record and admin routes, and the mock answers those for whatever subject is current, so a request that would be a <code>403</code> in production can be a <code>200</code> here. Use the fixture to see the app as another account, not to check that the app is secure.</li>
+<li>a request carrying no credential at all is read as the fixture's administrator, rather than refused. A static host has no login wall to stand behind, and a demo should open rather than present a login form nobody configured. <code>window.SASjsMock.as('sasjsuser')</code> switches the subject for the rest of the visit and sends every later call with that account's token, as the console's <strong>Act as</strong> does.</li>
+<li>what a visitor writes - a user, a group, a permission rule, a client - persists in the same IndexedDB the drive uses, so it survives a reload and is captured in a snapshot. <code>window.SASjsMock.reset()</code> restores the drive and the identity together.</li>
+<li>none of it is a boundary. Passwords are not verified, tokens are opaque strings nobody signs, and no rule is enforced on a request. A fixture is what a review environment needs in order to show an app as another account; it is not an authorisation service, and a site holding anything real belongs behind a real server.</li>
+</ul>
 <h3 id="downloads-and-file-responses">Downloads and file responses<a class="headerlink" href="#downloads-and-file-responses" title="Permanent link">&para;</a></h3>
 <p>A service answers with a file the same way it does on a server: it declares the response in <code>_SASJS_WEBOUT_HEADERS</code> and writes the body where the wrapper points it. The generated wrapper already declares <code>fs</code>, so a service uses it rather than requiring it again.</p>
 <p>For text - a CSV, a DDL script, a log - assign <code>_webout</code> (or write the string to <code>weboutPath</code>):</p>
@@ -2288,6 +2432,13 @@
 </tbody>
 </table>
 <p>A successful write answers <code>{"status":"success"}</code>, a create over a file that already exists answers <code>409</code>, and replacing or deleting a file that is not there answers <code>404</code> - the statuses the server's routes use. Paths are drive-relative: a leading slash means "under the drive root", never the host's filesystem, and a path that climbs out with <code>..</code> is refused with a <code>400</code>. A file whose extension is <code>.exe</code>, <code>.sh</code> or <code>.htaccess</code> is refused on every route that creates, replaces, deletes or renames it, as it is on a server.</p>
+<p>Two limits are particular to a browser, because the whole payload is held in memory before it is written:</p>
+<ul>
+<li>for direct multipart requests, the host caps each uploaded file at 10 MB, including on the single-file drive create and replace routes (<code>POST</code> and <code>PATCH /SASjsApi/drive/file</code>); the deploy archive upload is exempt from this check</li>
+<li>the deploy routes cap a deploy tree at 10,000 entries, 100 MB decoded in total and 20 MB for any one file</li>
+</ul>
+<p>The 10 MB check is not a universal upload limit: the page's XHR bridge converts form data to JSON before it reaches the worker, bypassing that multipart check. Do not rely on it as a security boundary.</p>
+<p>A refusal is <code>413</code>, answered before anything is written so a refused deploy leaves the drive exactly as it was, and the message names the limit that was exceeded - <code>The file tree exceeds the deploy limit: 10001 entries (maximum 10000).</code> rather than a bare "deployment failed".</p>
 <p>What a visitor writes stays in that visitor's drive: it is kept in IndexedDB in their own browser, so it survives a refresh but is not shared with anyone else, and an empty folder is not kept across a reload because the drive is stored as a map of files. Preloaded data is still shipped as a snapshot, below.</p>
 <h3 id="serving-it">Serving it<a class="headerlink" href="#serving-it" title="Permanent link">&para;</a></h3>
 <p>Serve the folder over http or https. A service worker needs a secure context, which means <code>localhost</code> and <code>https</code> both work but <code>file://</code> does not:</p>
@@ -2345,7 +2496,7 @@
 </ul>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>This is a single-user, no-authentication build. Services that read SAS tables, run macros or depend on SAS libraries cannot work in it, because there is no SAS engine in the browser. Treat it as a demo and review artefact, not as a replacement for a real deployment.</p>
+<p>A browser build is a demo and review artefact, not a replacement for a deployment. Services that read SAS tables, run macros or depend on SAS libraries cannot work in it: there is no SAS engine, so a <code>.sas</code> run is answered from a recording rather than executed. Its identity is a fixture rather than an authorisation service, and its diagnostics describe the worker rather than a process. Nothing here is a boundary - put anything private behind a real server.</p>
 </div>
 
 
