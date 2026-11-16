@@ -28,6 +28,7 @@ nav:
       - sasjs doc: doc.md
       - sasjs flow: flow.md
       - sasjs folder: folder.md
+      - sasjs format: format.md
       - sasjs fs: fs.md
       - sasjs help: help.md
       - sasjs init: init.md

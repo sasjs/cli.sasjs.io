@@ -120,6 +120,8 @@ The command works as follows:
 sasjs lint fix
 ```
 
+`lint fix` repairs what a rule can prove is wrong, and changes nothing else - it does not re-indent code or split statements. For the layout as well as the rules, see [`sasjs format`](/format), which lays the file out and then runs the same rules over the result; the two are separate commands so that `lint fix` keeps doing exactly what it always did.
+
 ### Usage
 
 Running the command applies the fixes. The following rules support `autofix`:
