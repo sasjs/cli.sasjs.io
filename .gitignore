@@ -6,3 +6,7 @@ docs/sasjsconfig.html
 lighthouse-reports
 # the repository's first dependency: nothing here is meant to be committed
 node_modules
+
+# python bytecode - mkdocs imports hooks/html_fixes.py on every build
+__pycache__
+*.pyc

@@ -113,6 +113,45 @@ The site boots from `host/boot.js`: the build takes every script tag the page ha
 
 The loader is a file rather than an inline script on purpose: an app that sets a strict Content-Security-Policy (`default-src 'self'`, no `unsafe-inline`) refuses an inline script, and the build cannot add a hash or nonce to a policy it does not own. A strict-CSP app therefore builds and runs unchanged.
 
+### What a browser host answers
+
+A browser build is not a subset of the API. It answers the operations in the [published reference](https://server.sasjs.io/api/) across drive, runs, sessions, editor, identity, sign-in pages, info, admin and app stream, from the same route table a SASjs Server answers from. What differs is what sits behind each route, so the differences are stated here rather than left to be found in the network tab.
+
+| Area | What answers it |
+| --- | --- |
+| Drive | the visitor's own drive in IndexedDB: create, replace, delete, rename, folder create and delete, deploy, deploy upload, file read, folder list, file tree |
+| Runs | the JavaScript service runs for real; a SAS program or buffer is answered from a recorded session, below |
+| Sessions | a real session record, so log, output and state answer |
+| Editor | `@sasjs/lint` in the worker, against the nearest `.sasjslint` at or above the file |
+| Identity and sign-in | the identity fixture the build ships, persisted per visitor, below |
+| Sign-in pages | the same fixture: `SASLogon/login`, `authorize`, `logout`, and the `GET /` shell |
+| Info | the host's own answers, including the run times it offers |
+| Admin | the worker's diagnostics and its own activity, not a process's |
+| App Stream | the drive's app index |
+
+Two rules hold across all of them:
+
+* a route the host cannot serve answers `501` with the capability it is missing named in the message. A `404` can mean the path is not part of the API, but it can also mean a resource on a defined route is missing, such as a file being replaced or deleted. A `501` means this host does not have the facility - a SAS engine, a node filesystem, an external identity provider.
+* the per-operation list, with the parameters each declares, is generated at build time into the [API console](#trying-the-api-api-console) from the same table the worker dispatches with, so the console is the detail and this table is the summary.
+
+#### Running SAS
+
+There is no SAS binary in a browser and there never was, so a `.sas` program cannot be executed. It is still answered as a run rather than refused: a complete session comes back - log, listing and webout - so a code editor's log panel behaves the way it does against a server, errors and warnings included.
+
+By default that session is a mocked one, written the way a SAS log is written (source lines, notes, an error, the process-time block), with a webout carrying `"MOCKED":true`.
+
+For a demo that needs real numbers, record a session and ship it as `sas-transcript.json` in the build folder (`sasjsbuild/sas-transcript.json` by default) - the same place `mock-snapshot.json` goes. The build copies it into the site, and a run of a program it names answers with the recording instead. The shape is `{ "<program path>": { "log": "...", "print": "...", "webout": "..." } }`, all three strings; the path is matched as a person sees it, with the `/sasjs/drive/files` prefix and the `.sas` suffix ignored, and `{{program}}` in any of the three is replaced with the program's path.
+
+#### The identity is a fixture
+
+Sign-in, the permission list and the record routes are answered from a fixture the build ships as `host/identity.json`, so an app that reads its menus from `GET /SASjsApi/permission` and signs in through `POST /SASjsApi/auth/token` renders in a browser build with no server behind it.
+
+* it holds one administrator (`sasjsadmin`) and one restricted user (`sasjsuser`), both with the demo password the console prints, two groups and a handful of permission rules. Replace it with `mock-identity.json` in the build folder, the arrangement `mock-snapshot.json` already uses.
+* the refusals are the API's own, and only those. A request carrying an unknown or expired token answers `401`, and the answers to `GET /SASjsApi/permission` and `GET /SASjsApi/info/myAuthorizedRoutes` come from the fixture, so an app that builds its menu from them shows a restricted account a smaller menu. What a browser host does not do is enforce the rules on the call itself: a SASjs Server mounts an administrator check in front of the record and admin routes, and the mock answers those for whatever subject is current, so a request that would be a `403` in production can be a `200` here. Use the fixture to see the app as another account, not to check that the app is secure.
+* a request carrying no credential at all is read as the fixture's administrator, rather than refused. A static host has no login wall to stand behind, and a demo should open rather than present a login form nobody configured. `window.SASjsMock.as('sasjsuser')` switches the subject for the rest of the visit and sends every later call with that account's token, as the console's **Act as** does.
+* what a visitor writes - a user, a group, a permission rule, a client - persists in the same IndexedDB the drive uses, so it survives a reload and is captured in a snapshot. `window.SASjsMock.reset()` restores the drive and the identity together.
+* none of it is a boundary. Passwords are not verified, tokens are opaque strings nobody signs, and no rule is enforced on a request. A fixture is what a review environment needs in order to show an app as another account; it is not an authorisation service, and a site holding anything real belongs behind a real server.
+
 ### Downloads and file responses
 
 A service answers with a file the same way it does on a server: it declares the response in `_SASJS_WEBOUT_HEADERS` and writes the body where the wrapper points it. The generated wrapper already declares `fs`, so a service uses it rather than requiring it again.
@@ -162,6 +201,15 @@ The drive endpoints answer the same contract a SASjs Server does, so a client th
 | `POST /SASjsApi/drive/rename` | move a file or folder, from a JSON body `{ "oldPath": "...", "newPath": "..." }` |
 
 A successful write answers `{"status":"success"}`, a create over a file that already exists answers `409`, and replacing or deleting a file that is not there answers `404` - the statuses the server's routes use. Paths are drive-relative: a leading slash means "under the drive root", never the host's filesystem, and a path that climbs out with `..` is refused with a `400`. A file whose extension is `.exe`, `.sh` or `.htaccess` is refused on every route that creates, replaces, deletes or renames it, as it is on a server.
+
+Two limits are particular to a browser, because the whole payload is held in memory before it is written:
+
+* for direct multipart requests, the host caps each uploaded file at 10 MB, including on the single-file drive create and replace routes (`POST` and `PATCH /SASjsApi/drive/file`); the deploy archive upload is exempt from this check
+* the deploy routes cap a deploy tree at 10,000 entries, 100 MB decoded in total and 20 MB for any one file
+
+The 10 MB check is not a universal upload limit: the page's XHR bridge converts form data to JSON before it reaches the worker, bypassing that multipart check. Do not rely on it as a security boundary.
+
+A refusal is `413`, answered before anything is written so a refused deploy leaves the drive exactly as it was, and the message names the limit that was exceeded - `The file tree exceeds the deploy limit: 10001 entries (maximum 10000).` rather than a bare "deployment failed".
 
 What a visitor writes stays in that visitor's drive: it is kept in IndexedDB in their own browser, so it survives a refresh but is not shared with anyone else, and an empty folder is not kept across a reload because the drive is stored as a map of files. Preloaded data is still shipped as a snapshot, below.
 
@@ -241,4 +289,4 @@ Three things worth knowing:
 * to start over, `window.SASjsMock.reset()` clears the persisted drive and reseeds from the shipped files; to ship the plain seed instead, remove `mock-snapshot.json` from the build folder and build again
 
 !!! warning
-    This is a single-user, no-authentication build. Services that read SAS tables, run macros or depend on SAS libraries cannot work in it, because there is no SAS engine in the browser. Treat it as a demo and review artefact, not as a replacement for a real deployment.
+    A browser build is a demo and review artefact, not a replacement for a deployment. Services that read SAS tables, run macros or depend on SAS libraries cannot work in it: there is no SAS engine, so a `.sas` run is answered from a recording rather than executed. Its identity is a fixture rather than an authorisation service, and its diagnostics describe the worker rather than a process. Nothing here is a boundary - put anything private behind a real server.
