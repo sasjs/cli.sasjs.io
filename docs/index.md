@@ -75,6 +75,7 @@ Every command has a page, and the same list is printed by [`sasjs help`](help.md
 | [`sasjs db`](db.md) | | Concatenates the `.ddl` and `.sas` files under `sasjs/db` into one file per database |
 | [`sasjs deploy`](deploy.md) | `d` | Deploys the built artefact to the target's SAS environment |
 | [`sasjs doc`](doc.md) | `docs` | Generates the Doxygen documentation site, or the data lineage |
+| [`sasjs format`](format.md) | | Rewrites `.sas` files into the project's canonical form - the engine's layout, then the `.sasjslint` rules - and gates a pipeline with `--check` |
 | [`sasjs flow`](flow.md) | | Executes a flow (a JSON list of jobs) in order, logging the results to CSV |
 | [`sasjs folder`](folder.md) | | Creates, deletes, lists and moves SAS Viya folders |
 | [`sasjs fs`](fs.md) | | Synchronises files with a remote SAS directory (`compile`, `sync`, `deploy`) |
