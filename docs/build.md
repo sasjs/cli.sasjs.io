@@ -204,8 +204,10 @@ A successful write answers `{"status":"success"}`, a create over a file that alr
 
 Two limits are particular to a browser, because the whole payload is held in memory before it is written:
 
-* the single-file drive create and replace routes (`POST` and `PATCH /SASjsApi/drive/file`) cap the uploaded file at 10 MB
+* for direct multipart requests, the host caps each uploaded file at 10 MB, including on the single-file drive create and replace routes (`POST` and `PATCH /SASjsApi/drive/file`); the deploy archive upload is exempt from this check
 * the deploy routes cap a deploy tree at 10,000 entries, 100 MB decoded in total and 20 MB for any one file
+
+The 10 MB check is not a universal upload limit: the page's XHR bridge converts form data to JSON before it reaches the worker, bypassing that multipart check. Do not rely on it as a security boundary.
 
 A refusal is `413`, answered before anything is written so a refused deploy leaves the drive exactly as it was, and the message names the limit that was exceeded - `The file tree exceeds the deploy limit: 10001 entries (maximum 10000).` rather than a bare "deployment failed".
 
