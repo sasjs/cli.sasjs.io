@@ -44,15 +44,15 @@ jobs:
       - name: Install the release tool
         run: npm ci
 
-      - name: The tool that runs here is audited, or shown to need no audit
-        # nothing in this repository ships, so `npm audit` has no production tree
-        # to speak for; the dependency that matters is the one running on a job
-        # holding contents: write, and `--omit=dev` skips it. Assert the property
-        # that makes skipping it safe - it resolves to nothing of its own - read
-        # from the lockfile, so no install is needed to answer.
+      - name: The tool that runs here resolves to nothing of its own
+        # The audit runs in build.yml, on the pull request a version bump travels
+        # through. This job holds contents: write, so it checks the one thing the
+        # audit can no longer cover here: that the tool it is about to run resolves
+        # from the lockfile to the entry that was reviewed - read from the
+        # lockfile, so no install is needed to answer, and it names what it finds
+        # if that changes.
         run: |
           set -euo pipefail
-          npm audit --omit=dev
           entry="$(node -p "JSON.stringify(require('./package-lock.json').packages['node_modules/@sasjs/release'] || null)")"
           if [ "$entry" = "null" ]; then
             echo "::error::@sasjs/release is not in package-lock.json - is it still a devDependency?"

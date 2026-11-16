@@ -43,6 +43,28 @@ jobs:
         with:
           node-version: "22"
 
+      - name: Install the release tool and audit what it brings
+        # the dependency this repository has, checked where a version bump
+        # travels: a pull request. `npm audit` has no production tree to speak for
+        # here - nothing in this repository ships - and --omit=dev would skip the
+        # only dependency there is, so both halves run: the audit, and the
+        # assertion that the tool resolves to nothing of its own.
+        run: |
+          set -euo pipefail
+          npm ci
+          npm audit
+          entry="$(node -p "JSON.stringify(require('./package-lock.json').packages['node_modules/@sasjs/release'] || null)")"
+          if [ "$entry" = "null" ]; then
+            echo "::error::@sasjs/release is not in package-lock.json - is it still a devDependency?"
+            exit 1
+          fi
+          deps="$(node -p "const p=JSON.parse(process.argv[1]);const b=Array.isArray(p.bundleDependencies)?p.bundleDependencies:Object.keys(p.bundleDependencies||{});[...Object.keys(p.dependencies||{}),...Object.keys(p.peerDependencies||{}),...Object.keys(p.optionalDependencies||{}),...b].join(', ')" "$entry")"
+          if [ -n "$deps" ]; then
+            echo "::error::@sasjs/release now depends on: $deps - decide what audits it before bumping"
+            exit 1
+          fi
+          echo "@sasjs/release declares no dependencies"
+
       - name: Check the command reference against the CLI
         # Every command has a page, every nav command page names a real command,
         # and no page mentions a flag its command does not declare. The CLI
