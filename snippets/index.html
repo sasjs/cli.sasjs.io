@@ -1595,6 +1595,34 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Import Snippets to VS Code">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#user-wide-sas-snippets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        User-wide SAS snippets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#project-specific-sas-snippets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project-specific SAS snippets
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -1783,6 +1811,34 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Import Snippets to VS Code">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#user-wide-sas-snippets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        User-wide SAS snippets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#project-specific-sas-snippets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project-specific SAS snippets
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -1858,8 +1914,15 @@
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://cli.sasjs.io/sasjsconfig-schema.json"</span><span class="p">,</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">"macroFolders"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="s2">"my/macros"</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="p">]</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="p">}</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="p">],</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="nt">"defaultTarget"</span><span class="p">:</span><span class="w"> </span><span class="s2">"local"</span><span class="p">,</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">  </span><span class="nt">"targets"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"local"</span><span class="p">,</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="nt">"serverUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:5000"</span><span class="p">,</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="nt">"serverType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SASJS"</span><span class="p">,</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="nt">"appLoc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/Public/example"</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">  </span><span class="p">}]</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="p">}</span>
 </span></code></pre></div>
 <p>Simply run the <code>sasjs snippets</code> command within the SASjs project, and the following file will be written to <code>sasjsresults/sasjs-macro-snippets.json</code>:</p>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
@@ -1869,23 +1932,42 @@
 </span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 </span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">      </span><span class="s2">"An example macro"</span><span class="p">,</span>
 </span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">      </span><span class="s2">"\r"</span><span class="p">,</span>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">      </span><span class="s2">"Params:\r"</span><span class="p">,</span>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">      </span><span class="s2">"-msg The message to be printed\r"</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">      </span><span class="s2">"Params:"</span><span class="p">,</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">      </span><span class="s2">"-msg The message to be printed"</span>
 </span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="p">]</span>
 </span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">  </span><span class="p">}</span>
 </span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="p">}</span>
 </span></code></pre></div>
 <p>Notice that the doxygen <code>@brief</code> value has been placed at the beginning of the description, and <code>@param</code> has been put to the <code>Params</code> section. The file name has been used to populate the <code>prefix</code> and <code>body</code> of the VS Code snippet, and placeholders are also created in the <code>body</code>.</p>
 <h2 id="import-snippets-to-vs-code">Import Snippets to VS Code<a class="headerlink" href="#import-snippets-to-vs-code" title="Permanent link">&para;</a></h2>
-<p>In order to import the generated VS Code snippets file please follow these steps:</p>
+<p>The generated file is a JSON object whose top-level entries are snippet names such as <code>"example"</code>. It is not installed automatically. Open <code>sasjsresults/sasjs-macro-snippets.json</code> (or the file in your chosen output directory) and use one of the following methods.</p>
+<h3 id="user-wide-sas-snippets">User-wide SAS snippets<a class="headerlink" href="#user-wide-sas-snippets" title="Permanent link">&para;</a></h3>
 <ol>
-<li>Open Command Pallet by pressing <code>F1</code> (unix) or <code>ctrl+shift+P</code> (windows).</li>
-<li>Type <code>Snippets: Configure User Snippets</code>.</li>
-<li>Choose <code>sas.json</code>.</li>
-<li>Copy everything from the file generated by <code>sasjs snippets</code> command and paste it into <code>sas.json</code>.</li>
-<li>Save <code>sas.json</code></li>
-<li>Snippets should be available in any <code>.sas</code> file by typing <code>%&lt;name of the snippet&gt;</code> (<code>%example</code> for the snippet from an example provided above).</li>
+<li>In VS Code, open the Command Palette (<code>F1</code>) and select <strong>Snippets: Configure Snippets</strong>.</li>
+<li>Select the <code>sas</code> language to open <code>sas.json</code>.</li>
+<li>Copy the generated snippet entries <strong>inside</strong> the outer braces into the existing object in <code>sas.json</code>. Keep any existing entries, add commas between entries, and resolve duplicate snippet names by renaming or replacing the entry you choose. Do not paste a second outer object into the existing one.</li>
+<li>Save <code>sas.json</code>. These snippets apply to SAS files in all projects for this user.</li>
 </ol>
+<h3 id="project-specific-sas-snippets">Project-specific SAS snippets<a class="headerlink" href="#project-specific-sas-snippets" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Open the project folder in VS Code. Run <strong>Snippets: Configure Snippets</strong> and select <strong>New Snippets file for '<project>'</strong>, or create a <code>.vscode/&lt;name&gt;.code-snippets</code> file in the project root.</li>
+<li>
+<p>Copy the generated snippet entries into that file's outer object, preserving existing entries and resolving duplicate names as above. For every generated entry, add <code>"scope": "sas"</code> alongside <code>prefix</code>, <code>body</code>, and <code>description</code>. For example:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sas"</span><span class="p">,</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nt">"prefix"</span><span class="p">:</span><span class="w"> </span><span class="s2">"%example"</span><span class="p">,</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="s2">"%example($1)"</span><span class="p">,</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"An example macro"</span><span class="p">]</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="p">}</span>
+</span></code></pre></div>
+</li>
+<li>
+<p>Save the file. Without <code>scope</code>, a project snippet is available for all languages. The generator does not add this scope, and writing its output directly over an existing snippets file can overwrite your snippets.</p>
+</li>
+</ol>
+<p>In a file whose VS Code language mode is <code>sas</code> (install a SAS language extension if needed), type the prefix (for example <code>%example</code>) and select the suggestion, or run <strong>Insert Snippet</strong> from the Command Palette. See the <a href="https://code.visualstudio.com/docs/editing/userdefinedsnippets">VS Code snippets documentation</a> for details.</p>
 
 
 
